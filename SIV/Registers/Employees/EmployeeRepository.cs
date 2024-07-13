@@ -93,4 +93,18 @@ public class EmployeeRepository
             }
         }
     }
+
+    public void DeleteEmployee(string id)
+    {
+        using (var connection = ConnectionManager.GetConnection()) // Uso do bloco using para garantir que a conexão será fechada após o uso
+        {
+            var sql = "DELETE FROM employees WHERE id = @id";
+
+            using (var cmd = new MySqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
 }

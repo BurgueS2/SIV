@@ -22,6 +22,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     {
         NoPhoto(); // Chama o método 'NoPhoto' que exibe a imagem padrão 
         EmployeeList(); // Chama o método 'EmployeeList' que exibe a lista de funcionários
+        ConfigureUiControls(false); // Chama o método 'ConfigureUiControls' para desabilitar os campos do formulário
         _imageChangedFlag = "not"; // Variável para verificar se a imagem foi alterada
     }
     
@@ -107,7 +108,26 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
 
     private void btnDelete_Click(object sender, EventArgs e)
     {
-        throw new System.NotImplementedException();
+        var questioning = MessageBox.Show(this, @"Deseja excluir o registro?", @"EXCLUIR REGISTRO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+        if (questioning == DialogResult.Yes)
+        {
+            try
+            {
+                var repository = new EmployeeRepository();
+                repository.DeleteEmployee(_id);
+                MessageBox.Show(this, @"Registro excluído com sucesso!", @"REGISTRO EXCLUÍDO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex, "Erro ao excluir no banco de dados:");
+            }
+            finally
+            {
+                ConnectionManager.CloseConnection();
+                UpdateUiAfterSaveOrUpdate(); // Atualiza a interface do usuário após excluir
+            }
+        }
     }
 
     private void btnPhoto_Click(object sender, EventArgs e)
