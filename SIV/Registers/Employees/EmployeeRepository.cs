@@ -11,8 +11,7 @@ public class EmployeeRepository
         var dt = new DataTable(); // DataTable é uma classe que representa uma tabela na memória
         using (var connection = ConnectionManager.GetConnection())
         {
-            var sql = "SELECT * FROM employees ORDER BY name";
-            using (var cmd = new MySqlCommand(sql, connection))
+            using (var cmd = new MySqlCommand("SELECT * FROM employees ORDER BY name", connection))
             {
                 using (var adapter = new MySqlDataAdapter(cmd))
                 {
@@ -34,8 +33,7 @@ public class EmployeeRepository
 
         using (var connection = ConnectionManager.GetConnection())
         {
-            var sql = "SELECT COUNT(*) FROM employees WHERE cpf = @cpf";
-            using (var cmd = new MySqlCommand(sql, connection))
+            using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM employees WHERE cpf = @cpf", connection))
             {
                 cmd.Parameters.AddWithValue("@cpf", cpf);
                 var result = (long)cmd.ExecuteScalar(); // ExecuteScalar retorna a primeira coluna da primeira linha do resultado da consulta
@@ -49,11 +47,7 @@ public class EmployeeRepository
     {
         using (var connection = ConnectionManager.GetConnection())
         {
-            var sql = 
-                "INSERT INTO employees (name, cpf, phone, job, address, date, photo) " +
-                "VALUES (@name, @cpf, @phone, @job, @address, curDate(), @photo)";
-
-            using (var cmd = new MySqlCommand(sql, connection))
+            using (var cmd = new MySqlCommand("INSERT INTO employees (name, cpf, phone, job, address, date, photo) VALUES (@name, @cpf, @phone, @job, @address, curDate(), @photo)", connection))
             {
                 cmd.Parameters.AddWithValue("@name", name);
                 cmd.Parameters.AddWithValue("@cpf", cpf);
@@ -71,11 +65,7 @@ public class EmployeeRepository
     {
         using (var connection = ConnectionManager.GetConnection())
         {
-            var sql = 
-                $"UPDATE employees SET name = @name, cpf = @cpf, phone = @phone, job = @job, address = @address" +
-                $"{(imageChanged ? ", photo = @photo" : "")} WHERE id = @id";
-
-            using (var cmd = new MySqlCommand(sql, connection))
+            using (var cmd = new MySqlCommand($"UPDATE employees SET name = @name, cpf = @cpf, phone = @phone, job = @job, address = @address{(imageChanged ? ", photo = @photo" : "")} WHERE id = @id", connection))
             {
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.Parameters.AddWithValue("@name", name);
@@ -98,9 +88,7 @@ public class EmployeeRepository
     {
         using (var connection = ConnectionManager.GetConnection()) // Uso do bloco using para garantir que a conexão será fechada após o uso
         {
-            var sql = "DELETE FROM employees WHERE id = @id";
-
-            using (var cmd = new MySqlCommand(sql, connection))
+            using (var cmd = new MySqlCommand("DELETE FROM employees WHERE id = @id", connection))
             {
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.ExecuteNonQuery();
