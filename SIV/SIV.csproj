@@ -109,6 +109,7 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="ConnectionManager.cs" />
         <Compile Include="FrmMain.cs">
             <SubType>Form</SubType>
         </Compile>
@@ -117,6 +118,8 @@
         </Compile>
         <Compile Include="Program.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="Registers\Employees\EmployeeRepository.cs" />
+        <Compile Include="Registers\Employees\EmployeeValidator.cs" />
         <Compile Include="Registers\Employees\FrmEmployees.cs">
           <SubType>Form</SubType>
         </Compile>
@@ -138,6 +141,9 @@
             <AutoGen>True</AutoGen>
             <DependentUpon>Resources.resx</DependentUpon>
         </Compile>
+        <EmbeddedResource Include="Registers\Employees\FrmEmployees.resx">
+          <DependentUpon>FrmEmployees.cs</DependentUpon>
+        </EmbeddedResource>
         <None Include="packages.config" />
         <None Include="Properties\Settings.settings">
             <Generator>SettingsSingleFileGenerator</Generator>
@@ -151,6 +157,9 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="App.config"/>
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="Resources\sem_foto.png" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>
