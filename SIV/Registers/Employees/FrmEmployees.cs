@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using SIV.Registers.Jobs;
 
 namespace SIV.Registers.Employees;
 
@@ -23,6 +25,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         NoPhoto(); // Chama o método 'NoPhoto' que exibe a imagem padrão 
         EmployeeList(); // Chama o método 'EmployeeList' que exibe a lista de funcionários
         ConfigureUiControls(false); // Chama o método 'ConfigureUiControls' para desabilitar os campos do formulário
+        ListJob();
         _imageChangedFlag = "not"; // Variável para verificar se a imagem foi alterada
     }
     
@@ -34,7 +37,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         btnSave.Enabled = false;
 
         // Preenche os campos do formulário com os dados da linha selecionada
-        _id = GridData.CurrentRow?.Cells[0].Value.ToString();
+        _id = GridData.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do funcionário
         txtName.Text = GridData.CurrentRow?.Cells[1].Value.ToString();
         txtCpf.Text = GridData.CurrentRow?.Cells[2].Value.ToString();
         _oldCpf = GridData.CurrentRow?.Cells[2].Value.ToString(); // Salva o CPF antigo para verificar se foi alterado
@@ -157,6 +160,21 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         finally
         {
             ConnectionManager.CloseConnection();
+        }
+    }
+
+    private void ListJob()
+    {
+        try
+        {
+            var jobRepository = new JobRepository();
+            var jobs = jobRepository.GetAllJobs();
+            cbJob.DataSource = jobs;
+            cbJob.DisplayMember = "name";
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(this, $@"Erro ao listar cargos: {ex.Message}", @"ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
     
@@ -304,4 +322,6 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         ConfigureUiControls(false);
         GridData.Enabled = true;
     }
+    
+    
 }

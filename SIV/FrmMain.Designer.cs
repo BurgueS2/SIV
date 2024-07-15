@@ -99,6 +99,7 @@
             resources.ApplyResources(this.MenuRegistrationJob, "MenuRegistrationJob");
             this.MenuRegistrationJob.BackColor = System.Drawing.Color.White;
             this.MenuRegistrationJob.Name = "MenuRegistrationJob";
+            this.MenuRegistrationJob.Click += new System.EventHandler(this.MenuRegistrationJob_Click);
             // 
             // MenuProducts
             // 

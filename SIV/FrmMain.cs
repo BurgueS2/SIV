@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SIV;
@@ -31,5 +24,11 @@ public partial class FrmMain : MetroFramework.Forms.MetroForm
     {
         var frmEmployees = new Registers.Employees.FrmEmployees();
         frmEmployees.ShowDialog();
+    }
+
+    private void MenuRegistrationJob_Click(object sender, EventArgs e)
+    {
+        var frmJobs = new Registers.Jobs.FrmJobs();
+        frmJobs.ShowDialog();
     }
 }

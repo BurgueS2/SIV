@@ -253,6 +253,7 @@ partial class FrmEmployees
         this.GridData.AllowUserToAddRows = false;
         this.GridData.AllowUserToDeleteRows = false;
         this.GridData.AllowUserToResizeRows = false;
+        this.GridData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
         this.GridData.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
         this.GridData.BorderStyle = System.Windows.Forms.BorderStyle.None;
         this.GridData.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -277,7 +278,7 @@ partial class FrmEmployees
         this.GridData.EnableHeadersVisualStyles = false;
         this.GridData.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
         this.GridData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-        this.GridData.Location = new System.Drawing.Point(26, 314);
+        this.GridData.Location = new System.Drawing.Point(26, 312);
         this.GridData.Name = "GridData";
         this.GridData.ReadOnly = true;
         this.GridData.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
