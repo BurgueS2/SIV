@@ -62,6 +62,7 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
         }
         catch (Exception ex)
         {
+            Logger.LogException(ex);
             HandleException(ex, "Erro ao salvar no banco de dados:");
         }
         finally
@@ -91,6 +92,7 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
         }
         catch (Exception ex)
         {
+            Logger.LogException(ex);
             HandleException(ex, "Erro ao atualizar no banco de dados:");
         }
         finally
@@ -117,6 +119,7 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
             }
             catch (Exception ex)
             {
+                Logger.LogException(ex);
                 HandleException(ex, "Erro ao excluir no banco de dados:");
             }
             finally

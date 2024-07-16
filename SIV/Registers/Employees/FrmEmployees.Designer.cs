@@ -61,6 +61,7 @@ partial class FrmEmployees
         // logotipo
         // 
         this.logotipo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+        this.logotipo.Image = global::SIV.Properties.Resources.logotipo;
         this.logotipo.Location = new System.Drawing.Point(9, 18);
         this.logotipo.Name = "logotipo";
         this.logotipo.Size = new System.Drawing.Size(39, 39);
@@ -243,7 +244,6 @@ partial class FrmEmployees
         this.txtCpf.Enabled = false;
         this.txtCpf.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.txtCpf.Location = new System.Drawing.Point(537, 89);
-        this.txtCpf.Mask = "000.000.000-00";
         this.txtCpf.Name = "txtCpf";
         this.txtCpf.Size = new System.Drawing.Size(218, 23);
         this.txtCpf.TabIndex = 29;

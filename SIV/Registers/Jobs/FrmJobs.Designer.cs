@@ -50,6 +50,7 @@ partial class FrmJobs
         // logotipo
         // 
         this.logotipo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+        this.logotipo.Image = global::SIV.Properties.Resources.logotipo;
         this.logotipo.Location = new System.Drawing.Point(9, 18);
         this.logotipo.Name = "logotipo";
         this.logotipo.Size = new System.Drawing.Size(39, 39);
@@ -213,7 +214,9 @@ partial class FrmJobs
         this.Controls.Add(this.LabelName);
         this.Controls.Add(this.logotipo);
         this.MaximizeBox = false;
+        this.MaximumSize = new System.Drawing.Size(901, 489);
         this.MinimizeBox = false;
+        this.MinimumSize = new System.Drawing.Size(901, 489);
         this.Name = "FrmJobs";
         this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
         this.ShowInTaskbar = false;

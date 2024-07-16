@@ -120,6 +120,10 @@
   <data name="&gt;&gt;MenuProducts.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="logotipo.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="MenuProductsStock.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
@@ -148,8 +152,8 @@
   <data name="&gt;&gt;MenuRegistrationSupplier.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;MenuReportSales.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="MenuReportExpenses.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 22</value>
   </data>
   <data name="MenuRegistrationClient.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 22</value>
@@ -244,7 +248,6 @@
   <data name="Exiting.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 20</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="MenuMain.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -260,14 +263,14 @@
   <data name="MenuMovements.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 20</value>
   </data>
-  <data name="MenuReportExpenses.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 22</value>
-  </data>
   <data name="&gt;&gt;MenuProducts.Name" xml:space="preserve">
     <value>MenuProducts</value>
   </data>
   <data name="&gt;&gt;MenuReportInputOutput.Name" xml:space="preserve">
     <value>MenuReportInputOutput</value>
+  </data>
+  <data name="logotipo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>447, 240</value>
   </data>
   <data name="MenuRegistrationEmployee.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 22</value>
@@ -277,6 +280,9 @@
   </data>
   <data name="&gt;&gt;MenuMovementsSales.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;logotipo.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="MenuRegistrationSupplier.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
@@ -296,15 +302,24 @@
   <data name="&gt;&gt;MenuRegistration.Name" xml:space="preserve">
     <value>MenuRegistration</value>
   </data>
+  <data name="&gt;&gt;logotipo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>23, 69, 23, 23</value>
   </data>
-  <data name="&gt;&gt;MenuRegistrationSupplier.Name" xml:space="preserve">
-    <value>MenuRegistrationSupplier</value>
+  <data name="&gt;&gt;MenuReportSales.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>SISTEMA DE VENDA INTELIGENTE</value>
+  </data>
+  <data name="&gt;&gt;logotipo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;logotipo.Name" xml:space="preserve">
+    <value>logotipo</value>
   </data>
   <data name="&gt;&gt;MenuProductsStock.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -318,6 +333,9 @@
   <data name="MenuRegistrationJob.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
+  <data name="&gt;&gt;MenuRegistrationSupplier.Name" xml:space="preserve">
+    <value>MenuRegistrationSupplier</value>
+  </data>
   <data name="&gt;&gt;MenuReportExpenses.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -328,7 +346,7 @@
     <value>153, 22</value>
   </data>
   <data name="&gt;&gt;MenuMain.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -9,11 +8,11 @@ using SIV.Registers.Jobs;
 namespace SIV.Registers.Employees;
 
 public partial class FrmEmployees : MetroFramework.Forms.MetroForm
-{ 
-    string _image; // Variável para armazenar o caminho da imagem
-    string _imageChangedFlag; // Variável para verificar se a imagem foi alterada
-    string _id; // Variável para armazenar o ID do funcionário
-    string _oldCpf; // Variável para armazenar o CPF antigo
+{
+    private string _image; // Variável para armazenar o caminho da imagem
+    private string _imageChangedFlag; // Variável para verificar se a imagem foi alterada
+    private string _id; // Variável para armazenar o ID do funcionário
+    private string _oldCpf; // Variável para armazenar o CPF antigo
     
     public FrmEmployees()
     {
@@ -113,23 +112,23 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     {
         var questioning = MessageBox.Show(this, @"Deseja excluir o registro?", @"EXCLUIR REGISTRO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-        if (questioning == DialogResult.Yes)
+        if (questioning != DialogResult.Yes) return;
+        
+        try
         {
-            try
-            {
-                var repository = new EmployeeRepository();
-                repository.DeleteEmployee(_id);
-                MessageBox.Show(this, @"Registro excluído com sucesso!", @"REGISTRO EXCLUÍDO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex, "Erro ao excluir no banco de dados:");
-            }
-            finally
-            {
-                ConnectionManager.CloseConnection();
-                UpdateUiAfterSaveOrUpdate(); // Atualiza a interface do usuário após excluir
-            }
+            var repository = new EmployeeRepository();
+            repository.DeleteEmployee(_id);
+            MessageBox.Show(this, @"Registro excluído com sucesso!", @"REGISTRO EXCLUÍDO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            HandleException(ex, "Erro ao excluir no banco de dados:");
+        }
+        finally
+        {
+            ConnectionManager.CloseConnection();
+            UpdateUiAfterSaveOrUpdate(); // Atualiza a interface do usuário após excluir
         }
     }
 
@@ -138,10 +137,12 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         var dialog = new OpenFileDialog();
         dialog.Filter = @"picture files(*.jpg;*.png;*.jpeg) | *.jpg;*.png;*.jpeg"; // Filtro de arquivos de imagem
 
-        if (dialog.ShowDialog() != DialogResult.OK) return; // Se o usuário não selecionar uma imagem, interrompe a execução
-        _image = dialog.FileName;
-        photo.ImageLocation = _image; // Exibe a imagem no PictureBox
-        _imageChangedFlag = "yes"; // Variável para verificar se a imagem foi alterada
+        if (dialog.ShowDialog() == DialogResult.OK)
+        {
+            _image = dialog.FileName;
+            photo.Image = ImageHelper.LoadImageFromFile(_image); // Carrega a imagem no PictureBox
+            _imageChangedFlag = "yes"; // Variável para verificar se a imagem foi alterada
+        }
     }
     
     // Método para exibir a lista de funcionários no DataGridView.
@@ -174,6 +175,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         }
         catch (Exception ex)
         {
+            Logger.LogException(ex);
             MessageBox.Show(this, $@"Erro ao listar cargos: {ex.Message}", @"ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
@@ -234,25 +236,10 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     // Método para converter a imagem em bytes.
     private byte[] Picture()
     {
-        if (_image == "") // A string '_image', nunca será vazia, pois sempre terá o caminho da imagem
-        {
-            return null; // Retorna nulo se a imagem não for selecionada
-        }
-
-        try
-        {
-            using (var fs = new FileStream(_image, FileMode.Open, FileAccess.Read))
-            using (var br = new BinaryReader(fs)) 
-            {
-                var imageBytes = br.ReadBytes((int)fs.Length); // Lê os bytes da imagem
-                return imageBytes;
-            }
-        }
-        catch (IOException ex)
-        {
-            MessageBox.Show(this, $@"Erro ao ler o arquivo da imagem: {ex.Message}", @"ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return null; // Retorna nulo se ocorrer um erro ao ler a imagem
-        }
+        if (string.IsNullOrEmpty(_image) || _image.Equals("Resources/sem_foto.png")) return null;
+        
+        var image = ImageHelper.LoadImageFromFile(_image);
+        return ImageHelper.ConvertImageToByteArray(image);
     }
     
     // Método para exibir a imagem padrão.
@@ -285,6 +272,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         }
         catch (Exception ex)
         {
+            Logger.LogException(ex);
             HandleException(ex, "Erro ao salvar no banco de dados:");
         }
         finally
@@ -306,6 +294,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         }
         catch (Exception ex)
         {
+            Logger.LogException(ex);
             HandleException(ex, "Erro ao atualizar no banco de dados:");
         }
         finally

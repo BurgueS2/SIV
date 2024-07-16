@@ -50,7 +50,9 @@
             this.MenuReportInputOutput = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuReportExpenses = new System.Windows.Forms.ToolStripMenuItem();
             this.Exiting = new System.Windows.Forms.ToolStripMenuItem();
+            this.logotipo = new System.Windows.Forms.PictureBox();
             this.MenuMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logotipo)).BeginInit();
             this.SuspendLayout();
             // 
             // MenuMain
@@ -171,10 +173,18 @@
             this.Exiting.Name = "Exiting";
             this.Exiting.Click += new System.EventHandler(this.Exiting_Click);
             // 
+            // logotipo
+            // 
+            resources.ApplyResources(this.logotipo, "logotipo");
+            this.logotipo.Image = global::SIV.Properties.Resources.logotipo;
+            this.logotipo.Name = "logotipo";
+            this.logotipo.TabStop = false;
+            // 
             // FrmMain
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.logotipo);
             this.Controls.Add(this.MenuMain);
             this.Name = "FrmMain";
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
@@ -182,9 +192,12 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.MenuMain.ResumeLayout(false);
             this.MenuMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logotipo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.PictureBox logotipo;
 
         private System.Windows.Forms.MenuStrip MenuMain;
         private System.Windows.Forms.ToolStripMenuItem MenuRegistration;

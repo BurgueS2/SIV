@@ -1,31 +1,33 @@
-﻿namespace SIV.Registers.Employees;
+﻿using System.Text.RegularExpressions;
+
+namespace SIV.Registers.Employees;
 
 public class EmployeeValidator
 {
     public static string ValidateEmployee(string name, string cpf, string phone, string job, string address)
     {
-        if (string.IsNullOrWhiteSpace(name))
+        if (string.IsNullOrWhiteSpace(name) || !Regex.IsMatch(name, @"^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ ]{2,}$"))
         {
-            return "Preencha o campo NOME";
+            return "Nome inválido. Use apenas letras e espaços.";
         }
         
-        if (cpf == "   .   .   -" || cpf.Length < 14)
+        if (!Regex.IsMatch(cpf, @"^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$"))
         {
-            return "Preencha o campo CPF corretamente";
+            return "Formato de CPF inválido.";
         }
 
-        if (string.IsNullOrWhiteSpace(phone) || phone.Length < 11)
+        if (string.IsNullOrWhiteSpace(phone) || !Regex.IsMatch(phone, @"^\(?\d{2}\)?[\s-]?[\s9]?\d{4}-?\d{4}$"))
         {
-            return "Preencha o campo TELEFONE corretamente";
+            return "Formato de telefone inválido.";
         }
 
         if (string.IsNullOrWhiteSpace(job))
         {
-            return "Adicione um CARGO ao funcionário";
+            return "Adicione um cargo ao funcionário.";
         }
         if (string.IsNullOrWhiteSpace(address))
         {
-            return "Preencha o campo ENDEREÇO";
+            return "Preencha o campo endereço.";
         }
 
         return string.Empty; // Se não houver erros, retorna uma string vazia
