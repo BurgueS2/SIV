@@ -1341,4 +1341,7 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
   </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Sistem Inteligente de Vendas</value>
+  </data>
 </root>

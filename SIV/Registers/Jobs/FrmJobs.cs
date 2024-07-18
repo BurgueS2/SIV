@@ -1,11 +1,20 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using SIV.Core;
 
 namespace SIV.Registers.Jobs;
 
+/// <summary>
+/// A classe é responsável pela interface gráfica relacionada à gestão de cargos no sistema.
+/// </summary>
 public partial class FrmJobs : MetroFramework.Forms.MetroForm
 {
     private string _id;
+    
+    /// <summary>
+    /// Inicializa uma nova instância, configurando os componentes da interface gráfica.
+    /// </summary>
     public FrmJobs()
     {
         InitializeComponent();
@@ -50,26 +59,14 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
 
     private void btnSave_Click(object sender, EventArgs e)
     {
-        try
+        if (string.IsNullOrWhiteSpace(txtName.Text) || !Regex.IsMatch(txtName.Text, @"^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ ]{2,}$"))
         {
-            var repository = new JobRepository();
-            repository.SaveJob(txtName.Text);
-            
-            MessageBox.Show(this, @"Registro salvo com sucesso!", @"CADASTRO SALVO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            
-            ConfigureUiControls(false);
-            txtName.Clear();
+            MessageBox.Show(this, @"O nome do cargo não pode estar vazio, Use apenas letras e espaços.", @"Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
         }
-        catch (Exception ex)
-        {
-            Logger.LogException(ex);
-            HandleException(ex, "Erro ao salvar no banco de dados:");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
-            LoadJobs();
-        }
+        
+        SaveJob();
+        UpdateUiAfterSaveOrUpdate();
     }
 
     private void btnEdit_Click(object sender, EventArgs e)
@@ -79,74 +76,95 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
             MessageBox.Show(this, @"Por favor, selecione um cargo para editar.", @"Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
+        
+        UpdateJob();
+        UpdateUiAfterSaveOrUpdate();
+    }
 
+    private void btnDelete_Click(object sender, EventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(_id))
+        {
+            MessageBox.Show(this, @"Por favor, selecione um cargo para excluir.", @"Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+        
+        if (!MessageHelper.ConfirmDeletion())
+        {
+            DeleteJob();
+        }
+        
+        UpdateUiAfterSaveOrUpdate();
+    }
+    
+    private void SaveJob()
+    {
+        try
+        {
+            var repository = new JobRepository();
+            repository.SaveJob(txtName.Text);
+
+            MessageHelper.ShowSaveSuccessMessage();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex); // Registra a exceção no arquivo de log
+            MessageHelper.ShowErrorMessage(ex, "salvar");
+        }
+        finally
+        {
+            ConnectionManager.CloseConnection();
+        }
+    }
+    
+    private void UpdateJob()
+    {
         try
         {
             var repository = new JobRepository();
             repository.UpdateJob(_id, txtName.Text);
             
-            MessageBox.Show(this, @"Registro atualizado com sucesso!", @"CADASTRO ATUALIZADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            
-            ConfigureUiControls(false);
-            txtName.Clear();
+            MessageHelper.ShowUpdateSuccessMessage();
         }
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            HandleException(ex, "Erro ao atualizar no banco de dados:");
+            MessageHelper.ShowErrorMessage(ex, "atualizar");
         }
         finally
         {
             ConnectionManager.CloseConnection();
-            LoadJobs();
         }
     }
-
-    private void btnDelete_Click(object sender, EventArgs e)
+    
+    private void DeleteJob()
     {
-        var questioning = MessageBox.Show(this, @"Deseja excluir o registro?", @"EXCLUIR REGISTRO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-        if (questioning == DialogResult.Yes)
+        try
         {
-            try
-            {
-                var repository = new JobRepository();
-                repository.DeleteJob(_id);
-                MessageBox.Show(this, @"Registro excluído com sucesso!", @"REGISTRO EXCLUÍDO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
-                ConfigureUiControls(false);
-                txtName.Clear();
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-                HandleException(ex, "Erro ao excluir no banco de dados:");
-            }
-            finally
-            {
-                ConnectionManager.CloseConnection();
-                LoadJobs(); // Atualiza a interface do usuário após excluir
-            }
+            var repository = new JobRepository();
+            repository.DeleteJob(_id);
+            
+            MessageHelper.ShowDeleteSuccessMessage();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "excluir");
+        }
+        finally
+        {
+            ConnectionManager.CloseConnection();
         }
     }
-
+    
     private void LoadJobs()
     {
         var repository = new JobRepository();
         var dt = repository.GetAllJobs();
+        
         dgvJobs.DataSource = dt;
         dgvJobs.Columns[0].Visible = false; // Esconde a primeira coluna do DataGridView
     }
-    
-    
-    private void HandleException(Exception ex, string customMessage)
-    {
-        var message = string.IsNullOrWhiteSpace(customMessage) ? "Um erro inesperado ocorreu." : customMessage;
-        message += $"\nDetalhe do Erro: {ex.Message}"; // Concatena a mensagem de erro com a mensagem personalizada
-        
-        MessageBox.Show(this, message, @"ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    }
-    
     
     private void ConfigureUiControls(bool enable)
     {
@@ -157,5 +175,13 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
         btnCancel.Enabled = enable;
         txtName.Enabled = enable;
         dgvJobs.Enabled = !enable;
+    }
+    
+    private void UpdateUiAfterSaveOrUpdate()
+    {
+        txtName.Clear();
+        LoadJobs(); // Atualiza a interface do usuário após salvar ou atualizar
+        ConfigureUiControls(false);
+        dgvJobs.Enabled = true;
     }
 }

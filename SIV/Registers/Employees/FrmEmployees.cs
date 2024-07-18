@@ -3,17 +3,24 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using SIV.Core;
 using SIV.Registers.Jobs;
 
 namespace SIV.Registers.Employees;
 
+/// <summary>
+/// Classe responsável pela gestão de funcionários, permitindo operações como listar, adicionar, editar e excluir funcionários.
+/// </summary>
 public partial class FrmEmployees : MetroFramework.Forms.MetroForm
 {
     private string _image; // Variável para armazenar o caminho da imagem
     private string _imageChangedFlag; // Variável para verificar se a imagem foi alterada
-    private string _id; // Variável para armazenar o ID do funcionário
-    private string _oldCpf; // Variável para armazenar o CPF antigo
+    private string _id; // Armazena o ID do funcionário
+    private string _oldCpf; // CPF antigo do funcionário, usado para verificações durante a atualização.
     
+    /// <summary>
+    /// Construtor da classe, inicializa os componentes do formulário.
+    /// </summary>
     public FrmEmployees()
     {
         InitializeComponent();
@@ -21,9 +28,9 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     
     private void FrmEmployees_Load(object sender, EventArgs e)
     {
-        NoPhoto(); // Chama o método 'NoPhoto' que exibe a imagem padrão 
-        EmployeeList(); // Chama o método 'EmployeeList' que exibe a lista de funcionários
-        ConfigureUiControls(false); // Chama o método 'ConfigureUiControls' para desabilitar os campos do formulário
+        NoPhoto();
+        EmployeeList();
+        ConfigureUiControls(false);
         ListJob();
         _imageChangedFlag = "not"; // Variável para verificar se a imagem foi alterada
     }
@@ -32,10 +39,10 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     {
         if (e.RowIndex <= -1) return; // Se o índice da linha for menor ou igual a -1, interrompe a execução
         
-        ConfigureUiControls(true); // Habilita os campos do formulário
+        ConfigureUiControls(true);
         btnSave.Enabled = false;
 
-        // Preenche os campos do formulário com os dados da linha selecionada
+        // Obtém os valores das células da linha selecionada e preenche os campos do formulário
         _id = GridData.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do funcionário
         txtName.Text = GridData.CurrentRow?.Cells[1].Value.ToString();
         txtCpf.Text = GridData.CurrentRow?.Cells[2].Value.ToString();
@@ -56,7 +63,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
             photo.Image = Properties.Resources.sem_foto;
         }
     }
-
+    
     private void btnNew_Click(object sender, EventArgs e)
     {
         ConfigureUiControls(true);
@@ -66,14 +73,14 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         btnDelete.Enabled = false;
         GridData.Enabled = false;
     }
-
+    
     private void btnCancel_Click(object sender, EventArgs e)
     {
         ConfigureUiControls(false);
         ClearFields();
         GridData.Enabled = true;
     }
-
+    
     private void btnSave_Click(object sender, EventArgs e)
     {
         if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
@@ -83,14 +90,14 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         // Verifica se o CPF já está cadastrado
         if (!new EmployeeRepository().VerifyCpfExistence(cpf, _oldCpf))
         {
-            MessageBox.Show(this, @"CPF já cadastrado", @"ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageHelper.ShowRegisteredCpfMessage();
             return;
         }
 
-        SaveFormData(); // Chama o método 'SaveFormData' para salvar os dados do formulário
+        SaveFormData();
         UpdateUiAfterSaveOrUpdate();
     }
-
+    
     private void btnEdit_Click(object sender, EventArgs e)
     {
         if (!ValidateFormData()) return;
@@ -100,38 +107,23 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         // Verifica se o CPF já está cadastrado
         if (!new EmployeeRepository().VerifyCpfExistence(cpf, _oldCpf))
         {
-            MessageBox.Show(this, @"CPF já cadastrado", @"ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageHelper.ShowRegisteredCpfMessage();
             return;
         }
         
         UpdateEmployeeData();
         UpdateUiAfterSaveOrUpdate();
     }
-
+    
     private void btnDelete_Click(object sender, EventArgs e)
     {
-        var questioning = MessageBox.Show(this, @"Deseja excluir o registro?", @"EXCLUIR REGISTRO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-        if (questioning != DialogResult.Yes) return;
-        
-        try
+        // Se o usuário confirmar a exclusão, chama o método 'DeleteEmployee' para excluir o funcionário
+        if (!MessageHelper.ConfirmDeletion())
         {
-            var repository = new EmployeeRepository();
-            repository.DeleteEmployee(_id);
-            MessageBox.Show(this, @"Registro excluído com sucesso!", @"REGISTRO EXCLUÍDO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        catch (Exception ex)
-        {
-            Logger.LogException(ex);
-            HandleException(ex, "Erro ao excluir no banco de dados:");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
-            UpdateUiAfterSaveOrUpdate(); // Atualiza a interface do usuário após excluir
+            DeleteEmployee();
         }
     }
-
+    
     private void btnPhoto_Click(object sender, EventArgs e)
     {
         var dialog = new OpenFileDialog();
@@ -140,47 +132,51 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         if (dialog.ShowDialog() == DialogResult.OK)
         {
             _image = dialog.FileName;
-            photo.Image = ImageHelper.LoadImageFromFile(_image); // Carrega a imagem no PictureBox
-            _imageChangedFlag = "yes"; // Variável para verificar se a imagem foi alterada
+            photo.Image = ImageHelper.LoadImageFromFile(_image); // Carrega a imagem selecionada no PictureBox
+            _imageChangedFlag = "yes"; // Define a flag para indicar que a imagem foi alterada
         }
     }
     
-    // Método para exibir a lista de funcionários no DataGridView.
     private void EmployeeList()
     {
         try
         {
-            var repository = new EmployeeRepository(); // Instancia a classe EmployeeRepository
+            var repository = new EmployeeRepository();
             GridData.DataSource = repository.GetAllEmployees(); // Preenche o DataGridView com os dados do banco de dados
             FormatGridData();
         }
         catch (MySqlException ex)
         {
-            MessageBox.Show(this,$@"Erro ao acessar o banco de dados: {ex.Message}", @"ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Logger.LogException(ex); // Registra a exceção no arquivo de log
+            MessageHelper.ShowErrorMessage(ex, "acessar");
         }
         finally
         {
             ConnectionManager.CloseConnection();
         }
     }
-
+    
     private void ListJob()
     {
         try
         {
             var jobRepository = new JobRepository();
-            var jobs = jobRepository.GetAllJobs();
+            var jobs = jobRepository.GetAllJobs(); // Obtém a lista de cargos do banco de dados
             cbJob.DataSource = jobs;
             cbJob.DisplayMember = "name";
         }
         catch (Exception ex)
         {
-            Logger.LogException(ex);
-            MessageBox.Show(this, $@"Erro ao listar cargos: {ex.Message}", @"ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Logger.LogException(ex); // Registra a exceção no arquivo de log
+            MessageHelper.ShowErrorMessage(ex, "listar os cargos");
         }
     }
     
-    // Método para tratar exceções.
+    /// <summary>
+    /// Trata exceções, exibindo uma mensagem de erro personalizada ao usuário.
+    /// </summary>
+    /// <param name="ex">A exceção capturada.</param>
+    /// <param name="customMessage">Mensagem personalizada para ser exibida junto com os detalhes da exceção.</param>
     private void HandleException(Exception ex, string customMessage)
     {
         var message = string.IsNullOrWhiteSpace(customMessage) ? "Um erro inesperado ocorreu." : customMessage;
@@ -189,7 +185,6 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         MessageBox.Show(this, message, @"ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
     
-    // Método para formatar os dados do DataGridView.
     private void FormatGridData()
     {
         GridData.Columns[0].HeaderText = @"ID";
@@ -201,11 +196,11 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         GridData.Columns[6].HeaderText = @"DATA";
         GridData.Columns[7].HeaderText = @"FOTO";
 
+        GridData.Columns[0].Width = 50;
         GridData.Columns[0].Visible = false;
         GridData.Columns[7].Visible = false;
     }
     
-    // Método para configurar os controles da interface do usuário.
     private void ConfigureUiControls(bool enable)
     {
         btnNew.Enabled = !enable;
@@ -222,7 +217,6 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         GridData.Enabled = !enable;
     }
     
-    // Método para limpar os campos do formulário.
     private void ClearFields()
     {
         txtName.Text = "";
@@ -233,47 +227,46 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         NoPhoto(); // Reutiliza o método existente para definir a foto padrão
     }
     
-    // Método para converter a imagem em bytes.
     private byte[] Picture()
     {
-        if (string.IsNullOrEmpty(_image) || _image.Equals("Resources/sem_foto.png")) return null;
+        if (string.IsNullOrEmpty(_image) || _image.Equals("Resources/sem_foto.png")) return null; // Se a imagem for nula ou a padrão, retorna nulo
         
         var image = ImageHelper.LoadImageFromFile(_image);
         return ImageHelper.ConvertImageToByteArray(image);
     }
     
-    // Método para exibir a imagem padrão.
     private void NoPhoto()
     {
         photo.Image = Properties.Resources.sem_foto; // Imagem padrão
         _image = "Resources/sem_foto.png"; // Caminho da imagem padrão
     }
     
-    // Método para validar os dados do formulário.
     private bool ValidateFormData()
     {
         var validationResult = EmployeeValidator.ValidateEmployee(txtName.Text, txtCpf.Text, txtPhone.Text, cbJob.Text, txtAddress.Text);
 
         if (string.IsNullOrEmpty(validationResult)) return true; // Se a validação passar, retorna verdadeiro
-        MessageBox.Show(this, validationResult, @"ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        
+        MessageHelper.ShowValidationMessage(validationResult);
         return false; // Se a validação falhar, retorna falso 
     }
     
-    // Método para salvar os dados do funcionário.
     private void SaveFormData()
     {
         try
         {
             var repository = new EmployeeRepository();
-            var photoBytes = Picture(); // Assume que este método retorna a foto em formato byte[]
+            var photoBytes = Picture(); // Converte a imagem para um array de bytes
+            
+            // Chama o método 'SaveEmployee' para salvar os dados do funcionário
             repository.SaveEmployee(txtName.Text, txtCpf.Text, txtPhone.Text, cbJob.Text, txtAddress.Text, photoBytes);
-            MessageBox.Show(this, @"Registro salvo com sucesso!", @"CADASTRO SALVO", MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            
+            MessageHelper.ShowSaveSuccessMessage();
         }
         catch (Exception ex)
         {
-            Logger.LogException(ex);
-            HandleException(ex, "Erro ao salvar no banco de dados:");
+            Logger.LogException(ex); // Registra a exceção no arquivo de log
+            MessageHelper.ShowErrorMessage(ex, "salvar");
         }
         finally
         {
@@ -281,21 +274,23 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         }
     }
     
-    // Método para atualizar os dados do funcionário.
     private void UpdateEmployeeData()
     {
         try
         {
             var repository = new EmployeeRepository();
-            var photoBytes = Picture();
+            var photoBytes = Picture(); // Chama o método 'Picture' para converter a imagem em um array de bytes
             var imageChanged = _imageChangedFlag == "yes";
+            
+            // Chama o método 'UpdateEmployee' para atualizar os dados do funcionário
             repository.UpdateEmployee(_id, txtName.Text, txtCpf.Text, txtPhone.Text, cbJob.Text, txtAddress.Text, photoBytes, imageChanged);
-            MessageBox.Show(this, @"Registro atualizado com sucesso!", @"CADASTRO ATUALIZADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+            MessageHelper.ShowUpdateSuccessMessage();
         }
         catch (Exception ex)
         {
-            Logger.LogException(ex);
-            HandleException(ex, "Erro ao atualizar no banco de dados:");
+            Logger.LogException(ex); // Registra a exceção no arquivo de log
+            MessageHelper.ShowErrorMessage(ex, "atualizar");
         }
         finally
         {
@@ -303,7 +298,9 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         }
     }
     
-    // Método para atualizar a interface do usuário após salvar ou atualizar.
+    /// <summary>
+    /// Atualiza a interface do usuário após salvar ou atualizar um funcionário, limpando os campos e recarregando a lista de funcionários.
+    /// </summary>
     private void UpdateUiAfterSaveOrUpdate()
     {
         ClearFields();
@@ -312,5 +309,23 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         GridData.Enabled = true;
     }
     
-    
+    private void DeleteEmployee()
+    {
+        try
+        {
+            var repository = new EmployeeRepository();
+            repository.DeleteEmployee(_id);
+
+            MessageHelper.ShowDeleteSuccessMessage();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex); // Registra a exceção no arquivo de log
+            MessageHelper.ShowErrorMessage(ex, "excluir");
+        }
+        finally
+        {
+            ConnectionManager.CloseConnection();
+        }
+    }
 }

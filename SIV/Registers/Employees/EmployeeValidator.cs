@@ -2,8 +2,21 @@
 
 namespace SIV.Registers.Employees;
 
+/// <summary>
+/// A classe é responsável pela validação dos dados dos funcionários antes de serem processados ou salvos no banco de dados.
+/// Ela utiliza expressões regulares para validar o formato dos campos de entrada.
+/// </summary>
 public class EmployeeValidator
 {
+    /// <summary>
+    /// Valida os campos de um funcionário, incluindo nome, CPF, telefone, cargo e endereço.
+    /// </summary>
+    /// <param name="name">Nome do funcionário. Deve conter apenas letras e espaços, com um mínimo de 2 caracteres.</param>
+    /// <param name="cpf">CPF do funcionário. Deve seguir o formato de CPF brasileiro (XXX.XXX.XXX-XX).</param>
+    /// <param name="phone">Telefone do funcionário. Aceita formatos com ou sem parênteses para o DDD, espaços ou hífens, e pode incluir o 9 inicial para celulares.</param>
+    /// <param name="job">Cargo do funcionário. Não pode ser vazio.</param>
+    /// <param name="address">Endereço do funcionário. Não pode ser vazio.</param>
+    /// <returns>Retorna uma string vazia se todos os campos forem válidos. Caso contrário, retorna uma mensagem de erro específica para o primeiro campo inválido encontrado.</returns>
     public static string ValidateEmployee(string name, string cpf, string phone, string job, string address)
     {
         if (string.IsNullOrWhiteSpace(name) || !Regex.IsMatch(name, @"^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ ]{2,}$"))

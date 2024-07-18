@@ -1,11 +1,19 @@
 ﻿using System.Data;
 using MySql.Data.MySqlClient;
+using SIV.Core;
 
 namespace SIV.Registers.Employees;
 
+/// <summary>
+/// Classe responsável pela manipulação de dados dos funcionários no banco de dados.
+/// Oferece métodos para realizar operações CRUD (Create, Read, Update, Delete) sobre a tabela funcionários.
+/// </summary>
 public class EmployeeRepository
 {
-    // Método que retorna todos os funcionários
+    /// <summary>
+    /// Retorna todos os funcionários cadastrados no banco de dados.
+    /// </summary>
+    /// <returns>Um DataTable contendo todos funcionários.</returns>
     public DataTable GetAllEmployees()
     {
         var dt = new DataTable(); // DataTable é uma classe que representa uma tabela na memória
@@ -23,7 +31,12 @@ public class EmployeeRepository
         return dt;
     }
     
-    // Método que verifica se o CPF já existe
+    /// <summary>
+    /// Verifica se um CPF já está cadastrado no banco de dados, exceto durante uma atualização.
+    /// </summary>
+    /// <param name="cpf">O CPF do funcionário a ser verificado.</param>
+    /// <param name="oldCpf">O CPF antigo do funcionário, usado em operações de atualização.</param>
+    /// <returns>True se o CPF não existir ou for o mesmo do CPF antigo, caso contrário, false.</returns>
     public bool VerifyCpfExistence(string cpf, string oldCpf)
     {
         if (cpf == oldCpf)
@@ -42,7 +55,15 @@ public class EmployeeRepository
         }
     }
 
-    // Método que salva um funcionário
+    /// <summary>
+    /// Salva um novo funcionário no banco de dados.
+    /// </summary>
+    /// <param name="name">Nome do funcionário.</param>
+    /// <param name="cpf">CPF do funcionário.</param>
+    /// <param name="phone">Telefone do funcionário.</param>
+    /// <param name="job">Cargo do funcionário.</param>
+    /// <param name="address">Endereço do funcionário.</param>
+    /// <param name="photo">Foto do funcionário em formato de array de bytes.</param>
     public void SaveEmployee(string name, string cpf, string phone, string job, string address, byte[] photo)
     {
         using (var connection = ConnectionManager.GetConnection())
@@ -61,6 +82,17 @@ public class EmployeeRepository
         }
     }
     
+    /// <summary>
+    /// Atualiza os dados de um funcionário existente no banco de dados.
+    /// </summary>
+    /// <param name="id">ID do funcionário a ser atualizado.</param>
+    /// <param name="name">Novo nome do funcionário</param>
+    /// <param name="cpf">Novo CPF do funcionário.</param>
+    /// <param name="phone">Novo telefone do funcionário.</param>
+    /// <param name="job">Novo cargo do funcionário.</param>
+    /// <param name="address">Novo endereço do funcionário.</param>
+    /// <param name="photo">Nova foto do funcionário em formato de array de bytes.</param>
+    /// <param name="imageChanged">Indica se a imagem foi alterada (`true`) ou não (`false`).</param>
     public void UpdateEmployee(string id, string name, string cpf, string phone, string job, string address, byte[] photo, bool imageChanged)
     {
         using (var connection = ConnectionManager.GetConnection())
@@ -84,6 +116,10 @@ public class EmployeeRepository
         }
     }
 
+    /// <summary>
+    /// Exclui um funcionário do banco de dados.
+    /// </summary>
+    /// <param name="id">ID do funcionário a ser excluído.</param>
     public void DeleteEmployee(string id)
     {
         using (var connection = ConnectionManager.GetConnection()) // Uso do bloco using para garantir que a conexão será fechada após o uso
