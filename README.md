@@ -1,4 +1,4 @@
-# SIV (Sistema Inteligente de Vendas)
+# Sistema Inteligente de Vendas (SIV)
 
 ## Sobre o Projeto
 
@@ -7,6 +7,7 @@ Este projeto é um sistema PDV (Ponto de Venda) atualmente em desenvolvimento, p
 ## Funcionalidades Implementadas
 
 - **Gestão de Funcionários**: Permite o cadastro, edição, visualização e exclusão de funcionários, com validação de dados como CPF, telefone, cargo e endereço.
+- **Gestão de Cargos**: Permite o cadastro, edição, visualização e exclusão de cargos, com validação de dados como nome e descrição.
 
 ## Funcionalidades em Desenvolvimento
 
@@ -21,18 +22,20 @@ Este projeto é um sistema PDV (Ponto de Venda) atualmente em desenvolvimento, p
 ## Tecnologias Utilizadas
 
 - **Linguagem de Programação**: C#
+- **Framework**: .NET Framework 4.7.2
+- **Interface Gráfica**: Windows Forms
+- **Estilo de Interface**: MetroFramework
 - **Banco de Dados**: MySQL
-- **Framework de Interface**: MetroFramework para Windows Forms
+
+## Status do Projeto
+<h4 align="center"> 
+	🚧  React Select 🚀 Em construção...  🚧
+</h4>
+Este projeto está atualmente em desenvolvimento. Algumas funcionalidades já estão implementadas, enquanto outras estão em fase de planejamento e desenvolvimento. A contribuição da comunidade é bem-vinda para ajudar a acelerar o desenvolvimento e a implementação de novas funcionalidades.
 
 ## Como Contribuir
 
-Este projeto está em desenvolvimento ativo e contribuições são bem-vindas. Para contribuir, siga os passos abaixo:
-
-1. Faça um fork do projeto.
-2. Crie uma branch para sua feature (\`git checkout -b feature/AmazingFeature\`).
-3. Faça commit de suas mudanças (\`git commit -m 'Add some AmazingFeature'\`).
-4. Faça push para a branch (\`git push origin feature/AmazingFeature\`).
-5. Abra um Pull Request.
+Este projeto está em desenvolvimento ativo e contribuições são bem-vindas. Para contribuir, [siga os passos](CONTRIBUTING.md) descritos no guia de contribuição.
 
 ## Licença
 
@@ -40,6 +43,6 @@ Este projeto está licenciado sob a Licença Pública Geral GNU v3.0 - veja o ar
 
 ## Contato
 
-Felipe Dias - felipedias.101@outlook.com
+Felipe Dias - [felipedias.101@outlook.com](mailto:)
 
-Projeto Link: [https://github.com/seu\_usuario/seu\_repositorio](https://github.com/seu_usuario/seu_repositorio)
+Projeto Link: [https://github.com/BurgueS2/SIV](https://github.com/BurgueS2/SIV)
