@@ -1,10 +1,6 @@
 ﻿# Como Contribuir para o Sistema Inteligente de Vendas (SIV)
 
-Agradecemos seu interesse em contribuir para o SIV! Este documento contém diretrizes para contribuir com o projeto e esperamos que facilite o processo de contribuição.
-
-## Código de Conduta
-
-Este projeto e todos que participam nele devem aderir ao nosso Código de Conduta. Ao contribuir, você concorda em respeitar este código. Por favor, leia [Código de Conduta](LINK_PARA_CODIGO_DE_CONDUTA) para entender nossas expectativas.
+Agradeço seu interesse em contribuir para o SIV! Este documento contém diretrizes para contribuir com o projeto e espero que facilite o processo de contribuição.
 
 ## Como Começar
 
@@ -16,7 +12,7 @@ Este projeto e todos que participam nele devem aderir ao nosso Código de Condut
 
 ## Configuração do Ambiente de Desenvolvimento
 
-Para configurar seu ambiente de desenvolvimento, siga os passos descritos em [Como Rodar a Aplicação](LINK_PARA_SECAO_COMO_RODAR_A_APLICACAO).
+Para configurar seu ambiente de desenvolvimento, siga os passos descritos em [Como Rodar a Aplicação](SETUP.md).
 
 ## Enviando Contribuições
 
@@ -50,8 +46,6 @@ Para configurar seu ambiente de desenvolvimento, siga os passos descritos em [Co
 
 ## Após o Pull Request
 
-- Aguarde o feedback dos mantenedores do projeto. Eles podem solicitar alterações antes de sua contribuição ser aceita.
+Se seu Pull Request for aceito, ele será mesclado na branch principal do projeto.
 
-- Se seu Pull Request for aceito, ele será mesclado na branch principal do projeto.
-
-Agradecemos por dedicar seu tempo para contribuir com o Sistema Inteligente de Vendas (SIV)! 🌟
+Agradeço por dedicar seu tempo para contribuir com o Sistema SIV! 🌟
