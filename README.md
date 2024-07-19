@@ -1,4 +1,7 @@
-# Sistema Inteligente de Vendas (SIV)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f6d08598-5b7d-4053-beb4-1357540a4ba1" alt="logotipo" width="200" height="200">
+</p>
+<h1 aling="center"># Sistema Inteligente de Vendas (SIV)</h1>
 
 ## Sobre o Projeto
 
@@ -29,7 +32,7 @@ Este projeto é um sistema PDV (Ponto de Venda) atualmente em desenvolvimento, p
 
 ## Status do Projeto
 <h4 align="center"> 
-	🚧  React Select 🚀 Em construção...  🚧
+	🚧 Em construção... 🚧
 </h4>
 Este projeto está atualmente em desenvolvimento. Algumas funcionalidades já estão implementadas, enquanto outras estão em fase de planejamento e desenvolvimento. A contribuição da comunidade é bem-vinda para ajudar a acelerar o desenvolvimento e a implementação de novas funcionalidades.
 
