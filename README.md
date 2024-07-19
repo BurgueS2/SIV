@@ -1,7 +1,7 @@
 <p align="center">
   <img src="https://github.com/user-attachments/assets/f6d08598-5b7d-4053-beb4-1357540a4ba1" alt="logotipo" width="200" height="200">
 </p>
-<h1 aling="center"># Sistema Inteligente de Vendas (SIV)</h1>
+<h1 align="center">Sistema Inteligente de Vendas (SIV)</h1>
 
 ## Sobre o Projeto
 
