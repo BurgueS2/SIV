@@ -9,7 +9,7 @@ Antes de começar, certifique de ter instalado em sua máquina:
 - **Git**: Para clonar o repositório do projeto.
 - **MySQL Server**: Para o armazenamento e gerenciamento dos dados.
 - **.NET SDK**: Necessário para desenvolvimento em C#.
-- **Visual Studio**: IDE recomendadas para o desenvolvimento do projeto ou outro IDE da sua escolha.
+- **Visual Studio**: IDE recomendada para o desenvolvimento do projeto ou outro IDE da sua escolha.
 
 ## Configuração do Ambiente
 
@@ -18,7 +18,7 @@ Antes de começar, certifique de ter instalado em sua máquina:
 Primeiro, clone o repositório do projeto para sua máquina local usando o Git:
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone https://github.com/BurgueS2/SIV
 ```
 
 ### 2. Instalar o MySQL Server
@@ -27,7 +27,7 @@ git clone https://github.com/seu-usuario/seu-repositorio.git
 
 ### 3. Configurar o Banco de Dados
 - Crie um banco de dados chamado `pdv` ou outro nome que você achar melhor no MySQL.
-- Importe o script SQL fornecido no repositório para criar as tabelas necessárias.
+- Importe o [script SQL](script.sql) fornecido no repositório para criar as tabelas necessárias.
 
 ### 4. Configurar a string de Conexão
 - Abra o arquivo `SIV/Core/ConnectionManager.cs` no projeto clonado.

@@ -11,14 +11,15 @@ Este projeto é um sistema PDV (Ponto de Venda) atualmente em desenvolvimento, p
 
 - **Gestão de Funcionários**: Permite o cadastro, edição, visualização e exclusão de funcionários, com validação de dados como CPF, telefone, cargo e endereço.
 - **Gestão de Cargos**: Permite o cadastro, edição, visualização e exclusão de cargos, com validação de dados como nome e descrição.
+- **Gerenciamento de Clientes**: Cadastro, atualização, remoção e busca de clientes, com validação de dados como CPF, telefone, endereço e gerenciamento de informações dos clientes, incluindo um histórico de compras.
 
 ## Funcionalidades em Desenvolvimento
 
+- **Autenticação de Usuários**: Implementação de um sistema de login e autenticação de usuários para garantir a segurança e controle de acesso ao sistema. (Em desenvolvimento)
 - **Cadastro de Produtos**: Interface para adicionar, editar e remover produtos do estoque. (Em desenvolvimento)
 - **Controle de Estoque**: Funcionalidade para gerenciar o estoque, incluindo a quantidade de produtos disponíveis. (Em desenvolvimento)
 - **Vendas**: Registro de vendas, permitindo a seleção de produtos, cálculo de totais e emissão de comprovantes. (Em desenvolvimento)
 - **Relatórios**: Geração de relatórios de vendas, estoque e desempenho dos funcionários para análise e tomada de decisões. (Em desenvolvimento)
-- **Gestão de Clientes**: Cadastro e gerenciamento de informações dos clientes, incluindo um histórico de compras. (Em desenvolvimento)
 - **Integração com Meios de Pagamento**: Planeja-se implementar a integração com diversos meios de pagamento, como cartões de crédito, débito e PIX, para facilitar as transações. (Em desenvolvimento)
 - **Interface de Usuário**: Estão previstas melhorias contínuas na interface de usuário para tornar a experiência mais fluida e intuitiva. (Em desenvolvimento)
 
