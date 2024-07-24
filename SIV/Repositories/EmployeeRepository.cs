@@ -2,7 +2,7 @@
 using MySql.Data.MySqlClient;
 using SIV.Core;
 
-namespace SIV.Registers.Employees;
+namespace SIV.Repositories;
 
 /// <summary>
 /// Classe responsável pela manipulação de dados dos funcionários no banco de dados.
@@ -45,13 +45,12 @@ public class EmployeeRepository
         }
 
         using (var connection = ConnectionManager.GetConnection())
+        using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM employees WHERE cpf = @cpf", connection))
         {
-            using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM employees WHERE cpf = @cpf", connection))
-            {
-                cmd.Parameters.AddWithValue("@cpf", cpf);
-                var result = (long)cmd.ExecuteScalar(); // ExecuteScalar retorna a primeira coluna da primeira linha do resultado da consulta
-                return result == 0; // Se result for 0, significa que o CPF não existe
-            }
+            cmd.Parameters.AddWithValue("@cpf", cpf);
+            var result = (long)cmd.ExecuteScalar(); // ExecuteScalar retorna a primeira coluna da primeira linha do resultado da consulta
+            
+            return result == 0; // Se result for 0, significa que o CPF não existe
         }
     }
 
@@ -67,18 +66,15 @@ public class EmployeeRepository
     public void SaveEmployee(string name, string cpf, string phone, string job, string address, byte[] photo)
     {
         using (var connection = ConnectionManager.GetConnection())
+        using (var cmd = new MySqlCommand("INSERT INTO employees (name, cpf, phone, job, address, date, photo) VALUES (@name, @cpf, @phone, @job, @address, curDate(), @photo)", connection))
         {
-            using (var cmd = new MySqlCommand("INSERT INTO employees (name, cpf, phone, job, address, date, photo) VALUES (@name, @cpf, @phone, @job, @address, curDate(), @photo)", connection))
-            {
-                cmd.Parameters.AddWithValue("@name", name);
-                cmd.Parameters.AddWithValue("@cpf", cpf);
-                cmd.Parameters.AddWithValue("@phone", phone);
-                cmd.Parameters.AddWithValue("@job", job);
-                cmd.Parameters.AddWithValue("@address", address);
-                cmd.Parameters.AddWithValue("@photo", photo);
-                
-                cmd.ExecuteNonQuery();
-            }
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@cpf", cpf);
+            cmd.Parameters.AddWithValue("@phone", phone);
+            cmd.Parameters.AddWithValue("@job", job);
+            cmd.Parameters.AddWithValue("@address", address);
+            cmd.Parameters.AddWithValue("@photo", photo);
+            cmd.ExecuteNonQuery();
         }
     }
     
@@ -92,27 +88,25 @@ public class EmployeeRepository
     /// <param name="job">Novo cargo do funcionário.</param>
     /// <param name="address">Novo endereço do funcionário.</param>
     /// <param name="photo">Nova foto do funcionário em formato de array de bytes.</param>
-    /// <param name="imageChanged">Indica se a imagem foi alterada (`true`) ou não (`false`).</param>
+    /// <param name="imageChanged">Indica se a imagem foi alterada (true) ou não (false).</param>
     public void UpdateEmployee(string id, string name, string cpf, string phone, string job, string address, byte[] photo, bool imageChanged)
     {
         using (var connection = ConnectionManager.GetConnection())
+        using (var cmd = new MySqlCommand($"UPDATE employees SET name = @name, cpf = @cpf, phone = @phone, job = @job, address = @address{(imageChanged ? ", photo = @photo" : "")} WHERE id = @id", connection))
         {
-            using (var cmd = new MySqlCommand($"UPDATE employees SET name = @name, cpf = @cpf, phone = @phone, job = @job, address = @address{(imageChanged ? ", photo = @photo" : "")} WHERE id = @id", connection))
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@cpf", cpf);
+            cmd.Parameters.AddWithValue("@phone", phone);
+            cmd.Parameters.AddWithValue("@job", job);
+            cmd.Parameters.AddWithValue("@address", address);
+
+            if (imageChanged) // Se a imagem foi alterada, atualiza a foto
             {
-                cmd.Parameters.AddWithValue("@id", id);
-                cmd.Parameters.AddWithValue("@name", name);
-                cmd.Parameters.AddWithValue("@cpf", cpf);
-                cmd.Parameters.AddWithValue("@phone", phone);
-                cmd.Parameters.AddWithValue("@job", job);
-                cmd.Parameters.AddWithValue("@address", address);
-
-                if (imageChanged) // Se a imagem foi alterada, atualiza a foto
-                {
-                    cmd.Parameters.AddWithValue("@photo", photo);
-                }
-
-                cmd.ExecuteNonQuery();
+                cmd.Parameters.AddWithValue("@photo", photo);
             }
+
+            cmd.ExecuteNonQuery();
         }
     }
 
@@ -123,12 +117,10 @@ public class EmployeeRepository
     public void DeleteEmployee(string id)
     {
         using (var connection = ConnectionManager.GetConnection()) // Uso do bloco using para garantir que a conexão será fechada após o uso
+        using (var cmd = new MySqlCommand("DELETE FROM employees WHERE id = @id", connection))
         {
-            using (var cmd = new MySqlCommand("DELETE FROM employees WHERE id = @id", connection))
-            {
-                cmd.Parameters.AddWithValue("@id", id);
-                cmd.ExecuteNonQuery();
-            }
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
         }
     }
 }

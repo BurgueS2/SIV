@@ -1,8 +1,9 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using MySql.Data.MySqlClient;
 using SIV.Core;
 
-namespace SIV.Registers.Jobs;
+namespace SIV.Repositories;
 
 /// <summary>
 /// A classe é responsável pela manipulação de dados relacionados a cargos (jobs) no banco de dados.
@@ -11,7 +12,7 @@ namespace SIV.Registers.Jobs;
 public class JobRepository
 {
     /// <summary>
-    /// Recupera todos os cargos do banco de dados e os retorna em um `DataTable`.
+    /// Recupera todos os cargos do banco de dados e os retorna em um 'DataTable'.
     /// </summary>
     /// <returns>`DataTable` contendo todos os cargos.</returns>
     public DataTable GetAllJobs()
@@ -34,7 +35,7 @@ public class JobRepository
     public void SaveJob(string name)
     {
         using (var connection = ConnectionManager.GetConnection())
-        using (var cmd = new MySqlCommand("INSERT INTO job (name) VALUES (@name)", connection))
+        using (var cmd = new MySqlCommand("INSERT INTO job (name, date) VALUES (@name, curDate())", connection))
         {
             cmd.Parameters.AddWithValue("@name", name);
             
@@ -69,8 +70,24 @@ public class JobRepository
         using (var cmd = new MySqlCommand("DELETE FROM job WHERE id = @id", connection))
         {
             cmd.Parameters.AddWithValue("@id", id);
-            
             cmd.ExecuteNonQuery();
+        }
+    }
+    
+    /// <summary>
+    /// Verifica se um cargo especificado pelo nome já existe no banco de dados.
+    /// </summary>
+    /// <param name="name">Nome do cargo a ser verificado.</param>
+    /// <returns>Retorna 'true' se o cargo já existe no banco de dados, caso contrário, retorna 'false'.</returns>
+    public bool JobExists(string name)
+    {
+        using (var connection = ConnectionManager.GetConnection())
+        using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM job WHERE name = @name", connection))
+        {
+            cmd.Parameters.AddWithValue("@name", name);
+            var result = Convert.ToInt32(cmd.ExecuteScalar());
+            
+            return result > 0; // Se result for maior que 0, significa que o cargo já existe
         }
     }
 }

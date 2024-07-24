@@ -1,4 +1,4 @@
-﻿namespace SIV
+﻿namespace SIV.Views
 {
     partial class FrmMain
     {
@@ -89,6 +89,7 @@
             resources.ApplyResources(this.MenuRegistrationClient, "MenuRegistrationClient");
             this.MenuRegistrationClient.BackColor = System.Drawing.Color.White;
             this.MenuRegistrationClient.Name = "MenuRegistrationClient";
+            this.MenuRegistrationClient.Click += new System.EventHandler(this.MenuRegistrationClient_Click);
             // 
             // MenuRegistrationSupplier
             // 
@@ -186,6 +187,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.logotipo);
             this.Controls.Add(this.MenuMain);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrmMain";
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.TextAlign = MetroFramework.Forms.MetroFormTextAlign.Center;

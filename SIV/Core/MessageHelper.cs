@@ -58,7 +58,7 @@ public class MessageHelper
     /// <summary>
     /// Exibe uma caixa de diálogo de confirmação para a exclusão de um registro.
     /// </summary>
-    /// <returns>Indicando a escolha do usuário (`true` para sim, `false` para não).</returns>
+    /// <returns>Indicando a escolha do usuário ('true' para sim 'false' para não).</returns>
     public static bool ConfirmDeletion()
     {
         var questioning = MessageBox.Show( @"Deseja excluir o registro?", @"EXCLUIR REGISTRO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);

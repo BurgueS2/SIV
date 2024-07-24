@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
+﻿﻿using System.ComponentModel;
 
-namespace SIV.Registers.Employees;
+ namespace SIV.Views.Employees;
 
 partial class FrmEmployees
 {
@@ -153,7 +153,7 @@ partial class FrmEmployees
         this.txtPhone.SelectionStart = 0;
         this.txtPhone.ShortcutsEnabled = true;
         this.txtPhone.Size = new System.Drawing.Size(218, 23);
-        this.txtPhone.TabIndex = 24;
+        this.txtPhone.TabIndex = 3;
         this.txtPhone.UseSelectable = true;
         this.txtPhone.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
         this.txtPhone.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -183,7 +183,7 @@ partial class FrmEmployees
         this.txtName.SelectionStart = 0;
         this.txtName.ShortcutsEnabled = true;
         this.txtName.Size = new System.Drawing.Size(218, 23);
-        this.txtName.TabIndex = 25;
+        this.txtName.TabIndex = 1;
         this.txtName.UseSelectable = true;
         this.txtName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
         this.txtName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -213,7 +213,7 @@ partial class FrmEmployees
         this.txtAddress.SelectionStart = 0;
         this.txtAddress.ShortcutsEnabled = true;
         this.txtAddress.Size = new System.Drawing.Size(218, 23);
-        this.txtAddress.TabIndex = 26;
+        this.txtAddress.TabIndex = 4;
         this.txtAddress.UseSelectable = true;
         this.txtAddress.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
         this.txtAddress.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -225,7 +225,7 @@ partial class FrmEmployees
         this.cbJob.Location = new System.Drawing.Point(537, 150);
         this.cbJob.Name = "cbJob";
         this.cbJob.Size = new System.Drawing.Size(218, 29);
-        this.cbJob.TabIndex = 27;
+        this.cbJob.TabIndex = 5;
         this.cbJob.UseSelectable = true;
         this.cbJob.UseStyleColors = true;
         // 
@@ -244,9 +244,10 @@ partial class FrmEmployees
         this.txtCpf.Enabled = false;
         this.txtCpf.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.txtCpf.Location = new System.Drawing.Point(537, 89);
+        this.txtCpf.Mask = "000.000.000-00";
         this.txtCpf.Name = "txtCpf";
         this.txtCpf.Size = new System.Drawing.Size(218, 23);
-        this.txtCpf.TabIndex = 29;
+        this.txtCpf.TabIndex = 2;
         // 
         // GridData
         // 

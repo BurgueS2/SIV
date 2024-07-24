@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace SIV.Registers.Employees;
+namespace SIV.Validators;
 
 /// <summary>
 /// A classe é responsável pela validação dos dados dos funcionários antes de serem processados ou salvos no banco de dados.
@@ -24,7 +24,7 @@ public class EmployeeValidator
             return "Nome inválido. Use apenas letras e espaços.";
         }
         
-        if (!Regex.IsMatch(cpf, @"^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$"))
+        if (!Regex.IsMatch(cpf, @"^\d{3}\,?\d{3}\,?\d{3}-?\d{2}$"))
         {
             return "Formato de CPF inválido.";
         }
@@ -38,6 +38,7 @@ public class EmployeeValidator
         {
             return "Adicione um cargo ao funcionário.";
         }
+        
         if (string.IsNullOrWhiteSpace(address))
         {
             return "Preencha o campo endereço.";

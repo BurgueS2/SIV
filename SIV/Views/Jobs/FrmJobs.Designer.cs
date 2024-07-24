@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace SIV.Registers.Jobs;
+namespace SIV.Views.Jobs;
 
 partial class FrmJobs
 {
@@ -73,7 +73,7 @@ partial class FrmJobs
         this.txtName.CustomButton.UseSelectable = true;
         this.txtName.CustomButton.Visible = false;
         this.txtName.Lines = new string[0];
-        this.txtName.Location = new System.Drawing.Point(136, 89);
+        this.txtName.Location = new System.Drawing.Point(102, 89);
         this.txtName.MaxLength = 255;
         this.txtName.Name = "txtName";
         this.txtName.PasswordChar = '\0';
@@ -156,7 +156,7 @@ partial class FrmJobs
         this.dgvJobs.AllowUserToDeleteRows = false;
         this.dgvJobs.AllowUserToResizeRows = false;
         this.dgvJobs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-        this.dgvJobs.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+        this.dgvJobs.BackgroundColor = System.Drawing.Color.White;
         this.dgvJobs.BorderStyle = System.Windows.Forms.BorderStyle.None;
         this.dgvJobs.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
         this.dgvJobs.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -180,7 +180,7 @@ partial class FrmJobs
         this.dgvJobs.EnableHeadersVisualStyles = false;
         this.dgvJobs.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
         this.dgvJobs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-        this.dgvJobs.Location = new System.Drawing.Point(23, 178);
+        this.dgvJobs.Location = new System.Drawing.Point(23, 184);
         this.dgvJobs.Name = "dgvJobs";
         this.dgvJobs.ReadOnly = true;
         this.dgvJobs.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;

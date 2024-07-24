@@ -4,9 +4,10 @@ using System.IO;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using SIV.Core;
-using SIV.Registers.Jobs;
+using SIV.Repositories;
+using SIV.Validators;
 
-namespace SIV.Registers.Employees;
+namespace SIV.Views.Employees;
 
 /// <summary>
 /// Classe responsável pela gestão de funcionários, permitindo operações como listar, adicionar, editar e excluir funcionários.
@@ -51,6 +52,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         cbJob.Text = GridData.CurrentRow?.Cells[4].Value.ToString();
         txtAddress.Text = GridData.CurrentRow?.Cells[5].Value.ToString();
 
+        // Se a célula 7 não for nula, exibe a imagem no PictureBox
         if (GridData.CurrentRow?.Cells[7].Value != DBNull.Value)
         {
             var img = (byte[])GridData.Rows[e.RowIndex].Cells[7].Value; // Cria um array de bytes e joga o valor da célula 7 do DataGridView
@@ -68,7 +70,6 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     {
         ConfigureUiControls(true);
         txtName.Focus();
-        
         btnEdit.Enabled = false;
         btnDelete.Enabled = false;
         GridData.Enabled = false;
@@ -91,11 +92,10 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         if (!new EmployeeRepository().VerifyCpfExistence(cpf, _oldCpf))
         {
             MessageHelper.ShowRegisteredCpfMessage();
-            return;
+            return; 
         }
 
         SaveFormData();
-        UpdateUiAfterSaveOrUpdate();
     }
     
     private void btnEdit_Click(object sender, EventArgs e)
@@ -112,12 +112,11 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         }
         
         UpdateEmployeeData();
-        UpdateUiAfterSaveOrUpdate();
     }
     
     private void btnDelete_Click(object sender, EventArgs e)
     {
-        // Se o usuário confirmar a exclusão, chama o método 'DeleteEmployee' para excluir o funcionário
+        // Se o usuário confirmar a exclusão, chama o método 'DeleteEmployee'
         if (!MessageHelper.ConfirmDeletion())
         {
             DeleteEmployee();
@@ -170,19 +169,10 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
             Logger.LogException(ex); // Registra a exceção no arquivo de log
             MessageHelper.ShowErrorMessage(ex, "listar os cargos");
         }
-    }
-    
-    /// <summary>
-    /// Trata exceções, exibindo uma mensagem de erro personalizada ao usuário.
-    /// </summary>
-    /// <param name="ex">A exceção capturada.</param>
-    /// <param name="customMessage">Mensagem personalizada para ser exibida junto com os detalhes da exceção.</param>
-    private void HandleException(Exception ex, string customMessage)
-    {
-        var message = string.IsNullOrWhiteSpace(customMessage) ? "Um erro inesperado ocorreu." : customMessage;
-        message += $"\nDetalhe do Erro: {ex.Message}"; // Concatena a mensagem de erro com a mensagem personalizada
-        
-        MessageBox.Show(this, message, @"ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        finally
+        {
+            ConnectionManager.CloseConnection();
+        }
     }
     
     private void FormatGridData()
@@ -231,7 +221,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     {
         if (string.IsNullOrEmpty(_image) || _image.Equals("Resources/sem_foto.png")) return null; // Se a imagem for nula ou a padrão, retorna nulo
         
-        var image = ImageHelper.LoadImageFromFile(_image);
+        var image = ImageHelper.LoadImageFromFile(_image); 
         return ImageHelper.ConvertImageToByteArray(image);
     }
     
@@ -251,6 +241,14 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         return false; // Se a validação falhar, retorna falso 
     }
     
+    private void UpdateUiAfterSaveOrUpdate()
+    {
+        ClearFields();
+        EmployeeList(); // Atualiza a lista de funcionários
+        ConfigureUiControls(false);
+        GridData.Enabled = true;
+    }
+    
     private void SaveFormData()
     {
         try
@@ -261,6 +259,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
             // Chama o método 'SaveEmployee' para salvar os dados do funcionário
             repository.SaveEmployee(txtName.Text, txtCpf.Text, txtPhone.Text, cbJob.Text, txtAddress.Text, photoBytes);
             
+            UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowSaveSuccessMessage();
         }
         catch (Exception ex)
@@ -285,6 +284,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
             // Chama o método 'UpdateEmployee' para atualizar os dados do funcionário
             repository.UpdateEmployee(_id, txtName.Text, txtCpf.Text, txtPhone.Text, cbJob.Text, txtAddress.Text, photoBytes, imageChanged);
             
+            UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowUpdateSuccessMessage();
         }
         catch (Exception ex)
@@ -298,17 +298,6 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         }
     }
     
-    /// <summary>
-    /// Atualiza a interface do usuário após salvar ou atualizar um funcionário, limpando os campos e recarregando a lista de funcionários.
-    /// </summary>
-    private void UpdateUiAfterSaveOrUpdate()
-    {
-        ClearFields();
-        EmployeeList(); // Atualiza a lista de funcionários
-        ConfigureUiControls(false);
-        GridData.Enabled = true;
-    }
-    
     private void DeleteEmployee()
     {
         try
@@ -316,6 +305,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
             var repository = new EmployeeRepository();
             repository.DeleteEmployee(_id);
 
+            UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowDeleteSuccessMessage();
         }
         catch (Exception ex)

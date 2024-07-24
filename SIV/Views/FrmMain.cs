@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
+using SIV.Views.Clients;
+using SIV.Views.Employees;
+using SIV.Views.Jobs;
 
-namespace SIV;
+namespace SIV.Views;
 
 public partial class FrmMain : MetroFramework.Forms.MetroForm
 {
@@ -22,13 +25,19 @@ public partial class FrmMain : MetroFramework.Forms.MetroForm
 
     private void MenuRegistrationEmployee_Click(object sender, EventArgs e)
     {
-        var frmEmployees = new Registers.Employees.FrmEmployees();
+        var frmEmployees = new FrmEmployees();
         frmEmployees.ShowDialog();
     }
 
     private void MenuRegistrationJob_Click(object sender, EventArgs e)
     {
-        var frmJobs = new Registers.Jobs.FrmJobs();
+        var frmJobs = new FrmJobs();
         frmJobs.ShowDialog();
+    }
+
+    private void MenuRegistrationClient_Click(object sender, EventArgs e)
+    {
+        var frmClients = new FrmClients();
+        frmClients.ShowDialog();
     }
 }

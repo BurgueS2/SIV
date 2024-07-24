@@ -2,8 +2,9 @@
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using SIV.Core;
+using SIV.Repositories;
 
-namespace SIV.Registers.Jobs;
+namespace SIV.Views.Jobs;
 
 /// <summary>
 /// A classe é responsável pela interface gráfica relacionada à gestão de cargos no sistema.
@@ -30,7 +31,7 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
     
     private void dgvJobs_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
     {
-        if (dgvJobs.SelectedRows.Count <= 0) return;
+        if (dgvJobs.SelectedRows.Count <= 0) return; // Se não houver linhas selecionadas, não faz nada
         
         ConfigureUiControls(true); // Habilita os campos do formulário
         btnSave.Enabled = false;
@@ -65,6 +66,12 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
             return;
         }
         
+        if (new JobRepository().JobExists(txtName.Text))
+        {
+            MessageBox.Show(this, @$"{txtName.Text} já está cadastrado.", @"Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return; // Se o cargo já existe, não é possível salvar
+        }
+        
         SaveJob();
         UpdateUiAfterSaveOrUpdate();
     }
@@ -88,12 +95,10 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
             MessageBox.Show(this, @"Por favor, selecione um cargo para excluir.", @"Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
+
+        if (!MessageHelper.ConfirmDeletion()) return;
         
-        if (!MessageHelper.ConfirmDeletion())
-        {
-            DeleteJob();
-        }
-        
+        DeleteJob();
         UpdateUiAfterSaveOrUpdate();
     }
     

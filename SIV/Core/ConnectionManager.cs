@@ -17,7 +17,7 @@ public class ConnectionManager
     /// Retorna uma instância da conexão com o banco de dados.
     /// Se a conexão ainda não foi estabelecida ou se foi fechada, uma nova conexão é aberta e retornada.
     /// </summary>
-    /// <returns>`MySqlConnection` representando a conexão aberta com o banco de dados.</returns>
+    /// <returns>'MySqlConnection' representando a conexão aberta com o banco de dados.</returns>
     public static MySqlConnection GetConnection()
     {
         if (_connection == null || _connection.State != ConnectionState.Open)

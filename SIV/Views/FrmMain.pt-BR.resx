@@ -127,11 +127,20 @@
   <data name="MenuRegistrationClient.Text" xml:space="preserve">
     <value>Cientes</value>
   </data>
+  <data name="MenuRegistrationUser.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 22</value>
+  </data>
   <data name="MenuRegistrationUser.Text" xml:space="preserve">
     <value>Usuários</value>
   </data>
+  <data name="MenuRegistrationSupplier.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 22</value>
+  </data>
   <data name="MenuRegistrationSupplier.Text" xml:space="preserve">
     <value>Fornecedor</value>
+  </data>
+  <data name="MenuRegistrationJob.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 22</value>
   </data>
   <data name="MenuRegistrationJob.Text" xml:space="preserve">
     <value>Cargos</value>
