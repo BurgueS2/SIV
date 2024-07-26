@@ -60,6 +60,8 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
 
     private void btnSave_Click(object sender, EventArgs e)
     {
+        var job = txtName.Text;
+        
         if (string.IsNullOrWhiteSpace(txtName.Text) || !Regex.IsMatch(txtName.Text, @"^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ ]{2,}$"))
         {
             MessageBox.Show(this, @"O nome do cargo não pode estar vazio, Use apenas letras e espaços.", @"Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -68,7 +70,7 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
         
         if (new JobRepository().JobExists(txtName.Text))
         {
-            MessageBox.Show(this, @$"{txtName.Text} já está cadastrado.", @"Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageHelper.ShowJobExistMessage(job);
             return; // Se o cargo já existe, não é possível salvar
         }
         

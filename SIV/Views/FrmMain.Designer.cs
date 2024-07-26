@@ -51,8 +51,10 @@
             this.MenuReportExpenses = new System.Windows.Forms.ToolStripMenuItem();
             this.Exiting = new System.Windows.Forms.ToolStripMenuItem();
             this.logotipo = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.MenuMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logotipo)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuMain
@@ -181,24 +183,34 @@
             this.logotipo.Name = "logotipo";
             this.logotipo.TabStop = false;
             // 
+            // panel1
+            // 
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Controls.Add(this.logotipo);
+            this.panel1.Name = "panel1";
+            // 
             // FrmMain
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.logotipo);
+            this.ControlBox = false;
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.MenuMain);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmMain";
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
-            this.TextAlign = MetroFramework.Forms.MetroFormTextAlign.Center;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.MenuMain.ResumeLayout(false);
             this.MenuMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logotipo)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Panel panel1;
 
         private System.Windows.Forms.PictureBox logotipo;
 

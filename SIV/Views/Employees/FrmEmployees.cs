@@ -125,14 +125,23 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     
     private void btnPhoto_Click(object sender, EventArgs e)
     {
-        var dialog = new OpenFileDialog();
-        dialog.Filter = @"picture files(*.jpg;*.png;*.jpeg) | *.jpg;*.png;*.jpeg"; // Filtro de arquivos de imagem
+        var dialog = new OpenFileDialog
+        {
+            Filter = @"picture files(*.jpg;*.png;*.jpeg) | *.jpg;*.png;*.jpeg" // Filtro de arquivos de imagem
+        };
 
-        if (dialog.ShowDialog() == DialogResult.OK)
+        if (dialog.ShowDialog() != DialogResult.OK) return;
+        
+        try
         {
             _image = dialog.FileName;
             photo.Image = ImageHelper.LoadImageFromFile(_image); // Carrega a imagem selecionada no PictureBox
             _imageChangedFlag = "yes"; // Define a flag para indicar que a imagem foi alterada
+        }
+        catch (OutOfMemoryException)
+        {
+            MessageHelper.ShowInsufficientMemory();
+            NoPhoto();
         }
     }
     
@@ -220,9 +229,17 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     private byte[] Picture()
     {
         if (string.IsNullOrEmpty(_image) || _image.Equals("Resources/sem_foto.png")) return null; // Se a imagem for nula ou a padrão, retorna nulo
-        
-        var image = ImageHelper.LoadImageFromFile(_image); 
-        return ImageHelper.ConvertImageToByteArray(image);
+
+        try
+        {
+            var image = ImageHelper.LoadImageFromFile(_image);
+            return ImageHelper.ConvertImageToByteArray(image);
+        }
+        catch (OutOfMemoryException)
+        {
+            MessageHelper.ShowInsufficientMemory();
+            return null; // Retorna nulo para evitar mais processamento
+        }
     }
     
     private void NoPhoto()

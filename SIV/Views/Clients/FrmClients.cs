@@ -113,6 +113,7 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
         if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
 
         var cpf = txtCpf.Text;
+        var email = txtEmail.Text;
 
         // Verifica se o CPF já está cadastrado
         if (!new ClientRepository().VerifyCpfExistence(cpf, _oldCpf))
@@ -121,7 +122,18 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
             return; // Se o CPF já estiver cadastrado, interrompe a execução
         }
 
+        // Verifica se o email já está cadastrado
+        if (new ClientRepository().VerifyEmailExisting(email))
+        {
+            // Se o email já estiver cadastrado, exibe uma mensagem de confirmação
+            if (!MessageHelper.ShowEmailExistMessage())
+            {
+                return; // Se o usuário cancelar a operação, interrompe a execução 
+            }
+        }
+        
         SaveFormData();
+        EnableSearchControls(true);
     }
 
     private void btnEdit_Click(object sender, EventArgs e)
@@ -129,6 +141,7 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
         if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
         
         var cpf = txtCpf.Text;
+        var email = txtEmail.Text;
         
         // Verifica se o CPF já está cadastrado
         if (!new ClientRepository().VerifyCpfExistence(cpf, _oldCpf))
@@ -137,7 +150,18 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
             return; // Se o CPF já estiver cadastrado, interrompe a execução
         }
         
+        // Verifica se o email já está cadastrado
+        if (new ClientRepository().VerifyEmailExisting(email))
+        {
+            // Se o email já estiver cadastrado, exibe uma mensagem de confirmação
+            if (!MessageHelper.ShowEmailExistMessage())
+            {
+                return; // Se o usuário cancelar a operação, interrompe a execução 
+            }
+        }
+        
         UpdateClientData();
+        EnableSearchControls(true);
     }
 
     private void btnDelete_Click(object sender, EventArgs e)
@@ -216,9 +240,12 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
         try
         {
             var repository = new ClientRepository();
-            var status = btnBlocked.Checked; // Verifica se o funcionário está bloqueado 
+            var status = btnBlocked.Checked; // Verifica se o funcionário está bloqueado
             
-            repository.SaveClients(txtCode.Text, txtName.Text, txtCpf.Text, txtValue.Text, status, txtPhone.Text, txtEmail.Text, txtAddress.Text);
+            // Substitui a vírgula por ponto para salvar o valor corretamente
+            var openAmount = txtValue.Text.Replace(",", ".");
+            
+            repository.SaveClients(txtCode.Text, txtName.Text, txtCpf.Text, openAmount, status, txtPhone.Text, txtEmail.Text, txtAddress.Text);
             
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowSaveSuccessMessage();
@@ -240,8 +267,9 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
         {
             var repository = new ClientRepository();
             var status = btnBlocked.Checked; // Verifica se o funcionário está bloqueado 
+            var openAmount = txtValue.Text.Replace(",", ".");
             
-            repository.UpdateClients(_id, txtName.Text, txtCpf.Text, txtValue.Text, status, txtPhone.Text, txtEmail.Text, txtAddress.Text);
+            repository.UpdateClients(_id, txtName.Text, txtCpf.Text, openAmount, status, txtPhone.Text, txtEmail.Text, txtAddress.Text);
             
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowUpdateSuccessMessage();

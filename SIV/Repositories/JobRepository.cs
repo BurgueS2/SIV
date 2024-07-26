@@ -82,12 +82,12 @@ public class JobRepository
     public bool JobExists(string name)
     {
         using (var connection = ConnectionManager.GetConnection())
-        using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM job WHERE name = @name", connection))
+        using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM job WHERE LOWER(name) = LOWER(@name)", connection))
         {
             cmd.Parameters.AddWithValue("@name", name);
             var result = Convert.ToInt32(cmd.ExecuteScalar());
             
-            return result > 0; // Se result for maior que 0, significa que o cargo já existe
+            return result > 0; // Se result for maior que 0, significa que o cargo já existe, ignorando maiúsculas e minúsculas
         }
     }
 }

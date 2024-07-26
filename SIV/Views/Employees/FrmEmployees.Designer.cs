@@ -47,12 +47,12 @@ partial class FrmEmployees
         this.photo = new System.Windows.Forms.PictureBox();
         this.txtCpf = new System.Windows.Forms.MaskedTextBox();
         this.GridData = new MetroFramework.Controls.MetroGrid();
-        this.btnNew = new MetroFramework.Controls.MetroButton();
-        this.btnPhoto = new MetroFramework.Controls.MetroButton();
-        this.btnDelete = new MetroFramework.Controls.MetroButton();
-        this.btnEdit = new MetroFramework.Controls.MetroButton();
-        this.btnSave = new MetroFramework.Controls.MetroButton();
-        this.btnCancel = new MetroFramework.Controls.MetroButton();
+        this.btnNew = new System.Windows.Forms.Button();
+        this.btnCancel = new System.Windows.Forms.Button();
+        this.btnSave = new System.Windows.Forms.Button();
+        this.btnEdit = new System.Windows.Forms.Button();
+        this.btnDelete = new System.Windows.Forms.Button();
+        this.btnPhoto = new System.Windows.Forms.Button();
         ((System.ComponentModel.ISupportInitialize)(this.logotipo)).BeginInit();
         ((System.ComponentModel.ISupportInitialize)(this.photo)).BeginInit();
         ((System.ComponentModel.ISupportInitialize)(this.GridData)).BeginInit();
@@ -300,74 +300,81 @@ partial class FrmEmployees
         // 
         // btnNew
         // 
-        this.btnNew.Location = new System.Drawing.Point(26, 539);
+        this.btnNew.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.btnNew.Location = new System.Drawing.Point(25, 539);
         this.btnNew.Name = "btnNew";
         this.btnNew.Size = new System.Drawing.Size(75, 23);
-        this.btnNew.TabIndex = 31;
+        this.btnNew.TabIndex = 33;
         this.btnNew.Text = "Novo";
-        this.btnNew.UseSelectable = true;
+        this.btnNew.UseVisualStyleBackColor = true;
         this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
         // 
-        // btnPhoto
+        // btnCancel
         // 
-        this.btnPhoto.Location = new System.Drawing.Point(919, 269);
-        this.btnPhoto.Name = "btnPhoto";
-        this.btnPhoto.Size = new System.Drawing.Size(75, 23);
-        this.btnPhoto.TabIndex = 32;
-        this.btnPhoto.Text = "Foto";
-        this.btnPhoto.UseSelectable = true;
-        this.btnPhoto.Click += new System.EventHandler(this.btnPhoto_Click);
-        // 
-        // btnDelete
-        // 
-        this.btnDelete.Location = new System.Drawing.Point(449, 539);
-        this.btnDelete.Name = "btnDelete";
-        this.btnDelete.Size = new System.Drawing.Size(75, 23);
-        this.btnDelete.TabIndex = 33;
-        this.btnDelete.Text = "Excluir";
-        this.btnDelete.UseSelectable = true;
-        this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-        // 
-        // btnEdit
-        // 
-        this.btnEdit.Location = new System.Drawing.Point(346, 539);
-        this.btnEdit.Name = "btnEdit";
-        this.btnEdit.Size = new System.Drawing.Size(75, 23);
-        this.btnEdit.TabIndex = 34;
-        this.btnEdit.Text = "Editar";
-        this.btnEdit.UseSelectable = true;
-        this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+        this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.btnCancel.Location = new System.Drawing.Point(125, 539);
+        this.btnCancel.Name = "btnCancel";
+        this.btnCancel.Size = new System.Drawing.Size(75, 23);
+        this.btnCancel.TabIndex = 34;
+        this.btnCancel.Text = "Cancelar";
+        this.btnCancel.UseVisualStyleBackColor = true;
+        this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
         // 
         // btnSave
         // 
-        this.btnSave.Location = new System.Drawing.Point(241, 539);
+        this.btnSave.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.btnSave.Location = new System.Drawing.Point(225, 539);
         this.btnSave.Name = "btnSave";
         this.btnSave.Size = new System.Drawing.Size(75, 23);
         this.btnSave.TabIndex = 35;
         this.btnSave.Text = "Salvar";
-        this.btnSave.UseSelectable = true;
+        this.btnSave.UseVisualStyleBackColor = true;
         this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
         // 
-        // btnCancel
+        // btnEdit
         // 
-        this.btnCancel.Location = new System.Drawing.Point(136, 539);
-        this.btnCancel.Name = "btnCancel";
-        this.btnCancel.Size = new System.Drawing.Size(75, 23);
-        this.btnCancel.TabIndex = 36;
-        this.btnCancel.Text = "Cancelar";
-        this.btnCancel.UseSelectable = true;
-        this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+        this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.btnEdit.Location = new System.Drawing.Point(325, 539);
+        this.btnEdit.Name = "btnEdit";
+        this.btnEdit.Size = new System.Drawing.Size(75, 23);
+        this.btnEdit.TabIndex = 36;
+        this.btnEdit.Text = "Editar";
+        this.btnEdit.UseVisualStyleBackColor = true;
+        this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+        // 
+        // btnDelete
+        // 
+        this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.btnDelete.Location = new System.Drawing.Point(425, 539);
+        this.btnDelete.Name = "btnDelete";
+        this.btnDelete.Size = new System.Drawing.Size(75, 23);
+        this.btnDelete.TabIndex = 37;
+        this.btnDelete.Text = "Excluir ";
+        this.btnDelete.UseVisualStyleBackColor = true;
+        this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+        // 
+        // btnPhoto
+        // 
+        this.btnPhoto.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.btnPhoto.Location = new System.Drawing.Point(917, 261);
+        this.btnPhoto.Name = "btnPhoto";
+        this.btnPhoto.Size = new System.Drawing.Size(75, 23);
+        this.btnPhoto.TabIndex = 38;
+        this.btnPhoto.Text = "Foto";
+        this.btnPhoto.UseVisualStyleBackColor = true;
+        this.btnPhoto.Click += new System.EventHandler(this.btnPhoto_Click);
         // 
         // FrmEmployees
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
         this.ClientSize = new System.Drawing.Size(1067, 588);
-        this.Controls.Add(this.btnCancel);
-        this.Controls.Add(this.btnSave);
-        this.Controls.Add(this.btnEdit);
-        this.Controls.Add(this.btnDelete);
         this.Controls.Add(this.btnPhoto);
+        this.Controls.Add(this.btnDelete);
+        this.Controls.Add(this.btnEdit);
+        this.Controls.Add(this.btnSave);
+        this.Controls.Add(this.btnCancel);
         this.Controls.Add(this.btnNew);
         this.Controls.Add(this.GridData);
         this.Controls.Add(this.txtCpf);
@@ -382,6 +389,7 @@ partial class FrmEmployees
         this.Controls.Add(this.labelPhone);
         this.Controls.Add(this.LabelName);
         this.Controls.Add(this.logotipo);
+        this.Location = new System.Drawing.Point(15, 15);
         this.MaximizeBox = false;
         this.MaximumSize = new System.Drawing.Size(1067, 588);
         this.MinimizeBox = false;
@@ -399,30 +407,29 @@ partial class FrmEmployees
         this.ResumeLayout(false);
         this.PerformLayout();
     }
-
-    private MetroFramework.Controls.MetroButton btnNew;
-    private MetroFramework.Controls.MetroButton btnPhoto;
-    private MetroFramework.Controls.MetroButton btnDelete;
-    private MetroFramework.Controls.MetroButton btnEdit;
-    private MetroFramework.Controls.MetroButton btnSave;
-    private MetroFramework.Controls.MetroButton btnCancel;
+    
+    private System.Windows.Forms.Button btnPhoto;
+    private System.Windows.Forms.Button btnEdit;
+    private System.Windows.Forms.Button btnSave;
+    private System.Windows.Forms.Button btnDelete;
+    private System.Windows.Forms.Button btnNew;
+    private System.Windows.Forms.Button btnCancel;
 
     private MetroFramework.Controls.MetroGrid GridData;
-
-    private System.Windows.Forms.MaskedTextBox txtCpf;
-
+    
     private System.Windows.Forms.PictureBox photo;
 
     private MetroFramework.Controls.MetroComboBox cbJob;
-
     private MetroFramework.Controls.MetroLabel LabelName;
     private MetroFramework.Controls.MetroLabel labelPhone;
     private MetroFramework.Controls.MetroLabel labelAddress;
     private MetroFramework.Controls.MetroLabel labelCpf;
     private MetroFramework.Controls.MetroLabel labelJob;
+    
     private MetroFramework.Controls.MetroTextBox txtPhone;
     private MetroFramework.Controls.MetroTextBox txtName;
     private MetroFramework.Controls.MetroTextBox txtAddress;
+    private System.Windows.Forms.MaskedTextBox txtCpf;
 
     private System.Windows.Forms.PictureBox logotipo;
 

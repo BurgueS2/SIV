@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using SIV.Core;
 using SIV.Views.Clients;
 using SIV.Views.Employees;
 using SIV.Views.Jobs;
@@ -15,9 +16,7 @@ public partial class FrmMain : MetroFramework.Forms.MetroForm
     
     private void Exiting_Click(object sender, EventArgs e)
     {
-        var questioning = MessageBox.Show(this,@"Deseja sair do sistema?", @"Sair do Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-        if (questioning == DialogResult.Yes)
+        if (MessageHelper.ConfirmExit())
         {
             Application.Exit();
         }

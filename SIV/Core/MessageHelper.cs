@@ -74,4 +74,31 @@ public class MessageHelper
     {
         MessageBox.Show(validationResult, @"ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
     }
+    
+    public static void ShowJobExistMessage(string jobExist)
+    {
+        MessageBox.Show(@$"O cargo '{jobExist}' já está cadastrado.", @"ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    }
+
+    /// <summary>
+    /// Exibe uma mensagem de erro ao tentar carregar uma imagem com memória insuficiente.
+    /// </summary>
+    public static void ShowInsufficientMemory()
+    {
+        MessageBox.Show(@"Memória insuficiente para carregar a imagem. Tente uma imagem menor.", @"ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    }
+    
+    public static bool ConfirmExit()
+    {
+        var questioning = MessageBox.Show(@"Deseja sair do sistema?", @"SAIR", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        
+        return questioning == DialogResult.Yes;
+    }
+    
+    public static bool ShowEmailExistMessage()
+    {
+        var questioning = MessageBox.Show(@"Esse E-Mail já existe deseja salvar mesmo assim?", @"EMAIL EXISTENTE", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+        return questioning == DialogResult.Yes;
+    }
 }

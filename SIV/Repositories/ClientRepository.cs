@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using MySql.Data.MySqlClient;
 using SIV.Core;
 
@@ -165,5 +166,17 @@ public class ClientRepository
         }
 
         return dt; // Retorna o DataTable preenchido com os dados da consulta
+    }
+
+    public bool VerifyEmailExisting(string email)
+    {
+        using (var connection = ConnectionManager.GetConnection())
+        using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM clients WHERE LOWER(email) = LOWER(@email)", connection))
+        {
+            cmd.Parameters.AddWithValue("@email", email);
+            var result = Convert.ToInt32(cmd.ExecuteScalar());
+            
+            return result > 0; // Se result for maior que 0, significa que o email já existe
+        }
     }
 }
