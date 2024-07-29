@@ -3,7 +3,9 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using SIV.Controllers;
 using SIV.Core;
+using SIV.Models;
 using SIV.Repositories;
 using SIV.Validators;
 
@@ -14,6 +16,7 @@ namespace SIV.Views.Employees;
 /// </summary>
 public partial class FrmEmployees : MetroFramework.Forms.MetroForm
 {
+    private readonly EmployeeController _controller; // Instância da classe EmployeeController
     private string _image; // Variável para armazenar o caminho da imagem
     private string _imageChangedFlag; // Variável para verificar se a imagem foi alterada
     private string _id; // Armazena o ID do funcionário
@@ -25,12 +28,28 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     public FrmEmployees()
     {
         InitializeComponent();
+        _controller = new EmployeeController();
+        //LoadEmployees();
+    }
+    
+    private void LoadEmployees()
+    {
+        try
+        {
+            GridData.DataSource = _controller.GetAllEmployees();
+            FormatGridData();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "carregar funcionários");
+        }
     }
     
     private void FrmEmployees_Load(object sender, EventArgs e)
     {
         NoPhoto();
-        EmployeeList();
+        LoadEmployees();
         ConfigureUiControls(false);
         ListJob();
         _imageChangedFlag = "not"; // Variável para verificar se a imagem foi alterada
@@ -47,22 +66,20 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         _id = GridData.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do funcionário
         txtName.Text = GridData.CurrentRow?.Cells[1].Value.ToString();
         txtCpf.Text = GridData.CurrentRow?.Cells[2].Value.ToString();
-        _oldCpf = GridData.CurrentRow?.Cells[2].Value.ToString(); // Salva o CPF antigo para verificar se foi alterado
         txtPhone.Text = GridData.CurrentRow?.Cells[3].Value.ToString();
         cbJob.Text = GridData.CurrentRow?.Cells[4].Value.ToString();
         txtAddress.Text = GridData.CurrentRow?.Cells[5].Value.ToString();
+        _oldCpf = GridData.CurrentRow?.Cells[2].Value.ToString(); // Salva o CPF antigo para verificar se foi alterado
 
-        // Se a célula 7 não for nula, exibe a imagem no PictureBox
+        // Carrega a foto do funcionário, se disponível
         if (GridData.CurrentRow?.Cells[7].Value != DBNull.Value)
         {
-            var img = (byte[])GridData.Rows[e.RowIndex].Cells[7].Value; // Cria um array de bytes e joga o valor da célula 7 do DataGridView
-            var ms = new MemoryStream(img);
-            
-            photo.Image = Image.FromStream(ms); // Exibe a imagem no PictureBox
+            var photoBytes = (byte[])GridData.CurrentRow?.Cells[7].Value;
+            photo.Image = ImageHelper.ConvertByteArrayToImage(photoBytes);
         }
-        else // Se a célula 7 for nula, exibe a imagem padrão
+        else
         {
-            photo.Image = Properties.Resources.sem_foto;
+            NoPhoto();
         }
     }
     
@@ -89,12 +106,12 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         var cpf = txtCpf.Text;
 
         // Verifica se o CPF já está cadastrado
-        if (!new EmployeeRepository().VerifyCpfExistence(cpf, _oldCpf))
+        if (!_controller.VerifyCpfExistence(cpf, _oldCpf))
         {
             MessageHelper.ShowRegisteredCpfMessage();
             return; 
         }
-
+        
         SaveFormData();
     }
     
@@ -105,22 +122,21 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         var cpf = txtCpf.Text;
         
         // Verifica se o CPF já está cadastrado
-        if (!new EmployeeRepository().VerifyCpfExistence(cpf, _oldCpf))
+        if (!_controller.VerifyCpfExistence(cpf, _oldCpf))
         {
             MessageHelper.ShowRegisteredCpfMessage();
             return;
         }
-        
+
         UpdateEmployeeData();
     }
     
     private void btnDelete_Click(object sender, EventArgs e)
     {
-        // Se o usuário confirmar a exclusão, chama o método 'DeleteEmployee'
-        if (!MessageHelper.ConfirmDeletion())
-        {
-            DeleteEmployee();
-        }
+        // Exibe uma mensagem de confirmação antes de excluir o funcionário
+        if (!MessageHelper.ConfirmDeletion()) return;
+
+        DeleteEmployee();
     }
     
     private void btnPhoto_Click(object sender, EventArgs e)
@@ -142,25 +158,6 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         {
             MessageHelper.ShowInsufficientMemory();
             NoPhoto();
-        }
-    }
-    
-    private void EmployeeList()
-    {
-        try
-        {
-            var repository = new EmployeeRepository();
-            GridData.DataSource = repository.GetAllEmployees(); // Preenche o DataGridView com os dados do banco de dados
-            FormatGridData();
-        }
-        catch (MySqlException ex)
-        {
-            Logger.LogException(ex); // Registra a exceção no arquivo de log
-            MessageHelper.ShowErrorMessage(ex, "acessar");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
         }
     }
     
@@ -194,8 +191,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         GridData.Columns[5].HeaderText = @"ENDEREÇO";
         GridData.Columns[6].HeaderText = @"DATA";
         GridData.Columns[7].HeaderText = @"FOTO";
-
-        GridData.Columns[0].Width = 50;
+        
         GridData.Columns[0].Visible = false;
         GridData.Columns[7].Visible = false;
     }
@@ -223,7 +219,10 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         txtPhone.Text = "";
         cbJob.Text = "";
         txtAddress.Text = "";
-        NoPhoto(); // Reutiliza o método existente para definir a foto padrão
+        _image = "";
+        _imageChangedFlag = "0";
+        _id = "";
+        _oldCpf = "";
     }
     
     private byte[] Picture()
@@ -261,7 +260,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     private void UpdateUiAfterSaveOrUpdate()
     {
         ClearFields();
-        EmployeeList(); // Atualiza a lista de funcionários
+        LoadEmployees(); // Atualiza a lista de funcionários
         ConfigureUiControls(false);
         GridData.Enabled = true;
     }
@@ -270,12 +269,18 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     {
         try
         {
-            var repository = new EmployeeRepository();
-            var photoBytes = Picture(); // Converte a imagem para um array de bytes
-            
-            // Chama o método 'SaveEmployee' para salvar os dados do funcionário
-            repository.SaveEmployee(txtName.Text, txtCpf.Text, txtPhone.Text, cbJob.Text, txtAddress.Text, photoBytes);
-            
+            var employee = new Employee
+            {
+                Id = _id,
+                Name = txtName.Text,
+                Cpf = txtCpf.Text,
+                Phone = txtPhone.Text,
+                Job = cbJob.Text,
+                Address = txtAddress.Text,
+                Photo = _imageChangedFlag == "1" ? ImageHelper.ConvertImageToByteArray(ImageHelper.LoadImageFromFile(_image)) : null
+            };
+        
+            _controller.SaveEmployee(employee);
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowSaveSuccessMessage();
         }
@@ -294,13 +299,18 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     {
         try
         {
-            var repository = new EmployeeRepository();
-            var photoBytes = Picture(); // Chama o método 'Picture' para converter a imagem em um array de bytes
-            var imageChanged = _imageChangedFlag == "yes";
-            
-            // Chama o método 'UpdateEmployee' para atualizar os dados do funcionário
-            repository.UpdateEmployee(_id, txtName.Text, txtCpf.Text, txtPhone.Text, cbJob.Text, txtAddress.Text, photoBytes, imageChanged);
-            
+            var employee = new Employee
+            {
+                Id = _id,
+                Name = txtName.Text,
+                Cpf = txtCpf.Text,
+                Phone = txtPhone.Text,
+                Job = cbJob.Text,
+                Address = txtAddress.Text,
+                Photo = _imageChangedFlag == "1" ? ImageHelper.ConvertImageToByteArray(ImageHelper.LoadImageFromFile(_image)) : null
+            };
+
+            _controller.UpdateEmployee(employee);
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowUpdateSuccessMessage();
         }
@@ -319,9 +329,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     {
         try
         {
-            var repository = new EmployeeRepository();
-            repository.DeleteEmployee(_id);
-
+            _controller.DeleteEmployee(_id);
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowDeleteSuccessMessage();
         }

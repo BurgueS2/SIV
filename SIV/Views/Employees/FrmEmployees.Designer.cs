@@ -1,6 +1,6 @@
 ﻿﻿using System.ComponentModel;
 
- namespace SIV.Views.Employees;
+namespace SIV.Views.Employees;
 
 partial class FrmEmployees
 {

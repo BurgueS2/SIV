@@ -201,7 +201,7 @@
     <value>Sair</value>
   </data>
   <data name="MenuMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>212, 69</value>
+    <value>166, 42</value>
   </data>
   <data name="MenuMain.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 2, 0, 2</value>
@@ -219,23 +219,73 @@
     <value>NoControl</value>
   </data>
   <data name="logotipo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
+    <value>3, 3</value>
   </data>
   <data name="logotipo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 88</value>
+    <value>164, 59</value>
   </data>
   <data name="logotipo.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
   </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-4, 4</value>
+  <data name="btnExx3.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 1080</value>
+  <data name="btnExx3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
+  <data name="btnExx3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnExx3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 77</value>
+  </data>
+  <data name="btnExx3.Text" xml:space="preserve">
+    <value>Novo</value>
+  </data>
+  <data name="btnExx2.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnExx2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="btnExx2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnExx2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 77</value>
+  </data>
+  <data name="btnExx2.Text" xml:space="preserve">
+    <value>Novo</value>
+  </data>
+  <data name="btnExxx.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnExxx.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="btnExxx.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnExxx.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 77</value>
+  </data>
+  <data name="btnExxx.Text" xml:space="preserve">
+    <value>Novo</value>
+  </data>
+  <data name="btnProducts.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnProducts.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="btnProducts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 77</value>
+  </data>
+  <data name="btnProducts.Text" xml:space="preserve">
+    <value>Novo</value>
+  </data>
+  <data name="mainPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 1080</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

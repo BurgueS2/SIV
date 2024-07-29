@@ -51,10 +51,14 @@
             this.MenuReportExpenses = new System.Windows.Forms.ToolStripMenuItem();
             this.Exiting = new System.Windows.Forms.ToolStripMenuItem();
             this.logotipo = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.mainPanel = new System.Windows.Forms.Panel();
+            this.btnExx3 = new System.Windows.Forms.Button();
+            this.btnExx2 = new System.Windows.Forms.Button();
+            this.btnExxx = new System.Windows.Forms.Button();
+            this.btnProducts = new System.Windows.Forms.Button();
             this.MenuMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logotipo)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuMain
@@ -183,19 +187,47 @@
             this.logotipo.Name = "logotipo";
             this.logotipo.TabStop = false;
             // 
-            // panel1
+            // mainPanel
             // 
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.BackColor = System.Drawing.Color.Black;
-            this.panel1.Controls.Add(this.logotipo);
-            this.panel1.Name = "panel1";
+            resources.ApplyResources(this.mainPanel, "mainPanel");
+            this.mainPanel.BackColor = System.Drawing.Color.Azure;
+            this.mainPanel.Controls.Add(this.btnExx3);
+            this.mainPanel.Controls.Add(this.btnExx2);
+            this.mainPanel.Controls.Add(this.btnExxx);
+            this.mainPanel.Controls.Add(this.btnProducts);
+            this.mainPanel.Controls.Add(this.logotipo);
+            this.mainPanel.Name = "mainPanel";
+            // 
+            // btnExx3
+            // 
+            resources.ApplyResources(this.btnExx3, "btnExx3");
+            this.btnExx3.Name = "btnExx3";
+            this.btnExx3.UseVisualStyleBackColor = true;
+            // 
+            // btnExx2
+            // 
+            resources.ApplyResources(this.btnExx2, "btnExx2");
+            this.btnExx2.Name = "btnExx2";
+            this.btnExx2.UseVisualStyleBackColor = true;
+            // 
+            // btnExxx
+            // 
+            resources.ApplyResources(this.btnExxx, "btnExxx");
+            this.btnExxx.Name = "btnExxx";
+            this.btnExxx.UseVisualStyleBackColor = true;
+            // 
+            // btnProducts
+            // 
+            resources.ApplyResources(this.btnProducts, "btnProducts");
+            this.btnProducts.Name = "btnProducts";
+            this.btnProducts.UseVisualStyleBackColor = true;
             // 
             // FrmMain
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ControlBox = false;
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.MenuMain);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -205,12 +237,20 @@
             this.MenuMain.ResumeLayout(false);
             this.MenuMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logotipo)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.mainPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
         }
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnExxx;
+
+        private System.Windows.Forms.Button btnExx2;
+
+        private System.Windows.Forms.Button btnExx3;
+
+        private System.Windows.Forms.Button btnProducts;
+
+        private System.Windows.Forms.Panel mainPanel;
 
         private System.Windows.Forms.PictureBox logotipo;
 

@@ -31,4 +31,12 @@ public class ImageHelper
             return ms.ToArray();
         }
     }
+    
+    public static Image ConvertByteArrayToImage(byte[] byteArray)
+    {
+        using (var ms = new MemoryStream(byteArray))
+        {
+            return Image.FromStream(ms);
+        }
+    }
 }

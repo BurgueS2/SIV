@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using SIV.Core;
 using SIV.Views.Clients;
@@ -9,6 +10,10 @@ namespace SIV.Views;
 
 public partial class FrmMain : MetroFramework.Forms.MetroForm
 {
+    private Button _currentButton;
+    private Random _random;
+    private int _tempIndex;
+    
     public FrmMain()
     {
         InitializeComponent();
@@ -38,5 +43,20 @@ public partial class FrmMain : MetroFramework.Forms.MetroForm
     {
         var frmClients = new FrmClients();
         frmClients.ShowDialog();
+    }
+
+    private Color RandomColor()
+    {
+        var index = _random.Next(ColorThemes._colorList.Count);
+
+        while (_tempIndex == index){}
+        {
+            index = _random.Next(ColorThemes._colorList.Count);
+        }
+        
+        _tempIndex = index;
+        var color = ColorThemes._colorList[index];
+        
+        return ColorTranslator.FromHtml(color); // Converte uma cor em formato hexadecimal para um objeto Color
     }
 }
