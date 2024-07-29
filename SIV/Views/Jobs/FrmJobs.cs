@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using SIV.Controllers;
 using SIV.Core;
+using SIV.Models;
 using SIV.Repositories;
 
 namespace SIV.Views.Jobs;
@@ -11,6 +13,7 @@ namespace SIV.Views.Jobs;
 /// </summary>
 public partial class FrmJobs : MetroFramework.Forms.MetroForm
 {
+    private readonly JobController _controller;
     private string _id;
     
     /// <summary>
@@ -19,6 +22,7 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
     public FrmJobs()
     {
         InitializeComponent();
+        _controller = new JobController();
     }
     
     private void FrmJobs_Load(object sender, EventArgs e)
@@ -45,7 +49,6 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
     {
         ConfigureUiControls(true);
         txtName.Focus();
-        
         btnEdit.Enabled = false;
         btnDelete.Enabled = false;
         dgvJobs.Enabled = false;
@@ -68,49 +71,47 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
             return;
         }
         
-        if (new JobRepository().JobExists(txtName.Text))
+        if (_controller.JobExists(txtName.Text))
         {
             MessageHelper.ShowJobExistMessage(job);
             return; // Se o cargo já existe, não é possível salvar
         }
         
         SaveJob();
-        UpdateUiAfterSaveOrUpdate();
     }
 
     private void btnEdit_Click(object sender, EventArgs e)
     {
         if (string.IsNullOrWhiteSpace(_id))
         {
-            MessageBox.Show(this, @"Por favor, selecione um cargo para editar.", @"Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageHelper.ShowMessageJob("editar");
             return;
         }
         
         UpdateJob();
-        UpdateUiAfterSaveOrUpdate();
     }
 
     private void btnDelete_Click(object sender, EventArgs e)
     {
         if (string.IsNullOrWhiteSpace(_id))
         {
-            MessageBox.Show(this, @"Por favor, selecione um cargo para excluir.", @"Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageHelper.ShowMessageJob("excluir");
             return;
         }
 
         if (!MessageHelper.ConfirmDeletion()) return;
         
         DeleteJob();
-        UpdateUiAfterSaveOrUpdate();
     }
     
     private void SaveJob()
     {
         try
         {
-            var repository = new JobRepository();
-            repository.SaveJob(txtName.Text);
-
+            var newJob = new Job { Name = txtName.Text };
+            
+            _controller.SaveJob(newJob);
+            UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowSaveSuccessMessage();
         }
         catch (Exception ex)
@@ -128,9 +129,10 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
     {
         try
         {
-            var repository = new JobRepository();
-            repository.UpdateJob(_id, txtName.Text);
+            var job = new Job { Id = _id, Name = txtName.Text };
             
+            _controller.UpdateJob(job);
+            UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowUpdateSuccessMessage();
         }
         catch (Exception ex)
@@ -148,9 +150,8 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
     {
         try
         {
-            var repository = new JobRepository();
-            repository.DeleteJob(_id);
-            
+            _controller.DeleteJob(_id);
+            UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowDeleteSuccessMessage();
         }
         catch (Exception ex)
@@ -166,11 +167,8 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
     
     private void LoadJobs()
     {
-        var repository = new JobRepository();
-        var dt = repository.GetAllJobs();
-        
-        dgvJobs.DataSource = dt;
-        dgvJobs.Columns[0].Visible = false; // Esconde a primeira coluna do DataGridView
+        dgvJobs.DataSource = _controller.GetAllJobs();
+        dgvJobs.Columns[0].Visible = false;
     }
     
     private void ConfigureUiControls(bool enable)

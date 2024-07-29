@@ -165,15 +165,16 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     {
         try
         {
-            var jobRepository = new JobRepository();
-            var jobs = jobRepository.GetAllJobs(); // Obtém a lista de cargos do banco de dados
+            var jobs = new JobController().GetAllJobs();
+            
             cbJob.DataSource = jobs;
-            cbJob.DisplayMember = "name";
+            cbJob.DisplayMember = "Name";
+            cbJob.ValueMember = "Id";
         }
         catch (Exception ex)
         {
             Logger.LogException(ex); // Registra a exceção no arquivo de log
-            MessageHelper.ShowErrorMessage(ex, "listar os cargos");
+            MessageHelper.ShowErrorMessage(ex, "carregar cargos");
         }
         finally
         {

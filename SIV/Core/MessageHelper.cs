@@ -80,6 +80,11 @@ public class MessageHelper
         MessageBox.Show(@$"O cargo '{jobExist}' já está cadastrado.", @"ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
     }
 
+    public static void ShowMessageJob(string message)
+    {
+        MessageBox.Show(@$"Por favor, selecione um cargo para {message}", @"ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    }
+    
     /// <summary>
     /// Exibe uma mensagem de erro ao tentar carregar uma imagem com memória insuficiente.
     /// </summary>
