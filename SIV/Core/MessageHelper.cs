@@ -75,11 +75,18 @@ public class MessageHelper
         MessageBox.Show(validationResult, @"ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
     }
     
+    /// <summary>
+    /// Exibe uma mensagem de alerta informando que o cargo já está cadastrado.
+    /// </summary>
     public static void ShowJobExistMessage(string jobExist)
     {
         MessageBox.Show(@$"O cargo '{jobExist}' já está cadastrado.", @"ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
     }
-
+    
+    /// <summary>
+    /// Exibe uma mensagem de alerta solicitando a seleção de um cargo.
+    /// </summary>
+    /// <param name="message">A ação que está sendo realizada.</param>
     public static void ShowMessageJob(string message)
     {
         MessageBox.Show(@$"Por favor, selecione um cargo para {message}", @"ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -93,6 +100,9 @@ public class MessageHelper
         MessageBox.Show(@"Memória insuficiente para carregar a imagem. Tente uma imagem menor.", @"ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
     
+    /// <summary>
+    /// Exibe uma caixa de diálogo de confirmação para sair do sistema.
+    /// </summary>
     public static bool ConfirmExit()
     {
         var questioning = MessageBox.Show(@"Deseja sair do sistema?", @"SAIR", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -100,6 +110,10 @@ public class MessageHelper
         return questioning == DialogResult.Yes;
     }
     
+    /// <summary>
+    /// Exibe uma mensagem de alerta informando que o email já existe e pergunta se deseja salvar mesmo assim.
+    /// </summary>
+    /// <returns>Indicando a escolha do usuário ('true' para sim 'false' para não).</returns>
     public static bool ShowEmailExistMessage()
     {
         var questioning = MessageBox.Show(@"Esse E-Mail já existe deseja salvar mesmo assim?", @"EMAIL EXISTENTE", MessageBoxButtons.YesNo, MessageBoxIcon.Question);

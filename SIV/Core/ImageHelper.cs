@@ -37,6 +37,11 @@ public class ImageHelper
         }
     }
     
+    /// <summary>
+    /// Converte um array de bytes em um objeto Image.
+    /// </summary>
+    /// <param name="byteArray">O array de bytes a ser convertido.</param>
+    /// <returns>Retorna um objeto Image criado a partir do array de bytes.</returns>
     public static Image ConvertByteArrayToImage(byte[] byteArray)
     {
         using (var ms = new MemoryStream(byteArray))

@@ -42,4 +42,14 @@ public class ClientController
     {
         return _repository.VerifyEmailExisting(email);
     }
+    
+    public DataTable SearchByName(string name)
+    {
+        return _repository.SearchByName(name);
+    }
+
+    public DataTable SearchByCpf(string cpf)
+    {
+        return _repository.SearchByCpf(cpf);
+    }
 }

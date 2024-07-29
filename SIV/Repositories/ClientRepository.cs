@@ -17,7 +17,7 @@ public class ClientRepository
     /// <returns>Um <c>DataTable</c> contendo todos os clientes.</returns>
     public DataTable GetAllClients()
     {
-        var dt = new DataTable(); // DataTable é uma classe que representa uma tabela na memória
+        var dt = new DataTable();
         
         using (var connection = ConnectionManager.GetConnection())
         using (var cmd = new MySqlCommand("SELECT * FROM clients ORDER BY name", connection))
@@ -143,7 +143,7 @@ public class ClientRepository
             }
         }
 
-        return dt; // Retorna o DataTable preenchido com os dados da consulta
+        return dt;
     }
     
     /// <summary>
@@ -165,9 +165,14 @@ public class ClientRepository
             }
         }
 
-        return dt; // Retorna o DataTable preenchido com os dados da consulta
+        return dt;
     }
 
+    /// <summary>
+    /// Verifica a existência de um email no banco de dados.
+    /// </summary>
+    /// <param name="email">O email a ser verificado.</param>
+    /// <returns>True se o email já existir, caso contrário, false.</returns>
     public bool VerifyEmailExisting(string email)
     {
         using (var connection = ConnectionManager.GetConnection())

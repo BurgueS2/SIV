@@ -1,5 +1,8 @@
 ﻿namespace SIV.Models;
 
+/// <summary>
+/// Representa um cliente dentro do sistema.
+/// </summary>
 public class Client
 {
     public string Id { get; set; }

@@ -16,11 +16,8 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
 {
     private readonly ClientController _controller;
     private string _id;
-    private string _oldCpf;
+    private string _oldCpf; // CPF antigo do cliente, usado para verificações durante a atualização.
     
-    /// <summary>
-    /// Construtor da classe, inicializa os componentes do formulário.
-    /// </summary>
     public FrmClients()
     {
         InitializeComponent();
@@ -32,7 +29,6 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
         ClientList();
         ConfigureUiControls(false);
         EnableSearchControls(true);
-        
         GridDataClient.CellFormatting += GridDataClient_CellFormatting; // Adiciona um evento de formatação de célula
     }
     
@@ -114,67 +110,20 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
 
     private void btnSave_Click(object sender, EventArgs e)
     {
-        if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
-
-        var cpf = txtCpf.Text;
-        var email = txtEmail.Text;
-
-        // Verifica se o CPF já está cadastrado
-        if (!new ClientRepository().VerifyCpfExistence(cpf, _oldCpf))
-        {
-            MessageHelper.ShowRegisteredCpfMessage();
-            return; // Se o CPF já estiver cadastrado, interrompe a execução
-        }
-
-        // Verifica se o email já está cadastrado
-        if (new ClientRepository().VerifyEmailExisting(email))
-        {
-            // Se o email já estiver cadastrado, exibe uma mensagem de confirmação
-            if (!MessageHelper.ShowEmailExistMessage())
-            {
-                return; // Se o usuário cancelar a operação, interrompe a execução 
-            }
-        }
-        
         SaveFormData();
         EnableSearchControls(true);
     }
 
     private void btnEdit_Click(object sender, EventArgs e)
     {
-        if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
-        
-        var cpf = txtCpf.Text;
-        var email = txtEmail.Text;
-        
-        // Verifica se o CPF já está cadastrado
-        if (!new ClientRepository().VerifyCpfExistence(cpf, _oldCpf))
-        {
-            MessageHelper.ShowRegisteredCpfMessage();
-            return; // Se o CPF já estiver cadastrado, interrompe a execução
-        }
-        
-        // Verifica se o email já está cadastrado
-        if (new ClientRepository().VerifyEmailExisting(email))
-        {
-            // Se o email já estiver cadastrado, exibe uma mensagem de confirmação
-            if (!MessageHelper.ShowEmailExistMessage())
-            {
-                return; // Se o usuário cancelar a operação, interrompe a execução 
-            }
-        }
-        
         UpdateClientData();
         EnableSearchControls(true);
     }
 
     private void btnDelete_Click(object sender, EventArgs e)
     {
-        // Verifica se o usuário realmente deseja excluir o cliente
-        if (!MessageHelper.ConfirmDeletion())
-        {
-            DeleteClient();
-        }
+        DeleteClient();
+        EnableSearchControls(true);
     }
     
     private void SearchByName()
@@ -182,14 +131,14 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
         try
         {
             var name = txtSearchName.Text;
-            var repository = new ClientRepository();
-            var result = repository.SearchByName(name); // Realiza a busca no banco de dados pelo nome aproximado 
-            GridDataClient.DataSource = result; // Preenche o DataGridView com os dados retornados
+            var result = _controller.SearchByName(name); // Realiza a busca no banco de dados pelo nome aproximado
+
+            GridDataClient.DataSource = result;
             FormatGridDataClients();
         }
         catch (MySqlException ex)
         {
-            Logger.LogException(ex); // Registra a exceção no arquivo de log
+            Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "acessar");
         }
         finally
@@ -203,14 +152,14 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
         try
         {
             var cpf = txtSearchCpf.Text;
-            var repository = new ClientRepository();
-            var result = repository.SearchByCpf(cpf); // Realiza a busca no banco de dados pelo CPF 
+            var result = _controller.SearchByCpf(cpf); // Realiza a busca no banco de dados pelo CPF
+            
             GridDataClient.DataSource = result;
             FormatGridDataClients();
         }
         catch (MySqlException ex)
         {
-            Logger.LogException(ex); // Registra a exceção no arquivo de log
+            Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "acessar");
         }
         finally
@@ -228,7 +177,7 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
         }
         catch (MySqlException ex)
         {
-            Logger.LogException(ex); // Registra a exceção no arquivo de log
+            Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "acessar");
         }
     }
@@ -237,6 +186,28 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
     {
         try
         {
+            if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
+
+            var cpf = txtCpf.Text;
+            var email = txtEmail.Text;
+
+            // Verifica se o CPF já está cadastrado
+            if (!_controller.VerifyCpfExistence(cpf, _oldCpf))
+            {
+                MessageHelper.ShowRegisteredCpfMessage();
+                return;
+            }
+
+            // Verifica se o email já está cadastrado
+            if (_controller.VerifyEmailExistence(email))
+            {
+                // Se o email já estiver cadastrado, exibe uma mensagem de confirmação
+                if (!MessageHelper.ShowEmailExistMessage())
+                {
+                    return; // Se o usuário cancelar a operação, interrompe a execução 
+                }
+            }
+            
             var client = new Client
             {
                 Code = txtCode.Text,
@@ -255,7 +226,7 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
         }
         catch (Exception ex)
         {
-            Logger.LogException(ex); // Registra a exceção no arquivo de log
+            Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "salvar");
         }
         finally
@@ -268,6 +239,28 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
     {
         try
         {
+            if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
+        
+            var cpf = txtCpf.Text;
+            var email = txtEmail.Text;
+        
+            // Verifica se o CPF já está cadastrado
+            if (!new ClientRepository().VerifyCpfExistence(cpf, _oldCpf))
+            {
+                MessageHelper.ShowRegisteredCpfMessage();
+                return;
+            }
+        
+            // Verifica se o email já está cadastrado
+            if (new ClientRepository().VerifyEmailExisting(email))
+            {
+                // Se o email já estiver cadastrado, exibe uma mensagem de confirmação
+                if (!MessageHelper.ShowEmailExistMessage())
+                {
+                    return; // Se o usuário cancelar a operação, interrompe a execução 
+                }
+            }
+            
             var client = new Client
             {
                 Id = _id,
@@ -286,7 +279,7 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
         }
         catch (Exception ex)
         {
-            Logger.LogException(ex); // Registra a exceção no arquivo de log
+            Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "atualizar");
         }
         finally
@@ -299,13 +292,15 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
     {
         try
         {
+            if (!MessageHelper.ConfirmDeletion()) return;
+            
             _controller.DeleteClient(_id);
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowDeleteSuccessMessage();
         }
         catch (Exception ex)
         {
-            Logger.LogException(ex); // Registra a exceção no arquivo de log
+            Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "excluir");
         }
         finally

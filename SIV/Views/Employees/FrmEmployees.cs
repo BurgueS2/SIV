@@ -12,17 +12,16 @@ namespace SIV.Views.Employees;
 /// </summary>
 public partial class FrmEmployees : MetroFramework.Forms.MetroForm
 {
-    private readonly EmployeeController _controller; // Instância da classe EmployeeController
+    private readonly EmployeeController _controller;
     private string _image; // Variável para armazenar o caminho da imagem
     private bool _imageChangedFlag; // Variável para verificar se a imagem foi alterada
-    private string _id; // Armazena o ID do funcionário
+    private string _id;
     private string _oldCpf; // CPF antigo do funcionário, usado para verificações durante a atualização.
     
     public FrmEmployees()
     {
         InitializeComponent();
         _controller = new EmployeeController();
-        //LoadEmployees();
     }
     
     private void LoadEmployees()
@@ -70,7 +69,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
             var photoBytes = (byte[])GridData.CurrentRow?.Cells[7].Value;
             photo.Image = ImageHelper.ConvertByteArrayToImage(photoBytes);
         }
-        else
+        else // Se não houver foto, exibe a imagem padrão
         {
             NoPhoto();
         }
@@ -147,7 +146,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         }
         catch (Exception ex)
         {
-            Logger.LogException(ex); // Registra a exceção no arquivo de log
+            Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "carregar cargos");
         }
         finally
@@ -252,7 +251,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         }
         catch (Exception ex)
         {
-            Logger.LogException(ex); // Registra a exceção no arquivo de log
+            Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "salvar");
         }
         finally

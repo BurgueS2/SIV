@@ -44,6 +44,6 @@ public class EmployeeValidator
             return "Preencha o campo endereço.";
         }
 
-        return string.Empty; // Se não houver erros, retorna uma string vazia
+        return string.Empty;
     }
 }

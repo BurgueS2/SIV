@@ -1,5 +1,8 @@
 ﻿namespace SIV.Models;
 
+/// <summary>
+/// Representa um funcionário dentro do sistema.
+/// </summary>
 public class Employee
 {
     public string Id { get; set; }

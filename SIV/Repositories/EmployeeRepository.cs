@@ -92,7 +92,8 @@ public class EmployeeRepository
     public void UpdateEmployee(string id, string name, string cpf, string phone, string job, string address, byte[] photo, bool imageChanged)
     {
         using (var connection = ConnectionManager.GetConnection())
-        using (var cmd = new MySqlCommand($"UPDATE employees SET name = @name, cpf = @cpf, phone = @phone, job = @job, address = @address{(imageChanged ? ", photo = @photo" : "")} WHERE id = @id", connection))
+        using (var cmd = new MySqlCommand($"UPDATE employees SET name = @name, cpf = @cpf, phone = @phone, job = @job, address = @address" +
+        $"{(imageChanged ? ", photo = @photo" : "")} WHERE id = @id", connection))
         {
             cmd.Parameters.AddWithValue("@id", id);
             cmd.Parameters.AddWithValue("@name", name);

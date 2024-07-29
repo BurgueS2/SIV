@@ -16,9 +16,6 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
     private readonly JobController _controller;
     private string _id;
     
-    /// <summary>
-    /// Inicializa uma nova instância, configurando os componentes da interface gráfica.
-    /// </summary>
     public FrmJobs()
     {
         InitializeComponent();
@@ -40,7 +37,7 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
         ConfigureUiControls(true); // Habilita os campos do formulário
         btnSave.Enabled = false;
         
-        // Supondo que a primeira coluna do DataGridView contém o ID do cargo
+        // Preenche o campo de texto com o nome do cargo selecionado
         _id = dgvJobs.SelectedRows[0].Cells[0].Value.ToString();
         txtName.Text = dgvJobs.CurrentRow?.Cells[1].Value.ToString();
     }
@@ -63,44 +60,16 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
 
     private void btnSave_Click(object sender, EventArgs e)
     {
-        var job = txtName.Text;
-        
-        if (string.IsNullOrWhiteSpace(txtName.Text) || !Regex.IsMatch(txtName.Text, @"^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ ]{2,}$"))
-        {
-            MessageBox.Show(this, @"O nome do cargo não pode estar vazio, Use apenas letras e espaços.", @"Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return;
-        }
-        
-        if (_controller.JobExists(txtName.Text))
-        {
-            MessageHelper.ShowJobExistMessage(job);
-            return; // Se o cargo já existe, não é possível salvar
-        }
-        
         SaveJob();
     }
 
     private void btnEdit_Click(object sender, EventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(_id))
-        {
-            MessageHelper.ShowMessageJob("editar");
-            return;
-        }
-        
         UpdateJob();
     }
 
     private void btnDelete_Click(object sender, EventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(_id))
-        {
-            MessageHelper.ShowMessageJob("excluir");
-            return;
-        }
-
-        if (!MessageHelper.ConfirmDeletion()) return;
-        
         DeleteJob();
     }
     
@@ -109,6 +78,18 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
         try
         {
             var newJob = new Job { Name = txtName.Text };
+            
+            if (string.IsNullOrWhiteSpace(txtName.Text) || !Regex.IsMatch(txtName.Text, @"^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ ]{2,}$"))
+            {
+                MessageBox.Show(this, @"O nome do cargo não pode estar vazio, Use apenas letras e espaços.", @"Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+        
+            if (_controller.JobExists(txtName.Text))
+            {
+                MessageHelper.ShowJobExistMessage(newJob.Name);
+                return; // Se o cargo já existe, não é possível salvar
+            }
             
             _controller.SaveJob(newJob);
             UpdateUiAfterSaveOrUpdate();
@@ -129,6 +110,12 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
     {
         try
         {
+            if (string.IsNullOrWhiteSpace(_id))
+            {
+                MessageHelper.ShowMessageJob("editar");
+                return;
+            }
+            
             var job = new Job { Id = _id, Name = txtName.Text };
             
             _controller.UpdateJob(job);
@@ -150,6 +137,14 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
     {
         try
         {
+            if (string.IsNullOrWhiteSpace(_id))
+            {
+                MessageHelper.ShowMessageJob("excluir");
+                return;
+            }
+
+            if (!MessageHelper.ConfirmDeletion()) return;
+            
             _controller.DeleteJob(_id);
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowDeleteSuccessMessage();
@@ -185,7 +180,7 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
     private void UpdateUiAfterSaveOrUpdate()
     {
         txtName.Clear();
-        LoadJobs(); // Atualiza a interface do usuário após salvar ou atualizar
+        LoadJobs(); // Atualiza a lista de cargos
         ConfigureUiControls(false);
         dgvJobs.Enabled = true;
     }
