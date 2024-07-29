@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 using SIV.Controllers;
 using SIV.Core;
 using SIV.Models;
-using SIV.Repositories;
 using SIV.Validators;
 
 namespace SIV.Views.Employees;
@@ -18,13 +14,10 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
 {
     private readonly EmployeeController _controller; // Instância da classe EmployeeController
     private string _image; // Variável para armazenar o caminho da imagem
-    private string _imageChangedFlag; // Variável para verificar se a imagem foi alterada
+    private bool _imageChangedFlag; // Variável para verificar se a imagem foi alterada
     private string _id; // Armazena o ID do funcionário
     private string _oldCpf; // CPF antigo do funcionário, usado para verificações durante a atualização.
     
-    /// <summary>
-    /// Construtor da classe, inicializa os componentes do formulário.
-    /// </summary>
     public FrmEmployees()
     {
         InitializeComponent();
@@ -52,7 +45,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         LoadEmployees();
         ConfigureUiControls(false);
         ListJob();
-        _imageChangedFlag = "not"; // Variável para verificar se a imagem foi alterada
+        _imageChangedFlag = false; // Variável para verificar se a imagem foi alterada
     }
     
     private void GridData_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -94,6 +87,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     
     private void btnCancel_Click(object sender, EventArgs e)
     {
+        NoPhoto();
         ConfigureUiControls(false);
         ClearFields();
         GridData.Enabled = true;
@@ -101,41 +95,16 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     
     private void btnSave_Click(object sender, EventArgs e)
     {
-        if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
-
-        var cpf = txtCpf.Text;
-
-        // Verifica se o CPF já está cadastrado
-        if (!_controller.VerifyCpfExistence(cpf, _oldCpf))
-        {
-            MessageHelper.ShowRegisteredCpfMessage();
-            return; 
-        }
-        
         SaveFormData();
     }
     
     private void btnEdit_Click(object sender, EventArgs e)
     {
-        if (!ValidateFormData()) return;
-        
-        var cpf = txtCpf.Text;
-        
-        // Verifica se o CPF já está cadastrado
-        if (!_controller.VerifyCpfExistence(cpf, _oldCpf))
-        {
-            MessageHelper.ShowRegisteredCpfMessage();
-            return;
-        }
-
         UpdateEmployeeData();
     }
     
     private void btnDelete_Click(object sender, EventArgs e)
     {
-        // Exibe uma mensagem de confirmação antes de excluir o funcionário
-        if (!MessageHelper.ConfirmDeletion()) return;
-
         DeleteEmployee();
     }
     
@@ -152,12 +121,17 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         {
             _image = dialog.FileName;
             photo.Image = ImageHelper.LoadImageFromFile(_image); // Carrega a imagem selecionada no PictureBox
-            _imageChangedFlag = "yes"; // Define a flag para indicar que a imagem foi alterada
+            _imageChangedFlag = true; // Define a flag para indicar que a imagem foi alterada
         }
         catch (OutOfMemoryException)
         {
             MessageHelper.ShowInsufficientMemory();
             NoPhoto();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "carregar imagem");
         }
     }
     
@@ -192,7 +166,6 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         GridData.Columns[5].HeaderText = @"ENDEREÇO";
         GridData.Columns[6].HeaderText = @"DATA";
         GridData.Columns[7].HeaderText = @"FOTO";
-        
         GridData.Columns[0].Visible = false;
         GridData.Columns[7].Visible = false;
     }
@@ -220,26 +193,6 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         txtPhone.Text = "";
         cbJob.Text = "";
         txtAddress.Text = "";
-        _image = "";
-        _imageChangedFlag = "0";
-        _id = "";
-        _oldCpf = "";
-    }
-    
-    private byte[] Picture()
-    {
-        if (string.IsNullOrEmpty(_image) || _image.Equals("Resources/sem_foto.png")) return null; // Se a imagem for nula ou a padrão, retorna nulo
-
-        try
-        {
-            var image = ImageHelper.LoadImageFromFile(_image);
-            return ImageHelper.ConvertImageToByteArray(image);
-        }
-        catch (OutOfMemoryException)
-        {
-            MessageHelper.ShowInsufficientMemory();
-            return null; // Retorna nulo para evitar mais processamento
-        }
     }
     
     private void NoPhoto()
@@ -255,13 +208,15 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         if (string.IsNullOrEmpty(validationResult)) return true; // Se a validação passar, retorna verdadeiro
         
         MessageHelper.ShowValidationMessage(validationResult);
+        
         return false; // Se a validação falhar, retorna falso 
     }
     
     private void UpdateUiAfterSaveOrUpdate()
     {
+        NoPhoto();
         ClearFields();
-        LoadEmployees(); // Atualiza a lista de funcionários
+        LoadEmployees();
         ConfigureUiControls(false);
         GridData.Enabled = true;
     }
@@ -270,6 +225,16 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     {
         try
         {
+            if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
+
+            var cpf = txtCpf.Text;
+            
+            if (!_controller.VerifyCpfExistence(cpf, _oldCpf))
+            {
+                MessageHelper.ShowRegisteredCpfMessage();
+                return; 
+            }
+            
             var employee = new Employee
             {
                 Id = _id,
@@ -278,7 +243,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
                 Phone = txtPhone.Text,
                 Job = cbJob.Text,
                 Address = txtAddress.Text,
-                Photo = _imageChangedFlag == "1" ? ImageHelper.ConvertImageToByteArray(ImageHelper.LoadImageFromFile(_image)) : null
+                Photo = _imageChangedFlag ? ImageHelper.ConvertImageToByteArray(ImageHelper.LoadImageFromFile(_image)) : null
             };
         
             _controller.SaveEmployee(employee);
@@ -300,6 +265,16 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     {
         try
         {
+            if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
+        
+            var cpf = txtCpf.Text;
+            
+            if (!_controller.VerifyCpfExistence(cpf, _oldCpf))
+            {
+                MessageHelper.ShowRegisteredCpfMessage();
+                return;
+            }
+            
             var employee = new Employee
             {
                 Id = _id,
@@ -308,7 +283,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
                 Phone = txtPhone.Text,
                 Job = cbJob.Text,
                 Address = txtAddress.Text,
-                Photo = _imageChangedFlag == "1" ? ImageHelper.ConvertImageToByteArray(ImageHelper.LoadImageFromFile(_image)) : null
+                Photo = _imageChangedFlag ? ImageHelper.ConvertImageToByteArray(ImageHelper.LoadImageFromFile(_image)) : null
             };
 
             _controller.UpdateEmployee(employee);
@@ -317,7 +292,7 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         }
         catch (Exception ex)
         {
-            Logger.LogException(ex); // Registra a exceção no arquivo de log
+            Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "atualizar");
         }
         finally
@@ -330,13 +305,15 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
     {
         try
         {
+            if (!MessageHelper.ConfirmDeletion()) return;
+            
             _controller.DeleteEmployee(_id);
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowDeleteSuccessMessage();
         }
         catch (Exception ex)
         {
-            Logger.LogException(ex); // Registra a exceção no arquivo de log
+            Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "excluir");
         }
         finally

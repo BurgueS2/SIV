@@ -15,6 +15,11 @@ public class ImageHelper
     /// <returns>Retorna um objeto Image carregado do arquivo especificado.</returns>
     public static Image LoadImageFromFile(string filePath)
     {
+        if (!File.Exists(filePath))
+        {
+            throw new FileNotFoundException($"O arquivo {filePath} não foi encontrado.");
+        }
+        
         return Image.FromFile(filePath);
     }
     
