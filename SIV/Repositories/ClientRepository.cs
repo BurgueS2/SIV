@@ -65,7 +65,7 @@ public class ClientRepository
     /// <param name="phone">Telefone do cliente.</param>
     /// <param name="email">Email do cliente.</param>
     /// <param name="address">Endereço do cliente.</param>
-    public void SaveClients(string code, string name, string cpf,string openAmount, bool status, string phone, string email, string address)
+    public void SaveClient(string code, string name, string cpf,string openAmount, bool status, string phone, string email, string address)
     {
         using (var connection = ConnectionManager.GetConnection())
         using (var cmd = new MySqlCommand("INSERT INTO clients (code, name, cpf, openAmount, status, phone, email, address, date) VALUES (@code, @name, @cpf,@openAmount, @status, @phone, @email, @address, curDate())", connection))
@@ -93,7 +93,7 @@ public class ClientRepository
     /// <param name="phone">Novo telefone do cliente.</param>
     /// <param name="email">Novo email do cliente.</param>
     /// <param name="address">Novo endereço do cliente.</param>
-    public void UpdateClients(string id , string name, string cpf,string openAmount, bool status, string phone, string email, string address)
+    public void UpdateClient(string id , string name, string cpf,string openAmount, bool status, string phone, string email, string address)
     {
         using (var connection = ConnectionManager.GetConnection())
         using (var cmd = new MySqlCommand($"UPDATE clients SET  name = @name, cpf = @cpf, openAmount = @openAmount, status = @status, phone = @phone, email = @email, address = @address WHERE id = @id", connection))
@@ -114,7 +114,7 @@ public class ClientRepository
     /// Exclui um cliente do banco de dados.
     /// </summary>
     /// <param name="id">ID do cliente a ser excluído.</param>
-    public void DeleteClients(string id)
+    public void DeleteClient(string id)
     {
         using (var connection = ConnectionManager.GetConnection()) // Uso do bloco using para garantir que a conexão será fechada após o uso
         using (var cmd = new MySqlCommand("DELETE FROM clients WHERE id = @id", connection))

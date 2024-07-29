@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using SIV.Controllers;
 using SIV.Core;
+using SIV.Models;
 using SIV.Repositories;
 using SIV.Validators;
 
@@ -12,6 +14,7 @@ namespace SIV.Views.Clients;
 /// </summary>
 public partial class FrmClients : MetroFramework.Forms.MetroForm
 {
+    private readonly ClientController _controller;
     private string _id;
     private string _oldCpf;
     
@@ -21,6 +24,7 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
     public FrmClients()
     {
         InitializeComponent();
+        _controller = new ClientController();
     }
     
     private void FrmClients_Load(object sender, EventArgs e)
@@ -68,7 +72,7 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
         
         // Verifica se o status do funcionário é bloqueado
         var statusValue = GridDataClient.CurrentRow?.Cells[5].Value.ToString().ToLower(); 
-        bool isBlocked = statusValue == "1"; // Se o valor for 1, o funcionário está bloqueado se não, está desbloqueado
+        var isBlocked = statusValue == "1"; // Se o valor for 1, o funcionário está bloqueado se não, está desbloqueado
         btnBlocked.Checked = isBlocked; 
         btnUnlocked.Checked = !isBlocked;
         
@@ -219,9 +223,7 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
     {
         try
         {
-            var repository = new ClientRepository();
-            
-            GridDataClient.DataSource = repository.GetAllClients(); // Preenche o DataGridView com os dados do banco de dados
+            GridDataClient.DataSource = _controller.GetAllClients();
             FormatGridDataClients();
         }
         catch (MySqlException ex)
@@ -229,24 +231,25 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
             Logger.LogException(ex); // Registra a exceção no arquivo de log
             MessageHelper.ShowErrorMessage(ex, "acessar");
         }
-        finally
-        {
-            ConnectionManager.CloseConnection();
-        }
     }
 
     private void SaveFormData()
     {
         try
         {
-            var repository = new ClientRepository();
-            var status = btnBlocked.Checked; // Verifica se o funcionário está bloqueado
+            var client = new Client
+            {
+                Code = txtCode.Text,
+                Name = txtName.Text,
+                Cpf = txtCpf.Text,
+                OpenAmount = txtValue.Text.Replace(",", "."),
+                Status = btnBlocked.Checked,
+                Phone = txtPhone.Text,
+                Email = txtEmail.Text,
+                Address = txtAddress.Text
+            };
             
-            // Substitui a vírgula por ponto para salvar o valor corretamente
-            var openAmount = txtValue.Text.Replace(",", ".");
-            
-            repository.SaveClients(txtCode.Text, txtName.Text, txtCpf.Text, openAmount, status, txtPhone.Text, txtEmail.Text, txtAddress.Text);
-            
+            _controller.SaveClient(client);
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowSaveSuccessMessage();
         }
@@ -265,12 +268,19 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
     {
         try
         {
-            var repository = new ClientRepository();
-            var status = btnBlocked.Checked; // Verifica se o funcionário está bloqueado 
-            var openAmount = txtValue.Text.Replace(",", ".");
+            var client = new Client
+            {
+                Id = _id,
+                Name = txtName.Text,
+                Cpf = txtCpf.Text,
+                OpenAmount = txtValue.Text.Replace(",", "."),
+                Status = btnBlocked.Checked,
+                Phone = txtPhone.Text,
+                Email = txtEmail.Text,
+                Address = txtAddress.Text
+            };
             
-            repository.UpdateClients(_id, txtName.Text, txtCpf.Text, openAmount, status, txtPhone.Text, txtEmail.Text, txtAddress.Text);
-            
+            _controller.UpdateClient(client);
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowUpdateSuccessMessage();
         }
@@ -289,9 +299,7 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
     {
         try
         {
-            var repository = new ClientRepository();
-            repository.DeleteClients(_id);
-
+            _controller.DeleteClient(_id);
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowDeleteSuccessMessage();
         }
@@ -378,7 +386,6 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
         if (string.IsNullOrEmpty(validationResult)) return true; // Se a validação passar, retorna verdadeiro
         
         MessageHelper.ShowValidationMessage(validationResult);
-        
         return false; // Se a validação falhar, retorna falso 
     }
 }

@@ -123,12 +123,14 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Controllers\ClientController.cs" />
         <Compile Include="Controllers\EmployeeController.cs" />
         <Compile Include="Controllers\JobController.cs" />
         <Compile Include="Core\ConnectionManager.cs" />
         <Compile Include="Core\ImageHelper.cs" />
         <Compile Include="Core\Logger.cs" />
         <Compile Include="Core\MessageHelper.cs" />
+        <Compile Include="Models\Client.cs" />
         <Compile Include="Models\Employee.cs" />
         <Compile Include="Models\Job.cs" />
         <Compile Include="Program.cs" />
