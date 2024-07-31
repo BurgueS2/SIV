@@ -12,7 +12,7 @@ namespace SIV.Views.Clients;
 /// <summary>
 /// Classe responsável por gerenciar a interface gráfica do formulário de clientes.
 /// </summary>
-public partial class FrmClients : MetroFramework.Forms.MetroForm
+public partial class FrmClients : Form
 {
     private readonly ClientController _controller;
     private string _id;
@@ -44,7 +44,7 @@ public partial class FrmClients : MetroFramework.Forms.MetroForm
         e.FormattingApplied = true; // Indica que a formatação foi aplicada
     }
     
-    private void GridDataClient_CellDoubleClickFormatting(object sender, DataGridViewCellEventArgs e)
+    private void GridDataClient_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
     {
         if (e.RowIndex <= -1) return; // Se o índice da linha for menor ou igual a -1, interrompe a execução
         

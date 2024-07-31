@@ -201,6 +201,10 @@
         <None Include="App.config" />
     </ItemGroup>
     <ItemGroup>
+      <Content Include="Resources\icons_caixa.png" />
+      <Content Include="Resources\icons_mesa.png" />
+      <Content Include="Resources\icons_produto.png" />
+      <Content Include="Resources\icons_relatorio.png" />
       <Content Include="Resources\logotipo.png" />
       <Content Include="Resources\sem_foto.png" />
     </ItemGroup>

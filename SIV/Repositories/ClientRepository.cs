@@ -96,7 +96,7 @@ public class ClientRepository
     public void UpdateClient(string id , string name, string cpf,string openAmount, bool status, string phone, string email, string address)
     {
         using (var connection = ConnectionManager.GetConnection())
-        using (var cmd = new MySqlCommand($"UPDATE clients SET  name = @name, cpf = @cpf, openAmount = @openAmount, status = @status, phone = @phone, email = @email, address = @address WHERE id = @id", connection))
+        using (var cmd = new MySqlCommand("UPDATE clients SET  name = @name, cpf = @cpf, openAmount = @openAmount, status = @status, phone = @phone, email = @email, address = @address WHERE id = @id", connection))
         {
             cmd.Parameters.AddWithValue("@id", id);
             cmd.Parameters.AddWithValue("@name", name);

@@ -61,7 +61,6 @@ partial class FrmEmployees
         // logotipo
         // 
         this.logotipo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-        this.logotipo.Image = global::SIV.Properties.Resources.logotipo;
         this.logotipo.Location = new System.Drawing.Point(9, 18);
         this.logotipo.Name = "logotipo";
         this.logotipo.Size = new System.Drawing.Size(39, 39);
