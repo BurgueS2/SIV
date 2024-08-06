@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Org.BouncyCastle.Pqc.Crypto.Frodo;
 using SIV.Core;
 using SIV.Views.Registers;
 
@@ -113,7 +114,7 @@ public partial class FrmMain : MetroFramework.Forms.MetroForm
     private void UpdatePanelColors(Color color)
     {
         panelBar.BackColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
-        panelLogo.BackColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
+        //panelLogo.BackColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
         panelMenu.BackColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
     }
     
@@ -170,5 +171,11 @@ public partial class FrmMain : MetroFramework.Forms.MetroForm
 
         labelTitle.Text = @"HOME";
         btnExitDisplay.Visible = false;
+    }
+
+    private void timer_Tick(object sender, EventArgs e)
+    {
+        DateStatusBar.Text = DateTime.Today.ToString("dd/MMMM/yyyy - dddd");
+        TimeStatusBar.Text = DateTime.Now.ToString("HH:mm:ss");
     }
 }

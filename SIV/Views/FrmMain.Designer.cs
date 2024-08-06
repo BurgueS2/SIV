@@ -29,9 +29,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.panelBar = new System.Windows.Forms.Panel();
-            this.panelLogo = new System.Windows.Forms.Panel();
             this.logoTipo = new System.Windows.Forms.PictureBox();
             this.labelLogo = new System.Windows.Forms.Label();
             this.labelTitle = new System.Windows.Forms.Label();
@@ -43,10 +43,22 @@
             this.panelMenu = new System.Windows.Forms.Panel();
             this.btnExitDisplay = new System.Windows.Forms.Button();
             this.displayPanel = new System.Windows.Forms.Panel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.labelUser = new System.Windows.Forms.ToolStripLabel();
+            this.UserStatusBar = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.labelTime = new System.Windows.Forms.ToolStripLabel();
+            this.TimeStatusBar = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.labelDate = new System.Windows.Forms.ToolStripLabel();
+            this.DateStatusBar = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.panelBar.SuspendLayout();
-            this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoTipo)).BeginInit();
             this.panelMenu.SuspendLayout();
+            this.displayPanel.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelBar
@@ -54,17 +66,10 @@
             resources.ApplyResources(this.panelBar, "panelBar");
             this.panelBar.BackColor = System.Drawing.Color.LightCyan;
             this.panelBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelBar.Controls.Add(this.panelLogo);
+            this.panelBar.Controls.Add(this.logoTipo);
+            this.panelBar.Controls.Add(this.labelLogo);
             this.panelBar.Controls.Add(this.labelTitle);
             this.panelBar.Name = "panelBar";
-            // 
-            // panelLogo
-            // 
-            resources.ApplyResources(this.panelLogo, "panelLogo");
-            this.panelLogo.BackColor = System.Drawing.Color.LightCyan;
-            this.panelLogo.Controls.Add(this.logoTipo);
-            this.panelLogo.Controls.Add(this.labelLogo);
-            this.panelLogo.Name = "panelLogo";
             // 
             // logoTipo
             // 
@@ -154,7 +159,66 @@
             // 
             resources.ApplyResources(this.displayPanel, "displayPanel");
             this.displayPanel.BackColor = System.Drawing.Color.Transparent;
+            this.displayPanel.Controls.Add(this.toolStrip1);
             this.displayPanel.Name = "displayPanel";
+            // 
+            // toolStrip1
+            // 
+            resources.ApplyResources(this.toolStrip1, "toolStrip1");
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.labelUser, this.UserStatusBar, this.toolStripSeparator1, this.labelTime, this.TimeStatusBar, this.toolStripSeparator2, this.labelDate, this.DateStatusBar });
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            // 
+            // labelUser
+            // 
+            this.labelUser.Name = "labelUser";
+            resources.ApplyResources(this.labelUser, "labelUser");
+            // 
+            // UserStatusBar
+            // 
+            this.UserStatusBar.Name = "UserStatusBar";
+            resources.ApplyResources(this.UserStatusBar, "UserStatusBar");
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // labelTime
+            // 
+            this.labelTime.Name = "labelTime";
+            resources.ApplyResources(this.labelTime, "labelTime");
+            // 
+            // TimeStatusBar
+            // 
+            this.TimeStatusBar.Name = "TimeStatusBar";
+            resources.ApplyResources(this.TimeStatusBar, "TimeStatusBar");
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
+            // 
+            // labelDate
+            // 
+            this.labelDate.Name = "labelDate";
+            resources.ApplyResources(this.labelDate, "labelDate");
+            // 
+            // DateStatusBar
+            // 
+            this.DateStatusBar.Name = "DateStatusBar";
+            resources.ApplyResources(this.DateStatusBar, "DateStatusBar");
+            // 
+            // toolStripSplitButton1
+            // 
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            resources.ApplyResources(this.toolStripSplitButton1, "toolStripSplitButton1");
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // FrmMain
             // 
@@ -168,21 +232,44 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmMain";
-            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panelBar.ResumeLayout(false);
-            this.panelLogo.ResumeLayout(false);
-            this.panelLogo.PerformLayout();
+            this.panelBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoTipo)).EndInit();
             this.panelMenu.ResumeLayout(false);
+            this.displayPanel.ResumeLayout(false);
+            this.displayPanel.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
         }
-        
+
+        private System.Windows.Forms.Timer timer;
+
+        private System.Windows.Forms.ToolStripLabel DateStatusBar;
+
+        private System.Windows.Forms.ToolStripLabel labelDate;
+
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+
+        private System.Windows.Forms.ToolStripLabel TimeStatusBar;
+
+        private System.Windows.Forms.ToolStripLabel labelTime;
+
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+
+        private System.Windows.Forms.ToolStripLabel UserStatusBar;
+
+        private System.Windows.Forms.ToolStripLabel labelUser;
+
+        private System.Windows.Forms.ToolStrip toolStrip1;
+
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
+
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Panel panelBar;
         private System.Windows.Forms.Panel panelMenu;
         private System.Windows.Forms.Panel displayPanel;
-        private System.Windows.Forms.Panel panelLogo;
         private System.Windows.Forms.Label labelLogo;
         private System.Windows.Forms.PictureBox logoTipo;
 
