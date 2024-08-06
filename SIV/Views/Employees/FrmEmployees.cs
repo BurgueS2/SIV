@@ -10,7 +10,7 @@ namespace SIV.Views.Employees;
 /// <summary>
 /// Classe responsável pela gestão de funcionários, permitindo operações como listar, adicionar, editar e excluir funcionários.
 /// </summary>
-public partial class FrmEmployees : MetroFramework.Forms.MetroForm
+public partial class FrmEmployees : Form
 {
     private readonly EmployeeController _controller;
     private string _image; // Variável para armazenar o caminho da imagem
@@ -107,6 +107,11 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         DeleteEmployee();
     }
     
+    private void btnSearch_Click(object sender, EventArgs e)
+    {
+        SearchByName();
+    }
+    
     private void btnPhoto_Click(object sender, EventArgs e)
     {
         var dialog = new OpenFileDialog
@@ -131,6 +136,27 @@ public partial class FrmEmployees : MetroFramework.Forms.MetroForm
         {
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "carregar imagem");
+        }
+    }
+
+    private void SearchByName()
+    {
+        try
+        {
+            var name = txtSearch.Text;
+            var result = _controller.SearchByName(name);
+
+            GridData.DataSource = result;
+            FormatGridData();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "pesquisar funcionário");
+        }
+        finally
+        {
+            ConnectionManager.CloseConnection();
         }
     }
     

@@ -5,7 +5,9 @@ namespace SIV.Views;
 
 public class ColorThemes
 {
-    public static List<string> ColorList =
+    public static Color PrimaryColor { get; set; }
+    
+    public static readonly List<string> ColorList =
     [
         "#C4EEF2",
         "#B0D5D9",

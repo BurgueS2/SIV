@@ -30,191 +30,58 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
-            this.MenuMain = new System.Windows.Forms.MenuStrip();
-            this.MenuRegistration = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuRegistrationUser = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuRegistrationEmployee = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuRegistrationClient = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuRegistrationSupplier = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuRegistrationJob = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuProducts = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuProductsProduct = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuProductsStock = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuMovements = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuMovementsCashFlow = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuMovementsSales = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuMovementsExpenses = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuReportProducts = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuReportSales = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuReportInputOutput = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuReportExpenses = new System.Windows.Forms.ToolStripMenuItem();
-            this.Exiting = new System.Windows.Forms.ToolStripMenuItem();
-            this.panelMenu = new System.Windows.Forms.Panel();
-            this.btnReport = new System.Windows.Forms.Button();
-            this.btnCashFlow = new System.Windows.Forms.Button();
-            this.btnTables = new System.Windows.Forms.Button();
-            this.btnProducts = new System.Windows.Forms.Button();
             this.panelBar = new System.Windows.Forms.Panel();
-            this.labelTitle = new System.Windows.Forms.Label();
             this.panelLogo = new System.Windows.Forms.Panel();
-            this.labelSIV = new System.Windows.Forms.Label();
-            this.logotipo = new System.Windows.Forms.PictureBox();
+            this.logoTipo = new System.Windows.Forms.PictureBox();
+            this.labelLogo = new System.Windows.Forms.Label();
+            this.labelTitle = new System.Windows.Forms.Label();
+            this.btnTables = new System.Windows.Forms.Button();
+            this.btnRegisters = new System.Windows.Forms.Button();
+            this.btnCashFlow = new System.Windows.Forms.Button();
+            this.btnReport = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.panelMenu = new System.Windows.Forms.Panel();
+            this.btnExitDisplay = new System.Windows.Forms.Button();
             this.displayPanel = new System.Windows.Forms.Panel();
-            this.MenuMain.SuspendLayout();
-            this.panelMenu.SuspendLayout();
             this.panelBar.SuspendLayout();
             this.panelLogo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logotipo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logoTipo)).BeginInit();
+            this.panelMenu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // MenuMain
+            // panelBar
             // 
-            this.MenuMain.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.MenuMain, "MenuMain");
-            this.MenuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.MenuRegistration, this.MenuProducts, this.MenuMovements, this.MenuReport, this.Exiting });
-            this.MenuMain.Name = "MenuMain";
-            this.MenuMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            resources.ApplyResources(this.panelBar, "panelBar");
+            this.panelBar.BackColor = System.Drawing.Color.LightCyan;
+            this.panelBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelBar.Controls.Add(this.panelLogo);
+            this.panelBar.Controls.Add(this.labelTitle);
+            this.panelBar.Name = "panelBar";
             // 
-            // MenuRegistration
+            // panelLogo
             // 
-            this.MenuRegistration.BackColor = System.Drawing.Color.Transparent;
-            this.MenuRegistration.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.MenuRegistrationUser, this.MenuRegistrationSupplier, this.MenuRegistrationJob });
-            resources.ApplyResources(this.MenuRegistration, "MenuRegistration");
-            this.MenuRegistration.Name = "MenuRegistration";
+            resources.ApplyResources(this.panelLogo, "panelLogo");
+            this.panelLogo.BackColor = System.Drawing.Color.LightCyan;
+            this.panelLogo.Controls.Add(this.logoTipo);
+            this.panelLogo.Controls.Add(this.labelLogo);
+            this.panelLogo.Name = "panelLogo";
             // 
-            // MenuRegistrationUser
+            // logoTipo
             // 
-            this.MenuRegistrationUser.BackColor = System.Drawing.Color.White;
-            this.MenuRegistrationUser.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.MenuRegistrationEmployee, this.MenuRegistrationClient });
-            this.MenuRegistrationUser.Name = "MenuRegistrationUser";
-            resources.ApplyResources(this.MenuRegistrationUser, "MenuRegistrationUser");
+            this.logoTipo.Image = global::SIV.Properties.Resources.logotipo;
+            resources.ApplyResources(this.logoTipo, "logoTipo");
+            this.logoTipo.Name = "logoTipo";
+            this.logoTipo.TabStop = false;
             // 
-            // MenuRegistrationEmployee
+            // labelLogo
             // 
-            this.MenuRegistrationEmployee.BackColor = System.Drawing.Color.White;
-            this.MenuRegistrationEmployee.Name = "MenuRegistrationEmployee";
-            resources.ApplyResources(this.MenuRegistrationEmployee, "MenuRegistrationEmployee");
-            this.MenuRegistrationEmployee.Click += new System.EventHandler(this.MenuRegistrationEmployee_Click);
+            resources.ApplyResources(this.labelLogo, "labelLogo");
+            this.labelLogo.Name = "labelLogo";
             // 
-            // MenuRegistrationClient
+            // labelTitle
             // 
-            this.MenuRegistrationClient.BackColor = System.Drawing.Color.White;
-            this.MenuRegistrationClient.Name = "MenuRegistrationClient";
-            resources.ApplyResources(this.MenuRegistrationClient, "MenuRegistrationClient");
-            this.MenuRegistrationClient.Click += new System.EventHandler(this.MenuRegistrationClient_Click);
-            // 
-            // MenuRegistrationSupplier
-            // 
-            this.MenuRegistrationSupplier.BackColor = System.Drawing.Color.White;
-            this.MenuRegistrationSupplier.Name = "MenuRegistrationSupplier";
-            resources.ApplyResources(this.MenuRegistrationSupplier, "MenuRegistrationSupplier");
-            // 
-            // MenuRegistrationJob
-            // 
-            this.MenuRegistrationJob.BackColor = System.Drawing.Color.White;
-            this.MenuRegistrationJob.Name = "MenuRegistrationJob";
-            resources.ApplyResources(this.MenuRegistrationJob, "MenuRegistrationJob");
-            this.MenuRegistrationJob.Click += new System.EventHandler(this.MenuRegistrationJob_Click);
-            // 
-            // MenuProducts
-            // 
-            this.MenuProducts.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.MenuProductsProduct, this.MenuProductsStock });
-            this.MenuProducts.Name = "MenuProducts";
-            resources.ApplyResources(this.MenuProducts, "MenuProducts");
-            // 
-            // MenuProductsProduct
-            // 
-            this.MenuProductsProduct.Name = "MenuProductsProduct";
-            resources.ApplyResources(this.MenuProductsProduct, "MenuProductsProduct");
-            // 
-            // MenuProductsStock
-            // 
-            this.MenuProductsStock.Name = "MenuProductsStock";
-            resources.ApplyResources(this.MenuProductsStock, "MenuProductsStock");
-            // 
-            // MenuMovements
-            // 
-            this.MenuMovements.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.MenuMovementsCashFlow });
-            this.MenuMovements.Name = "MenuMovements";
-            resources.ApplyResources(this.MenuMovements, "MenuMovements");
-            // 
-            // MenuMovementsCashFlow
-            // 
-            this.MenuMovementsCashFlow.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.MenuMovementsSales, this.MenuMovementsExpenses });
-            this.MenuMovementsCashFlow.Name = "MenuMovementsCashFlow";
-            resources.ApplyResources(this.MenuMovementsCashFlow, "MenuMovementsCashFlow");
-            // 
-            // MenuMovementsSales
-            // 
-            this.MenuMovementsSales.Name = "MenuMovementsSales";
-            resources.ApplyResources(this.MenuMovementsSales, "MenuMovementsSales");
-            // 
-            // MenuMovementsExpenses
-            // 
-            this.MenuMovementsExpenses.Name = "MenuMovementsExpenses";
-            resources.ApplyResources(this.MenuMovementsExpenses, "MenuMovementsExpenses");
-            // 
-            // MenuReport
-            // 
-            this.MenuReport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.MenuReportProducts, this.MenuReportSales, this.MenuReportInputOutput, this.MenuReportExpenses });
-            this.MenuReport.Name = "MenuReport";
-            resources.ApplyResources(this.MenuReport, "MenuReport");
-            // 
-            // MenuReportProducts
-            // 
-            this.MenuReportProducts.Name = "MenuReportProducts";
-            resources.ApplyResources(this.MenuReportProducts, "MenuReportProducts");
-            // 
-            // MenuReportSales
-            // 
-            this.MenuReportSales.Name = "MenuReportSales";
-            resources.ApplyResources(this.MenuReportSales, "MenuReportSales");
-            // 
-            // MenuReportInputOutput
-            // 
-            this.MenuReportInputOutput.Name = "MenuReportInputOutput";
-            resources.ApplyResources(this.MenuReportInputOutput, "MenuReportInputOutput");
-            // 
-            // MenuReportExpenses
-            // 
-            this.MenuReportExpenses.Name = "MenuReportExpenses";
-            resources.ApplyResources(this.MenuReportExpenses, "MenuReportExpenses");
-            // 
-            // Exiting
-            // 
-            this.Exiting.Name = "Exiting";
-            resources.ApplyResources(this.Exiting, "Exiting");
-            this.Exiting.Click += new System.EventHandler(this.Exiting_Click);
-            // 
-            // panelMenu
-            // 
-            resources.ApplyResources(this.panelMenu, "panelMenu");
-            this.panelMenu.BackColor = System.Drawing.Color.LightCyan;
-            this.panelMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelMenu.Controls.Add(this.btnReport);
-            this.panelMenu.Controls.Add(this.btnCashFlow);
-            this.panelMenu.Controls.Add(this.btnTables);
-            this.panelMenu.Controls.Add(this.btnProducts);
-            this.panelMenu.Name = "panelMenu";
-            // 
-            // btnReport
-            // 
-            this.btnReport.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.btnReport, "btnReport");
-            this.btnReport.Image = global::SIV.Properties.Resources.icons_relatorio;
-            this.btnReport.Name = "btnReport";
-            this.btnReport.UseVisualStyleBackColor = true;
-            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
-            // 
-            // btnCashFlow
-            // 
-            this.btnCashFlow.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.btnCashFlow, "btnCashFlow");
-            this.btnCashFlow.Image = global::SIV.Properties.Resources.icons_caixa;
-            this.btnCashFlow.Name = "btnCashFlow";
-            this.btnCashFlow.UseVisualStyleBackColor = true;
-            this.btnCashFlow.Click += new System.EventHandler(this.btnCashFlow_Click);
+            resources.ApplyResources(this.labelTitle, "labelTitle");
+            this.labelTitle.Name = "labelTitle";
             // 
             // btnTables
             // 
@@ -225,49 +92,63 @@
             this.btnTables.UseVisualStyleBackColor = true;
             this.btnTables.Click += new System.EventHandler(this.btnTables_Click);
             // 
-            // btnProducts
+            // btnRegisters
             // 
-            this.btnProducts.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.btnProducts, "btnProducts");
-            this.btnProducts.Image = global::SIV.Properties.Resources.icons_produto;
-            this.btnProducts.Name = "btnProducts";
-            this.btnProducts.UseVisualStyleBackColor = true;
-            this.btnProducts.Click += new System.EventHandler(this.btnProducts_Click);
+            this.btnRegisters.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.btnRegisters, "btnRegisters");
+            this.btnRegisters.Image = global::SIV.Properties.Resources.icons8_cadastro_32;
+            this.btnRegisters.Name = "btnRegisters";
+            this.btnRegisters.UseVisualStyleBackColor = true;
+            this.btnRegisters.Click += new System.EventHandler(this.btnRegisters_Click);
             // 
-            // panelBar
+            // btnCashFlow
             // 
-            resources.ApplyResources(this.panelBar, "panelBar");
-            this.panelBar.BackColor = System.Drawing.Color.LightCyan;
-            this.panelBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelBar.Controls.Add(this.labelTitle);
-            this.panelBar.Controls.Add(this.panelLogo);
-            this.panelBar.Name = "panelBar";
+            this.btnCashFlow.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.btnCashFlow, "btnCashFlow");
+            this.btnCashFlow.Image = global::SIV.Properties.Resources.icons_caixa;
+            this.btnCashFlow.Name = "btnCashFlow";
+            this.btnCashFlow.UseVisualStyleBackColor = true;
+            this.btnCashFlow.Click += new System.EventHandler(this.btnCashFlow_Click);
             // 
-            // labelTitle
+            // btnReport
             // 
-            resources.ApplyResources(this.labelTitle, "labelTitle");
-            this.labelTitle.Name = "labelTitle";
+            this.btnReport.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.btnReport, "btnReport");
+            this.btnReport.Image = global::SIV.Properties.Resources.icons_relatorio;
+            this.btnReport.Name = "btnReport";
+            this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
-            // panelLogo
+            // btnExit
             // 
-            this.panelLogo.BackColor = System.Drawing.Color.LightCyan;
-            this.panelLogo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelLogo.Controls.Add(this.labelSIV);
-            this.panelLogo.Controls.Add(this.logotipo);
-            resources.ApplyResources(this.panelLogo, "panelLogo");
-            this.panelLogo.Name = "panelLogo";
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.btnExit, "btnExit");
+            this.btnExit.Image = global::SIV.Properties.Resources.icons_closed;
+            this.btnExit.Name = "btnExit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // labelSIV
+            // panelMenu
             // 
-            resources.ApplyResources(this.labelSIV, "labelSIV");
-            this.labelSIV.Name = "labelSIV";
+            resources.ApplyResources(this.panelMenu, "panelMenu");
+            this.panelMenu.BackColor = System.Drawing.Color.LightCyan;
+            this.panelMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelMenu.Controls.Add(this.btnExitDisplay);
+            this.panelMenu.Controls.Add(this.btnTables);
+            this.panelMenu.Controls.Add(this.btnCashFlow);
+            this.panelMenu.Controls.Add(this.btnRegisters);
+            this.panelMenu.Controls.Add(this.btnReport);
+            this.panelMenu.Controls.Add(this.btnExit);
+            this.panelMenu.Name = "panelMenu";
             // 
-            // logotipo
+            // btnExitDisplay
             // 
-            this.logotipo.Image = global::SIV.Properties.Resources.logotipo;
-            resources.ApplyResources(this.logotipo, "logotipo");
-            this.logotipo.Name = "logotipo";
-            this.logotipo.TabStop = false;
+            resources.ApplyResources(this.btnExitDisplay, "btnExitDisplay");
+            this.btnExitDisplay.FlatAppearance.BorderSize = 0;
+            this.btnExitDisplay.Image = global::SIV.Properties.Resources.icons_close;
+            this.btnExitDisplay.Name = "btnExitDisplay";
+            this.btnExitDisplay.UseVisualStyleBackColor = true;
+            this.btnExitDisplay.Click += new System.EventHandler(this.btnExitDisplay_Click);
             // 
             // displayPanel
             // 
@@ -279,65 +160,38 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ControlBox = false;
-            this.Controls.Add(this.MenuMain);
             this.Controls.Add(this.displayPanel);
-            this.Controls.Add(this.panelBar);
             this.Controls.Add(this.panelMenu);
+            this.Controls.Add(this.panelBar);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmMain";
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.MenuMain.ResumeLayout(false);
-            this.MenuMain.PerformLayout();
-            this.panelMenu.ResumeLayout(false);
             this.panelBar.ResumeLayout(false);
-            this.panelBar.PerformLayout();
             this.panelLogo.ResumeLayout(false);
             this.panelLogo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logotipo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logoTipo)).EndInit();
+            this.panelMenu.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
         }
-
-        private System.Windows.Forms.Panel displayPanel;
-
+        
         private System.Windows.Forms.Label labelTitle;
+        private System.Windows.Forms.Panel panelBar;
+        private System.Windows.Forms.Panel panelMenu;
+        private System.Windows.Forms.Panel displayPanel;
+        private System.Windows.Forms.Panel panelLogo;
+        private System.Windows.Forms.Label labelLogo;
+        private System.Windows.Forms.PictureBox logoTipo;
 
-        private System.Windows.Forms.Label labelSIV;
-
-        private System.Windows.Forms.PictureBox logotipo;
-
-        private System.Windows.Forms.Button btnProducts;
+        private System.Windows.Forms.Button btnExitDisplay;
+        private System.Windows.Forms.Button btnRegisters;
+        private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnTables;
         private System.Windows.Forms.Button btnCashFlow;
         private System.Windows.Forms.Button btnReport;
-
-        private System.Windows.Forms.Panel panelMenu;
-        private System.Windows.Forms.Panel panelBar;
-        private System.Windows.Forms.Panel panelLogo;
-
-        private System.Windows.Forms.MenuStrip MenuMain;
-        private System.Windows.Forms.ToolStripMenuItem MenuRegistration;
-        private System.Windows.Forms.ToolStripMenuItem MenuRegistrationUser;
-        private System.Windows.Forms.ToolStripMenuItem MenuRegistrationEmployee;
-        private System.Windows.Forms.ToolStripMenuItem MenuRegistrationClient;
-        private System.Windows.Forms.ToolStripMenuItem MenuRegistrationSupplier;
-        private System.Windows.Forms.ToolStripMenuItem MenuRegistrationJob;
-        private System.Windows.Forms.ToolStripMenuItem MenuProducts;
-        private System.Windows.Forms.ToolStripMenuItem MenuProductsProduct;
-        private System.Windows.Forms.ToolStripMenuItem MenuProductsStock;
-        private System.Windows.Forms.ToolStripMenuItem MenuMovements;
-        private System.Windows.Forms.ToolStripMenuItem MenuMovementsCashFlow;
-        private System.Windows.Forms.ToolStripMenuItem MenuMovementsSales;
-        private System.Windows.Forms.ToolStripMenuItem MenuMovementsExpenses;
-        private System.Windows.Forms.ToolStripMenuItem MenuReport;
-        private System.Windows.Forms.ToolStripMenuItem MenuReportProducts;
-        private System.Windows.Forms.ToolStripMenuItem MenuReportSales;
-        private System.Windows.Forms.ToolStripMenuItem MenuReportInputOutput;
-        private System.Windows.Forms.ToolStripMenuItem MenuReportExpenses;
-        private System.Windows.Forms.ToolStripMenuItem Exiting;
 
         #endregion
     }

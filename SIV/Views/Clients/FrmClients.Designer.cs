@@ -53,25 +53,26 @@ partial class FrmClients
         this.labelEmail = new MetroFramework.Controls.MetroLabel();
         this.txtValue = new MetroFramework.Controls.MetroTextBox();
         this.labelDebt = new MetroFramework.Controls.MetroLabel();
-        this.txtSearchName = new MetroFramework.Controls.MetroTextBox();
-        this.labelSearch = new MetroFramework.Controls.MetroLabel();
         this.txtSearchCpf = new System.Windows.Forms.MaskedTextBox();
-        this.labelSearchCpf = new MetroFramework.Controls.MetroLabel();
-        this.btnSearchName = new MetroFramework.Controls.MetroButton();
-        this.btnSearchCpf = new MetroFramework.Controls.MetroButton();
         this.logotipo = new System.Windows.Forms.PictureBox();
         this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
         this.btnUnlocked = new MetroFramework.Controls.MetroRadioButton();
         this.btnBlocked = new MetroFramework.Controls.MetroRadioButton();
-        this.GridDataClient = new MetroFramework.Controls.MetroGrid();
+        this.panelGrid = new System.Windows.Forms.Panel();
+        this.btnSearchCpf = new System.Windows.Forms.Button();
+        this.btnSearchName = new System.Windows.Forms.Button();
+        this.txtSearchName = new MetroFramework.Controls.MetroTextBox();
+        this.labelRegisteredEmployees = new System.Windows.Forms.Label();
+        this.gridData = new MetroFramework.Controls.MetroGrid();
         ((System.ComponentModel.ISupportInitialize)(this.logotipo)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.GridDataClient)).BeginInit();
+        this.panelGrid.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
         this.SuspendLayout();
         // 
         // btnCancel
         // 
         this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-        this.btnCancel.Location = new System.Drawing.Point(120, 646);
+        this.btnCancel.Location = new System.Drawing.Point(134, 553);
         this.btnCancel.Name = "btnCancel";
         this.btnCancel.Size = new System.Drawing.Size(75, 23);
         this.btnCancel.TabIndex = 53;
@@ -82,7 +83,7 @@ partial class FrmClients
         // btnSave
         // 
         this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Left;
-        this.btnSave.Location = new System.Drawing.Point(220, 646);
+        this.btnSave.Location = new System.Drawing.Point(233, 553);
         this.btnSave.Name = "btnSave";
         this.btnSave.Size = new System.Drawing.Size(75, 23);
         this.btnSave.TabIndex = 52;
@@ -93,7 +94,7 @@ partial class FrmClients
         // btnEdit
         // 
         this.btnEdit.Anchor = System.Windows.Forms.AnchorStyles.Left;
-        this.btnEdit.Location = new System.Drawing.Point(320, 646);
+        this.btnEdit.Location = new System.Drawing.Point(337, 553);
         this.btnEdit.Name = "btnEdit";
         this.btnEdit.Size = new System.Drawing.Size(75, 23);
         this.btnEdit.TabIndex = 51;
@@ -104,7 +105,7 @@ partial class FrmClients
         // btnDelete
         // 
         this.btnDelete.Anchor = System.Windows.Forms.AnchorStyles.Left;
-        this.btnDelete.Location = new System.Drawing.Point(420, 646);
+        this.btnDelete.Location = new System.Drawing.Point(435, 553);
         this.btnDelete.Name = "btnDelete";
         this.btnDelete.Size = new System.Drawing.Size(75, 23);
         this.btnDelete.TabIndex = 50;
@@ -115,7 +116,7 @@ partial class FrmClients
         // btnNew
         // 
         this.btnNew.Anchor = System.Windows.Forms.AnchorStyles.Left;
-        this.btnNew.Location = new System.Drawing.Point(20, 646);
+        this.btnNew.Location = new System.Drawing.Point(34, 553);
         this.btnNew.Name = "btnNew";
         this.btnNew.Size = new System.Drawing.Size(75, 23);
         this.btnNew.TabIndex = 49;
@@ -125,14 +126,13 @@ partial class FrmClients
         // 
         // txtCpf
         // 
-        this.txtCpf.Anchor = System.Windows.Forms.AnchorStyles.Top;
         this.txtCpf.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
         this.txtCpf.Enabled = false;
         this.txtCpf.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.txtCpf.Location = new System.Drawing.Point(590, 144);
+        this.txtCpf.Location = new System.Drawing.Point(691, 33);
         this.txtCpf.Mask = "000.000.000-00";
         this.txtCpf.Name = "txtCpf";
-        this.txtCpf.Size = new System.Drawing.Size(235, 23);
+        this.txtCpf.Size = new System.Drawing.Size(318, 23);
         this.txtCpf.TabIndex = 4;
         // 
         // txtAddress
@@ -141,7 +141,7 @@ partial class FrmClients
         // 
         // 
         this.txtAddress.CustomButton.Image = null;
-        this.txtAddress.CustomButton.Location = new System.Drawing.Point(320, 1);
+        this.txtAddress.CustomButton.Location = new System.Drawing.Point(380, 1);
         this.txtAddress.CustomButton.Name = "";
         this.txtAddress.CustomButton.Size = new System.Drawing.Size(21, 21);
         this.txtAddress.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -151,7 +151,7 @@ partial class FrmClients
         this.txtAddress.CustomButton.Visible = false;
         this.txtAddress.Enabled = false;
         this.txtAddress.Lines = new string[0];
-        this.txtAddress.Location = new System.Drawing.Point(109, 264);
+        this.txtAddress.Location = new System.Drawing.Point(109, 153);
         this.txtAddress.MaxLength = 255;
         this.txtAddress.Name = "txtAddress";
         this.txtAddress.PasswordChar = '\0';
@@ -160,7 +160,7 @@ partial class FrmClients
         this.txtAddress.SelectionLength = 0;
         this.txtAddress.SelectionStart = 0;
         this.txtAddress.ShortcutsEnabled = true;
-        this.txtAddress.Size = new System.Drawing.Size(342, 23);
+        this.txtAddress.Size = new System.Drawing.Size(402, 23);
         this.txtAddress.TabIndex = 7;
         this.txtAddress.UseSelectable = true;
         this.txtAddress.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -172,7 +172,7 @@ partial class FrmClients
         // 
         // 
         this.txtName.CustomButton.Image = null;
-        this.txtName.CustomButton.Location = new System.Drawing.Point(177, 1);
+        this.txtName.CustomButton.Location = new System.Drawing.Point(246, 1);
         this.txtName.CustomButton.Name = "";
         this.txtName.CustomButton.Size = new System.Drawing.Size(21, 21);
         this.txtName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -182,7 +182,7 @@ partial class FrmClients
         this.txtName.CustomButton.Visible = false;
         this.txtName.Enabled = false;
         this.txtName.Lines = new string[0];
-        this.txtName.Location = new System.Drawing.Point(109, 144);
+        this.txtName.Location = new System.Drawing.Point(109, 33);
         this.txtName.MaxLength = 255;
         this.txtName.Name = "txtName";
         this.txtName.PasswordChar = '\0';
@@ -191,7 +191,7 @@ partial class FrmClients
         this.txtName.SelectionLength = 0;
         this.txtName.SelectionStart = 0;
         this.txtName.ShortcutsEnabled = true;
-        this.txtName.Size = new System.Drawing.Size(199, 23);
+        this.txtName.Size = new System.Drawing.Size(268, 23);
         this.txtName.TabIndex = 3;
         this.txtName.UseSelectable = true;
         this.txtName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -199,12 +199,11 @@ partial class FrmClients
         // 
         // txtPhone
         // 
-        this.txtPhone.Anchor = System.Windows.Forms.AnchorStyles.Top;
         // 
         // 
         // 
         this.txtPhone.CustomButton.Image = null;
-        this.txtPhone.CustomButton.Location = new System.Drawing.Point(213, 1);
+        this.txtPhone.CustomButton.Location = new System.Drawing.Point(296, 1);
         this.txtPhone.CustomButton.Name = "";
         this.txtPhone.CustomButton.Size = new System.Drawing.Size(21, 21);
         this.txtPhone.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -214,7 +213,7 @@ partial class FrmClients
         this.txtPhone.CustomButton.Visible = false;
         this.txtPhone.Enabled = false;
         this.txtPhone.Lines = new string[0];
-        this.txtPhone.Location = new System.Drawing.Point(590, 204);
+        this.txtPhone.Location = new System.Drawing.Point(691, 93);
         this.txtPhone.MaxLength = 11;
         this.txtPhone.Name = "txtPhone";
         this.txtPhone.PasswordChar = '\0';
@@ -223,7 +222,7 @@ partial class FrmClients
         this.txtPhone.SelectionLength = 0;
         this.txtPhone.SelectionStart = 0;
         this.txtPhone.ShortcutsEnabled = true;
-        this.txtPhone.Size = new System.Drawing.Size(235, 23);
+        this.txtPhone.Size = new System.Drawing.Size(318, 23);
         this.txtPhone.TabIndex = 6;
         this.txtPhone.UseSelectable = true;
         this.txtPhone.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -231,11 +230,10 @@ partial class FrmClients
         // 
         // labelCpf
         // 
-        this.labelCpf.Anchor = System.Windows.Forms.AnchorStyles.Top;
         this.labelCpf.AutoSize = true;
         this.labelCpf.FontSize = MetroFramework.MetroLabelSize.Tall;
         this.labelCpf.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-        this.labelCpf.Location = new System.Drawing.Point(474, 144);
+        this.labelCpf.Location = new System.Drawing.Point(587, 33);
         this.labelCpf.Name = "labelCpf";
         this.labelCpf.Size = new System.Drawing.Size(42, 25);
         this.labelCpf.TabIndex = 41;
@@ -247,7 +245,7 @@ partial class FrmClients
         this.labelAddress.AutoSize = true;
         this.labelAddress.FontSize = MetroFramework.MetroLabelSize.Tall;
         this.labelAddress.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-        this.labelAddress.Location = new System.Drawing.Point(12, 264);
+        this.labelAddress.Location = new System.Drawing.Point(12, 153);
         this.labelAddress.Name = "labelAddress";
         this.labelAddress.Size = new System.Drawing.Size(85, 25);
         this.labelAddress.TabIndex = 40;
@@ -255,11 +253,10 @@ partial class FrmClients
         // 
         // labelPhone
         // 
-        this.labelPhone.Anchor = System.Windows.Forms.AnchorStyles.Top;
         this.labelPhone.AutoSize = true;
         this.labelPhone.FontSize = MetroFramework.MetroLabelSize.Tall;
         this.labelPhone.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-        this.labelPhone.Location = new System.Drawing.Point(474, 204);
+        this.labelPhone.Location = new System.Drawing.Point(587, 93);
         this.labelPhone.Name = "labelPhone";
         this.labelPhone.Size = new System.Drawing.Size(77, 25);
         this.labelPhone.TabIndex = 39;
@@ -271,7 +268,7 @@ partial class FrmClients
         this.labelName.AutoSize = true;
         this.labelName.FontSize = MetroFramework.MetroLabelSize.Tall;
         this.labelName.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-        this.labelName.Location = new System.Drawing.Point(12, 144);
+        this.labelName.Location = new System.Drawing.Point(12, 33);
         this.labelName.Name = "labelName";
         this.labelName.Size = new System.Drawing.Size(61, 25);
         this.labelName.TabIndex = 38;
@@ -294,7 +291,7 @@ partial class FrmClients
         this.txtCode.CustomButton.Visible = false;
         this.txtCode.Enabled = false;
         this.txtCode.Lines = new string[0];
-        this.txtCode.Location = new System.Drawing.Point(378, 144);
+        this.txtCode.Location = new System.Drawing.Point(438, 33);
         this.txtCode.MaxLength = 255;
         this.txtCode.Name = "txtCode";
         this.txtCode.PasswordChar = '\0';
@@ -314,7 +311,7 @@ partial class FrmClients
         this.labelCode.AutoSize = true;
         this.labelCode.FontSize = MetroFramework.MetroLabelSize.Tall;
         this.labelCode.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-        this.labelCode.Location = new System.Drawing.Point(323, 144);
+        this.labelCode.Location = new System.Drawing.Point(383, 33);
         this.labelCode.Name = "labelCode";
         this.labelCode.Size = new System.Drawing.Size(49, 25);
         this.labelCode.TabIndex = 54;
@@ -327,7 +324,7 @@ partial class FrmClients
         // 
         // 
         this.txtEmail.CustomButton.Image = null;
-        this.txtEmail.CustomButton.Location = new System.Drawing.Point(320, 1);
+        this.txtEmail.CustomButton.Location = new System.Drawing.Point(380, 1);
         this.txtEmail.CustomButton.Name = "";
         this.txtEmail.CustomButton.Size = new System.Drawing.Size(21, 21);
         this.txtEmail.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -337,7 +334,7 @@ partial class FrmClients
         this.txtEmail.CustomButton.Visible = false;
         this.txtEmail.Enabled = false;
         this.txtEmail.Lines = new string[0];
-        this.txtEmail.Location = new System.Drawing.Point(109, 204);
+        this.txtEmail.Location = new System.Drawing.Point(109, 93);
         this.txtEmail.MaxLength = 255;
         this.txtEmail.Name = "txtEmail";
         this.txtEmail.PasswordChar = '\0';
@@ -346,7 +343,7 @@ partial class FrmClients
         this.txtEmail.SelectionLength = 0;
         this.txtEmail.SelectionStart = 0;
         this.txtEmail.ShortcutsEnabled = true;
-        this.txtEmail.Size = new System.Drawing.Size(342, 23);
+        this.txtEmail.Size = new System.Drawing.Size(402, 23);
         this.txtEmail.TabIndex = 5;
         this.txtEmail.UseSelectable = true;
         this.txtEmail.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -357,7 +354,7 @@ partial class FrmClients
         this.labelEmail.AutoSize = true;
         this.labelEmail.FontSize = MetroFramework.MetroLabelSize.Tall;
         this.labelEmail.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-        this.labelEmail.Location = new System.Drawing.Point(12, 204);
+        this.labelEmail.Location = new System.Drawing.Point(12, 93);
         this.labelEmail.Name = "labelEmail";
         this.labelEmail.Size = new System.Drawing.Size(61, 25);
         this.labelEmail.TabIndex = 56;
@@ -365,12 +362,11 @@ partial class FrmClients
         // 
         // txtValue
         // 
-        this.txtValue.Anchor = System.Windows.Forms.AnchorStyles.Top;
         // 
         // 
         // 
         this.txtValue.CustomButton.Image = null;
-        this.txtValue.CustomButton.Location = new System.Drawing.Point(213, 1);
+        this.txtValue.CustomButton.Location = new System.Drawing.Point(296, 1);
         this.txtValue.CustomButton.Name = "";
         this.txtValue.CustomButton.Size = new System.Drawing.Size(21, 21);
         this.txtValue.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -379,7 +375,7 @@ partial class FrmClients
         this.txtValue.CustomButton.UseSelectable = true;
         this.txtValue.CustomButton.Visible = false;
         this.txtValue.Lines = new string[0];
-        this.txtValue.Location = new System.Drawing.Point(590, 264);
+        this.txtValue.Location = new System.Drawing.Point(691, 153);
         this.txtValue.MaxLength = 11;
         this.txtValue.Name = "txtValue";
         this.txtValue.PasswordChar = '\0';
@@ -388,7 +384,7 @@ partial class FrmClients
         this.txtValue.SelectionLength = 0;
         this.txtValue.SelectionStart = 0;
         this.txtValue.ShortcutsEnabled = true;
-        this.txtValue.Size = new System.Drawing.Size(235, 23);
+        this.txtValue.Size = new System.Drawing.Size(318, 23);
         this.txtValue.TabIndex = 8;
         this.txtValue.UseSelectable = true;
         this.txtValue.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -396,105 +392,25 @@ partial class FrmClients
         // 
         // labelDebt
         // 
-        this.labelDebt.Anchor = System.Windows.Forms.AnchorStyles.Top;
         this.labelDebt.AutoSize = true;
         this.labelDebt.FontSize = MetroFramework.MetroLabelSize.Tall;
         this.labelDebt.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-        this.labelDebt.Location = new System.Drawing.Point(474, 264);
+        this.labelDebt.Location = new System.Drawing.Point(587, 153);
         this.labelDebt.Name = "labelDebt";
         this.labelDebt.Size = new System.Drawing.Size(66, 25);
         this.labelDebt.TabIndex = 58;
         this.labelDebt.Text = "Debito";
         this.labelDebt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         // 
-        // txtSearchName
-        // 
-        // 
-        // 
-        // 
-        this.txtSearchName.CustomButton.Image = null;
-        this.txtSearchName.CustomButton.Location = new System.Drawing.Point(239, 1);
-        this.txtSearchName.CustomButton.Name = "";
-        this.txtSearchName.CustomButton.Size = new System.Drawing.Size(21, 21);
-        this.txtSearchName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-        this.txtSearchName.CustomButton.TabIndex = 1;
-        this.txtSearchName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-        this.txtSearchName.CustomButton.UseSelectable = true;
-        this.txtSearchName.CustomButton.Visible = false;
-        this.txtSearchName.Lines = new string[0];
-        this.txtSearchName.Location = new System.Drawing.Point(109, 84);
-        this.txtSearchName.MaxLength = 255;
-        this.txtSearchName.Name = "txtSearchName";
-        this.txtSearchName.PasswordChar = '\0';
-        this.txtSearchName.ScrollBars = System.Windows.Forms.ScrollBars.None;
-        this.txtSearchName.SelectedText = "";
-        this.txtSearchName.SelectionLength = 0;
-        this.txtSearchName.SelectionStart = 0;
-        this.txtSearchName.ShortcutsEnabled = true;
-        this.txtSearchName.Size = new System.Drawing.Size(261, 23);
-        this.txtSearchName.TabIndex = 1;
-        this.txtSearchName.UseSelectable = true;
-        this.txtSearchName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-        this.txtSearchName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-        // 
-        // labelSearch
-        // 
-        this.labelSearch.AutoSize = true;
-        this.labelSearch.FontSize = MetroFramework.MetroLabelSize.Tall;
-        this.labelSearch.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-        this.labelSearch.Location = new System.Drawing.Point(12, 84);
-        this.labelSearch.Name = "labelSearch";
-        this.labelSearch.Size = new System.Drawing.Size(63, 25);
-        this.labelSearch.TabIndex = 65;
-        this.labelSearch.Text = "Buscar";
-        this.labelSearch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        // 
         // txtSearchCpf
         // 
-        this.txtSearchCpf.Anchor = System.Windows.Forms.AnchorStyles.Top;
         this.txtSearchCpf.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
         this.txtSearchCpf.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.txtSearchCpf.Location = new System.Drawing.Point(590, 84);
+        this.txtSearchCpf.Location = new System.Drawing.Point(306, 26);
         this.txtSearchCpf.Mask = "000.000.000-00";
         this.txtSearchCpf.Name = "txtSearchCpf";
-        this.txtSearchCpf.Size = new System.Drawing.Size(156, 23);
+        this.txtSearchCpf.Size = new System.Drawing.Size(239, 23);
         this.txtSearchCpf.TabIndex = 2;
-        // 
-        // labelSearchCpf
-        // 
-        this.labelSearchCpf.Anchor = System.Windows.Forms.AnchorStyles.Top;
-        this.labelSearchCpf.AutoSize = true;
-        this.labelSearchCpf.FontSize = MetroFramework.MetroLabelSize.Tall;
-        this.labelSearchCpf.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-        this.labelSearchCpf.Location = new System.Drawing.Point(474, 84);
-        this.labelSearchCpf.Name = "labelSearchCpf";
-        this.labelSearchCpf.Size = new System.Drawing.Size(98, 25);
-        this.labelSearchCpf.TabIndex = 63;
-        this.labelSearchCpf.Text = "Buscar CPF";
-        this.labelSearchCpf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        // 
-        // btnSearchName
-        // 
-        this.btnSearchName.Location = new System.Drawing.Point(376, 84);
-        this.btnSearchName.Name = "btnSearchName";
-        this.btnSearchName.Size = new System.Drawing.Size(73, 23);
-        this.btnSearchName.TabIndex = 67;
-        this.btnSearchName.Text = "Buscar";
-        this.btnSearchName.UseSelectable = true;
-        this.btnSearchName.UseStyleColors = true;
-        this.btnSearchName.Click += new System.EventHandler(this.btnSearchName_Click);
-        // 
-        // btnSearchCpf
-        // 
-        this.btnSearchCpf.Anchor = System.Windows.Forms.AnchorStyles.Top;
-        this.btnSearchCpf.Location = new System.Drawing.Point(752, 84);
-        this.btnSearchCpf.Name = "btnSearchCpf";
-        this.btnSearchCpf.Size = new System.Drawing.Size(73, 23);
-        this.btnSearchCpf.TabIndex = 68;
-        this.btnSearchCpf.Text = "Buscar";
-        this.btnSearchCpf.UseSelectable = true;
-        this.btnSearchCpf.UseStyleColors = true;
-        this.btnSearchCpf.Click += new System.EventHandler(this.btnSearchCpf_Click);
         // 
         // logotipo
         // 
@@ -508,11 +424,10 @@ partial class FrmClients
         // 
         // metroLabel1
         // 
-        this.metroLabel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
         this.metroLabel1.AutoSize = true;
         this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Tall;
         this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-        this.metroLabel1.Location = new System.Drawing.Point(879, 84);
+        this.metroLabel1.Location = new System.Drawing.Point(1083, 33);
         this.metroLabel1.Name = "metroLabel1";
         this.metroLabel1.Size = new System.Drawing.Size(153, 25);
         this.metroLabel1.TabIndex = 79;
@@ -521,9 +436,8 @@ partial class FrmClients
         // 
         // btnUnlocked
         // 
-        this.btnUnlocked.Anchor = System.Windows.Forms.AnchorStyles.Top;
         this.btnUnlocked.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
-        this.btnUnlocked.Location = new System.Drawing.Point(879, 163);
+        this.btnUnlocked.Location = new System.Drawing.Point(1083, 112);
         this.btnUnlocked.Name = "btnUnlocked";
         this.btnUnlocked.Size = new System.Drawing.Size(148, 24);
         this.btnUnlocked.TabIndex = 78;
@@ -532,81 +446,157 @@ partial class FrmClients
         // 
         // btnBlocked
         // 
-        this.btnBlocked.Anchor = System.Windows.Forms.AnchorStyles.Top;
         this.btnBlocked.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
-        this.btnBlocked.Location = new System.Drawing.Point(879, 133);
+        this.btnBlocked.Location = new System.Drawing.Point(1083, 82);
         this.btnBlocked.Name = "btnBlocked";
         this.btnBlocked.Size = new System.Drawing.Size(148, 24);
         this.btnBlocked.TabIndex = 77;
         this.btnBlocked.Text = "Bloqueado";
         this.btnBlocked.UseSelectable = true;
         // 
-        // GridDataClient
+        // panelGrid
         // 
-        this.GridDataClient.AllowUserToAddRows = false;
-        this.GridDataClient.AllowUserToDeleteRows = false;
-        this.GridDataClient.AllowUserToResizeRows = false;
-        this.GridDataClient.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-        this.GridDataClient.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-        this.GridDataClient.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-        this.GridDataClient.BorderStyle = System.Windows.Forms.BorderStyle.None;
-        this.GridDataClient.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-        this.GridDataClient.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+        this.panelGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        this.panelGrid.Controls.Add(this.btnSearchCpf);
+        this.panelGrid.Controls.Add(this.btnSearchName);
+        this.panelGrid.Controls.Add(this.txtSearchName);
+        this.panelGrid.Controls.Add(this.labelRegisteredEmployees);
+        this.panelGrid.Controls.Add(this.gridData);
+        this.panelGrid.Controls.Add(this.txtSearchCpf);
+        this.panelGrid.Location = new System.Drawing.Point(0, 268);
+        this.panelGrid.Name = "panelGrid";
+        this.panelGrid.Size = new System.Drawing.Size(1252, 245);
+        this.panelGrid.TabIndex = 81;
+        // 
+        // btnSearchCpf
+        // 
+        this.btnSearchCpf.Anchor = System.Windows.Forms.AnchorStyles.Left;
+        this.btnSearchCpf.FlatAppearance.BorderSize = 0;
+        this.btnSearchCpf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+        this.btnSearchCpf.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.btnSearchCpf.Image = global::SIV.Properties.Resources.icons8_localizar_e_substituir_26;
+        this.btnSearchCpf.Location = new System.Drawing.Point(545, 26);
+        this.btnSearchCpf.Name = "btnSearchCpf";
+        this.btnSearchCpf.Size = new System.Drawing.Size(34, 23);
+        this.btnSearchCpf.TabIndex = 82;
+        this.btnSearchCpf.UseVisualStyleBackColor = true;
+        this.btnSearchCpf.Click += new System.EventHandler(this.btnSearchCpf_Click);
+        // 
+        // btnSearchName
+        // 
+        this.btnSearchName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+        this.btnSearchName.FlatAppearance.BorderSize = 0;
+        this.btnSearchName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+        this.btnSearchName.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.btnSearchName.Image = global::SIV.Properties.Resources.icons8_localizar_e_substituir_26;
+        this.btnSearchName.Location = new System.Drawing.Point(266, 26);
+        this.btnSearchName.Name = "btnSearchName";
+        this.btnSearchName.Size = new System.Drawing.Size(34, 23);
+        this.btnSearchName.TabIndex = 40;
+        this.btnSearchName.UseVisualStyleBackColor = true;
+        this.btnSearchName.Click += new System.EventHandler(this.btnSearchName_Click);
+        // 
+        // txtSearchName
+        // 
+        // 
+        // 
+        // 
+        this.txtSearchName.CustomButton.Image = null;
+        this.txtSearchName.CustomButton.Location = new System.Drawing.Point(245, 1);
+        this.txtSearchName.CustomButton.Name = "";
+        this.txtSearchName.CustomButton.Size = new System.Drawing.Size(21, 21);
+        this.txtSearchName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+        this.txtSearchName.CustomButton.TabIndex = 1;
+        this.txtSearchName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+        this.txtSearchName.CustomButton.UseSelectable = true;
+        this.txtSearchName.CustomButton.Visible = false;
+        this.txtSearchName.Lines = new string[0];
+        this.txtSearchName.Location = new System.Drawing.Point(0, 26);
+        this.txtSearchName.MaxLength = 255;
+        this.txtSearchName.Name = "txtSearchName";
+        this.txtSearchName.PasswordChar = '\0';
+        this.txtSearchName.PromptText = "Buscar";
+        this.txtSearchName.ScrollBars = System.Windows.Forms.ScrollBars.None;
+        this.txtSearchName.SelectedText = "";
+        this.txtSearchName.SelectionLength = 0;
+        this.txtSearchName.SelectionStart = 0;
+        this.txtSearchName.ShortcutsEnabled = true;
+        this.txtSearchName.Size = new System.Drawing.Size(267, 23);
+        this.txtSearchName.TabIndex = 40;
+        this.txtSearchName.UseSelectable = true;
+        this.txtSearchName.WaterMark = "Buscar";
+        this.txtSearchName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+        this.txtSearchName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+        // 
+        // labelRegisteredEmployees
+        // 
+        this.labelRegisteredEmployees.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelRegisteredEmployees.Location = new System.Drawing.Point(0, 0);
+        this.labelRegisteredEmployees.Name = "labelRegisteredEmployees";
+        this.labelRegisteredEmployees.Size = new System.Drawing.Size(174, 23);
+        this.labelRegisteredEmployees.TabIndex = 0;
+        this.labelRegisteredEmployees.Text = "Clientes Cadastrados";
+        // 
+        // gridData
+        // 
+        this.gridData.AllowUserToAddRows = false;
+        this.gridData.AllowUserToDeleteRows = false;
+        this.gridData.AllowUserToResizeRows = false;
+        this.gridData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        this.gridData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+        this.gridData.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+        this.gridData.BorderStyle = System.Windows.Forms.BorderStyle.None;
+        this.gridData.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+        this.gridData.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
         dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+        dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightCyan;
         dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-        dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-        dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+        dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+        dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightCyan;
         dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
         dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-        this.GridDataClient.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-        this.GridDataClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        this.gridData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+        this.gridData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
         dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
         dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
         dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-        dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+        dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightCyan;
         dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
         dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-        this.GridDataClient.DefaultCellStyle = dataGridViewCellStyle2;
-        this.GridDataClient.EnableHeadersVisualStyles = false;
-        this.GridDataClient.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-        this.GridDataClient.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-        this.GridDataClient.Location = new System.Drawing.Point(0, 361);
-        this.GridDataClient.Name = "GridDataClient";
-        this.GridDataClient.ReadOnly = true;
-        this.GridDataClient.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+        this.gridData.DefaultCellStyle = dataGridViewCellStyle2;
+        this.gridData.EnableHeadersVisualStyles = false;
+        this.gridData.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+        this.gridData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+        this.gridData.Location = new System.Drawing.Point(0, 55);
+        this.gridData.Name = "gridData";
+        this.gridData.ReadOnly = true;
+        this.gridData.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
         dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+        dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightCyan;
         dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
         dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-        dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+        dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Azure;
         dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
         dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-        this.GridDataClient.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-        this.GridDataClient.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-        this.GridDataClient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-        this.GridDataClient.Size = new System.Drawing.Size(1052, 250);
-        this.GridDataClient.TabIndex = 76;
-        this.GridDataClient.UseStyleColors = true;
-        this.GridDataClient.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridDataClient_CellDoubleClick);
+        this.gridData.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+        this.gridData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+        this.gridData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+        this.gridData.Size = new System.Drawing.Size(1252, 224);
+        this.gridData.TabIndex = 30;
+        this.gridData.UseStyleColors = true;
+        this.gridData.DoubleClick += new System.EventHandler(this.gridData_DoubleClick);
         // 
         // FrmClients
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-        this.ClientSize = new System.Drawing.Size(1064, 681);
+        this.ClientSize = new System.Drawing.Size(1254, 681);
+        this.Controls.Add(this.panelGrid);
         this.Controls.Add(this.metroLabel1);
         this.Controls.Add(this.btnUnlocked);
         this.Controls.Add(this.btnBlocked);
-        this.Controls.Add(this.GridDataClient);
-        this.Controls.Add(this.btnSearchCpf);
-        this.Controls.Add(this.btnSearchName);
-        this.Controls.Add(this.txtSearchName);
-        this.Controls.Add(this.labelSearch);
-        this.Controls.Add(this.txtSearchCpf);
-        this.Controls.Add(this.labelSearchCpf);
         this.Controls.Add(this.txtValue);
         this.Controls.Add(this.labelDebt);
         this.Controls.Add(this.txtEmail);
@@ -635,10 +625,19 @@ partial class FrmClients
         this.Text = "Cadastro de Clientes";
         this.Load += new System.EventHandler(this.FrmClients_Load);
         ((System.ComponentModel.ISupportInitialize)(this.logotipo)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.GridDataClient)).EndInit();
+        this.panelGrid.ResumeLayout(false);
+        this.panelGrid.PerformLayout();
+        ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
         this.ResumeLayout(false);
         this.PerformLayout();
     }
+
+    private System.Windows.Forms.Button btnSearchCpf;
+
+    private System.Windows.Forms.Panel panelGrid;
+    
+    private System.Windows.Forms.Label labelRegisteredEmployees;
+    private MetroFramework.Controls.MetroGrid gridData;
 
     private MetroFramework.Controls.MetroLabel metroLabel1;
 
@@ -646,14 +645,10 @@ partial class FrmClients
 
     private System.Windows.Forms.PictureBox logotipo;
 
-    private MetroFramework.Controls.MetroButton btnSearchCpf;
-
-    private MetroFramework.Controls.MetroButton btnSearchName;
+    private System.Windows.Forms.Button btnSearchName;
 
     private MetroFramework.Controls.MetroTextBox txtSearchName;
-    private MetroFramework.Controls.MetroLabel labelSearch;
     private System.Windows.Forms.MaskedTextBox txtSearchCpf;
-    private MetroFramework.Controls.MetroLabel labelSearchCpf;
 
     private MetroFramework.Controls.MetroRadioButton btnBlocked;
 
@@ -671,7 +666,6 @@ partial class FrmClients
     private MetroFramework.Controls.MetroButton btnEdit;
     private MetroFramework.Controls.MetroButton btnDelete;
     private MetroFramework.Controls.MetroButton btnNew;
-    private MetroFramework.Controls.MetroGrid GridDataClient;
     private System.Windows.Forms.MaskedTextBox txtCpf;
     private MetroFramework.Controls.MetroTextBox txtAddress;
     private MetroFramework.Controls.MetroTextBox txtName;

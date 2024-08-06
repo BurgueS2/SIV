@@ -34,7 +34,6 @@ partial class FrmEmployees
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-        this.logotipo = new System.Windows.Forms.PictureBox();
         this.LabelName = new MetroFramework.Controls.MetroLabel();
         this.labelPhone = new MetroFramework.Controls.MetroLabel();
         this.labelAddress = new MetroFramework.Controls.MetroLabel();
@@ -53,27 +52,21 @@ partial class FrmEmployees
         this.btnEdit = new System.Windows.Forms.Button();
         this.btnDelete = new System.Windows.Forms.Button();
         this.btnPhoto = new System.Windows.Forms.Button();
-        ((System.ComponentModel.ISupportInitialize)(this.logotipo)).BeginInit();
+        this.panelGrid = new System.Windows.Forms.Panel();
+        this.btnSearch = new System.Windows.Forms.Button();
+        this.txtSearch = new MetroFramework.Controls.MetroTextBox();
+        this.labelRegisteredEmployees = new System.Windows.Forms.Label();
         ((System.ComponentModel.ISupportInitialize)(this.photo)).BeginInit();
         ((System.ComponentModel.ISupportInitialize)(this.GridData)).BeginInit();
+        this.panelGrid.SuspendLayout();
         this.SuspendLayout();
-        // 
-        // logotipo
-        // 
-        this.logotipo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-        this.logotipo.Location = new System.Drawing.Point(9, 18);
-        this.logotipo.Name = "logotipo";
-        this.logotipo.Size = new System.Drawing.Size(39, 39);
-        this.logotipo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-        this.logotipo.TabIndex = 18;
-        this.logotipo.TabStop = false;
         // 
         // LabelName
         // 
         this.LabelName.AutoSize = true;
         this.LabelName.FontSize = MetroFramework.MetroLabelSize.Tall;
         this.LabelName.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-        this.LabelName.Location = new System.Drawing.Point(26, 87);
+        this.LabelName.Location = new System.Drawing.Point(26, 28);
         this.LabelName.Name = "LabelName";
         this.LabelName.Size = new System.Drawing.Size(61, 25);
         this.LabelName.TabIndex = 19;
@@ -85,7 +78,7 @@ partial class FrmEmployees
         this.labelPhone.AutoSize = true;
         this.labelPhone.FontSize = MetroFramework.MetroLabelSize.Tall;
         this.labelPhone.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-        this.labelPhone.Location = new System.Drawing.Point(26, 150);
+        this.labelPhone.Location = new System.Drawing.Point(26, 91);
         this.labelPhone.Name = "labelPhone";
         this.labelPhone.Size = new System.Drawing.Size(77, 25);
         this.labelPhone.TabIndex = 20;
@@ -97,7 +90,7 @@ partial class FrmEmployees
         this.labelAddress.AutoSize = true;
         this.labelAddress.FontSize = MetroFramework.MetroLabelSize.Tall;
         this.labelAddress.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-        this.labelAddress.Location = new System.Drawing.Point(26, 213);
+        this.labelAddress.Location = new System.Drawing.Point(26, 154);
         this.labelAddress.Name = "labelAddress";
         this.labelAddress.Size = new System.Drawing.Size(85, 25);
         this.labelAddress.TabIndex = 21;
@@ -108,7 +101,7 @@ partial class FrmEmployees
         this.labelCpf.AutoSize = true;
         this.labelCpf.FontSize = MetroFramework.MetroLabelSize.Tall;
         this.labelCpf.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-        this.labelCpf.Location = new System.Drawing.Point(449, 87);
+        this.labelCpf.Location = new System.Drawing.Point(449, 28);
         this.labelCpf.Name = "labelCpf";
         this.labelCpf.Size = new System.Drawing.Size(42, 25);
         this.labelCpf.TabIndex = 22;
@@ -120,7 +113,7 @@ partial class FrmEmployees
         this.labelJob.AutoSize = true;
         this.labelJob.FontSize = MetroFramework.MetroLabelSize.Tall;
         this.labelJob.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-        this.labelJob.Location = new System.Drawing.Point(449, 152);
+        this.labelJob.Location = new System.Drawing.Point(449, 93);
         this.labelJob.Name = "labelJob";
         this.labelJob.Size = new System.Drawing.Size(60, 25);
         this.labelJob.TabIndex = 23;
@@ -133,7 +126,7 @@ partial class FrmEmployees
         // 
         // 
         this.txtPhone.CustomButton.Image = null;
-        this.txtPhone.CustomButton.Location = new System.Drawing.Point(196, 1);
+        this.txtPhone.CustomButton.Location = new System.Drawing.Point(242, 1);
         this.txtPhone.CustomButton.Name = "";
         this.txtPhone.CustomButton.Size = new System.Drawing.Size(21, 21);
         this.txtPhone.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -142,7 +135,7 @@ partial class FrmEmployees
         this.txtPhone.CustomButton.UseSelectable = true;
         this.txtPhone.CustomButton.Visible = false;
         this.txtPhone.Lines = new string[0];
-        this.txtPhone.Location = new System.Drawing.Point(136, 152);
+        this.txtPhone.Location = new System.Drawing.Point(136, 93);
         this.txtPhone.MaxLength = 11;
         this.txtPhone.Name = "txtPhone";
         this.txtPhone.PasswordChar = '\0';
@@ -151,7 +144,7 @@ partial class FrmEmployees
         this.txtPhone.SelectionLength = 0;
         this.txtPhone.SelectionStart = 0;
         this.txtPhone.ShortcutsEnabled = true;
-        this.txtPhone.Size = new System.Drawing.Size(218, 23);
+        this.txtPhone.Size = new System.Drawing.Size(264, 23);
         this.txtPhone.TabIndex = 3;
         this.txtPhone.UseSelectable = true;
         this.txtPhone.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -163,7 +156,7 @@ partial class FrmEmployees
         // 
         // 
         this.txtName.CustomButton.Image = null;
-        this.txtName.CustomButton.Location = new System.Drawing.Point(196, 1);
+        this.txtName.CustomButton.Location = new System.Drawing.Point(242, 1);
         this.txtName.CustomButton.Name = "";
         this.txtName.CustomButton.Size = new System.Drawing.Size(21, 21);
         this.txtName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -172,7 +165,7 @@ partial class FrmEmployees
         this.txtName.CustomButton.UseSelectable = true;
         this.txtName.CustomButton.Visible = false;
         this.txtName.Lines = new string[0];
-        this.txtName.Location = new System.Drawing.Point(136, 89);
+        this.txtName.Location = new System.Drawing.Point(136, 30);
         this.txtName.MaxLength = 255;
         this.txtName.Name = "txtName";
         this.txtName.PasswordChar = '\0';
@@ -181,7 +174,7 @@ partial class FrmEmployees
         this.txtName.SelectionLength = 0;
         this.txtName.SelectionStart = 0;
         this.txtName.ShortcutsEnabled = true;
-        this.txtName.Size = new System.Drawing.Size(218, 23);
+        this.txtName.Size = new System.Drawing.Size(264, 23);
         this.txtName.TabIndex = 1;
         this.txtName.UseSelectable = true;
         this.txtName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -193,7 +186,7 @@ partial class FrmEmployees
         // 
         // 
         this.txtAddress.CustomButton.Image = null;
-        this.txtAddress.CustomButton.Location = new System.Drawing.Point(196, 1);
+        this.txtAddress.CustomButton.Location = new System.Drawing.Point(242, 1);
         this.txtAddress.CustomButton.Name = "";
         this.txtAddress.CustomButton.Size = new System.Drawing.Size(21, 21);
         this.txtAddress.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -202,7 +195,7 @@ partial class FrmEmployees
         this.txtAddress.CustomButton.UseSelectable = true;
         this.txtAddress.CustomButton.Visible = false;
         this.txtAddress.Lines = new string[0];
-        this.txtAddress.Location = new System.Drawing.Point(136, 215);
+        this.txtAddress.Location = new System.Drawing.Point(136, 156);
         this.txtAddress.MaxLength = 255;
         this.txtAddress.Name = "txtAddress";
         this.txtAddress.PasswordChar = '\0';
@@ -211,7 +204,7 @@ partial class FrmEmployees
         this.txtAddress.SelectionLength = 0;
         this.txtAddress.SelectionStart = 0;
         this.txtAddress.ShortcutsEnabled = true;
-        this.txtAddress.Size = new System.Drawing.Size(218, 23);
+        this.txtAddress.Size = new System.Drawing.Size(264, 23);
         this.txtAddress.TabIndex = 4;
         this.txtAddress.UseSelectable = true;
         this.txtAddress.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -221,7 +214,7 @@ partial class FrmEmployees
         // 
         this.cbJob.FormattingEnabled = true;
         this.cbJob.ItemHeight = 23;
-        this.cbJob.Location = new System.Drawing.Point(537, 150);
+        this.cbJob.Location = new System.Drawing.Point(537, 91);
         this.cbJob.Name = "cbJob";
         this.cbJob.Size = new System.Drawing.Size(218, 29);
         this.cbJob.TabIndex = 5;
@@ -230,7 +223,7 @@ partial class FrmEmployees
         // 
         // photo
         // 
-        this.photo.Location = new System.Drawing.Point(867, 72);
+        this.photo.Location = new System.Drawing.Point(867, 13);
         this.photo.Name = "photo";
         this.photo.Size = new System.Drawing.Size(174, 174);
         this.photo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -242,7 +235,7 @@ partial class FrmEmployees
         this.txtCpf.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
         this.txtCpf.Enabled = false;
         this.txtCpf.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.txtCpf.Location = new System.Drawing.Point(537, 89);
+        this.txtCpf.Location = new System.Drawing.Point(537, 30);
         this.txtCpf.Mask = "000.000.000-00";
         this.txtCpf.Name = "txtCpf";
         this.txtCpf.Size = new System.Drawing.Size(218, 23);
@@ -253,16 +246,17 @@ partial class FrmEmployees
         this.GridData.AllowUserToAddRows = false;
         this.GridData.AllowUserToDeleteRows = false;
         this.GridData.AllowUserToResizeRows = false;
+        this.GridData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
         this.GridData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
         this.GridData.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
         this.GridData.BorderStyle = System.Windows.Forms.BorderStyle.None;
         this.GridData.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
         this.GridData.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
         dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+        dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightCyan;
         dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-        dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-        dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+        dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+        dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightCyan;
         dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
         dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
         this.GridData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
@@ -271,36 +265,37 @@ partial class FrmEmployees
         dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
         dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
         dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-        dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+        dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightCyan;
         dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
         dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
         this.GridData.DefaultCellStyle = dataGridViewCellStyle2;
         this.GridData.EnableHeadersVisualStyles = false;
         this.GridData.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
         this.GridData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-        this.GridData.Location = new System.Drawing.Point(26, 312);
+        this.GridData.Location = new System.Drawing.Point(0, 55);
         this.GridData.Name = "GridData";
         this.GridData.ReadOnly = true;
         this.GridData.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
         dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+        dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightCyan;
         dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
         dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-        dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+        dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Azure;
         dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
         dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
         this.GridData.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
         this.GridData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
         this.GridData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-        this.GridData.Size = new System.Drawing.Size(1015, 199);
+        this.GridData.Size = new System.Drawing.Size(1065, 190);
         this.GridData.TabIndex = 30;
         this.GridData.UseStyleColors = true;
         this.GridData.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridData_CellContentDoubleClick);
         // 
         // btnNew
         // 
+        this.btnNew.Anchor = System.Windows.Forms.AnchorStyles.Left;
         this.btnNew.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.btnNew.Location = new System.Drawing.Point(25, 539);
+        this.btnNew.Location = new System.Drawing.Point(25, 526);
         this.btnNew.Name = "btnNew";
         this.btnNew.Size = new System.Drawing.Size(75, 23);
         this.btnNew.TabIndex = 33;
@@ -310,8 +305,9 @@ partial class FrmEmployees
         // 
         // btnCancel
         // 
+        this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
         this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.btnCancel.Location = new System.Drawing.Point(125, 539);
+        this.btnCancel.Location = new System.Drawing.Point(125, 526);
         this.btnCancel.Name = "btnCancel";
         this.btnCancel.Size = new System.Drawing.Size(75, 23);
         this.btnCancel.TabIndex = 34;
@@ -321,8 +317,9 @@ partial class FrmEmployees
         // 
         // btnSave
         // 
+        this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Left;
         this.btnSave.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.btnSave.Location = new System.Drawing.Point(225, 539);
+        this.btnSave.Location = new System.Drawing.Point(225, 526);
         this.btnSave.Name = "btnSave";
         this.btnSave.Size = new System.Drawing.Size(75, 23);
         this.btnSave.TabIndex = 35;
@@ -332,8 +329,9 @@ partial class FrmEmployees
         // 
         // btnEdit
         // 
+        this.btnEdit.Anchor = System.Windows.Forms.AnchorStyles.Left;
         this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.btnEdit.Location = new System.Drawing.Point(325, 539);
+        this.btnEdit.Location = new System.Drawing.Point(325, 526);
         this.btnEdit.Name = "btnEdit";
         this.btnEdit.Size = new System.Drawing.Size(75, 23);
         this.btnEdit.TabIndex = 36;
@@ -343,8 +341,9 @@ partial class FrmEmployees
         // 
         // btnDelete
         // 
+        this.btnDelete.Anchor = System.Windows.Forms.AnchorStyles.Left;
         this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.btnDelete.Location = new System.Drawing.Point(425, 539);
+        this.btnDelete.Location = new System.Drawing.Point(425, 526);
         this.btnDelete.Name = "btnDelete";
         this.btnDelete.Size = new System.Drawing.Size(75, 23);
         this.btnDelete.TabIndex = 37;
@@ -355,7 +354,7 @@ partial class FrmEmployees
         // btnPhoto
         // 
         this.btnPhoto.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.btnPhoto.Location = new System.Drawing.Point(917, 261);
+        this.btnPhoto.Location = new System.Drawing.Point(917, 202);
         this.btnPhoto.Name = "btnPhoto";
         this.btnPhoto.Size = new System.Drawing.Size(75, 23);
         this.btnPhoto.TabIndex = 38;
@@ -363,19 +362,86 @@ partial class FrmEmployees
         this.btnPhoto.UseVisualStyleBackColor = true;
         this.btnPhoto.Click += new System.EventHandler(this.btnPhoto_Click);
         // 
+        // panelGrid
+        // 
+        this.panelGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        this.panelGrid.Controls.Add(this.btnSearch);
+        this.panelGrid.Controls.Add(this.txtSearch);
+        this.panelGrid.Controls.Add(this.labelRegisteredEmployees);
+        this.panelGrid.Controls.Add(this.GridData);
+        this.panelGrid.Location = new System.Drawing.Point(1, 260);
+        this.panelGrid.Name = "panelGrid";
+        this.panelGrid.Size = new System.Drawing.Size(1065, 245);
+        this.panelGrid.TabIndex = 39;
+        // 
+        // btnSearch
+        // 
+        this.btnSearch.Anchor = System.Windows.Forms.AnchorStyles.Left;
+        this.btnSearch.FlatAppearance.BorderSize = 0;
+        this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+        this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.btnSearch.Image = global::SIV.Properties.Resources.icons8_localizar_e_substituir_26;
+        this.btnSearch.Location = new System.Drawing.Point(266, 26);
+        this.btnSearch.Name = "btnSearch";
+        this.btnSearch.Size = new System.Drawing.Size(34, 23);
+        this.btnSearch.TabIndex = 40;
+        this.btnSearch.UseVisualStyleBackColor = true;
+        this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+        // 
+        // txtSearch
+        // 
+        // 
+        // 
+        // 
+        this.txtSearch.CustomButton.Image = null;
+        this.txtSearch.CustomButton.Location = new System.Drawing.Point(245, 1);
+        this.txtSearch.CustomButton.Name = "";
+        this.txtSearch.CustomButton.Size = new System.Drawing.Size(21, 21);
+        this.txtSearch.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+        this.txtSearch.CustomButton.TabIndex = 1;
+        this.txtSearch.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+        this.txtSearch.CustomButton.UseSelectable = true;
+        this.txtSearch.CustomButton.Visible = false;
+        this.txtSearch.Lines = new string[0];
+        this.txtSearch.Location = new System.Drawing.Point(0, 26);
+        this.txtSearch.MaxLength = 255;
+        this.txtSearch.Name = "txtSearch";
+        this.txtSearch.PasswordChar = '\0';
+        this.txtSearch.PromptText = "Buscar";
+        this.txtSearch.ScrollBars = System.Windows.Forms.ScrollBars.None;
+        this.txtSearch.SelectedText = "";
+        this.txtSearch.SelectionLength = 0;
+        this.txtSearch.SelectionStart = 0;
+        this.txtSearch.ShortcutsEnabled = true;
+        this.txtSearch.Size = new System.Drawing.Size(267, 23);
+        this.txtSearch.TabIndex = 40;
+        this.txtSearch.UseSelectable = true;
+        this.txtSearch.WaterMark = "Buscar";
+        this.txtSearch.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+        this.txtSearch.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+        // 
+        // labelRegisteredEmployees
+        // 
+        this.labelRegisteredEmployees.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelRegisteredEmployees.Location = new System.Drawing.Point(0, 0);
+        this.labelRegisteredEmployees.Name = "labelRegisteredEmployees";
+        this.labelRegisteredEmployees.Size = new System.Drawing.Size(202, 23);
+        this.labelRegisteredEmployees.TabIndex = 0;
+        this.labelRegisteredEmployees.Text = "Funcionários Cadastrados";
+        // 
         // FrmEmployees
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-        this.ClientSize = new System.Drawing.Size(1067, 588);
+        this.ClientSize = new System.Drawing.Size(1067, 681);
+        this.Controls.Add(this.panelGrid);
         this.Controls.Add(this.btnPhoto);
         this.Controls.Add(this.btnDelete);
         this.Controls.Add(this.btnEdit);
         this.Controls.Add(this.btnSave);
         this.Controls.Add(this.btnCancel);
         this.Controls.Add(this.btnNew);
-        this.Controls.Add(this.GridData);
         this.Controls.Add(this.txtCpf);
         this.Controls.Add(this.photo);
         this.Controls.Add(this.cbJob);
@@ -387,26 +453,28 @@ partial class FrmEmployees
         this.Controls.Add(this.labelAddress);
         this.Controls.Add(this.labelPhone);
         this.Controls.Add(this.LabelName);
-        this.Controls.Add(this.logotipo);
         this.Location = new System.Drawing.Point(15, 15);
         this.MaximizeBox = false;
-        this.MaximumSize = new System.Drawing.Size(1067, 588);
         this.MinimizeBox = false;
-        this.MinimumSize = new System.Drawing.Size(1067, 588);
+        this.MinimumSize = new System.Drawing.Size(1080, 720);
         this.Name = "FrmEmployees";
         this.Padding = new System.Windows.Forms.Padding(23, 69, 23, 23);
-        this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
         this.ShowInTaskbar = false;
         this.Text = "CADASTRO DE FUNCIONÁRIOS";
-        this.TextAlign = MetroFramework.Forms.MetroFormTextAlign.Center;
         this.Load += new System.EventHandler(this.FrmEmployees_Load);
-        ((System.ComponentModel.ISupportInitialize)(this.logotipo)).EndInit();
         ((System.ComponentModel.ISupportInitialize)(this.photo)).EndInit();
         ((System.ComponentModel.ISupportInitialize)(this.GridData)).EndInit();
+        this.panelGrid.ResumeLayout(false);
         this.ResumeLayout(false);
         this.PerformLayout();
     }
-    
+
+    private MetroFramework.Controls.MetroTextBox txtSearch;
+    private System.Windows.Forms.Button btnSearch;
+
+    private System.Windows.Forms.Panel panelGrid;
+    private System.Windows.Forms.Label labelRegisteredEmployees;
+
     private System.Windows.Forms.Button btnPhoto;
     private System.Windows.Forms.Button btnEdit;
     private System.Windows.Forms.Button btnSave;
@@ -429,8 +497,6 @@ partial class FrmEmployees
     private MetroFramework.Controls.MetroTextBox txtName;
     private MetroFramework.Controls.MetroTextBox txtAddress;
     private System.Windows.Forms.MaskedTextBox txtCpf;
-
-    private System.Windows.Forms.PictureBox logotipo;
 
     #endregion
 }

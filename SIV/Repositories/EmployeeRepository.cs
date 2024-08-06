@@ -124,4 +124,26 @@ public class EmployeeRepository
             cmd.ExecuteNonQuery();
         }
     }
+    
+    /// <summary>
+    /// Busca clientes pelo nome.
+    /// </summary>
+    /// <param name="name">Nome do cliente a ser buscado.</param>
+    /// <returns>Um <c>DataTable</c> contendo os clientes que correspondem ao critério de busca.</returns>
+    public DataTable SearchByName(string name)
+    {
+        var dt = new DataTable();
+        
+        using (var connection = ConnectionManager.GetConnection())
+        using (var cmd = new MySqlCommand("SELECT * FROM employees WHERE name LIKE @name ORDER BY name", connection))
+        {
+            cmd.Parameters.AddWithValue("@name", "%" + name + "%"); // Adiciona o caractere % para buscar qualquer nome que contenha o valor informado
+            using (var adapter = new MySqlDataAdapter(cmd))
+            {
+                adapter.Fill(dt);
+            }
+        }
+
+        return dt;
+    }
 }

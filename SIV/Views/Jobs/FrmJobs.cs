@@ -11,7 +11,7 @@ namespace SIV.Views.Jobs;
 /// <summary>
 /// A classe é responsável pela interface gráfica relacionada à gestão de cargos no sistema.
 /// </summary>
-public partial class FrmJobs : MetroFramework.Forms.MetroForm
+public partial class FrmJobs : Form
 {
     private readonly JobController _controller;
     private string _id;
@@ -27,19 +27,19 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
         ConfigureUiControls(false);
         LoadJobs();
         btnNew.Enabled = true;
-        dgvJobs.Columns[1].HeaderText = @"NOME";
+        gridData.Columns[1].HeaderText = @"NOME";
     }
     
-    private void dgvJobs_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+    private void gridData_DoubleClick(object sender, EventArgs e)
     {
-        if (dgvJobs.SelectedRows.Count <= 0) return; // Se não houver linhas selecionadas, não faz nada
+        if (gridData.SelectedRows.Count <= 0) return; // Se não houver linhas selecionadas, não faz nada
         
         ConfigureUiControls(true); // Habilita os campos do formulário
         btnSave.Enabled = false;
         
         // Preenche o campo de texto com o nome do cargo selecionado
-        _id = dgvJobs.SelectedRows[0].Cells[0].Value.ToString();
-        txtName.Text = dgvJobs.CurrentRow?.Cells[1].Value.ToString();
+        _id = gridData.SelectedRows[0].Cells[0].Value.ToString();
+        txtName.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
     }
 
     private void btnNew_Click(object sender, EventArgs e)
@@ -48,14 +48,14 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
         txtName.Focus();
         btnEdit.Enabled = false;
         btnDelete.Enabled = false;
-        dgvJobs.Enabled = false;
+        gridData.Enabled = false;
     }
 
     private void btnCancel_Click(object sender, EventArgs e)
     {
         ConfigureUiControls(false);
         txtName.Clear();
-        dgvJobs.Enabled = true;
+        gridData.Enabled = true;
     }
 
     private void btnSave_Click(object sender, EventArgs e)
@@ -162,8 +162,8 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
     
     private void LoadJobs()
     {
-        dgvJobs.DataSource = _controller.GetAllJobs();
-        dgvJobs.Columns[0].Visible = false;
+        gridData.DataSource = _controller.GetAllJobs();
+        gridData.Columns[0].Visible = false;
     }
     
     private void ConfigureUiControls(bool enable)
@@ -174,7 +174,7 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
         btnDelete.Enabled = enable;
         btnCancel.Enabled = enable;
         txtName.Enabled = enable;
-        dgvJobs.Enabled = !enable;
+        gridData.Enabled = !enable;
     }
     
     private void UpdateUiAfterSaveOrUpdate()
@@ -182,6 +182,6 @@ public partial class FrmJobs : MetroFramework.Forms.MetroForm
         txtName.Clear();
         LoadJobs(); // Atualiza a lista de cargos
         ConfigureUiControls(false);
-        dgvJobs.Enabled = true;
+        gridData.Enabled = true;
     }
 }

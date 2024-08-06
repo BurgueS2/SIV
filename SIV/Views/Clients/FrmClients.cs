@@ -29,13 +29,13 @@ public partial class FrmClients : Form
         ClientList();
         ConfigureUiControls(false);
         EnableSearchControls(true);
-        GridDataClient.CellFormatting += GridDataClient_CellFormatting; // Adiciona um evento de formatação de célula
+        gridData.CellFormatting += GridDataClient_CellFormatting; // Adiciona um evento de formatação de célula
     }
     
     private void GridDataClient_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
     {
         // Verifica se a coluna é a coluna de status
-        if (GridDataClient.Columns[e.ColumnIndex].Name != "status") return; // Se não for, interrompe a execução
+        if (gridData.Columns[e.ColumnIndex].Name != "status") return; // Se não for, interrompe a execução
         
         if (e.Value == null) return;
         
@@ -44,48 +44,36 @@ public partial class FrmClients : Form
         e.FormattingApplied = true; // Indica que a formatação foi aplicada
     }
     
-    private void GridDataClient_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+    private void gridData_DoubleClick(object sender, EventArgs e)
     {
-        if (e.RowIndex <= -1) return; // Se o índice da linha for menor ou igual a -1, interrompe a execução
-        
+        // if (e.RowIndex <= -1) return; // Se o índice da linha for menor ou igual a -1, interrompe a execução
         
         ClearFields();
         ConfigureUiControls(true);
         EnableSearchControls(false);
-        
+
         // Desabilita controles específicos durante a edição
         btnSave.Enabled = false;
         txtCode.Enabled = false;
         
-
         // Obtém os valores das células da linha selecionada e preenche os campos do formulário
-        _id = GridDataClient.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do funcionário
-        txtCode.Text = GridDataClient.CurrentRow?.Cells[1].Value.ToString();
-        txtName.Text = GridDataClient.CurrentRow?.Cells[2].Value.ToString();
-        txtCpf.Text = GridDataClient.CurrentRow?.Cells[3].Value.ToString();
-        _oldCpf = GridDataClient.CurrentRow?.Cells[3].Value.ToString(); // Salva o CPF antigo para verificar se foi alterado
-        txtValue.Text = GridDataClient.CurrentRow?.Cells[4].Value.ToString();
-        
-        // Verifica se o status do funcionário é bloqueado
-        var statusValue = GridDataClient.CurrentRow?.Cells[5].Value.ToString().ToLower(); 
-        var isBlocked = statusValue == "1"; // Se o valor for 1, o funcionário está bloqueado se não, está desbloqueado
-        btnBlocked.Checked = isBlocked; 
-        btnUnlocked.Checked = !isBlocked;
-        
-        // Preenche os campos restantes
-        txtPhone.Text = GridDataClient.CurrentRow?.Cells[6].Value.ToString();
-        txtEmail.Text = GridDataClient.CurrentRow?.Cells[7].Value.ToString();
-        txtAddress.Text = GridDataClient.CurrentRow?.Cells[8].Value.ToString();
-    }
-    
-    private void btnSearchName_Click(object sender, EventArgs e)
-    {
-        SearchByName();
-    }
+        _id = gridData.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do funcionário
+        txtCode.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
+        txtName.Text = gridData.CurrentRow?.Cells[2].Value.ToString();
+        txtCpf.Text = gridData.CurrentRow?.Cells[3].Value.ToString();
+        _oldCpf = gridData.CurrentRow?.Cells[3].Value.ToString(); // Salva o CPF antigo para verificar se foi alterado
+        txtValue.Text = gridData.CurrentRow?.Cells[4].Value.ToString();
 
-    private void btnSearchCpf_Click(object sender, EventArgs e)
-    {
-        SearchByCpf(); 
+        // Verifica se o status do funcionário é bloqueado
+        var statusValue = gridData.CurrentRow?.Cells[5].Value.ToString().ToLower();
+        var isBlocked = statusValue == "1"; // Se o valor for 1, o funcionário está bloqueado se não, está desbloqueado
+        btnBlocked.Checked = isBlocked;
+        btnUnlocked.Checked = !isBlocked;
+
+        // Preenche os campos restantes
+        txtPhone.Text = gridData.CurrentRow?.Cells[6].Value.ToString();
+        txtEmail.Text = gridData.CurrentRow?.Cells[7].Value.ToString();
+        txtAddress.Text = gridData.CurrentRow?.Cells[8].Value.ToString();
     }
     
     private void btnNew_Click(object sender, EventArgs e)
@@ -97,7 +85,7 @@ public partial class FrmClients : Form
         // Desabilita controles específicos durante a edição
         btnEdit.Enabled = false;
         btnDelete.Enabled = false;
-        GridDataClient.Enabled = false;
+        gridData.Enabled = false;
     }
 
     private void btnCancel_Click(object sender, EventArgs e)
@@ -105,7 +93,7 @@ public partial class FrmClients : Form
         ClearFields();
         ConfigureUiControls(false);
         EnableSearchControls(true);
-        GridDataClient.Enabled = true;
+        gridData.Enabled = true;
     }
 
     private void btnSave_Click(object sender, EventArgs e)
@@ -126,6 +114,16 @@ public partial class FrmClients : Form
         EnableSearchControls(true);
     }
     
+    private void btnSearchName_Click(object sender, EventArgs e)
+    {
+        SearchByName();
+    }
+
+    private void btnSearchCpf_Click(object sender, EventArgs e)
+    {
+        SearchByCpf();
+    }
+    
     private void SearchByName()
     {
         try
@@ -133,7 +131,7 @@ public partial class FrmClients : Form
             var name = txtSearchName.Text;
             var result = _controller.SearchByName(name); // Realiza a busca no banco de dados pelo nome aproximado
 
-            GridDataClient.DataSource = result;
+            gridData.DataSource = result;
             FormatGridDataClients();
         }
         catch (MySqlException ex)
@@ -154,7 +152,7 @@ public partial class FrmClients : Form
             var cpf = txtSearchCpf.Text;
             var result = _controller.SearchByCpf(cpf); // Realiza a busca no banco de dados pelo CPF
             
-            GridDataClient.DataSource = result;
+            gridData.DataSource = result;
             FormatGridDataClients();
         }
         catch (MySqlException ex)
@@ -172,7 +170,7 @@ public partial class FrmClients : Form
     {
         try
         {
-            GridDataClient.DataSource = _controller.GetAllClients();
+            gridData.DataSource = _controller.GetAllClients();
             FormatGridDataClients();
         }
         catch (MySqlException ex)
@@ -311,19 +309,18 @@ public partial class FrmClients : Form
     
     private void FormatGridDataClients()
     {
-        GridDataClient.Columns[0].HeaderText = @"ID";
-        GridDataClient.Columns[1].HeaderText = @"COD.";
-        GridDataClient.Columns[2].HeaderText = @"NOME";
-        GridDataClient.Columns[3].HeaderText = @"CPF";
-        GridDataClient.Columns[4].HeaderText = @"VALOR ABERTO";
-        GridDataClient.Columns[5].HeaderText = @"STATUS";
-        GridDataClient.Columns[6].HeaderText = @"TELEFONE";
-        GridDataClient.Columns[7].HeaderText = @"EMAIL";
-        GridDataClient.Columns[8].HeaderText = @"ENDEREÇO";
-        GridDataClient.Columns[9].HeaderText = @"DATA";
-
-        GridDataClient.Columns[0].Width = 50;
-        GridDataClient.Columns[0].Visible = false;
+        gridData.Columns[0].HeaderText = @"ID";
+        gridData.Columns[1].HeaderText = @"COD.";
+        gridData.Columns[2].HeaderText = @"NOME";
+        gridData.Columns[3].HeaderText = @"CPF";
+        gridData.Columns[4].HeaderText = @"VALOR ABERTO";
+        gridData.Columns[5].HeaderText = @"STATUS";
+        gridData.Columns[6].HeaderText = @"TELEFONE";
+        gridData.Columns[7].HeaderText = @"EMAIL";
+        gridData.Columns[8].HeaderText = @"ENDEREÇO";
+        gridData.Columns[9].HeaderText = @"DATA";
+        
+        gridData.Columns[0].Visible = false;
     }
     
     private void ConfigureUiControls(bool enable)
@@ -340,7 +337,7 @@ public partial class FrmClients : Form
         txtCode.Enabled = enable;
         txtEmail.Enabled = enable;
         txtValue.Enabled = enable;
-        GridDataClient.Enabled = !enable;
+        gridData.Enabled = !enable;
         btnBlocked.Enabled = enable;
         btnUnlocked.Enabled = enable;
     }
@@ -371,7 +368,7 @@ public partial class FrmClients : Form
         ClearFields();
         ClientList(); // Atualiza a lista de clientes
         ConfigureUiControls(false);
-        GridDataClient.Enabled = true;
+        gridData.Enabled = true;
     }
     
     private bool ValidateFormData()

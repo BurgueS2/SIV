@@ -37,4 +37,9 @@ public class EmployeeController
     {
         return _repository.VerifyCpfExistence(cpf, oldCpf);
     }
+    
+    public DataTable SearchByName(string name)
+    {
+        return _repository.SearchByName(name);
+    }
 }
