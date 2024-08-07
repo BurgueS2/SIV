@@ -196,7 +196,7 @@
     <value>192, 0</value>
   </data>
   <data name="labelTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>803, 57</value>
+    <value>779, 57</value>
   </data>
   <data name="labelTitle.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -451,7 +451,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnExitDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>929, -1</value>
+    <value>948, -1</value>
   </data>
   <data name="btnExitDisplay.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 96</value>

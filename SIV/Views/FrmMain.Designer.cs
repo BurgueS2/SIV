@@ -229,6 +229,7 @@
             this.Controls.Add(this.displayPanel);
             this.Controls.Add(this.panelMenu);
             this.Controls.Add(this.panelBar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmMain";

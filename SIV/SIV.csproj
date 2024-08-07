@@ -42,6 +42,9 @@
         <Reference Include="Google.Protobuf, Version=3.26.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
           <HintPath>..\packages\Google.Protobuf.3.26.1\lib\net45\Google.Protobuf.dll</HintPath>
         </Reference>
+        <Reference Include="Guna.UI2, Version=2.0.4.6, Culture=neutral, PublicKeyToken=8b9d14aa5142e261, processorArchitecture=MSIL">
+          <HintPath>..\packages\Guna.UI2.WinForms.2.0.4.6\lib\net472\Guna.UI2.dll</HintPath>
+        </Reference>
         <Reference Include="K4os.Compression.LZ4, Version=1.3.8.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
           <HintPath>..\packages\K4os.Compression.LZ4.1.3.8\lib\net462\K4os.Compression.LZ4.dll</HintPath>
         </Reference>
@@ -85,6 +88,7 @@
           <HintPath>..\packages\System.Configuration.ConfigurationManager.8.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
         </Reference>
         <Reference Include="System.Core"/>
+        <Reference Include="System.Design" />
         <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
           <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
         </Reference>
@@ -109,6 +113,7 @@
         <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
           <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
         </Reference>
+        <Reference Include="System.Web" />
         <Reference Include="System.Xml.Linq"/>
         <Reference Include="System.Data.DataSetExtensions"/>
         <Reference Include="Microsoft.CSharp"/>
@@ -126,6 +131,7 @@
         <Compile Include="Controllers\ClientController.cs" />
         <Compile Include="Controllers\EmployeeController.cs" />
         <Compile Include="Controllers\JobController.cs" />
+        <Compile Include="Controllers\UserController.cs" />
         <Compile Include="Core\ConnectionManager.cs" />
         <Compile Include="Core\Logger.cs" />
         <Compile Include="Helpers\ImageHelper.cs" />
@@ -133,11 +139,13 @@
         <Compile Include="Models\Client.cs" />
         <Compile Include="Models\Employee.cs" />
         <Compile Include="Models\Job.cs" />
+        <Compile Include="Models\User.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Repositories\ClientRepository.cs" />
         <Compile Include="Repositories\EmployeeRepository.cs" />
         <Compile Include="Repositories\JobRepository.cs" />
+        <Compile Include="Repositories\UserRepository.cs" />
         <Compile Include="Validators\ClientValidator.cs" />
         <Compile Include="Validators\EmployeeValidator.cs" />
         <Compile Include="Views\Clients\FrmClients.cs">
@@ -150,6 +158,12 @@
         <Compile Include="Views\Employees\FrmEmployees.cs" />
         <Compile Include="Views\Employees\FrmEmployees.Designer.cs">
           <DependentUpon>FrmEmployees.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Views\FrmLogin.cs">
+          <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="Views\FrmLogin.Designer.cs">
+          <DependentUpon>FrmLogin.cs</DependentUpon>
         </Compile>
         <Compile Include="Views\FrmMain.cs">
           <SubType>Form</SubType>
@@ -181,6 +195,9 @@
         </EmbeddedResource>
         <EmbeddedResource Include="Views\Employees\FrmEmployees.resx">
           <DependentUpon>FrmEmployees.cs</DependentUpon>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Views\FrmLogin.resx">
+          <DependentUpon>FrmLogin.cs</DependentUpon>
         </EmbeddedResource>
         <EmbeddedResource Include="Views\FrmMain.pt-BR.resx">
           <DependentUpon>FrmMain.cs</DependentUpon>
@@ -223,7 +240,12 @@
       <Content Include="Resources\icons_produto.png" />
       <Content Include="Resources\icons_relatorio.png" />
       <Content Include="Resources\logotipo.png" />
+      <Content Include="Resources\painelLoginImg.png" />
+      <Content Include="Resources\painelLogo.png" />
       <Content Include="Resources\sem_foto.png" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Views\Users\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>

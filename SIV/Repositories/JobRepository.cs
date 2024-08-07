@@ -18,11 +18,14 @@ public class JobRepository
     public DataTable GetAllJobs()
     {
         var dt = new DataTable();
+        
         using (var connection = ConnectionManager.GetConnection())
         using (var cmd = new MySqlCommand("SELECT * FROM job ORDER BY name", connection))
-        using (var da = new MySqlDataAdapter(cmd))
         {
-            da.Fill(dt);
+            using (var da = new MySqlDataAdapter(cmd))
+            {
+                da.Fill(dt);
+            }
         }
 
         return dt;
