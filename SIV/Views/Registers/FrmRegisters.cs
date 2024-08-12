@@ -1,55 +1,65 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Guna.UI2.WinForms;
+using SIV.Core;
+using SIV.Helpers;
+using SIV.Models;
 using SIV.Views.Clients;
 using SIV.Views.Employees;
 using SIV.Views.Jobs;
+using SIV.Views.Users;
 
 namespace SIV.Views.Registers;
 
 public partial class FrmRegisters : Form
 {
     private const double BrightnessFactor = 0.5;
-    //private Button _currentButton;
+    private readonly User _loggedInUser;
     
-    public FrmRegisters()
+    public FrmRegisters(User loggedInUser)
     {
         InitializeComponent();
+        _loggedInUser = loggedInUser;
     }
 
     private void FrmRegisters_Load(object sender, EventArgs e)
     {
         ApplyingTheme();
     }
-
+    
     private void btnEmployee_Click(object sender, EventArgs e)
     {
         OpenDisplayForm(new FrmEmployees(), sender);
     }
-
+    
+    private void btnUser_Click(object sender, EventArgs e)
+    {
+        OpenDisplayForm(new FrmUsers(), sender);
+    }
+    
     private void btnClient_Click(object sender, EventArgs e)
     {
         OpenDisplayForm(new FrmClients(), sender);
     }
-    
+
     private void btnJob_Click(object sender, EventArgs e)
     {
         OpenDisplayForm(new FrmJobs(), sender);
     }
 
-    private void btnSupplier_Click(object sender, EventArgs e)
-    {
-        throw new System.NotImplementedException();
-    }
+    
 
-    private void btnProduct_Click(object sender, EventArgs e)
-    {
-        throw new System.NotImplementedException();
-    }
+    
     
     private void OpenDisplayForm(Form dashboard, object senderButton)
     {
-        //_enableFormDisplay = dashboard;
+        if (!_loggedInUser.HasPermission("ManageCadastres"))
+        {
+            MessageHelper.ShowValidationMessage("Usuário não tem permissão para acessar o cadastro de Employees!");
+            return;
+        }
+        
         ActivateButton(senderButton);
         dashboard.TopLevel = false;
         dashboard.FormBorderStyle = FormBorderStyle.None;
@@ -58,47 +68,49 @@ public partial class FrmRegisters : Form
         displayPanel.Tag = dashboard;
         dashboard.BringToFront();
         dashboard.Show();
-        //labelTitle.Text = dashboard.Text;
     }
     
     private void ActivateButton(object senderButton)
     {
         var color = ColorThemes.PrimaryColor;
         ResetButtons(color);
-        var currentButton = (Button)senderButton;
+        var currentButton = (Guna2Button)senderButton;
         
-        currentButton.BackColor = color;
+        currentButton.FillColor = color;
         currentButton.ForeColor = Color.Black;
-        currentButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+        currentButton.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
         
-        ColorThemes.PrimaryColor = color;
         panelMenuRegister.BackColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
     }
     
     private void ResetButtons(Color color)
-    {
+    { 
         foreach (Control control in panelMenuRegister.Controls)
         {
-            if (control.GetType() != typeof(Button)) continue; // Verifica se o controle é um botão
+            if (control is not Guna2Button button) continue;
             
-            control.BackColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
-            control.ForeColor = Color.Black;
-            control.Font = new Font("Segoe UI", 12F, FontStyle.Regular);
+            button.FillColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
+            button.ForeColor = Color.Black;
+            button.Font = new Font("Century Gothic", 11.25F, FontStyle.Regular);
         }
     }
     
     private void ApplyingTheme()
     {
-        ApplyThemeToControl(panelMenuRegister);
-        ApplyThemeToControl(btnEmployee);
-        ApplyThemeToControl(btnClient);
-        ApplyThemeToControl(btnJob);
-        ApplyThemeToControl(btnSupplier);
-        ApplyThemeToControl(btnProduct);
+        var fillColor = ColorThemes.ChangeBrightness(ColorThemes.PrimaryColor, 0.5);
+        
+        panelMenuRegister.BackColor = fillColor;
+        ApplyThemeToControl(btnEmployee, fillColor);
+        ApplyThemeToControl(btnUser, fillColor);
+        ApplyThemeToControl(btnClient, fillColor);
+        ApplyThemeToControl(btnJob, fillColor);
     }
     
-    private static void ApplyThemeToControl(Control control)
+    private static void ApplyThemeToControl(Control control, Color fillColor)
     {
-        control.BackColor = ColorThemes.ChangeBrightness(ColorThemes.PrimaryColor, 0.5);
+        if (control is Guna2Button button)
+        {
+            button.FillColor = fillColor;
+        }
     }
 }

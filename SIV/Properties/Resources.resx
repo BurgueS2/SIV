@@ -107,4 +107,37 @@
   <data name="painelLoginImg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\painelLoginImg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons_funcionário" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons_funcionário.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_usuário" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons_usuário.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_cliente" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons_cliente.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_fornecedor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons_fornecedor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_mesa_de_restaurante" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons_mesa_de_restaurante.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_comanda" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons_comanda.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_relatório" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons_relatório.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons_exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_user" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons_user.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_configuração" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons_configuração.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_pesquisar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons_pesquisar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

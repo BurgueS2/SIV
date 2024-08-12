@@ -121,7 +121,7 @@ public partial class FrmClients : Form
 
     private void btnSearchCpf_Click(object sender, EventArgs e)
     {
-        SearchByCpf();
+        //SearchByCpf();
     }
     
     private void SearchByName()
@@ -145,7 +145,7 @@ public partial class FrmClients : Form
         }
     }
 
-    private void SearchByCpf()
+    /*private void SearchByCpf()
     {
         try
         {
@@ -164,7 +164,7 @@ public partial class FrmClients : Form
         {
             ConnectionManager.CloseConnection();
         }
-    }
+    }*/
     
     private void ClientList()
     {
@@ -344,10 +344,10 @@ public partial class FrmClients : Form
     
     private void EnableSearchControls(bool enable)
     {
-        btnSearchCpf.Enabled = enable;
+        //btnSearchCpf.Enabled = enable;
         btnSearchName.Enabled = enable;
         txtSearchName.Enabled = enable;
-        txtSearchCpf.Enabled = enable;
+        //txtSearchCpf.Enabled = enable;
     }
     
     private void ClearFields()

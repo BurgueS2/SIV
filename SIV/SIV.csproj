@@ -8,7 +8,7 @@
         <OutputType>WinExe</OutputType>
         <RootNamespace>SIV</RootNamespace>
         <AssemblyName>SIV</AssemblyName>
-        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <Deterministic>true</Deterministic>
@@ -134,6 +134,8 @@
         <Compile Include="Controllers\UserController.cs" />
         <Compile Include="Core\ConnectionManager.cs" />
         <Compile Include="Core\Logger.cs" />
+        <Compile Include="Core\SessionManager.cs" />
+        <Compile Include="Helpers\ColorThemes.cs" />
         <Compile Include="Helpers\ImageHelper.cs" />
         <Compile Include="Helpers\MessageHelper.cs" />
         <Compile Include="Models\Client.cs" />
@@ -148,22 +150,16 @@
         <Compile Include="Repositories\UserRepository.cs" />
         <Compile Include="Validators\ClientValidator.cs" />
         <Compile Include="Validators\EmployeeValidator.cs" />
+        <Compile Include="Validators\UserValidator.cs" />
         <Compile Include="Views\Clients\FrmClients.cs">
           <SubType>Form</SubType>
         </Compile>
         <Compile Include="Views\Clients\FrmClients.Designer.cs">
           <DependentUpon>FrmClients.cs</DependentUpon>
         </Compile>
-        <Compile Include="Views\ColorThemes.cs" />
         <Compile Include="Views\Employees\FrmEmployees.cs" />
         <Compile Include="Views\Employees\FrmEmployees.Designer.cs">
           <DependentUpon>FrmEmployees.cs</DependentUpon>
-        </Compile>
-        <Compile Include="Views\FrmLogin.cs">
-          <SubType>Form</SubType>
-        </Compile>
-        <Compile Include="Views\FrmLogin.Designer.cs">
-          <DependentUpon>FrmLogin.cs</DependentUpon>
         </Compile>
         <Compile Include="Views\FrmMain.cs">
           <SubType>Form</SubType>
@@ -175,11 +171,23 @@
         <Compile Include="Views\Jobs\FrmJobs.Designer.cs">
           <DependentUpon>FrmJobs.cs</DependentUpon>
         </Compile>
+        <Compile Include="Views\Login\FrmLogin.cs">
+          <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="Views\Login\FrmLogin.Designer.cs">
+          <DependentUpon>FrmLogin.cs</DependentUpon>
+        </Compile>
         <Compile Include="Views\Registers\FrmRegisters.cs">
           <SubType>Form</SubType>
         </Compile>
         <Compile Include="Views\Registers\FrmRegisters.Designer.cs">
           <DependentUpon>FrmRegisters.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Views\Users\FrmUsers.cs">
+          <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="Views\Users\FrmUsers.Designer.cs">
+          <DependentUpon>FrmUsers.cs</DependentUpon>
         </Compile>
         <EmbeddedResource Include="Properties\Resources.resx">
             <Generator>ResXFileCodeGenerator</Generator>
@@ -196,9 +204,6 @@
         <EmbeddedResource Include="Views\Employees\FrmEmployees.resx">
           <DependentUpon>FrmEmployees.cs</DependentUpon>
         </EmbeddedResource>
-        <EmbeddedResource Include="Views\FrmLogin.resx">
-          <DependentUpon>FrmLogin.cs</DependentUpon>
-        </EmbeddedResource>
         <EmbeddedResource Include="Views\FrmMain.pt-BR.resx">
           <DependentUpon>FrmMain.cs</DependentUpon>
         </EmbeddedResource>
@@ -208,8 +213,14 @@
         <EmbeddedResource Include="Views\Jobs\FrmJobs.resx">
           <DependentUpon>FrmJobs.cs</DependentUpon>
         </EmbeddedResource>
+        <EmbeddedResource Include="Views\Login\FrmLogin.resx">
+          <DependentUpon>FrmLogin.cs</DependentUpon>
+        </EmbeddedResource>
         <EmbeddedResource Include="Views\Registers\FrmRegisters.resx">
           <DependentUpon>FrmRegisters.cs</DependentUpon>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Views\Users\FrmUsers.resx">
+          <DependentUpon>FrmUsers.cs</DependentUpon>
         </EmbeddedResource>
         <None Include="favicon.ico" />
         <None Include="packages.config" />
@@ -234,18 +245,26 @@
       <Content Include="Resources\icons8_localizar_e_substituir_26.png" />
       <Content Include="Resources\icons_cadastro_funcionario.png" />
       <Content Include="Resources\icons_caixa.png" />
+      <Content Include="Resources\icons_cliente.png" />
       <Content Include="Resources\icons_close.png" />
       <Content Include="Resources\icons_closed.png" />
+      <Content Include="Resources\icons_comanda.png" />
+      <Content Include="Resources\icons_configuração.png" />
+      <Content Include="Resources\icons_exit.png" />
+      <Content Include="Resources\icons_fornecedor.png" />
+      <Content Include="Resources\icons_funcionário.png" />
       <Content Include="Resources\icons_mesa.png" />
+      <Content Include="Resources\icons_mesa_de_restaurante.png" />
+      <Content Include="Resources\icons_pesquisar.png" />
       <Content Include="Resources\icons_produto.png" />
       <Content Include="Resources\icons_relatorio.png" />
+      <Content Include="Resources\icons_relatório.png" />
+      <Content Include="Resources\icons_user.png" />
+      <Content Include="Resources\icons_usuário.png" />
       <Content Include="Resources\logotipo.png" />
       <Content Include="Resources\painelLoginImg.png" />
       <Content Include="Resources\painelLogo.png" />
       <Content Include="Resources\sem_foto.png" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Views\Users\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>

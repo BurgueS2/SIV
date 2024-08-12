@@ -14,12 +14,12 @@ public partial class FrmLogin : Form
         InitializeComponent();
         _controller = new UserController();
     }
-
+    
     private void btnExit_Click(object sender, EventArgs e)
     {
         Application.Exit();
     }
-
+    
     private void btnEnter_Click(object sender, EventArgs e)
     {
         VerifyUser();
@@ -56,15 +56,18 @@ public partial class FrmLogin : Form
                 return;
             }
             
-            if (_controller.UserExists(user, password))
+            _controller.Login(user, password);
+            
+            var loggedInUser = SessionManager.CurrentUser;
+            if (loggedInUser.HasPermission("AccessSystem"))
             {
                 Hide();
-                var frm = new FrmMain();
+                var frm = new FrmMain(loggedInUser);
                 frm.Show();
             }
             else
             {
-                MessageHelper.ShowValidationMessage("Usuário ou Senha Inválidos!");
+                MessageHelper.ShowValidationMessage("Usuário não tem permissão para acessar o sistema!");
             }
         }
         catch (Exception ex)

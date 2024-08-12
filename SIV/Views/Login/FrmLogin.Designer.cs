@@ -44,6 +44,7 @@ partial class FrmLogin
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLogin));
         this.design = new Guna.UI2.WinForms.Guna2PictureBox();
         this.labelDiscretionLogo = new System.Windows.Forms.Label();
         this.labelDiscretion = new System.Windows.Forms.Label();
@@ -57,8 +58,8 @@ partial class FrmLogin
         this.labelTop = new System.Windows.Forms.Label();
         this.txtUser = new Guna.UI2.WinForms.Guna2TextBox();
         this.labelUser = new System.Windows.Forms.Label();
-        this.btnExit = new Guna.UI2.WinForms.Guna2Button();
         this.guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
+        this.btnExit = new Guna.UI2.WinForms.Guna2Button();
         ((System.ComponentModel.ISupportInitialize)(this.design)).BeginInit();
         ((System.ComponentModel.ISupportInitialize)(this.logoTipo)).BeginInit();
         this.SuspendLayout();
@@ -71,7 +72,7 @@ partial class FrmLogin
         this.design.Location = new System.Drawing.Point(0, -1);
         this.design.Name = "design";
         this.design.ShadowDecoration.CustomizableEdges = customizableEdges2;
-        this.design.Size = new System.Drawing.Size(751, 392);
+        this.design.Size = new System.Drawing.Size(741, 392);
         this.design.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
         this.design.TabIndex = 15;
         this.design.TabStop = false;
@@ -161,7 +162,6 @@ partial class FrmLogin
         this.btnEnter.BackColor = System.Drawing.Color.Transparent;
         this.btnEnter.BorderColor = System.Drawing.Color.DarkRed;
         this.btnEnter.BorderRadius = 13;
-        this.btnEnter.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
         this.btnEnter.CustomizableEdges = customizableEdges5;
         this.btnEnter.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
         this.btnEnter.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -257,33 +257,33 @@ partial class FrmLogin
         this.labelUser.TabIndex = 21;
         this.labelUser.Text = "Usuário";
         // 
+        // guna2AnimateWindow1
+        // 
+        this.guna2AnimateWindow1.TargetForm = this;
+        // 
         // btnExit
         // 
         this.btnExit.Animated = true;
         this.btnExit.AutoRoundedCorners = true;
         this.btnExit.BackColor = System.Drawing.Color.Transparent;
-        this.btnExit.BorderRadius = 12;
+        this.btnExit.BorderColor = System.Drawing.Color.DarkRed;
+        this.btnExit.BorderRadius = 13;
         this.btnExit.CustomizableEdges = customizableEdges11;
-        this.btnExit.DefaultAutoSize = true;
         this.btnExit.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
         this.btnExit.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
         this.btnExit.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
         this.btnExit.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
         this.btnExit.FillColor = System.Drawing.Color.Transparent;
-        this.btnExit.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.btnExit.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.btnExit.ForeColor = System.Drawing.Color.DimGray;
-        this.btnExit.Location = new System.Drawing.Point(713, 1);
+        this.btnExit.Location = new System.Drawing.Point(718, -1);
         this.btnExit.Name = "btnExit";
         this.btnExit.ShadowDecoration.CustomizableEdges = customizableEdges12;
-        this.btnExit.Size = new System.Drawing.Size(39, 27);
+        this.btnExit.Size = new System.Drawing.Size(36, 29);
         this.btnExit.TabIndex = 33;
         this.btnExit.Text = "X";
         this.btnExit.UseTransparentBackground = true;
         this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-        // 
-        // guna2AnimateWindow1
-        // 
-        this.guna2AnimateWindow1.TargetForm = this;
         // 
         // FrmLogin
         // 
@@ -308,6 +308,7 @@ partial class FrmLogin
         this.Controls.Add(this.design);
         this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+        this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
         this.Margin = new System.Windows.Forms.Padding(5);
         this.MaximumSize = new System.Drawing.Size(753, 391);
         this.MinimumSize = new System.Drawing.Size(753, 391);
@@ -320,9 +321,9 @@ partial class FrmLogin
         this.PerformLayout();
     }
 
-    private Guna.UI2.WinForms.Guna2AnimateWindow guna2AnimateWindow1;
-
     private Guna.UI2.WinForms.Guna2Button btnExit;
+
+    private Guna.UI2.WinForms.Guna2AnimateWindow guna2AnimateWindow1;
 
     private System.Windows.Forms.Label labelDiscretionLogo;
     private System.Windows.Forms.Label labelDiscretion;

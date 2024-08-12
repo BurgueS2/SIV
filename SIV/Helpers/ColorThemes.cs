@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 
-namespace SIV.Views;
+namespace SIV.Helpers;
 
-public class ColorThemes
+public abstract class ColorThemes
 {
     public static Color PrimaryColor { get; set; }
     

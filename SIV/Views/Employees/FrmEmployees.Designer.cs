@@ -286,7 +286,7 @@ partial class FrmEmployees
         this.GridData.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
         this.GridData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
         this.GridData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-        this.GridData.Size = new System.Drawing.Size(1065, 190);
+        this.GridData.Size = new System.Drawing.Size(1078, 190);
         this.GridData.TabIndex = 30;
         this.GridData.UseStyleColors = true;
         this.GridData.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridData_CellContentDoubleClick);
@@ -295,7 +295,7 @@ partial class FrmEmployees
         // 
         this.btnNew.Anchor = System.Windows.Forms.AnchorStyles.Left;
         this.btnNew.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.btnNew.Location = new System.Drawing.Point(25, 526);
+        this.btnNew.Location = new System.Drawing.Point(25, 546);
         this.btnNew.Name = "btnNew";
         this.btnNew.Size = new System.Drawing.Size(75, 23);
         this.btnNew.TabIndex = 33;
@@ -307,7 +307,7 @@ partial class FrmEmployees
         // 
         this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
         this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.btnCancel.Location = new System.Drawing.Point(125, 526);
+        this.btnCancel.Location = new System.Drawing.Point(125, 546);
         this.btnCancel.Name = "btnCancel";
         this.btnCancel.Size = new System.Drawing.Size(75, 23);
         this.btnCancel.TabIndex = 34;
@@ -319,7 +319,7 @@ partial class FrmEmployees
         // 
         this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Left;
         this.btnSave.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.btnSave.Location = new System.Drawing.Point(225, 526);
+        this.btnSave.Location = new System.Drawing.Point(225, 546);
         this.btnSave.Name = "btnSave";
         this.btnSave.Size = new System.Drawing.Size(75, 23);
         this.btnSave.TabIndex = 35;
@@ -331,7 +331,7 @@ partial class FrmEmployees
         // 
         this.btnEdit.Anchor = System.Windows.Forms.AnchorStyles.Left;
         this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.btnEdit.Location = new System.Drawing.Point(325, 526);
+        this.btnEdit.Location = new System.Drawing.Point(325, 546);
         this.btnEdit.Name = "btnEdit";
         this.btnEdit.Size = new System.Drawing.Size(75, 23);
         this.btnEdit.TabIndex = 36;
@@ -343,7 +343,7 @@ partial class FrmEmployees
         // 
         this.btnDelete.Anchor = System.Windows.Forms.AnchorStyles.Left;
         this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.btnDelete.Location = new System.Drawing.Point(425, 526);
+        this.btnDelete.Location = new System.Drawing.Point(425, 546);
         this.btnDelete.Name = "btnDelete";
         this.btnDelete.Size = new System.Drawing.Size(75, 23);
         this.btnDelete.TabIndex = 37;
@@ -371,7 +371,7 @@ partial class FrmEmployees
         this.panelGrid.Controls.Add(this.GridData);
         this.panelGrid.Location = new System.Drawing.Point(1, 260);
         this.panelGrid.Name = "panelGrid";
-        this.panelGrid.Size = new System.Drawing.Size(1065, 245);
+        this.panelGrid.Size = new System.Drawing.Size(1078, 245);
         this.panelGrid.TabIndex = 39;
         // 
         // btnSearch
@@ -434,7 +434,7 @@ partial class FrmEmployees
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-        this.ClientSize = new System.Drawing.Size(1067, 681);
+        this.ClientSize = new System.Drawing.Size(1080, 720);
         this.Controls.Add(this.panelGrid);
         this.Controls.Add(this.btnPhoto);
         this.Controls.Add(this.btnDelete);

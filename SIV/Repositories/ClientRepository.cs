@@ -68,7 +68,8 @@ public class ClientRepository
     public void SaveClient(string code, string name, string cpf,string openAmount, bool status, string phone, string email, string address)
     {
         using (var connection = ConnectionManager.GetConnection())
-        using (var cmd = new MySqlCommand("INSERT INTO clients (code, name, cpf, openAmount, status, phone, email, address, date) VALUES (@code, @name, @cpf,@openAmount, @status, @phone, @email, @address, curDate())", connection))
+        using (var cmd = new MySqlCommand("INSERT INTO clients (code, name, cpf, openAmount, status, phone, email, address, date) " + 
+            "VALUES (@code, @name, @cpf,@openAmount, @status, @phone, @email, @address, curDate())", connection))
         {
             cmd.Parameters.AddWithValue("@code", code);
             cmd.Parameters.AddWithValue("@name", name);

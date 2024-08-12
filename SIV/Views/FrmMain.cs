@@ -1,23 +1,33 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Org.BouncyCastle.Pqc.Crypto.Frodo;
+using Guna.UI2.WinForms;
+using SIV.Controllers;
 using SIV.Core;
+using SIV.Helpers;
+using SIV.Models;
 using SIV.Views.Registers;
 
 namespace SIV.Views;
 
-public partial class FrmMain : MetroFramework.Forms.MetroForm
+public partial class FrmMain : Form
 {
     private const double BrightnessFactor = 0.5;
-    private Button _currentButton;
+    private Guna2Button _currentButton;
     private readonly Random _random = new();
     private int _tempIndex; // Armazena o índice da cor temporária
     private Form _enableFormDisplay; // Armazena o formulário que está sendo exibido
+    private readonly User _loggedInUser;
     
-    public FrmMain()
+    public FrmMain(User loggedInUser)
     {
         InitializeComponent();
+        _loggedInUser = loggedInUser;
+    }
+    
+    private void btnExitDisplay_Click(object sender, EventArgs e)
+    {
+        CloseDisplayForm();
     }
     
     private void btnTables_Click(object sender, EventArgs e)
@@ -30,16 +40,11 @@ public partial class FrmMain : MetroFramework.Forms.MetroForm
         HandleButtonClick(sender);
     }
 
-    private void btnReport_Click(object sender, EventArgs e)
-    {
-        HandleButtonClick(sender);
-    }
-    
     private void btnRegisters_Click(object sender, EventArgs e)
     {
         try
         {
-            OpenDisplayForm(new FrmRegisters(), sender);
+            OpenDisplayForm(new FrmRegisters(_loggedInUser), sender);
         }
         catch (Exception ex)
         {
@@ -47,16 +52,21 @@ public partial class FrmMain : MetroFramework.Forms.MetroForm
             MessageBox.Show($@"Ocorreu um erro: {ex.Message}");
         }
     }
-    
+
+    private void btnReport_Click(object sender, EventArgs e)
+    {
+        HandleButtonClick(sender);
+    }
+
     private void btnExit_Click(object sender, EventArgs e)
     {
         if (!MessageHelper.ConfirmExit()) return;
         Application.Exit();
     }
     
-    private void btnExitDisplay_Click(object sender, EventArgs e)
+    private void btnLogoff_Click(object sender, EventArgs e)
     {
-        CloseDisplayForm();
+        OpenLogin();
     }
     
     private Color RandomColor()
@@ -90,10 +100,10 @@ public partial class FrmMain : MetroFramework.Forms.MetroForm
         var color = RandomColor();
         ResetButtons(color);
         
-        _currentButton = (Button)senderButton;
-        _currentButton.BackColor = color;
+        _currentButton = (Guna2Button)senderButton;
+        _currentButton.FillColor = color;
         _currentButton.ForeColor = Color.Black;
-        _currentButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+        _currentButton.Font = new Font("Century Gothic", 15F, FontStyle.Bold);
         ColorThemes.PrimaryColor = color;
         
         UpdatePanelColors(color);
@@ -103,19 +113,21 @@ public partial class FrmMain : MetroFramework.Forms.MetroForm
     {
         foreach (Control control in panelMenu.Controls)
         {
-            if (control.GetType() != typeof(Button)) continue; // Verifica se o controle é um botão
+            if (control is not Guna2Button button) continue;
             
-            control.BackColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
-            control.ForeColor = Color.Black;
-            control.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
+            button.FillColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
+            button.ForeColor = Color.Black;
+            button.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular);
         }
     }
     
     private void UpdatePanelColors(Color color)
     {
         panelBar.BackColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
-        //panelLogo.BackColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
+        panelStatus.FillColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
         panelMenu.BackColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
+        btnConf.FillColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
+        btnLogoff.FillColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
     }
     
     private void OpenDisplayForm(Form dashboard, object senderButton)
@@ -124,11 +136,14 @@ public partial class FrmMain : MetroFramework.Forms.MetroForm
 
         ActivateButton(senderButton);
         _enableFormDisplay = dashboard;
+        
         dashboard.TopLevel = false;
         dashboard.FormBorderStyle = FormBorderStyle.None;
         dashboard.Dock = DockStyle.Fill;
+        
         displayPanel.Controls.Add(dashboard);
         displayPanel.Tag = dashboard;
+        
         dashboard.BringToFront();
         dashboard.Show();
         labelTitle.Text = dashboard.Text;
@@ -137,13 +152,15 @@ public partial class FrmMain : MetroFramework.Forms.MetroForm
     public void OpenFormInDisplayPanel(Form form)
     {
         _enableFormDisplay?.Close();
-
         _enableFormDisplay = form;
+        
         form.TopLevel = false;
         form.FormBorderStyle = FormBorderStyle.None;
         form.Dock = DockStyle.Fill;
+        
         displayPanel.Controls.Add(form);
         displayPanel.Tag = form;
+        
         form.BringToFront();
         form.Show();
         labelTitle.Text = form.Text;
@@ -175,7 +192,25 @@ public partial class FrmMain : MetroFramework.Forms.MetroForm
 
     private void timer_Tick(object sender, EventArgs e)
     {
-        DateStatusBar.Text = DateTime.Today.ToString("dd/MMMM/yyyy - dddd");
+        DateStatusBar.Text = DateTime.Today.ToString("dd/MMMM/yyyy");
         TimeStatusBar.Text = DateTime.Now.ToString("HH:mm:ss");
+    }
+
+    private void OpenLogin()
+    {
+        try
+        {
+            var controller = new UserController();
+            controller.Logoff();
+
+            var loginForm = new FrmLogin();
+            loginForm.ShowDialog();
+            Close();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageBox.Show(@$"Ocorreu um erro: {ex.Message}");
+        }
     }
 }
