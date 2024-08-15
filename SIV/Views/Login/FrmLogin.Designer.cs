@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace SIV.Views;
+namespace SIV.Views.Login;
 
 partial class FrmLogin
 {
@@ -259,6 +259,7 @@ partial class FrmLogin
         // 
         // guna2AnimateWindow1
         // 
+        this.guna2AnimateWindow1.AnimationType = Guna.UI2.WinForms.Guna2AnimateWindow.AnimateWindowType.AW_BLEND;
         this.guna2AnimateWindow1.TargetForm = this;
         // 
         // btnExit

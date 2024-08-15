@@ -6,6 +6,7 @@ using SIV.Controllers;
 using SIV.Core;
 using SIV.Helpers;
 using SIV.Models;
+using SIV.Views.Login;
 using SIV.Views.Registers;
 
 namespace SIV.Views;
@@ -19,10 +20,10 @@ public partial class FrmMain : Form
     private Form _enableFormDisplay; // Armazena o formulário que está sendo exibido
     private readonly User _loggedInUser;
     
-    public FrmMain(User loggedInUser)
+    public FrmMain(/*User loggedInUser*/)
     {
         InitializeComponent();
-        _loggedInUser = loggedInUser;
+        //_loggedInUser = loggedInUser;\
     }
     
     private void btnExitDisplay_Click(object sender, EventArgs e)
@@ -44,7 +45,7 @@ public partial class FrmMain : Form
     {
         try
         {
-            OpenDisplayForm(new FrmRegisters(_loggedInUser), sender);
+            OpenDisplayForm(new FrmRegisters(/*_loggedInUser*/), sender);
         }
         catch (Exception ex)
         {
@@ -188,6 +189,8 @@ public partial class FrmMain : Form
 
         labelTitle.Text = @"HOME";
         btnExitDisplay.Visible = false;
+        
+        ResetButtons(ColorThemes.PrimaryColor);
     }
 
     private void timer_Tick(object sender, EventArgs e)
@@ -201,7 +204,7 @@ public partial class FrmMain : Form
         try
         {
             var controller = new UserController();
-            controller.Logoff();
+            UserController.Logoff();
 
             var loginForm = new FrmLogin();
             loginForm.ShowDialog();

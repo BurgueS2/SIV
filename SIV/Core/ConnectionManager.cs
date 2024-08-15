@@ -10,7 +10,7 @@ namespace SIV.Core;
 /// </summary>
 public class ConnectionManager
 {
-    private static string _connectionString = "SERVER=localhost; DATABASE=pdv; UID=root; PWD=useroot; PORT=3306;";
+    private static string _connectionString = "SERVER=localhost; DATABASE=pdv; UID=root; PWD=root; PORT=3306;";
     private static MySqlConnection _connection;
 
     /// <summary>

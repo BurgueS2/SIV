@@ -6,50 +6,43 @@ namespace SIV.Controllers;
 
 public class ClientController
 {
-    private readonly ClientRepository _repository;
-
-    public ClientController()
+    public static DataTable GetAllClients()
     {
-        _repository = new ClientRepository();
+        return ClientRepository.GetAllClients();
     }
 
-    public DataTable GetAllClients()
+    public static void SaveClient(Client client)
     {
-        return _repository.GetAllClients();
+        ClientRepository.SaveClient(client.Name, client.Cpf, client.Status, client.Phone, client.Email, client.Address, client.ReferencePoint, client.Observation, client.Sex);
     }
 
-    public void SaveClient(Client client)
+    public static void UpdateClient(Client client)
     {
-        _repository.SaveClient(client.Code, client.Name, client.Cpf, client.OpenAmount, client.Status, client.Phone, client.Email, client.Address);
+        ClientRepository.UpdateClient(client.Id, client.Name, client.Cpf, client.Status, client.Phone, client.Email, client.Address, client.ReferencePoint, client.Observation, client.Sex);
     }
 
-    public void UpdateClient(Client client)
+    public static void DeleteClient(string id)
     {
-        _repository.UpdateClient(client.Id, client.Name, client.Cpf, client.OpenAmount, client.Status, client.Phone, client.Email, client.Address);
+        ClientRepository.DeleteClient(id);
     }
 
-    public void DeleteClient(string id)
+    public static bool VerifyCpfExistence(string cpf, string oldCpf)
     {
-        _repository.DeleteClient(id);
+        return ClientRepository.VerifyCpfExistence(cpf, oldCpf);
     }
 
-    public bool VerifyCpfExistence(string cpf, string oldCpf)
+    public static bool VerifyEmailExistence(string email)
     {
-        return _repository.VerifyCpfExistence(cpf, oldCpf);
-    }
-
-    public bool VerifyEmailExistence(string email)
-    {
-        return _repository.VerifyEmailExisting(email);
+        return ClientRepository.VerifyEmailExisting(email);
     }
     
-    public DataTable SearchByName(string name)
+    public static DataTable SearchByName(string name)
     {
-        return _repository.SearchByName(name);
+        return ClientRepository.SearchByName(name);
     }
 
-    public DataTable SearchByCpf(string cpf)
+    public static DataTable SearchByCpf(string cpf)
     {
-        return _repository.SearchByCpf(cpf);
+        return ClientRepository.SearchByCpf(cpf);
     }
 }

@@ -2,8 +2,9 @@
 using System.Windows.Forms;
 using SIV.Controllers;
 using SIV.Core;
+using SIV.Helpers;
 
-namespace SIV.Views;
+namespace SIV.Views.Login;
 
 public partial class FrmLogin : Form
 {
@@ -35,8 +36,8 @@ public partial class FrmLogin : Form
     {
         try
         {
-            var user = txtUser.Text.Trim();
-            var password = txtPassword.Text.Trim();
+            var user = "teste";//txtUser.Text.Trim();
+            var password = "teste";//txtPassword.Text.Trim();
             
             if (string.IsNullOrEmpty(user) && string.IsNullOrEmpty(password))
             {
@@ -56,14 +57,14 @@ public partial class FrmLogin : Form
                 return;
             }
             
-            _controller.Login(user, password);
+            UserController.Login(user, password);
             
             var loggedInUser = SessionManager.CurrentUser;
             if (loggedInUser.HasPermission("AccessSystem"))
             {
                 Hide();
-                var frm = new FrmMain(loggedInUser);
-                frm.Show();
+                //var frm = new FrmMain(loggedInUser);
+                //frm.Show();
             }
             else
             {

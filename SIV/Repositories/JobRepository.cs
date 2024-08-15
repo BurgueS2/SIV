@@ -14,8 +14,7 @@ public class JobRepository
     /// <summary>
     /// Recupera todos os cargos do banco de dados e os retorna em um 'DataTable'.
     /// </summary>
-    /// <returns>`DataTable` contendo todos os cargos.</returns>
-    public DataTable GetAllJobs()
+    public static DataTable GetAllJobs()
     {
         var dt = new DataTable();
         
@@ -35,7 +34,7 @@ public class JobRepository
     /// Insere um novo cargo no banco de dados.
     /// </summary>
     /// <param name="name">Nome do cargo a ser inserido.</param>
-    public void SaveJob(string name)
+    public static void SaveJob(string name)
     {
         using (var connection = ConnectionManager.GetConnection())
         using (var cmd = new MySqlCommand("INSERT INTO job (name, date) VALUES (@name, curDate())", connection))
@@ -51,7 +50,7 @@ public class JobRepository
     /// </summary>
     /// <param name="id">ID do cargo a ser atualizado.</param>
     /// <param name="name">Novo nome para o cargo.</param>
-    public void UpdateJob(string id, string name)
+    public static void UpdateJob(string id, string name)
     {
         using (var connection = ConnectionManager.GetConnection())
         using (var cmd = new MySqlCommand("UPDATE job SET name = @name WHERE id = @id", connection))
@@ -67,7 +66,7 @@ public class JobRepository
     /// Exclui um cargo do banco de dados.
     /// </summary>
     /// <param name="id">ID do cargo a ser excluído.</param>
-    public void DeleteJob(string id)
+    public static void DeleteJob(string id)
     {
         using (var connection = ConnectionManager.GetConnection())
         using (var cmd = new MySqlCommand("DELETE FROM job WHERE id = @id", connection))
@@ -82,7 +81,7 @@ public class JobRepository
     /// </summary>
     /// <param name="name">Nome do cargo a ser verificado.</param>
     /// <returns>Retorna 'true' se o cargo já existe no banco de dados, caso contrário, retorna 'false'.</returns>
-    public bool JobExists(string name)
+    public static bool JobExists(string name)
     {
         using (var connection = ConnectionManager.GetConnection())
         using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM job WHERE LOWER(name) = LOWER(@name)", connection))

@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  db:
+    image: mysql
+    container_name: db_pdv
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: useroot
+    ports:
+      - "3306:3306"
+    volumes:
+      - C:\Users\felip\OneDrive - 1915ma\Documentos\Projetos\PDV\docker\db:/var/lib/mysql

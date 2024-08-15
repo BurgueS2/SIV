@@ -2,9 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
-using SIV.Core;
 using SIV.Helpers;
-using SIV.Models;
 using SIV.Views.Clients;
 using SIV.Views.Employees;
 using SIV.Views.Jobs;
@@ -15,14 +13,14 @@ namespace SIV.Views.Registers;
 public partial class FrmRegisters : Form
 {
     private const double BrightnessFactor = 0.5;
-    private readonly User _loggedInUser;
+    //private readonly User _loggedInUser;
     
-    public FrmRegisters(User loggedInUser)
+    public FrmRegisters(/*User loggedInUser*/)
     {
         InitializeComponent();
-        _loggedInUser = loggedInUser;
+        //_loggedInUser = loggedInUser;
     }
-
+    
     private void FrmRegisters_Load(object sender, EventArgs e)
     {
         ApplyingTheme();
@@ -47,18 +45,34 @@ public partial class FrmRegisters : Form
     {
         OpenDisplayForm(new FrmJobs(), sender);
     }
-
     
+    private void btnProduct_Click(object sender, EventArgs e)
+    {
+        //throw new System.NotImplementedException();
+    }
 
-    
+    private void btnSupplier_Click(object sender, EventArgs e)
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    private void btnAddress_Click(object sender, EventArgs e)
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    private void btnPayment_Click(object sender, EventArgs e)
+    {
+        //throw new System.NotImplementedException();
+    }
     
     private void OpenDisplayForm(Form dashboard, object senderButton)
     {
-        if (!_loggedInUser.HasPermission("ManageCadastres"))
+        /*if (!_loggedInUser.HasPermission("ManageCadastres"))
         {
             MessageHelper.ShowValidationMessage("Usuário não tem permissão para acessar o cadastro de Employees!");
             return;
-        }
+        }*/
         
         ActivateButton(senderButton);
         dashboard.TopLevel = false;
@@ -104,6 +118,10 @@ public partial class FrmRegisters : Form
         ApplyThemeToControl(btnUser, fillColor);
         ApplyThemeToControl(btnClient, fillColor);
         ApplyThemeToControl(btnJob, fillColor);
+        ApplyThemeToControl(btnProduct, fillColor);
+        ApplyThemeToControl(btnSupplier, fillColor);
+        ApplyThemeToControl(btnAddress, fillColor);
+        ApplyThemeToControl(btnPayment, fillColor);
     }
     
     private static void ApplyThemeToControl(Control control, Color fillColor)

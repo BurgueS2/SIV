@@ -105,7 +105,7 @@ partial class FrmUsers
         this.txtName.SelectedText = "";
         this.txtName.ShadowDecoration.CustomizableEdges = customizableEdges2;
         this.txtName.Size = new System.Drawing.Size(295, 36);
-        this.txtName.TabIndex = 2;
+        this.txtName.TabIndex = 1;
         // 
         // labelPassword
         // 
@@ -139,7 +139,7 @@ partial class FrmUsers
         this.txtPassword.SelectedText = "";
         this.txtPassword.ShadowDecoration.CustomizableEdges = customizableEdges4;
         this.txtPassword.Size = new System.Drawing.Size(295, 36);
-        this.txtPassword.TabIndex = 4;
+        this.txtPassword.TabIndex = 2;
         this.txtPassword.UseSystemPasswordChar = true;
         // 
         // btnPartialAccess
@@ -320,7 +320,7 @@ partial class FrmUsers
         this.txtRepeatPassword.SelectedText = "";
         this.txtRepeatPassword.ShadowDecoration.CustomizableEdges = customizableEdges16;
         this.txtRepeatPassword.Size = new System.Drawing.Size(295, 36);
-        this.txtRepeatPassword.TabIndex = 16;
+        this.txtRepeatPassword.TabIndex = 3;
         this.txtRepeatPassword.UseSystemPasswordChar = true;
         // 
         // label1
@@ -410,7 +410,7 @@ partial class FrmUsers
         this.gridData.Name = "gridData";
         this.gridData.ReadOnly = true;
         this.gridData.RowHeadersVisible = false;
-        this.gridData.Size = new System.Drawing.Size(1040, 264);
+        this.gridData.Size = new System.Drawing.Size(1056, 303);
         this.gridData.TabIndex = 20;
         this.gridData.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Cyan;
         this.gridData.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
@@ -440,8 +440,9 @@ partial class FrmUsers
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        this.AutoScroll = true;
         this.BackColor = System.Drawing.Color.White;
-        this.ClientSize = new System.Drawing.Size(1064, 681);
+        this.ClientSize = new System.Drawing.Size(1080, 720);
         this.Controls.Add(this.gridData);
         this.Controls.Add(this.btnCancel);
         this.Controls.Add(this.btnActive);
@@ -462,6 +463,7 @@ partial class FrmUsers
         this.Controls.Add(this.txtName);
         this.Controls.Add(this.labelName);
         this.Font = new System.Drawing.Font("Century Gothic", 12F);
+        this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
         this.Margin = new System.Windows.Forms.Padding(5);
         this.Name = "FrmUsers";
         this.Text = "FrmUsers";

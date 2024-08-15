@@ -24,7 +24,7 @@ public class ClientValidator
             return "Nome inválido. Use apenas letras e espaços.";
         }
         
-        if (!Regex.IsMatch(cpf, @"^\d{3}\,?\d{3}\,?\d{3}-?\d{2}$"))
+        if (string.IsNullOrWhiteSpace(cpf) || !Regex.IsMatch(cpf, @"^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$"))
         {
             return "Formato de CPF inválido.";
         }

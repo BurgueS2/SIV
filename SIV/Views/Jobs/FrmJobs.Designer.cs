@@ -32,247 +32,278 @@ partial class FrmJobs
     /// </summary>
     private void InitializeComponent()
     {
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-        this.txtName = new MetroFramework.Controls.MetroTextBox();
-        this.LabelName = new MetroFramework.Controls.MetroLabel();
-        this.btnCancel = new MetroFramework.Controls.MetroButton();
-        this.btnSave = new MetroFramework.Controls.MetroButton();
-        this.btnEdit = new MetroFramework.Controls.MetroButton();
-        this.btnDelete = new MetroFramework.Controls.MetroButton();
-        this.btnNew = new MetroFramework.Controls.MetroButton();
-        this.panelGrid = new System.Windows.Forms.Panel();
-        this.btnSearch = new System.Windows.Forms.Button();
-        this.txtSearch = new MetroFramework.Controls.MetroTextBox();
+        this.txtName = new Guna.UI2.WinForms.Guna2TextBox();
+        this.labelName = new System.Windows.Forms.Label();
+        this.btnCancel = new Guna.UI2.WinForms.Guna2Button();
+        this.btnNew = new Guna.UI2.WinForms.Guna2Button();
+        this.btnDelete = new Guna.UI2.WinForms.Guna2Button();
+        this.btnEdit = new Guna.UI2.WinForms.Guna2Button();
+        this.btnSave = new Guna.UI2.WinForms.Guna2Button();
+        this.panelGrid = new Guna.UI2.WinForms.Guna2Panel();
         this.labelRegisteredEmployees = new System.Windows.Forms.Label();
-        this.gridData = new MetroFramework.Controls.MetroGrid();
+        this.gridData = new Guna.UI2.WinForms.Guna2DataGridView();
         this.panelGrid.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
         this.SuspendLayout();
         // 
         // txtName
         // 
-        // 
-        // 
-        // 
-        this.txtName.CustomButton.Image = null;
-        this.txtName.CustomButton.Location = new System.Drawing.Point(196, 1);
-        this.txtName.CustomButton.Name = "";
-        this.txtName.CustomButton.Size = new System.Drawing.Size(21, 21);
-        this.txtName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-        this.txtName.CustomButton.TabIndex = 1;
-        this.txtName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-        this.txtName.CustomButton.UseSelectable = true;
-        this.txtName.CustomButton.Visible = false;
-        this.txtName.Lines = new string[0];
-        this.txtName.Location = new System.Drawing.Point(88, 39);
-        this.txtName.MaxLength = 255;
+        this.txtName.Animated = true;
+        this.txtName.BorderRadius = 10;
+        this.txtName.Cursor = System.Windows.Forms.Cursors.IBeam;
+        this.txtName.CustomizableEdges = customizableEdges1;
+        this.txtName.DefaultText = "";
+        this.txtName.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+        this.txtName.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+        this.txtName.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+        this.txtName.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+        this.txtName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+        this.txtName.Font = new System.Drawing.Font("Segoe UI", 9F);
+        this.txtName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+        this.txtName.Location = new System.Drawing.Point(111, 39);
         this.txtName.Name = "txtName";
         this.txtName.PasswordChar = '\0';
-        this.txtName.ScrollBars = System.Windows.Forms.ScrollBars.None;
+        this.txtName.PlaceholderText = "";
         this.txtName.SelectedText = "";
-        this.txtName.SelectionLength = 0;
-        this.txtName.SelectionStart = 0;
-        this.txtName.ShortcutsEnabled = true;
-        this.txtName.Size = new System.Drawing.Size(218, 23);
-        this.txtName.TabIndex = 27;
-        this.txtName.UseSelectable = true;
-        this.txtName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-        this.txtName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+        this.txtName.ShadowDecoration.CustomizableEdges = customizableEdges2;
+        this.txtName.Size = new System.Drawing.Size(295, 36);
+        this.txtName.TabIndex = 4;
         // 
-        // LabelName
+        // labelName
         // 
-        this.LabelName.AutoSize = true;
-        this.LabelName.FontSize = MetroFramework.MetroLabelSize.Tall;
-        this.LabelName.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-        this.LabelName.Location = new System.Drawing.Point(12, 37);
-        this.LabelName.Name = "LabelName";
-        this.LabelName.Size = new System.Drawing.Size(61, 25);
-        this.LabelName.TabIndex = 26;
-        this.LabelName.Text = "Nome";
-        this.LabelName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.labelName.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelName.Location = new System.Drawing.Point(12, 39);
+        this.labelName.Name = "labelName";
+        this.labelName.Size = new System.Drawing.Size(93, 36);
+        this.labelName.TabIndex = 5;
+        this.labelName.Text = "Nome";
+        this.labelName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // btnCancel
         // 
-        this.btnCancel.Location = new System.Drawing.Point(122, 545);
+        this.btnCancel.Animated = true;
+        this.btnCancel.BackColor = System.Drawing.Color.Transparent;
+        this.btnCancel.BorderRadius = 10;
+        this.btnCancel.CustomizableEdges = customizableEdges3;
+        this.btnCancel.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+        this.btnCancel.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+        this.btnCancel.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+        this.btnCancel.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+        this.btnCancel.FillColor = System.Drawing.Color.Black;
+        this.btnCancel.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.btnCancel.ForeColor = System.Drawing.Color.White;
+        this.btnCancel.Location = new System.Drawing.Point(124, 200);
         this.btnCancel.Name = "btnCancel";
-        this.btnCancel.Size = new System.Drawing.Size(75, 23);
-        this.btnCancel.TabIndex = 42;
+        this.btnCancel.PressedColor = System.Drawing.Color.White;
+        this.btnCancel.ShadowDecoration.CustomizableEdges = customizableEdges4;
+        this.btnCancel.Size = new System.Drawing.Size(106, 29);
+        this.btnCancel.TabIndex = 29;
         this.btnCancel.Text = "Cancelar";
-        this.btnCancel.UseSelectable = true;
         this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-        // 
-        // btnSave
-        // 
-        this.btnSave.Location = new System.Drawing.Point(227, 545);
-        this.btnSave.Name = "btnSave";
-        this.btnSave.Size = new System.Drawing.Size(75, 23);
-        this.btnSave.TabIndex = 41;
-        this.btnSave.Text = "Salvar";
-        this.btnSave.UseSelectable = true;
-        this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-        // 
-        // btnEdit
-        // 
-        this.btnEdit.Location = new System.Drawing.Point(332, 545);
-        this.btnEdit.Name = "btnEdit";
-        this.btnEdit.Size = new System.Drawing.Size(75, 23);
-        this.btnEdit.TabIndex = 40;
-        this.btnEdit.Text = "Editar";
-        this.btnEdit.UseSelectable = true;
-        this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-        // 
-        // btnDelete
-        // 
-        this.btnDelete.Location = new System.Drawing.Point(435, 545);
-        this.btnDelete.Name = "btnDelete";
-        this.btnDelete.Size = new System.Drawing.Size(75, 23);
-        this.btnDelete.TabIndex = 39;
-        this.btnDelete.Text = "Excluir";
-        this.btnDelete.UseSelectable = true;
-        this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
         // 
         // btnNew
         // 
-        this.btnNew.Location = new System.Drawing.Point(12, 545);
+        this.btnNew.Animated = true;
+        this.btnNew.BackColor = System.Drawing.Color.Transparent;
+        this.btnNew.BorderRadius = 10;
+        this.btnNew.CustomizableEdges = customizableEdges5;
+        this.btnNew.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+        this.btnNew.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+        this.btnNew.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+        this.btnNew.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+        this.btnNew.FillColor = System.Drawing.Color.Black;
+        this.btnNew.Font = new System.Drawing.Font("Century Gothic", 12F);
+        this.btnNew.ForeColor = System.Drawing.Color.White;
+        this.btnNew.Location = new System.Drawing.Point(12, 200);
         this.btnNew.Name = "btnNew";
-        this.btnNew.Size = new System.Drawing.Size(75, 23);
-        this.btnNew.TabIndex = 38;
+        this.btnNew.PressedColor = System.Drawing.Color.White;
+        this.btnNew.ShadowDecoration.CustomizableEdges = customizableEdges6;
+        this.btnNew.Size = new System.Drawing.Size(106, 29);
+        this.btnNew.TabIndex = 28;
         this.btnNew.Text = "Novo";
-        this.btnNew.UseSelectable = true;
         this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+        // 
+        // btnDelete
+        // 
+        this.btnDelete.Animated = true;
+        this.btnDelete.BackColor = System.Drawing.Color.Transparent;
+        this.btnDelete.BorderRadius = 10;
+        this.btnDelete.CustomizableEdges = customizableEdges7;
+        this.btnDelete.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+        this.btnDelete.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+        this.btnDelete.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+        this.btnDelete.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+        this.btnDelete.FillColor = System.Drawing.Color.Black;
+        this.btnDelete.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.btnDelete.ForeColor = System.Drawing.Color.White;
+        this.btnDelete.Location = new System.Drawing.Point(460, 200);
+        this.btnDelete.Name = "btnDelete";
+        this.btnDelete.PressedColor = System.Drawing.Color.White;
+        this.btnDelete.ShadowDecoration.CustomizableEdges = customizableEdges8;
+        this.btnDelete.Size = new System.Drawing.Size(106, 29);
+        this.btnDelete.TabIndex = 27;
+        this.btnDelete.Text = "Excluir";
+        this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+        // 
+        // btnEdit
+        // 
+        this.btnEdit.Animated = true;
+        this.btnEdit.BackColor = System.Drawing.Color.Transparent;
+        this.btnEdit.BorderRadius = 10;
+        this.btnEdit.CustomizableEdges = customizableEdges9;
+        this.btnEdit.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+        this.btnEdit.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+        this.btnEdit.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+        this.btnEdit.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+        this.btnEdit.FillColor = System.Drawing.Color.Black;
+        this.btnEdit.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.btnEdit.ForeColor = System.Drawing.Color.White;
+        this.btnEdit.Location = new System.Drawing.Point(348, 200);
+        this.btnEdit.Name = "btnEdit";
+        this.btnEdit.PressedColor = System.Drawing.Color.White;
+        this.btnEdit.ShadowDecoration.CustomizableEdges = customizableEdges10;
+        this.btnEdit.Size = new System.Drawing.Size(106, 29);
+        this.btnEdit.TabIndex = 26;
+        this.btnEdit.Text = "Editar";
+        this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+        // 
+        // btnSave
+        // 
+        this.btnSave.Animated = true;
+        this.btnSave.BackColor = System.Drawing.Color.Transparent;
+        this.btnSave.BorderRadius = 10;
+        this.btnSave.CustomizableEdges = customizableEdges11;
+        this.btnSave.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+        this.btnSave.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+        this.btnSave.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+        this.btnSave.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+        this.btnSave.FillColor = System.Drawing.Color.Black;
+        this.btnSave.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.btnSave.ForeColor = System.Drawing.Color.White;
+        this.btnSave.Location = new System.Drawing.Point(236, 200);
+        this.btnSave.Name = "btnSave";
+        this.btnSave.PressedColor = System.Drawing.Color.White;
+        this.btnSave.ShadowDecoration.CustomizableEdges = customizableEdges12;
+        this.btnSave.Size = new System.Drawing.Size(106, 29);
+        this.btnSave.TabIndex = 25;
+        this.btnSave.Text = "Salvar";
+        this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
         // 
         // panelGrid
         // 
-        this.panelGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-        this.panelGrid.Controls.Add(this.btnSearch);
-        this.panelGrid.Controls.Add(this.txtSearch);
+        this.panelGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        this.panelGrid.BorderRadius = 15;
+        this.panelGrid.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dot;
         this.panelGrid.Controls.Add(this.labelRegisteredEmployees);
         this.panelGrid.Controls.Add(this.gridData);
-        this.panelGrid.Location = new System.Drawing.Point(2, 164);
+        this.panelGrid.CustomizableEdges = customizableEdges13;
+        this.panelGrid.FillColor = System.Drawing.Color.Transparent;
+        this.panelGrid.Location = new System.Drawing.Point(12, 282);
         this.panelGrid.Name = "panelGrid";
-        this.panelGrid.Size = new System.Drawing.Size(1060, 294);
-        this.panelGrid.TabIndex = 43;
-        // 
-        // btnSearch
-        // 
-        this.btnSearch.Anchor = System.Windows.Forms.AnchorStyles.Left;
-        this.btnSearch.FlatAppearance.BorderSize = 0;
-        this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-        this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.btnSearch.Image = global::SIV.Properties.Resources.icons8_localizar_e_substituir_26;
-        this.btnSearch.Location = new System.Drawing.Point(266, 27);
-        this.btnSearch.Name = "btnSearch";
-        this.btnSearch.Size = new System.Drawing.Size(34, 23);
-        this.btnSearch.TabIndex = 40;
-        this.btnSearch.UseVisualStyleBackColor = true;
-        // 
-        // txtSearch
-        // 
-        // 
-        // 
-        // 
-        this.txtSearch.CustomButton.Image = null;
-        this.txtSearch.CustomButton.Location = new System.Drawing.Point(245, 1);
-        this.txtSearch.CustomButton.Name = "";
-        this.txtSearch.CustomButton.Size = new System.Drawing.Size(21, 21);
-        this.txtSearch.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-        this.txtSearch.CustomButton.TabIndex = 1;
-        this.txtSearch.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-        this.txtSearch.CustomButton.UseSelectable = true;
-        this.txtSearch.CustomButton.Visible = false;
-        this.txtSearch.Lines = new string[0];
-        this.txtSearch.Location = new System.Drawing.Point(0, 26);
-        this.txtSearch.MaxLength = 255;
-        this.txtSearch.Name = "txtSearch";
-        this.txtSearch.PasswordChar = '\0';
-        this.txtSearch.PromptText = "Buscar";
-        this.txtSearch.ScrollBars = System.Windows.Forms.ScrollBars.None;
-        this.txtSearch.SelectedText = "";
-        this.txtSearch.SelectionLength = 0;
-        this.txtSearch.SelectionStart = 0;
-        this.txtSearch.ShortcutsEnabled = true;
-        this.txtSearch.Size = new System.Drawing.Size(267, 23);
-        this.txtSearch.TabIndex = 40;
-        this.txtSearch.UseSelectable = true;
-        this.txtSearch.WaterMark = "Buscar";
-        this.txtSearch.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-        this.txtSearch.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+        this.panelGrid.ShadowDecoration.CustomizableEdges = customizableEdges14;
+        this.panelGrid.Size = new System.Drawing.Size(1056, 426);
+        this.panelGrid.TabIndex = 30;
         // 
         // labelRegisteredEmployees
         // 
-        this.labelRegisteredEmployees.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.labelRegisteredEmployees.Location = new System.Drawing.Point(0, 0);
+        this.labelRegisteredEmployees.BackColor = System.Drawing.Color.Transparent;
+        this.labelRegisteredEmployees.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelRegisteredEmployees.Location = new System.Drawing.Point(3, 0);
         this.labelRegisteredEmployees.Name = "labelRegisteredEmployees";
-        this.labelRegisteredEmployees.Size = new System.Drawing.Size(202, 23);
-        this.labelRegisteredEmployees.TabIndex = 0;
+        this.labelRegisteredEmployees.Size = new System.Drawing.Size(207, 36);
+        this.labelRegisteredEmployees.TabIndex = 27;
         this.labelRegisteredEmployees.Text = "Cargos Cadastrados";
+        this.labelRegisteredEmployees.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // gridData
         // 
         this.gridData.AllowUserToAddRows = false;
         this.gridData.AllowUserToDeleteRows = false;
-        this.gridData.AllowUserToResizeRows = false;
+        dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
+        this.gridData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
         this.gridData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-        this.gridData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-        this.gridData.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-        this.gridData.BorderStyle = System.Windows.Forms.BorderStyle.None;
-        this.gridData.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-        this.gridData.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-        dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightCyan;
-        dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-        dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-        dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightCyan;
-        dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-        dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-        this.gridData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-        this.gridData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-        dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-        dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-        dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightCyan;
-        dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-        dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-        this.gridData.DefaultCellStyle = dataGridViewCellStyle2;
-        this.gridData.EnableHeadersVisualStyles = false;
-        this.gridData.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-        this.gridData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-        this.gridData.Location = new System.Drawing.Point(0, 55);
+        dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(188)))), ((int)(((byte)(211)))));
+        dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+        dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+        dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+        dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+        this.gridData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+        this.gridData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+        dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(241)))), ((int)(((byte)(245)))));
+        dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+        dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(210)))), ((int)(((byte)(225)))));
+        dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+        dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+        this.gridData.DefaultCellStyle = dataGridViewCellStyle3;
+        this.gridData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
+        this.gridData.Location = new System.Drawing.Point(0, 39);
         this.gridData.Name = "gridData";
         this.gridData.ReadOnly = true;
-        this.gridData.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-        dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightCyan;
-        dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-        dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-        dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Azure;
-        dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-        dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-        this.gridData.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-        this.gridData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-        this.gridData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-        this.gridData.Size = new System.Drawing.Size(1060, 239);
-        this.gridData.TabIndex = 30;
-        this.gridData.UseStyleColors = true;
+        this.gridData.RowHeadersVisible = false;
+        this.gridData.Size = new System.Drawing.Size(1056, 387);
+        this.gridData.TabIndex = 21;
+        this.gridData.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Cyan;
+        this.gridData.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
+        this.gridData.ThemeStyle.AlternatingRowsStyle.Font = null;
+        this.gridData.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
+        this.gridData.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
+        this.gridData.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
+        this.gridData.ThemeStyle.BackColor = System.Drawing.Color.White;
+        this.gridData.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
+        this.gridData.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(188)))), ((int)(((byte)(211)))));
+        this.gridData.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+        this.gridData.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.gridData.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
+        this.gridData.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+        this.gridData.ThemeStyle.HeaderStyle.Height = 23;
+        this.gridData.ThemeStyle.ReadOnly = true;
+        this.gridData.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(241)))), ((int)(((byte)(245)))));
+        this.gridData.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+        this.gridData.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.gridData.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.Black;
+        this.gridData.ThemeStyle.RowsStyle.Height = 22;
+        this.gridData.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(210)))), ((int)(((byte)(225)))));
+        this.gridData.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
         this.gridData.DoubleClick += new System.EventHandler(this.gridData_DoubleClick);
         // 
         // FrmJobs
         // 
-        this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+        this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.BackColor = System.Drawing.Color.White;
-        this.ClientSize = new System.Drawing.Size(1064, 681);
+        this.ClientSize = new System.Drawing.Size(1080, 720);
         this.Controls.Add(this.panelGrid);
         this.Controls.Add(this.btnCancel);
-        this.Controls.Add(this.btnSave);
-        this.Controls.Add(this.btnEdit);
-        this.Controls.Add(this.btnDelete);
         this.Controls.Add(this.btnNew);
+        this.Controls.Add(this.btnDelete);
+        this.Controls.Add(this.btnEdit);
+        this.Controls.Add(this.btnSave);
         this.Controls.Add(this.txtName);
-        this.Controls.Add(this.LabelName);
+        this.Controls.Add(this.labelName);
+        this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+        this.Margin = new System.Windows.Forms.Padding(5);
         this.MaximizeBox = false;
         this.MinimizeBox = false;
         this.Name = "FrmJobs";
@@ -282,23 +313,20 @@ partial class FrmJobs
         this.panelGrid.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
         this.ResumeLayout(false);
-        this.PerformLayout();
     }
 
-    private System.Windows.Forms.Panel panelGrid;
-    private System.Windows.Forms.Button btnSearch;
-    private MetroFramework.Controls.MetroTextBox txtSearch;
+    private Guna.UI2.WinForms.Guna2Panel panelGrid;
     private System.Windows.Forms.Label labelRegisteredEmployees;
-    private MetroFramework.Controls.MetroGrid gridData;
+    private Guna.UI2.WinForms.Guna2DataGridView gridData;
 
-    private MetroFramework.Controls.MetroButton btnCancel;
-    private MetroFramework.Controls.MetroButton btnSave;
-    private MetroFramework.Controls.MetroButton btnEdit;
-    private MetroFramework.Controls.MetroButton btnDelete;
-    private MetroFramework.Controls.MetroButton btnNew;
+    private Guna.UI2.WinForms.Guna2Button btnCancel;
+    private Guna.UI2.WinForms.Guna2Button btnNew;
+    private Guna.UI2.WinForms.Guna2Button btnDelete;
+    private Guna.UI2.WinForms.Guna2Button btnEdit;
+    private Guna.UI2.WinForms.Guna2Button btnSave;
 
-    private MetroFramework.Controls.MetroTextBox txtName;
-    private MetroFramework.Controls.MetroLabel LabelName;
+    private Guna.UI2.WinForms.Guna2TextBox txtName;
+    private System.Windows.Forms.Label labelName;
 
     #endregion
 }

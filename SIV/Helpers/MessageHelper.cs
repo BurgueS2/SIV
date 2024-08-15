@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace SIV.Core;
+namespace SIV.Helpers;
 
 /// <summary>
 /// A classe é responsável por centralizar a exibição de mensagens ao usuário, utilizando caixas de diálogo do Windows Forms.
@@ -14,8 +14,7 @@ public class MessageHelper
     /// </summary>
     public static void ShowSaveSuccessMessage()
     {
-        MessageBox.Show(@"Registro salvo com sucesso!", @"REGISTRO SALVO", MessageBoxButtons.OK,
-            MessageBoxIcon.Information);
+        MessageBox.Show(@"Registro salvo com sucesso!", @"REGISTRO SALVO", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     /// <summary>
@@ -23,8 +22,7 @@ public class MessageHelper
     /// </summary>
     public static void ShowUpdateSuccessMessage()
     {
-        MessageBox.Show(@"Registro atualizado com sucesso!", @"REGISTRO ATUALIZADO", MessageBoxButtons.OK,
-            MessageBoxIcon.Information);
+        MessageBox.Show(@"Registro atualizado com sucesso!", @"REGISTRO ATUALIZADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
     
     /// <summary>
@@ -32,8 +30,7 @@ public class MessageHelper
     /// </summary>
     public static void ShowDeleteSuccessMessage()
     {
-        MessageBox.Show(@"Registro excluído com sucesso!", @"REGISTRO EXCLUÍDO", MessageBoxButtons.OK,
-            MessageBoxIcon.Information);
+        MessageBox.Show(@"Registro excluído com sucesso!", @"REGISTRO EXCLUÍDO", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
     
     /// <summary>

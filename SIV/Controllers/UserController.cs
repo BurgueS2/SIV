@@ -2,6 +2,7 @@
 using System.Data;
 using System.Web.SessionState;
 using MySqlX.XDevAPI;
+using SIV.Core;
 using SIV.Models;
 using SIV.Repositories;
 
@@ -9,51 +10,34 @@ namespace SIV.Controllers;
 
 public class UserController
 {
-    private readonly UserRepository _repository;
-
-    public UserController()
+    public static DataTable GetAllUsers()
     {
-        _repository = new UserRepository();
+        return UserRepository.GetAllUsers();
     }
 
-    public DataTable GetAllUsers()
+    public static void SaveUser(User user)
     {
-        return _repository.GetAllUsers();
+        UserRepository.SaveUser(user.Name, user.Password, user.Job, user.Access, user.Active, user.Permissions);
     }
 
-    public void SaveUser(User user)
+    public static void UpdateUser(User user)
     {
-        _repository.SaveUser(user.Name, user.Password, user.Job, user.Access, user.Active, user.Permissions);
+        UserRepository.UpdateUser(user.Id, user.Name, user.Password, user.Job, user.Access, user.Active, user.Permissions);
     }
 
-    public void UpdateUser(User user)
+    public static void DeleteUser(string id)
     {
-        _repository.UpdateUser(user.Id, user.Name, user.Password, user.Job, user.Access, user.Active, user.Permissions);
+        UserRepository.DeleteUser(id);
     }
 
-    public void DeleteUser(string id)
-    {
-        _repository.DeleteUser(id);
-    }
-
-    public bool UserExists(string name, string password)
-    {
-        return _repository.VerifyUserExistence(name, password);
-    }
-
-    public User PermissionValidation(string name, string permission)
-    {
-        return _repository.UserPermition(name, permission);
-    }
-
-    public void Logoff()
+    public static void Logoff()
     {
         SessionManager.ClearSession();
     }
 
-    public void Login(string username, string password)
+    public static void Login(string username, string password)
     {
-        var user = _repository.UserPermition(username, password);
+        var user = UserRepository.UserPermission(username, password);
         if (user != null)
         {
             SessionManager.SetCurrentUser(user);

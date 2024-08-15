@@ -2,6 +2,9 @@
 
 namespace SIV.Models;
 
+/// <summary>
+/// Representa um usuário do sistema.
+/// </summary>
 public class User
 {
     public string Id { get; set; }
@@ -12,6 +15,11 @@ public class User
     public List<string> Permissions { get; set; }
     public string Active { get; set; }
     
+    /// <summary>
+    /// Verifica se o usuário possui a permissão informada.
+    /// </summary>
+    /// <param name="permission">Permissões são utilizadas para controlar o acesso do usuário a determinadas funcionalidades do sistema.</param>
+    /// <returns>Retorna verdadeiro se o usuário possuir a permissão, caso contrário, retorna falso.</returns>
     public bool HasPermission(string permission)
     {
         return Permissions.Contains(permission);

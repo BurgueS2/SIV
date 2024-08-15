@@ -13,10 +13,9 @@ public class EmployeeRepository
     /// <summary>
     /// Retorna todos os funcionários cadastrados no banco de dados.
     /// </summary>
-    /// <returns>Um DataTable contendo todos funcionários.</returns>
-    public DataTable GetAllEmployees()
+    public static DataTable GetAllEmployees()
     {
-        var dt = new DataTable(); // DataTable é uma classe que representa uma tabela na memória
+        var dt = new DataTable();
         using (var connection = ConnectionManager.GetConnection())
         {
             using (var cmd = new MySqlCommand("SELECT * FROM employees ORDER BY name", connection))
@@ -37,7 +36,7 @@ public class EmployeeRepository
     /// <param name="cpf">O CPF do funcionário a ser verificado.</param>
     /// <param name="oldCpf">O CPF antigo do funcionário, usado em operações de atualização.</param>
     /// <returns>True se o CPF não existir ou for o mesmo do CPF antigo, caso contrário, false.</returns>
-    public bool VerifyCpfExistence(string cpf, string oldCpf)
+    public static bool VerifyCpfExistence(string cpf, string oldCpf)
     {
         if (cpf == oldCpf)
         {
@@ -63,7 +62,7 @@ public class EmployeeRepository
     /// <param name="job">Cargo do funcionário.</param>
     /// <param name="address">Endereço do funcionário.</param>
     /// <param name="photo">Foto do funcionário em formato de array de bytes.</param>
-    public void SaveEmployee(string name, string cpf, string phone, string job, string address, byte[] photo)
+    public static void SaveEmployee(string name, string cpf, string phone, string job, string address, byte[] photo)
     {
         using (var connection = ConnectionManager.GetConnection())
         using (var cmd = new MySqlCommand("INSERT INTO employees (name, cpf, phone, job, address, date, photo) VALUES (@name, @cpf, @phone, @job, @address, curDate(), @photo)", connection))
@@ -89,7 +88,7 @@ public class EmployeeRepository
     /// <param name="address">Novo endereço do funcionário.</param>
     /// <param name="photo">Nova foto do funcionário em formato de array de bytes.</param>
     /// <param name="imageChanged">Indica se a imagem foi alterada (true) ou não (false).</param>
-    public void UpdateEmployee(string id, string name, string cpf, string phone, string job, string address, byte[] photo, bool imageChanged)
+    public static void UpdateEmployee(string id, string name, string cpf, string phone, string job, string address, byte[] photo, bool imageChanged)
     {
         using (var connection = ConnectionManager.GetConnection())
         using (var cmd = new MySqlCommand("UPDATE employees SET name = @name, cpf = @cpf, phone = @phone, job = @job, address = @address" +
@@ -115,7 +114,7 @@ public class EmployeeRepository
     /// Exclui um funcionário do banco de dados.
     /// </summary>
     /// <param name="id">ID do funcionário a ser excluído.</param>
-    public void DeleteEmployee(string id)
+    public static void DeleteEmployee(string id)
     {
         using (var connection = ConnectionManager.GetConnection()) // Uso do bloco using para garantir que a conexão será fechada após o uso
         using (var cmd = new MySqlCommand("DELETE FROM employees WHERE id = @id", connection))
@@ -130,7 +129,7 @@ public class EmployeeRepository
     /// </summary>
     /// <param name="name">Nome do cliente a ser buscado.</param>
     /// <returns>Um <c>DataTable</c> contendo os clientes que correspondem ao critério de busca.</returns>
-    public DataTable SearchByName(string name)
+    public static DataTable SearchByName(string name)
     {
         var dt = new DataTable();
         

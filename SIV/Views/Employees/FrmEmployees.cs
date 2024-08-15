@@ -2,40 +2,25 @@
 using System.Windows.Forms;
 using SIV.Controllers;
 using SIV.Core;
+using SIV.Helpers;
 using SIV.Models;
 using SIV.Validators;
 
 namespace SIV.Views.Employees;
 
 /// <summary>
-/// Classe responsável pela gestão de funcionários, permitindo operações como listar, adicionar, editar e excluir funcionários.
+/// Formulário responsável por gerenciar os funcionários do sistema, permitindo a criação, edição e exclusão de funcionários.
 /// </summary>
 public partial class FrmEmployees : Form
 {
-    private readonly EmployeeController _controller;
     private string _image; // Variável para armazenar o caminho da imagem
-    private bool _imageChangedFlag; // Variável para verificar se a imagem foi alterada
-    private string _id;
-    private string _oldCpf; // CPF antigo do funcionário, usado para verificações durante a atualização.
+    private bool _changedImage; // Variável para verificar se a imagem foi alterada
+    private string _selectedEmployeeId;
+    private string _oldCpf;
     
     public FrmEmployees()
     {
         InitializeComponent();
-        _controller = new EmployeeController();
-    }
-    
-    private void LoadEmployees()
-    {
-        try
-        {
-            GridData.DataSource = _controller.GetAllEmployees();
-            FormatGridData();
-        }
-        catch (Exception ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, "carregar funcionários");
-        }
     }
     
     private void FrmEmployees_Load(object sender, EventArgs e)
@@ -43,30 +28,30 @@ public partial class FrmEmployees : Form
         NoPhoto();
         LoadEmployees();
         ConfigureUiControls(false);
-        ListJob();
-        _imageChangedFlag = false; // Variável para verificar se a imagem foi alterada
+        LoadJob();
+        _changedImage = false; // Define a flag para indicar que a imagem não foi alterada
     }
     
-    private void GridData_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+    private void gridData_DoubleClick(object sender, EventArgs e)
     {
-        if (e.RowIndex <= -1) return; // Se o índice da linha for menor ou igual a -1, interrompe a execução
+        if (gridData.SelectedRows.Count <= 0) return; // Verifica se há linhas selecionadas
         
         ConfigureUiControls(true);
         btnSave.Enabled = false;
 
         // Obtém os valores das células da linha selecionada e preenche os campos do formulário
-        _id = GridData.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do funcionário
-        txtName.Text = GridData.CurrentRow?.Cells[1].Value.ToString();
-        txtCpf.Text = GridData.CurrentRow?.Cells[2].Value.ToString();
-        txtPhone.Text = GridData.CurrentRow?.Cells[3].Value.ToString();
-        cbJob.Text = GridData.CurrentRow?.Cells[4].Value.ToString();
-        txtAddress.Text = GridData.CurrentRow?.Cells[5].Value.ToString();
-        _oldCpf = GridData.CurrentRow?.Cells[2].Value.ToString(); // Salva o CPF antigo para verificar se foi alterado
+        _selectedEmployeeId = gridData.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do funcionário
+        txtName.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
+        txtCpf.Text = gridData.CurrentRow?.Cells[2].Value.ToString();
+        txtPhone.Text = gridData.CurrentRow?.Cells[3].Value.ToString();
+        cbJob.Text = gridData.CurrentRow?.Cells[4].Value.ToString();
+        txtAddress.Text = gridData.CurrentRow?.Cells[5].Value.ToString();
+        _oldCpf = gridData.CurrentRow?.Cells[2].Value.ToString(); // Salva o CPF antigo para verificar se foi alterado
 
         // Carrega a foto do funcionário, se disponível
-        if (GridData.CurrentRow?.Cells[7].Value != DBNull.Value)
+        if (gridData.CurrentRow?.Cells[7].Value != DBNull.Value)
         {
-            var photoBytes = (byte[])GridData.CurrentRow?.Cells[7].Value;
+            var photoBytes = (byte[])gridData.CurrentRow?.Cells[7].Value;
             photo.Image = ImageHelper.ConvertByteArrayToImage(photoBytes);
         }
         else // Se não houver foto, exibe a imagem padrão
@@ -81,7 +66,7 @@ public partial class FrmEmployees : Form
         txtName.Focus();
         btnEdit.Enabled = false;
         btnDelete.Enabled = false;
-        GridData.Enabled = false;
+        gridData.Enabled = false;
     }
     
     private void btnCancel_Click(object sender, EventArgs e)
@@ -89,7 +74,7 @@ public partial class FrmEmployees : Form
         NoPhoto();
         ConfigureUiControls(false);
         ClearFields();
-        GridData.Enabled = true;
+        gridData.Enabled = true;
     }
     
     private void btnSave_Click(object sender, EventArgs e)
@@ -99,12 +84,12 @@ public partial class FrmEmployees : Form
     
     private void btnEdit_Click(object sender, EventArgs e)
     {
-        UpdateEmployeeData();
+        UpdateFormData();
     }
     
     private void btnDelete_Click(object sender, EventArgs e)
     {
-        DeleteEmployee();
+        DeleteFormData();
     }
     
     private void btnSearch_Click(object sender, EventArgs e)
@@ -125,7 +110,7 @@ public partial class FrmEmployees : Form
         {
             _image = dialog.FileName;
             photo.Image = ImageHelper.LoadImageFromFile(_image); // Carrega a imagem selecionada no PictureBox
-            _imageChangedFlag = true; // Define a flag para indicar que a imagem foi alterada
+            _changedImage = true; // Define a flag para indicar que a imagem foi alterada
         }
         catch (OutOfMemoryException)
         {
@@ -138,15 +123,112 @@ public partial class FrmEmployees : Form
             MessageHelper.ShowErrorMessage(ex, "carregar imagem");
         }
     }
+    
+    private void SaveFormData()
+    {
+        try
+        {
+            if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
+
+            var cpf = txtCpf.Text;
+            
+            if (!EmployeeController.VerifyCpfExistence(cpf, _oldCpf))
+            {
+                MessageHelper.ShowRegisteredCpfMessage();
+                return; 
+            }
+            
+            var employee = CreateEmployeeFromFormData();
+            EmployeeController.SaveEmployee(employee);
+            
+            UpdateUiAfterSaveOrUpdate();
+            MessageHelper.ShowSaveSuccessMessage();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "salvar");
+        }
+        finally
+        {
+            ConnectionManager.CloseConnection();
+        }
+    }
+    
+    private void UpdateFormData()
+    {
+        try
+        {
+            if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
+            
+            var cpf = txtCpf.Text;
+            
+            if (!EmployeeController.VerifyCpfExistence(cpf, _oldCpf))
+            {
+                MessageHelper.ShowRegisteredCpfMessage();
+                return;
+            }
+            
+            var employee = CreateEmployeeFromFormData();
+            EmployeeController.UpdateEmployee(employee);
+            
+            UpdateUiAfterSaveOrUpdate();
+            MessageHelper.ShowUpdateSuccessMessage();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "atualizar");
+        }
+        finally
+        {
+            ConnectionManager.CloseConnection();
+        }
+    }
+    
+    private void DeleteFormData()
+    {
+        try
+        {
+            if (!MessageHelper.ConfirmDeletion()) return;
+            
+            EmployeeController.DeleteEmployee(_selectedEmployeeId);
+            UpdateUiAfterSaveOrUpdate();
+            MessageHelper.ShowDeleteSuccessMessage();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "excluir");
+        }
+        finally
+        {
+            ConnectionManager.CloseConnection();
+        }
+    }
+    
+    private Employee CreateEmployeeFromFormData()
+    {
+        return new Employee
+        {
+            Id = _selectedEmployeeId,
+            Name = txtName.Text.ToUpper(),
+            Cpf = AddCpfMask(txtCpf.Text),
+            Phone = AddPhoneMask(txtPhone.Text),
+            Job = cbJob.Text.ToUpper(),
+            Address = txtAddress.Text.ToUpper(),
+            Photo = _changedImage ? ImageHelper.ConvertImageToByteArray(photo.Image) : null
+        };
+    }
 
     private void SearchByName()
     {
         try
         {
-            var name = txtSearch.Text;
-            var result = _controller.SearchByName(name);
+            var name = txtSearch.Text.ToUpper();
+            var result = EmployeeController.SearchByName(name);
 
-            GridData.DataSource = result;
+            gridData.DataSource = result;
             FormatGridData();
         }
         catch (Exception ex)
@@ -160,13 +242,49 @@ public partial class FrmEmployees : Form
         }
     }
     
-    private void ListJob()
+    private static string AddCpfMask(string cpf)
+    {
+        if (cpf.Length == 11)
+        {
+            return $"{cpf.Substring(0, 3)}.{cpf.Substring(3, 3)}.{cpf.Substring(6, 3)}-{cpf.Substring(9, 2)}";
+        }
+
+        return cpf;
+    }
+    
+    private static string AddPhoneMask(string phone)
+    {
+        if (phone.Length == 11)
+        {
+            return $"({phone.Substring(0, 2)}) {phone.Substring(2, 5)}-{phone.Substring(7, 4)}";
+        }
+
+        return phone;
+    }
+    
+    private void LoadEmployees()
     {
         try
         {
-            var jobs = new JobController().GetAllJobs();
-            
-            cbJob.DataSource = jobs;
+            gridData.DataSource = EmployeeController.GetAllEmployees();
+            FormatGridData();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "carregar funcionários");
+        }
+        finally
+        {
+            ConnectionManager.CloseConnection();
+        }
+    }
+    
+    private void LoadJob()
+    {
+        try
+        {
+            cbJob.DataSource = JobController.GetAllJobs();
             cbJob.DisplayMember = "Name";
             cbJob.ValueMember = "Id";
         }
@@ -183,16 +301,16 @@ public partial class FrmEmployees : Form
     
     private void FormatGridData()
     {
-        GridData.Columns[0].HeaderText = @"ID";
-        GridData.Columns[1].HeaderText = @"NOME";
-        GridData.Columns[2].HeaderText = @"CPF";
-        GridData.Columns[3].HeaderText = @"TELEFONE";
-        GridData.Columns[4].HeaderText = @"CARGO";
-        GridData.Columns[5].HeaderText = @"ENDEREÇO";
-        GridData.Columns[6].HeaderText = @"DATA";
-        GridData.Columns[7].HeaderText = @"FOTO";
-        GridData.Columns[0].Visible = false;
-        GridData.Columns[7].Visible = false;
+        gridData.Columns[0].HeaderText = @"ID";
+        gridData.Columns[1].HeaderText = @"NOME";
+        gridData.Columns[2].HeaderText = @"CPF";
+        gridData.Columns[3].HeaderText = @"TELEFONE";
+        gridData.Columns[4].HeaderText = @"CARGO";
+        gridData.Columns[5].HeaderText = @"ENDEREÇO";
+        gridData.Columns[6].HeaderText = @"DATA";
+        gridData.Columns[7].HeaderText = @"FOTO";
+        gridData.Columns[0].Visible = false;
+        gridData.Columns[7].Visible = false;
     }
     
     private void ConfigureUiControls(bool enable)
@@ -208,7 +326,7 @@ public partial class FrmEmployees : Form
         txtPhone.Enabled = enable;
         cbJob.Enabled = enable;
         txtAddress.Enabled = enable;
-        GridData.Enabled = !enable;
+        gridData.Enabled = !enable;
     }
     
     private void ClearFields()
@@ -230,11 +348,10 @@ public partial class FrmEmployees : Form
     {
         var validationResult = EmployeeValidator.ValidateEmployee(txtName.Text, txtCpf.Text, txtPhone.Text, cbJob.Text, txtAddress.Text);
 
-        if (string.IsNullOrEmpty(validationResult)) return true; // Se a validação passar, retorna verdadeiro
+        if (string.IsNullOrEmpty(validationResult)) return true;
         
         MessageHelper.ShowValidationMessage(validationResult);
-        
-        return false; // Se a validação falhar, retorna falso 
+        return false;
     }
     
     private void UpdateUiAfterSaveOrUpdate()
@@ -243,107 +360,6 @@ public partial class FrmEmployees : Form
         ClearFields();
         LoadEmployees();
         ConfigureUiControls(false);
-        GridData.Enabled = true;
-    }
-    
-    private void SaveFormData()
-    {
-        try
-        {
-            if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
-
-            var cpf = txtCpf.Text;
-            
-            if (!_controller.VerifyCpfExistence(cpf, _oldCpf))
-            {
-                MessageHelper.ShowRegisteredCpfMessage();
-                return; 
-            }
-            
-            var employee = new Employee
-            {
-                Id = _id,
-                Name = txtName.Text,
-                Cpf = txtCpf.Text,
-                Phone = txtPhone.Text,
-                Job = cbJob.Text,
-                Address = txtAddress.Text,
-                Photo = _imageChangedFlag ? ImageHelper.ConvertImageToByteArray(ImageHelper.LoadImageFromFile(_image)) : null
-            };
-        
-            _controller.SaveEmployee(employee);
-            UpdateUiAfterSaveOrUpdate();
-            MessageHelper.ShowSaveSuccessMessage();
-        }
-        catch (Exception ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, "salvar");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
-        }
-    }
-    
-    private void UpdateEmployeeData()
-    {
-        try
-        {
-            if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
-        
-            var cpf = txtCpf.Text;
-            
-            if (!_controller.VerifyCpfExistence(cpf, _oldCpf))
-            {
-                MessageHelper.ShowRegisteredCpfMessage();
-                return;
-            }
-            
-            var employee = new Employee
-            {
-                Id = _id,
-                Name = txtName.Text,
-                Cpf = txtCpf.Text,
-                Phone = txtPhone.Text,
-                Job = cbJob.Text,
-                Address = txtAddress.Text,
-                Photo = _imageChangedFlag ? ImageHelper.ConvertImageToByteArray(ImageHelper.LoadImageFromFile(_image)) : null
-            };
-
-            _controller.UpdateEmployee(employee);
-            UpdateUiAfterSaveOrUpdate();
-            MessageHelper.ShowUpdateSuccessMessage();
-        }
-        catch (Exception ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, "atualizar");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
-        }
-    }
-    
-    private void DeleteEmployee()
-    {
-        try
-        {
-            if (!MessageHelper.ConfirmDeletion()) return;
-            
-            _controller.DeleteEmployee(_id);
-            UpdateUiAfterSaveOrUpdate();
-            MessageHelper.ShowDeleteSuccessMessage();
-        }
-        catch (Exception ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, "excluir");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
-        }
+        gridData.Enabled = true;
     }
 }

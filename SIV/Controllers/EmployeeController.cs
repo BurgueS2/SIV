@@ -6,40 +6,33 @@ namespace SIV.Controllers;
 
 public class EmployeeController
 {
-    private readonly EmployeeRepository _repository;
-
-    public EmployeeController()
+    public static DataTable GetAllEmployees()
     {
-        _repository = new EmployeeRepository();
+        return EmployeeRepository.GetAllEmployees();
+    }
+
+    public static void SaveEmployee(Employee employee)
+    {
+        EmployeeRepository.SaveEmployee(employee.Name, employee.Cpf, employee.Phone, employee.Job, employee.Address, employee.Photo);
     }
     
-    public DataTable GetAllEmployees()
+    public static void UpdateEmployee(Employee employee)
     {
-        return _repository.GetAllEmployees();
+        EmployeeRepository.UpdateEmployee(employee.Id, employee.Name, employee.Cpf, employee.Phone, employee.Job, employee.Address, employee.Photo, employee.Photo != null);
     }
 
-    public void SaveEmployee(Employee employee)
+    public static void DeleteEmployee(string id)
     {
-        _repository.SaveEmployee(employee.Name, employee.Cpf, employee.Phone, employee.Job, employee.Address, employee.Photo);
+        EmployeeRepository.DeleteEmployee(id);
+    }
+
+    public static bool VerifyCpfExistence(string cpf, string oldCpf)
+    {
+        return EmployeeRepository.VerifyCpfExistence(cpf, oldCpf);
     }
     
-    public void UpdateEmployee(Employee employee)
+    public static DataTable SearchByName(string name)
     {
-        _repository.UpdateEmployee(employee.Id, employee.Name, employee.Cpf, employee.Phone, employee.Job, employee.Address, employee.Photo, employee.Photo != null);
-    }
-
-    public void DeleteEmployee(string id)
-    {
-        _repository.DeleteEmployee(id);
-    }
-
-    public bool VerifyCpfExistence(string cpf, string oldCpf)
-    {
-        return _repository.VerifyCpfExistence(cpf, oldCpf);
-    }
-    
-    public DataTable SearchByName(string name)
-    {
-        return _repository.SearchByName(name);
+        return EmployeeRepository.SearchByName(name);
     }
 }

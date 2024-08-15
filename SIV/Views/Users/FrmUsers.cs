@@ -1,17 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 using SIV.Controllers;
 using SIV.Core;
+using SIV.Helpers;
 using SIV.Models;
 using SIV.Validators;
 
 namespace SIV.Views.Users;
 
+/// <summary>
+/// Formulário responsável por gerenciar os usuários do sistema, permitindo a criação, edição e exclusão de funcionários.
+/// Além disso, é possível visualizar a lista de funcionários cadastrados e suas respectivas informações.
+/// </summary>
 public partial class FrmUsers : Form
 {
-    private readonly UserController _controller = new();
     private string _selectedUserId;
+    
     public FrmUsers()
     {
         InitializeComponent();
@@ -19,8 +25,8 @@ public partial class FrmUsers : Form
     
     private void FrmUsers_Load(object sender, EventArgs e)
     {
-        UserList();
-        ListJob();
+        LoadUser();
+        LoadJob();
         ConfigureUiControls(false);
     }
     
@@ -28,8 +34,6 @@ public partial class FrmUsers : Form
     {
         ClearFields();
         ConfigureUiControls(true);
-
-        // Desabilita controles específicos durante a edição
         btnSave.Enabled = false;
         
         // Obtém os valores das células da linha selecionada e preenche os campos do formulário
@@ -39,18 +43,22 @@ public partial class FrmUsers : Form
         txtRepeatPassword.Text = gridData.CurrentRow?.Cells[2].Value.ToString();
         cbJob.Text = gridData.CurrentRow?.Cells[3].Value.ToString();
         
-        var accessLevel = gridData.CurrentRow?.Cells[4].Value.ToString().ToLower();
-        btnFullAccess.Checked = accessLevel == "full";
-        btnPartialAccess.Checked = accessLevel == "parcial";
+        // Verifica o nível de acesso do usuário
+        var accessLevel = gridData.CurrentRow?.Cells[4].Value.ToString().ToUpper();
+        btnFullAccess.Checked = accessLevel == "FULL";
+        btnPartialAccess.Checked = accessLevel == "PARCIAL";
         
-        // Verifica se o status do funcionário é bloqueado
-        var activeStatus = gridData.CurrentRow?.Cells[5].Value.ToString().ToLower();
-        btnActive.Checked = activeStatus == "ativo";
+        // Verifica se o status do usuário é ativo ou inativo
+        var activeStatus = gridData.CurrentRow?.Cells[5].Value.ToString().ToUpper();
+        btnActive.Checked = activeStatus == "ATIVO";
     }
     
     private void btnNew_Click(object sender, EventArgs e)
     {
+        ClearFields();
         txtName.Focus();
+        btnDelete.Enabled = false;
+        btnEdit.Enabled = false;
         ConfigureUiControls(true);
         gridData.Enabled = false;
     }
@@ -74,7 +82,7 @@ public partial class FrmUsers : Form
 
     private void btnDelete_Click(object sender, EventArgs e)
     {
-        throw new System.NotImplementedException();
+        DeleteFormData();
     }
     
     private void SaveFormData()
@@ -83,44 +91,21 @@ public partial class FrmUsers : Form
         {
             if (!ValidateFormData()) return;
             
-            var name = txtName.Text;
-            var password = txtPassword.Text;
-            var job = cbJob.Text;
-            var accessLevel = btnFullAccess.Checked ? "Full" : btnPartialAccess.Checked ? "Parcial" : "None";
-            var active = btnActive.Checked ? "Ativo" : "Inativo";
-            var permissions = new List<string>();
-
-            if (btnFullAccess.Checked)
-            {
-                permissions.Add("AccessSystem");
-                permissions.Add("ManageCadastres");
-                permissions.Add("ManageCashFlow");
-                permissions.Add("CreateOrders");
-            }
-            else if (btnPartialAccess.Checked)
-            {
-                permissions.Add("AccessSystem");
-                permissions.Add("CreateOrders");
-            }
+            var user = CreateUserFromFormData();
+            UserController.SaveUser(user);
             
-            var user = new User
-            {
-                Name = name,
-                Password = password,
-                Job = job,
-                Access = accessLevel,
-                Active = active,
-                Permissions = permissions
-            };
-            
-            _controller.SaveUser(user);
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowSaveSuccessMessage();
+        }
+        catch (MySqlException ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, $"Erro ao salvar no banco de dados: {ex.Message}");
         }
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, "salvar");
+            MessageHelper.ShowErrorMessage(ex, $"Erro inesperado: {ex.Message}");
         }
         finally
         {
@@ -134,30 +119,21 @@ public partial class FrmUsers : Form
         {
             if (!ValidateFormData()) return;
 
-            var user = new User
-            {
-                Id = _selectedUserId,
-                Name = txtName.Text,
-                Password = txtPassword.Text,
-                Job = cbJob.Text,
-                Access = btnFullAccess.Checked ? "Full" : btnPartialAccess.Checked ? "Parcial" : "None",
-                Active = btnActive.Checked ? "Ativo" : "Inativo",
-                Permissions = btnFullAccess.Checked
-                    ?
-                    new List<string> { "AccessSystem", "ManageCadastres", "ManageCashFlow", "CreateOrders" }
-                    : btnPartialAccess.Checked
-                        ? new List<string> { "AccessSystem", "CreateOrders" }
-                        : new List<string>()
-            };
-
-            _controller.UpdateUser(user);
+            var user = CreateUserFromFormData();
+            UserController.UpdateUser(user);
+            
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowUpdateSuccessMessage();
+        }
+        catch (MySqlException ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, $"Erro ao salvar no banco de dados: {ex.Message}");
         }
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, "atualizar");
+            MessageHelper.ShowErrorMessage(ex, $"Erro inesperado: {ex.Message}");
         }
         finally
         {
@@ -165,11 +141,46 @@ public partial class FrmUsers : Form
         }
     }
     
-    private void UserList()
+    private void DeleteFormData()
     {
         try
         {
-            gridData.DataSource = _controller.GetAllUsers();
+            if (!MessageHelper.ConfirmDeletion()) return;
+            
+            UserController.DeleteUser(_selectedUserId);
+            UpdateUiAfterSaveOrUpdate();
+            MessageHelper.ShowDeleteSuccessMessage();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "deletar");
+        }
+        finally
+        {
+            ConnectionManager.CloseConnection();
+        }
+    }
+    
+    private User CreateUserFromFormData()
+    {
+        return new User
+        {
+            Id = _selectedUserId,
+            Name = txtName.Text.ToUpper().Trim(),
+            Password = txtPassword.Text.Trim(),
+            Job = cbJob.Text.ToUpper(),
+            Access = GetAccessLevel(),
+            Active = btnActive.Checked ? "ATIVO" : "INATIVO",
+            Permissions = GetPermissions()
+        };
+    }
+    
+    private void LoadUser()
+    {
+        try
+        {
+            gridData.DataSource = UserController.GetAllUsers();
             FormatGridData();
         }
         catch (Exception ex)
@@ -183,13 +194,11 @@ public partial class FrmUsers : Form
         }
     }
     
-    private void ListJob()
+    private void LoadJob()
     {
         try
         {
-            var jobs = new JobController().GetAllJobs();
-            
-            cbJob.DataSource = jobs;
+            cbJob.DataSource = JobController.GetAllJobs();
             cbJob.DisplayMember = "Name";
             cbJob.ValueMember = "Id";
         }
@@ -202,6 +211,37 @@ public partial class FrmUsers : Form
         {
             ConnectionManager.CloseConnection();
         }
+    }
+
+    /// <summary>
+    /// Retorna o nível de acesso selecionado no formulário.
+    /// Será utilizado para definir as permissões do usuário, de acordo com o nível de acesso selecionado.
+    /// </summary>
+    private string GetAccessLevel()
+    {
+        if (btnFullAccess.Checked) return "FULL";
+        return btnPartialAccess.Checked ? "PARCIAL" : "SEM ACESSO"; // Se nenhum dos dois estiver marcado, retorna "SEM ACESSO"
+    }
+
+    /// <summary>
+    /// Retorna a lista de permissões de acordo com o nível de acesso selecionado.
+    /// </summary>
+    /// <example>Se o nível de acesso for "FULL", retorna todas as permissões disponíveis.</example>
+    /// <example>Se o nível de acesso for "PARCIAL", retorna apenas as permissões de acesso ao sistema e criação de pedidos.</example>
+    /// <returns>Se nenhum dos dois estiver marcado, retorna uma lista vazia.</returns>
+    private List<string> GetPermissions()
+    {
+        if (btnFullAccess.Checked)
+        {
+            return new List<string> { "AccessSystem", "ManageCadastres", "ManageCashFlow", "CreateOrders" };
+        }
+        
+        if (btnPartialAccess.Checked)
+        {
+            return new List<string> { "AccessSystem", "CreateOrders" };
+        }
+        
+        return []; // Se nenhum dos dois estiver marcado, retorna uma lista vazia
     }
     
     private void FormatGridData()
@@ -245,7 +285,7 @@ public partial class FrmUsers : Form
     private void UpdateUiAfterSaveOrUpdate()
     {
         ClearFields();
-        UserList();
+        LoadUser();
         ConfigureUiControls(false);
         gridData.Enabled = true;
     }
@@ -254,9 +294,9 @@ public partial class FrmUsers : Form
     {
         var validationResult = UserValidator.ValidateUser(txtName.Text, txtPassword.Text, txtRepeatPassword.Text, cbJob.Text);
         
-        if (string.IsNullOrEmpty(validationResult)) return true; // Se a validação passar, retorna verdadeiro
+        if (string.IsNullOrEmpty(validationResult)) return true;
         
         MessageHelper.ShowValidationMessage(validationResult);
-        return false; // Se a validação falhar, retorna falso 
+        return false;
     }
 }

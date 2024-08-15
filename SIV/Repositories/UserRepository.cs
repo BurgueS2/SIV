@@ -8,9 +8,16 @@ using SIV.Models;
 
 namespace SIV.Repositories;
 
+/// <summary>
+/// A classe é responsável por realizar operações de CRUD (Create, Read, Update, Delete) no banco de dados para a entidade User.
+/// </summary>
 public class UserRepository
 {
-    public DataTable GetAllUsers()
+    /// <summary>
+    /// Obtém todos os usuários do banco de dados.
+    /// </summary>
+    /// <returns>Um DataTable contendo todos os usuários.</returns>
+    public static DataTable GetAllUsers()
     {
         var dt = new DataTable();
         using (var connection = ConnectionManager.GetConnection())
@@ -23,7 +30,16 @@ public class UserRepository
         return dt;
     }
     
-    public void SaveUser(string name, string password, string job, string access, string active, List<string> permissions)
+    /// <summary>
+    /// Salva um novo usuário no banco de dados.
+    /// </summary>
+    /// <param name="name">Nome do usuário.</param>
+    /// <param name="password">Senha do usuário.</param>
+    /// <param name="job">Cargo do usuário.</param>
+    /// <param name="access">Nível de acesso do usuário.</param>
+    /// <param name="active">Status de atividade do usuário.</param>
+    /// <param name="permissions">Lista de permissões do usuário.</param>
+    public static void SaveUser(string name, string password, string job, string access, string active, List<string> permissions)
     {
         using (var connection = ConnectionManager.GetConnection())
         using (var cmd = new MySqlCommand("INSERT INTO users (name, password, job, access, active, permissions) VALUES (@name, @password, @job, @access, @active, @permissions)", connection))
@@ -39,7 +55,7 @@ public class UserRepository
         }
     }
     
-    public void UpdateUser(string id, string name, string password, string job, string access, string active, List<string> permissions)
+    public static void UpdateUser(string id, string name, string password, string job, string access, string active, List<string> permissions)
     {
         using (var connection = ConnectionManager.GetConnection())
         using (var cmd = new MySqlCommand("UPDATE users SET name = @name, password = @password, job = @job, access = @access, active = @active, permissions = @permissions WHERE id = @id", connection))
@@ -56,7 +72,7 @@ public class UserRepository
         }
     }
     
-    public void DeleteUser(string id)
+    public static void DeleteUser(string id)
     {
         using (var connection = ConnectionManager.GetConnection())
         using (var cmd = new MySqlCommand("DELETE FROM users WHERE id = @id", connection))
@@ -66,7 +82,13 @@ public class UserRepository
         }
     }
     
-    public User UserPermition(string name, string password)
+    /// <summary>
+    /// Obtém as permissões de um usuário com base no nome e senha.
+    /// </summary>
+    /// <param name="name">Nome do usuário.</param>
+    /// <param name="password">Senha do usuário.</param>
+    /// <returns>Um objeto User contendo as permissões do usuário, ou null se o usuário não existir.</returns>
+    public static User UserPermission(string name, string password)
     {
         using (var connection = ConnectionManager.GetConnection())
         using (var cmd = new MySqlCommand("SELECT id, name, password, job, access, active, permissions FROM users WHERE name = @name AND password = @password", connection))
@@ -95,7 +117,13 @@ public class UserRepository
         return null; // Retorna null se o usuário não existir
     }
     
-    public bool VerifyUserExistence(string user ,string password)
+    /// <summary>
+    /// Verifica se um usuário existe no banco de dados com base no nome e senha.
+    /// </summary>
+    /// <param name="user">Nome do usuário.</param>
+    /// <param name="password">Senha do usuário.</param>
+    /// <returns>True se o usuário existir, caso contrário, false.</returns>
+    public static bool VerifyUserExistence(string user ,string password)
     {
         using (var connection = ConnectionManager.GetConnection())
         using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM users WHERE user = @user AND password = @password", connection))

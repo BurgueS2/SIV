@@ -243,6 +243,7 @@
       <Content Include="Resources\icons8_grupo_de_fundo_selecionado_48.png" />
       <Content Include="Resources\icons8_grupo_de_fundo_selecionado_96.png" />
       <Content Include="Resources\icons8_localizar_e_substituir_26.png" />
+      <Content Include="Resources\icons_abrir_painel.png" />
       <Content Include="Resources\icons_cadastro_funcionario.png" />
       <Content Include="Resources\icons_caixa.png" />
       <Content Include="Resources\icons_cliente.png" />
@@ -250,11 +251,15 @@
       <Content Include="Resources\icons_closed.png" />
       <Content Include="Resources\icons_comanda.png" />
       <Content Include="Resources\icons_configuração.png" />
+      <Content Include="Resources\icons_editar_produto.png" />
+      <Content Include="Resources\icons_endereco.png" />
       <Content Include="Resources\icons_exit.png" />
       <Content Include="Resources\icons_fornecedor.png" />
+      <Content Include="Resources\icons_fornecedor1.png" />
       <Content Include="Resources\icons_funcionário.png" />
       <Content Include="Resources\icons_mesa.png" />
       <Content Include="Resources\icons_mesa_de_restaurante.png" />
+      <Content Include="Resources\icons_pagamento.png" />
       <Content Include="Resources\icons_pesquisar.png" />
       <Content Include="Resources\icons_produto.png" />
       <Content Include="Resources\icons_relatorio.png" />

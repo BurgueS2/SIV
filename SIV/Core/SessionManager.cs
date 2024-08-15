@@ -1,8 +1,11 @@
 ﻿using SIV.Models;
 
-namespace SIV;
+namespace SIV.Core;
 
-public class SessionManager
+/// <summary>
+/// Classe responsável por gerenciar a sessão do usuário logado.
+/// </summary>
+public abstract class SessionManager
 {
     // Propriedade para armazenar o usuário logado
     public static User CurrentUser { get; private set; }

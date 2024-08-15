@@ -140,4 +140,19 @@
   <data name="icons_pesquisar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons_pesquisar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons_abrir_painel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons_abrir_painel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_editar_produto" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons_editar_produto.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_fornecedor1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons_fornecedor1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_endereco" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons_endereco.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_pagamento" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons_pagamento.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

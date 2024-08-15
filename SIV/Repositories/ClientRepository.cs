@@ -15,7 +15,7 @@ public class ClientRepository
     /// Obtém todos os clientes do banco de dados.
     /// </summary>
     /// <returns>Um <c>DataTable</c> contendo todos os clientes.</returns>
-    public DataTable GetAllClients()
+    public static DataTable GetAllClients()
     {
         var dt = new DataTable();
         
@@ -24,7 +24,7 @@ public class ClientRepository
         {
             using (var adapter = new MySqlDataAdapter(cmd))
             {
-                adapter.Fill(dt); // Preenche o DataTable com os dados retornados da consulta
+                adapter.Fill(dt);
             }
         }
 
@@ -37,7 +37,7 @@ public class ClientRepository
     /// <param name="cpf">O CPF a ser verificado.</param>
     /// <param name="oldCpf">O CPF antigo do cliente, usado em operações de atualização.</param>
     /// <returns>True se o CPF não existir ou for o mesmo do CPF antigo, caso contrário, false.</returns>
-    public bool VerifyCpfExistence(string cpf, string oldCpf)
+    public static bool VerifyCpfExistence(string cpf, string oldCpf)
     {
         if (cpf == oldCpf)
         {
@@ -57,28 +57,30 @@ public class ClientRepository
     /// <summary>
     /// Salva um novo cliente no banco de dados.
     /// </summary>
-    /// <param name="code">Código do cliente.</param>
     /// <param name="name">Nome do cliente.</param>
     /// <param name="cpf">CPF do cliente.</param>
-    /// <param name="openAmount">Quantia em aberto do cliente.</param>
     /// <param name="status">Status do cliente (ativo/inativo).</param>
     /// <param name="phone">Telefone do cliente.</param>
     /// <param name="email">Email do cliente.</param>
     /// <param name="address">Endereço do cliente.</param>
-    public void SaveClient(string code, string name, string cpf,string openAmount, bool status, string phone, string email, string address)
+    /// <param name="referencePoint">Ponto de referencia para o Endereço</param>
+    /// <param name="observation">Campo de observação</param>
+    /// <param name="sex">Sexo do cliente</param>
+    public static void SaveClient(string name, string cpf, string status, string phone, string email, string address, string referencePoint, string observation, string sex)
     {
         using (var connection = ConnectionManager.GetConnection())
-        using (var cmd = new MySqlCommand("INSERT INTO clients (code, name, cpf, openAmount, status, phone, email, address, date) " + 
-            "VALUES (@code, @name, @cpf,@openAmount, @status, @phone, @email, @address, curDate())", connection))
+        using (var cmd = new MySqlCommand("INSERT INTO clients (name, cpf, status, phone, email, address, reference_point, observation, sex, date) " + 
+            "VALUES (@name, @cpf, @status, @phone, @email, @address, @reference_point, @observation, sex, curDate())", connection))
         {
-            cmd.Parameters.AddWithValue("@code", code);
             cmd.Parameters.AddWithValue("@name", name);
             cmd.Parameters.AddWithValue("@cpf", cpf);
-            cmd.Parameters.AddWithValue("@openAmount", openAmount);
             cmd.Parameters.AddWithValue("@status", status);
             cmd.Parameters.AddWithValue("@phone", phone);
             cmd.Parameters.AddWithValue("@email", email);
             cmd.Parameters.AddWithValue("@address", address);
+            cmd.Parameters.AddWithValue("@reference_point", referencePoint);
+            cmd.Parameters.AddWithValue("@observation", observation);
+            cmd.Parameters.AddWithValue("@sex", sex);
             cmd.ExecuteNonQuery();
         }
     }
@@ -86,27 +88,22 @@ public class ClientRepository
     /// <summary>
     /// Atualiza os dados de um cliente existente no banco de dados.
     /// </summary>
-    /// <param name="id">ID do cliente a ser atualizado.</param>
-    /// <param name="name">Novo nome do cliente.</param>
-    /// <param name="cpf">Novo CPF do cliente.</param>
-    /// <param name="openAmount">Nova quantia em aberto do cliente.</param>
-    /// <param name="status">Novo status do cliente (ativo/inativo).</param>
-    /// <param name="phone">Novo telefone do cliente.</param>
-    /// <param name="email">Novo email do cliente.</param>
-    /// <param name="address">Novo endereço do cliente.</param>
-    public void UpdateClient(string id , string name, string cpf,string openAmount, bool status, string phone, string email, string address)
+    public static void UpdateClient(string id , string name, string cpf, string status, string phone, string email, string address, string referencePoint, string observation, string sex)
     {
         using (var connection = ConnectionManager.GetConnection())
-        using (var cmd = new MySqlCommand("UPDATE clients SET  name = @name, cpf = @cpf, openAmount = @openAmount, status = @status, phone = @phone, email = @email, address = @address WHERE id = @id", connection))
+        using (var cmd = new MySqlCommand("UPDATE clients SET  name = @name, cpf = @cpf, status = @status, phone = @phone, email = @email, address = @address, " +
+            "reference_point = @reference_point, observation = @observation , sex = @sex WHERE id = @id", connection))
         {
             cmd.Parameters.AddWithValue("@id", id);
             cmd.Parameters.AddWithValue("@name", name);
             cmd.Parameters.AddWithValue("@cpf", cpf);
-            cmd.Parameters.AddWithValue("@openAmount", openAmount);
             cmd.Parameters.AddWithValue("@status", status);
             cmd.Parameters.AddWithValue("@phone", phone);
             cmd.Parameters.AddWithValue("@email", email);
             cmd.Parameters.AddWithValue("@address", address);
+            cmd.Parameters.AddWithValue("@reference_point", referencePoint);
+            cmd.Parameters.AddWithValue("@observation", observation);
+            cmd.Parameters.AddWithValue("@sex", sex);
             cmd.ExecuteNonQuery();
         }
     }
@@ -114,8 +111,7 @@ public class ClientRepository
     /// <summary>
     /// Exclui um cliente do banco de dados.
     /// </summary>
-    /// <param name="id">ID do cliente a ser excluído.</param>
-    public void DeleteClient(string id)
+    public static void DeleteClient(string id)
     {
         using (var connection = ConnectionManager.GetConnection()) // Uso do bloco using para garantir que a conexão será fechada após o uso
         using (var cmd = new MySqlCommand("DELETE FROM clients WHERE id = @id", connection))
@@ -130,7 +126,7 @@ public class ClientRepository
     /// </summary>
     /// <param name="name">Nome do cliente a ser buscado.</param>
     /// <returns>Um <c>DataTable</c> contendo os clientes que correspondem ao critério de busca.</returns>
-    public DataTable SearchByName(string name)
+    public static DataTable SearchByName(string name)
     {
         var dt = new DataTable();
         
@@ -152,7 +148,7 @@ public class ClientRepository
     /// </summary>
     /// <param name="cpf">CPF do cliente a ser buscado.</param>
     /// <returns>Um <c>DataTable</c> contendo os clientes que correspondem ao critério de busca.</returns>
-    public DataTable SearchByCpf(string cpf)
+    public static DataTable SearchByCpf(string cpf)
     {
         var dt = new DataTable();
         
@@ -174,7 +170,7 @@ public class ClientRepository
     /// </summary>
     /// <param name="email">O email a ser verificado.</param>
     /// <returns>True se o email já existir, caso contrário, false.</returns>
-    public bool VerifyEmailExisting(string email)
+    public static bool VerifyEmailExisting(string email)
     {
         using (var connection = ConnectionManager.GetConnection())
         using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM clients WHERE LOWER(email) = LOWER(@email)", connection))

@@ -223,7 +223,7 @@
             // 
             resources.ApplyResources(this.btnExitDisplay, "btnExitDisplay");
             this.btnExitDisplay.FlatAppearance.BorderSize = 0;
-            this.btnExitDisplay.Image = global::SIV.Properties.Resources.icons_close;
+            this.btnExitDisplay.Image = global::SIV.Properties.Resources.icons_abrir_painel;
             this.btnExitDisplay.Name = "btnExitDisplay";
             this.btnExitDisplay.UseVisualStyleBackColor = true;
             this.btnExitDisplay.Click += new System.EventHandler(this.btnExitDisplay_Click);

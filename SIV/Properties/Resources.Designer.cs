@@ -62,6 +62,16 @@ namespace SIV.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons_abrir_painel {
+            get {
+                object obj = ResourceManager.GetObject("icons_abrir_painel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons_cadastro_funcionario {
             get {
                 object obj = ResourceManager.GetObject("icons_cadastro_funcionario", resourceCulture);
@@ -132,6 +142,26 @@ namespace SIV.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons_editar_produto {
+            get {
+                object obj = ResourceManager.GetObject("icons_editar_produto", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons_endereco {
+            get {
+                object obj = ResourceManager.GetObject("icons_endereco", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons_exit {
             get {
                 object obj = ResourceManager.GetObject("icons_exit", resourceCulture);
@@ -145,6 +175,16 @@ namespace SIV.Properties {
         internal static System.Drawing.Bitmap icons_fornecedor {
             get {
                 object obj = ResourceManager.GetObject("icons_fornecedor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons_fornecedor1 {
+            get {
+                object obj = ResourceManager.GetObject("icons_fornecedor1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -175,6 +215,16 @@ namespace SIV.Properties {
         internal static System.Drawing.Bitmap icons_mesa_de_restaurante {
             get {
                 object obj = ResourceManager.GetObject("icons_mesa_de_restaurante", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons_pagamento {
+            get {
+                object obj = ResourceManager.GetObject("icons_pagamento", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

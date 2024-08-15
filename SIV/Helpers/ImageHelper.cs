@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.IO;
 
-namespace SIV.Core;
+namespace SIV.Helpers;
 
 /// <summary>
 /// A classe oferece funcionalidades para trabalhar com imagens, facilitando o carregamento e a conversão de imagens para arrays de bytes.

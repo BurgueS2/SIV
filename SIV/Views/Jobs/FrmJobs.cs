@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 using SIV.Controllers;
 using SIV.Core;
+using SIV.Helpers;
 using SIV.Models;
-using SIV.Repositories;
 
 namespace SIV.Views.Jobs;
 
@@ -13,13 +14,11 @@ namespace SIV.Views.Jobs;
 /// </summary>
 public partial class FrmJobs : Form
 {
-    private readonly JobController _controller;
-    private string _id;
+    private string _selectedJobId;
     
     public FrmJobs()
     {
         InitializeComponent();
-        _controller = new JobController();
     }
     
     private void FrmJobs_Load(object sender, EventArgs e)
@@ -28,17 +27,18 @@ public partial class FrmJobs : Form
         LoadJobs();
         btnNew.Enabled = true;
         gridData.Columns[1].HeaderText = @"NOME";
+        gridData.Columns[2].HeaderText = @"DATA DE CADASTRO";
     }
     
     private void gridData_DoubleClick(object sender, EventArgs e)
     {
-        if (gridData.SelectedRows.Count <= 0) return; // Se não houver linhas selecionadas, não faz nada
+        if (gridData.SelectedRows.Count <= 0) return; // Verifica se há linhas selecionadas
         
-        ConfigureUiControls(true); // Habilita os campos do formulário
+        ConfigureUiControls(true);
         btnSave.Enabled = false;
         
         // Preenche o campo de texto com o nome do cargo selecionado
-        _id = gridData.SelectedRows[0].Cells[0].Value.ToString();
+        _selectedJobId = gridData.SelectedRows[0].Cells[0].Value.ToString();
         txtName.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
     }
 
@@ -60,20 +60,20 @@ public partial class FrmJobs : Form
 
     private void btnSave_Click(object sender, EventArgs e)
     {
-        SaveJob();
+        SaveFormData();
     }
 
     private void btnEdit_Click(object sender, EventArgs e)
     {
-        UpdateJob();
+        UpdateFormData();
     }
 
     private void btnDelete_Click(object sender, EventArgs e)
     {
-        DeleteJob();
+        DeleteFormData();
     }
     
-    private void SaveJob()
+    private void SaveFormData()
     {
         try
         {
@@ -85,20 +85,25 @@ public partial class FrmJobs : Form
                 return;
             }
         
-            if (_controller.JobExists(txtName.Text))
+            if (JobController.JobExists(txtName.Text))
             {
                 MessageHelper.ShowJobExistMessage(newJob.Name);
-                return; // Se o cargo já existe, não é possível salvar
+                return;
             }
             
-            _controller.SaveJob(newJob);
+            JobController.SaveJob(newJob);
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowSaveSuccessMessage();
         }
+        catch (MySqlException ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, $"Erro ao salvar no banco de dados: {ex.Message}");
+        }
         catch (Exception ex)
         {
-            Logger.LogException(ex); // Registra a exceção no arquivo de log
-            MessageHelper.ShowErrorMessage(ex, "salvar");
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, $"Erro inesperado: {ex.Message}");
         }
         finally
         {
@@ -106,26 +111,31 @@ public partial class FrmJobs : Form
         }
     }
     
-    private void UpdateJob()
+    private void UpdateFormData()
     {
         try
         {
-            if (string.IsNullOrWhiteSpace(_id))
+            if (string.IsNullOrWhiteSpace(_selectedJobId))
             {
                 MessageHelper.ShowMessageJob("editar");
                 return;
             }
             
-            var job = new Job { Id = _id, Name = txtName.Text };
+            var job = new Job { Id = _selectedJobId, Name = txtName.Text };
+            JobController.UpdateJob(job);
             
-            _controller.UpdateJob(job);
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowUpdateSuccessMessage();
+        }
+        catch (MySqlException ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, $"Erro ao salvar no banco de dados: {ex.Message}");
         }
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, "atualizar");
+            MessageHelper.ShowErrorMessage(ex, $"Erro inesperado: {ex.Message}");
         }
         finally
         {
@@ -133,11 +143,11 @@ public partial class FrmJobs : Form
         }
     }
     
-    private void DeleteJob()
+    private void DeleteFormData()
     {
         try
         {
-            if (string.IsNullOrWhiteSpace(_id))
+            if (string.IsNullOrWhiteSpace(_selectedJobId))
             {
                 MessageHelper.ShowMessageJob("excluir");
                 return;
@@ -145,7 +155,7 @@ public partial class FrmJobs : Form
 
             if (!MessageHelper.ConfirmDeletion()) return;
             
-            _controller.DeleteJob(_id);
+            JobController.DeleteJob(_selectedJobId);
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowDeleteSuccessMessage();
         }
@@ -162,8 +172,20 @@ public partial class FrmJobs : Form
     
     private void LoadJobs()
     {
-        gridData.DataSource = _controller.GetAllJobs();
-        gridData.Columns[0].Visible = false;
+        try
+        {
+            gridData.DataSource = JobController.GetAllJobs();
+            gridData.Columns[0].Visible = false;
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "carregar");
+        }
+        finally
+        {
+            ConnectionManager.CloseConnection();
+        }
     }
     
     private void ConfigureUiControls(bool enable)
@@ -180,7 +202,7 @@ public partial class FrmJobs : Form
     private void UpdateUiAfterSaveOrUpdate()
     {
         txtName.Clear();
-        LoadJobs(); // Atualiza a lista de cargos
+        LoadJobs();
         ConfigureUiControls(false);
         gridData.Enabled = true;
     }

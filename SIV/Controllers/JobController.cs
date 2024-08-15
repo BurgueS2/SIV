@@ -6,35 +6,28 @@ namespace SIV.Controllers;
 
 public class JobController
 {
-    private readonly JobRepository _repository;
-
-    public JobController()
+    public static DataTable GetAllJobs()
     {
-        _repository = new JobRepository();
+        return JobRepository.GetAllJobs();
     }
 
-    public DataTable GetAllJobs()
+    public static void SaveJob(Job job)
     {
-        return _repository.GetAllJobs();
+        JobRepository.SaveJob(job.Name);
     }
 
-    public void SaveJob(Job job)
+    public static void UpdateJob(Job job)
     {
-        _repository.SaveJob(job.Name);
+        JobRepository.UpdateJob(job.Id, job.Name);
     }
 
-    public void UpdateJob(Job job)
+    public static void DeleteJob(string id)
     {
-        _repository.UpdateJob(job.Id, job.Name);
+        JobRepository.DeleteJob(id);
     }
 
-    public void DeleteJob(string id)
+    public static bool JobExists(string name)
     {
-        _repository.DeleteJob(id);
-    }
-
-    public bool JobExists(string name)
-    {
-        return _repository.JobExists(name);
+        return JobRepository.JobExists(name);
     }
 }

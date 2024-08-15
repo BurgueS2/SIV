@@ -3,17 +3,21 @@ using System.Drawing;
 
 namespace SIV.Helpers;
 
+/// <summary>
+/// Classe abstrata que define os temas de cores do sistema.
+/// </summary>
 public abstract class ColorThemes
 {
     public static Color PrimaryColor { get; set; }
     
+    // Lista de cores para os temas do sistema
     public static readonly List<string> ColorList =
     [
         "#C4EEF2",
         "#B0D5D9",
         "#8BD9D9"
     ];
-
+    
     public static Color ChangeBrightness(Color color, double correctionFactor)
     {
         double red = color.R;
