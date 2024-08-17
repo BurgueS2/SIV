@@ -6,6 +6,7 @@ using SIV.Helpers;
 using SIV.Views.Clients;
 using SIV.Views.Employees;
 using SIV.Views.Jobs;
+using SIV.Views.Payments;
 using SIV.Views.Users;
 
 namespace SIV.Views.Registers;
@@ -63,7 +64,7 @@ public partial class FrmRegisters : Form
 
     private void btnPayment_Click(object sender, EventArgs e)
     {
-        //throw new System.NotImplementedException();
+        OpenDisplayForm(new FrmPayments(), sender);
     }
     
     private void OpenDisplayForm(Form dashboard, object senderButton)

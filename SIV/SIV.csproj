@@ -177,6 +177,12 @@
         <Compile Include="Views\Login\FrmLogin.Designer.cs">
           <DependentUpon>FrmLogin.cs</DependentUpon>
         </Compile>
+        <Compile Include="Views\Payments\FrmPayments.cs">
+          <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="Views\Payments\FrmPayments.Designer.cs">
+          <DependentUpon>FrmPayments.cs</DependentUpon>
+        </Compile>
         <Compile Include="Views\Registers\FrmRegisters.cs">
           <SubType>Form</SubType>
         </Compile>
@@ -215,6 +221,9 @@
         </EmbeddedResource>
         <EmbeddedResource Include="Views\Login\FrmLogin.resx">
           <DependentUpon>FrmLogin.cs</DependentUpon>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Views\Payments\FrmPayments.resx">
+          <DependentUpon>FrmPayments.cs</DependentUpon>
         </EmbeddedResource>
         <EmbeddedResource Include="Views\Registers\FrmRegisters.resx">
           <DependentUpon>FrmRegisters.cs</DependentUpon>
