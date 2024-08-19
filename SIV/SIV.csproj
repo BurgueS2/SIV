@@ -189,6 +189,12 @@
         <Compile Include="Views\Registers\FrmRegisters.Designer.cs">
           <DependentUpon>FrmRegisters.cs</DependentUpon>
         </Compile>
+        <Compile Include="Views\Sales\FrmSalas.cs">
+          <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="Views\Sales\FrmSalas.Designer.cs">
+          <DependentUpon>FrmSalas.cs</DependentUpon>
+        </Compile>
         <Compile Include="Views\Users\FrmUsers.cs">
           <SubType>Form</SubType>
         </Compile>
@@ -227,6 +233,9 @@
         </EmbeddedResource>
         <EmbeddedResource Include="Views\Registers\FrmRegisters.resx">
           <DependentUpon>FrmRegisters.cs</DependentUpon>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Views\Sales\FrmSalas.resx">
+          <DependentUpon>FrmSalas.cs</DependentUpon>
         </EmbeddedResource>
         <EmbeddedResource Include="Views\Users\FrmUsers.resx">
           <DependentUpon>FrmUsers.cs</DependentUpon>
