@@ -170,7 +170,7 @@ partial class FrmSalas
         this.guna2Panel1.Controls.Add(this.guna2HtmlLabel1);
         this.guna2Panel1.Controls.Add(this.guna2TextBox1);
         this.guna2Panel1.CustomizableEdges = customizableEdges9;
-        this.guna2Panel1.Location = new System.Drawing.Point(271, 39);
+        this.guna2Panel1.Location = new System.Drawing.Point(271, 12);
         this.guna2Panel1.Name = "guna2Panel1";
         this.guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges10;
         this.guna2Panel1.Size = new System.Drawing.Size(481, 233);
@@ -414,10 +414,10 @@ partial class FrmSalas
         this.guna2Panel2.Controls.Add(this.guna2Button10);
         this.guna2Panel2.Controls.Add(this.guna2Button7);
         this.guna2Panel2.CustomizableEdges = customizableEdges45;
-        this.guna2Panel2.Location = new System.Drawing.Point(271, 278);
+        this.guna2Panel2.Location = new System.Drawing.Point(271, 251);
         this.guna2Panel2.Name = "guna2Panel2";
         this.guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges46;
-        this.guna2Panel2.Size = new System.Drawing.Size(481, 430);
+        this.guna2Panel2.Size = new System.Drawing.Size(481, 440);
         this.guna2Panel2.TabIndex = 1;
         // 
         // guna2Button14
@@ -820,10 +820,10 @@ partial class FrmSalas
         this.guna2Panel3.Controls.Add(this.gridData);
         this.guna2Panel3.Controls.Add(this.guna2HtmlLabel11);
         this.guna2Panel3.CustomizableEdges = customizableEdges47;
-        this.guna2Panel3.Location = new System.Drawing.Point(764, 39);
+        this.guna2Panel3.Location = new System.Drawing.Point(764, 12);
         this.guna2Panel3.Name = "guna2Panel3";
         this.guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges48;
-        this.guna2Panel3.Size = new System.Drawing.Size(304, 669);
+        this.guna2Panel3.Size = new System.Drawing.Size(304, 679);
         this.guna2Panel3.TabIndex = 2;
         // 
         // gridData
@@ -856,7 +856,7 @@ partial class FrmSalas
         this.gridData.Name = "gridData";
         this.gridData.ReadOnly = true;
         this.gridData.RowHeadersVisible = false;
-        this.gridData.Size = new System.Drawing.Size(298, 337);
+        this.gridData.Size = new System.Drawing.Size(298, 347);
         this.gridData.TabIndex = 22;
         this.gridData.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Cyan;
         this.gridData.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
@@ -1040,7 +1040,7 @@ partial class FrmSalas
         this.guna2CirclePictureBox1.Image = global::SIV.Properties.Resources.icons_user;
         this.guna2CirclePictureBox1.ImageRotate = 0F;
         this.guna2CirclePictureBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-        this.guna2CirclePictureBox1.Location = new System.Drawing.Point(78, 20);
+        this.guna2CirclePictureBox1.Location = new System.Drawing.Point(84, 20);
         this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
         this.guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges53;
         this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;

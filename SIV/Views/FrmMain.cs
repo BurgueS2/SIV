@@ -9,6 +9,7 @@ using SIV.Models;
 using SIV.Views.Login;
 using SIV.Views.Registers;
 using SIV.Views.Sales;
+using SIV.Views.Sales.Tables;
 
 namespace SIV.Views;
 
@@ -34,7 +35,7 @@ public partial class FrmMain : Form
     
     private void btnTables_Click(object sender, EventArgs e)
     {
-        HandleButtonClick(sender);
+        OpenDisplayForm(new FrmTables(), sender);
     }
 
     private void btnCashFlow_Click(object sender, EventArgs e)
