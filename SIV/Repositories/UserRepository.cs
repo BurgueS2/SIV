@@ -135,4 +135,28 @@ public class UserRepository
             return result > 0; // Se result for maior que 0, significa que o usuário existe
         }
     }
+    
+    public static User GetUserByNameApproximate(string userName)
+    {
+        using (var connection = ConnectionManager.GetConnection())
+        {
+            using (var cmd = new MySqlCommand("SELECT * FROM users WHERE name LIKE @name", connection))
+            {
+                cmd.Parameters.AddWithValue("@name", "%" + userName + "%");
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return new User
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("id")).ToString(),
+                            Name = reader.GetString(reader.GetOrdinal("name")),
+                            // Map other fields as needed
+                        };
+                    }
+                }
+            }
+        }
+        return null;
+    }
 }

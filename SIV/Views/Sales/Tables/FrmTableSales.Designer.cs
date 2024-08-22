@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace SIV.Views.Sales;
+namespace SIV.Views.Sales.Tables;
 
 partial class FrmTableSales
 {
@@ -84,14 +84,12 @@ partial class FrmTableSales
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges45 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges46 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         this.panelReleasedItems = new Guna.UI2.WinForms.Guna2Panel();
+        this.labelTotalValue = new Guna.UI2.WinForms.Guna2HtmlLabel();
+        this.labelValue = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.gridData = new Guna.UI2.WinForms.Guna2DataGridView();
-        this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
         this.labelReleasedItems = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.panelLaunch = new Guna.UI2.WinForms.Guna2Panel();
+        this.labelNameProduct = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.labelLaunch = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.btnBackspace = new Guna.UI2.WinForms.Guna2Button();
         this.numericAmount = new Guna.UI2.WinForms.Guna2NumericUpDown();
@@ -115,12 +113,12 @@ partial class FrmTableSales
         this.btn6 = new Guna.UI2.WinForms.Guna2Button();
         this.panelSalesData = new Guna.UI2.WinForms.Guna2Panel();
         this.btnSearchUser = new Guna.UI2.WinForms.Guna2Button();
-        this.stayHoursBar = new Guna.UI2.WinForms.Guna2HtmlLabel();
+        this.labelStayHours = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.txtSearchUser = new Guna.UI2.WinForms.Guna2TextBox();
-        this.dateStatusBar = new Guna.UI2.WinForms.Guna2HtmlLabel();
+        this.labelDateStatus = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.labelPermanence = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.labelDate = new Guna.UI2.WinForms.Guna2HtmlLabel();
-        this.timeStatusBar = new Guna.UI2.WinForms.Guna2HtmlLabel();
+        this.labelTimeStatus = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.labelEntry = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.labelWaiter = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.txtClient = new Guna.UI2.WinForms.Guna2TextBox();
@@ -142,6 +140,8 @@ partial class FrmTableSales
         this.panelReleasedItems.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
         this.panelReleasedItems.BorderRadius = 15;
         this.panelReleasedItems.BorderThickness = 1;
+        this.panelReleasedItems.Controls.Add(this.labelTotalValue);
+        this.panelReleasedItems.Controls.Add(this.labelValue);
         this.panelReleasedItems.Controls.Add(this.gridData);
         this.panelReleasedItems.Controls.Add(this.labelReleasedItems);
         this.panelReleasedItems.CustomizableEdges = customizableEdges1;
@@ -150,6 +150,30 @@ partial class FrmTableSales
         this.panelReleasedItems.ShadowDecoration.CustomizableEdges = customizableEdges2;
         this.panelReleasedItems.Size = new System.Drawing.Size(541, 683);
         this.panelReleasedItems.TabIndex = 5;
+        // 
+        // labelTotalValue
+        // 
+        this.labelTotalValue.AutoSize = false;
+        this.labelTotalValue.BackColor = System.Drawing.Color.Transparent;
+        this.labelTotalValue.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelTotalValue.Location = new System.Drawing.Point(280, 632);
+        this.labelTotalValue.Name = "labelTotalValue";
+        this.labelTotalValue.Size = new System.Drawing.Size(145, 36);
+        this.labelTotalValue.TabIndex = 24;
+        this.labelTotalValue.Text = "Valor Total:";
+        this.labelTotalValue.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+        // 
+        // labelValue
+        // 
+        this.labelValue.AutoSize = false;
+        this.labelValue.BackColor = System.Drawing.Color.Transparent;
+        this.labelValue.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelValue.Location = new System.Drawing.Point(431, 632);
+        this.labelValue.Name = "labelValue";
+        this.labelValue.Size = new System.Drawing.Size(107, 36);
+        this.labelValue.TabIndex = 23;
+        this.labelValue.Text = "R$ 00,00";
+        this.labelValue.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
         // 
         // gridData
         // 
@@ -167,7 +191,6 @@ partial class FrmTableSales
         dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
         this.gridData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
         this.gridData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-        this.gridData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.Column1, this.Column2, this.Column3, this.Column4, this.Column5 });
         dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
         dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(241)))), ((int)(((byte)(245)))));
         dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -206,36 +229,6 @@ partial class FrmTableSales
         this.gridData.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(210)))), ((int)(((byte)(225)))));
         this.gridData.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
         // 
-        // Column1
-        // 
-        this.Column1.HeaderText = "Column1";
-        this.Column1.Name = "Column1";
-        this.Column1.ReadOnly = true;
-        // 
-        // Column2
-        // 
-        this.Column2.HeaderText = "Column2";
-        this.Column2.Name = "Column2";
-        this.Column2.ReadOnly = true;
-        // 
-        // Column3
-        // 
-        this.Column3.HeaderText = "Column3";
-        this.Column3.Name = "Column3";
-        this.Column3.ReadOnly = true;
-        // 
-        // Column4
-        // 
-        this.Column4.HeaderText = "Column4";
-        this.Column4.Name = "Column4";
-        this.Column4.ReadOnly = true;
-        // 
-        // Column5
-        // 
-        this.Column5.HeaderText = "Column5";
-        this.Column5.Name = "Column5";
-        this.Column5.ReadOnly = true;
-        // 
         // labelReleasedItems
         // 
         this.labelReleasedItems.AutoSize = false;
@@ -254,6 +247,7 @@ partial class FrmTableSales
         this.panelLaunch.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
         this.panelLaunch.BorderRadius = 15;
         this.panelLaunch.BorderThickness = 1;
+        this.panelLaunch.Controls.Add(this.labelNameProduct);
         this.panelLaunch.Controls.Add(this.labelLaunch);
         this.panelLaunch.Controls.Add(this.btnBackspace);
         this.panelLaunch.Controls.Add(this.numericAmount);
@@ -281,6 +275,19 @@ partial class FrmTableSales
         this.panelLaunch.ShadowDecoration.CustomizableEdges = customizableEdges38;
         this.panelLaunch.Size = new System.Drawing.Size(481, 444);
         this.panelLaunch.TabIndex = 4;
+        // 
+        // labelNameProduct
+        // 
+        this.labelNameProduct.AutoSize = false;
+        this.labelNameProduct.BackColor = System.Drawing.Color.Transparent;
+        this.labelNameProduct.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelNameProduct.Location = new System.Drawing.Point(12, 80);
+        this.labelNameProduct.Name = "labelNameProduct";
+        this.labelNameProduct.Size = new System.Drawing.Size(229, 34);
+        this.labelNameProduct.TabIndex = 35;
+        this.labelNameProduct.Text = "Nome do Produto";
+        this.labelNameProduct.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+        this.labelNameProduct.Visible = false;
         // 
         // labelLaunch
         // 
@@ -323,12 +330,13 @@ partial class FrmTableSales
         this.numericAmount.Cursor = System.Windows.Forms.Cursors.IBeam;
         this.numericAmount.CustomizableEdges = customizableEdges5;
         this.numericAmount.Font = new System.Drawing.Font("Segoe UI", 9F);
-        this.numericAmount.Location = new System.Drawing.Point(145, 98);
+        this.numericAmount.Location = new System.Drawing.Point(145, 120);
         this.numericAmount.Name = "numericAmount";
         this.numericAmount.ShadowDecoration.CustomizableEdges = customizableEdges6;
         this.numericAmount.Size = new System.Drawing.Size(96, 36);
         this.numericAmount.TabIndex = 2;
         this.numericAmount.UpDownButtonFillColor = System.Drawing.Color.DeepSkyBlue;
+        this.numericAmount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericAmount_KeyDown);
         // 
         // btnSearchProduct
         // 
@@ -345,7 +353,7 @@ partial class FrmTableSales
         this.btnSearchProduct.ForeColor = System.Drawing.Color.White;
         this.btnSearchProduct.Image = global::SIV.Properties.Resources.icons_pesquisar;
         this.btnSearchProduct.ImageSize = new System.Drawing.Size(30, 30);
-        this.btnSearchProduct.Location = new System.Drawing.Point(437, 40);
+        this.btnSearchProduct.Location = new System.Drawing.Point(430, 39);
         this.btnSearchProduct.Name = "btnSearchProduct";
         this.btnSearchProduct.ShadowDecoration.CustomizableEdges = customizableEdges8;
         this.btnSearchProduct.Size = new System.Drawing.Size(32, 32);
@@ -370,7 +378,7 @@ partial class FrmTableSales
         this.btnOk.ShadowDecoration.CustomizableEdges = customizableEdges10;
         this.btnOk.Size = new System.Drawing.Size(101, 65);
         this.btnOk.TabIndex = 13;
-        this.btnOk.Text = "OK";
+        this.btnOk.Text = "Ok";
         this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
         // 
         // txtProduct
@@ -394,8 +402,10 @@ partial class FrmTableSales
         this.txtProduct.PlaceholderText = "Buscar por Produto...";
         this.txtProduct.SelectedText = "";
         this.txtProduct.ShadowDecoration.CustomizableEdges = customizableEdges12;
-        this.txtProduct.Size = new System.Drawing.Size(333, 36);
+        this.txtProduct.Size = new System.Drawing.Size(325, 36);
         this.txtProduct.TabIndex = 32;
+        this.txtProduct.TextChanged += new System.EventHandler(this.txtProduct_TextChanged);
+        this.txtProduct.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtProduct_KeyDown);
         // 
         // labelProduct
         // 
@@ -456,7 +466,7 @@ partial class FrmTableSales
         this.labelCost.AutoSize = false;
         this.labelCost.BackColor = System.Drawing.Color.Transparent;
         this.labelCost.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.labelCost.Location = new System.Drawing.Point(11, 151);
+        this.labelCost.Location = new System.Drawing.Point(11, 173);
         this.labelCost.Name = "labelCost";
         this.labelCost.Size = new System.Drawing.Size(94, 36);
         this.labelCost.TabIndex = 4;
@@ -495,10 +505,11 @@ partial class FrmTableSales
         this.txtCost.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
         this.txtCost.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
         this.txtCost.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+        this.txtCost.Enabled = false;
         this.txtCost.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
         this.txtCost.Font = new System.Drawing.Font("Segoe UI", 9F);
         this.txtCost.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-        this.txtCost.Location = new System.Drawing.Point(145, 151);
+        this.txtCost.Location = new System.Drawing.Point(145, 173);
         this.txtCost.Name = "txtCost";
         this.txtCost.PasswordChar = '\0';
         this.txtCost.PlaceholderText = "";
@@ -533,7 +544,7 @@ partial class FrmTableSales
         this.labelAmount.AutoSize = false;
         this.labelAmount.BackColor = System.Drawing.Color.Transparent;
         this.labelAmount.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.labelAmount.Location = new System.Drawing.Point(11, 98);
+        this.labelAmount.Location = new System.Drawing.Point(11, 120);
         this.labelAmount.Name = "labelAmount";
         this.labelAmount.Size = new System.Drawing.Size(131, 36);
         this.labelAmount.TabIndex = 2;
@@ -693,12 +704,12 @@ partial class FrmTableSales
         this.panelSalesData.BorderRadius = 15;
         this.panelSalesData.BorderThickness = 1;
         this.panelSalesData.Controls.Add(this.btnSearchUser);
-        this.panelSalesData.Controls.Add(this.stayHoursBar);
+        this.panelSalesData.Controls.Add(this.labelStayHours);
         this.panelSalesData.Controls.Add(this.txtSearchUser);
-        this.panelSalesData.Controls.Add(this.dateStatusBar);
+        this.panelSalesData.Controls.Add(this.labelDateStatus);
         this.panelSalesData.Controls.Add(this.labelPermanence);
         this.panelSalesData.Controls.Add(this.labelDate);
-        this.panelSalesData.Controls.Add(this.timeStatusBar);
+        this.panelSalesData.Controls.Add(this.labelTimeStatus);
         this.panelSalesData.Controls.Add(this.labelEntry);
         this.panelSalesData.Controls.Add(this.labelWaiter);
         this.panelSalesData.Controls.Add(this.txtClient);
@@ -734,17 +745,17 @@ partial class FrmTableSales
         this.btnSearchUser.Size = new System.Drawing.Size(32, 32);
         this.btnSearchUser.TabIndex = 33;
         // 
-        // stayHoursBar
+        // labelStayHours
         // 
-        this.stayHoursBar.AutoSize = false;
-        this.stayHoursBar.BackColor = System.Drawing.Color.Transparent;
-        this.stayHoursBar.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.stayHoursBar.Location = new System.Drawing.Point(285, 194);
-        this.stayHoursBar.Name = "stayHoursBar";
-        this.stayHoursBar.Size = new System.Drawing.Size(125, 36);
-        this.stayHoursBar.TabIndex = 12;
-        this.stayHoursBar.Text = "00:00:00";
-        this.stayHoursBar.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+        this.labelStayHours.AutoSize = false;
+        this.labelStayHours.BackColor = System.Drawing.Color.Transparent;
+        this.labelStayHours.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelStayHours.Location = new System.Drawing.Point(285, 194);
+        this.labelStayHours.Name = "labelStayHours";
+        this.labelStayHours.Size = new System.Drawing.Size(125, 36);
+        this.labelStayHours.TabIndex = 12;
+        this.labelStayHours.Text = "00:00:00";
+        this.labelStayHours.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // txtSearchUser
         // 
@@ -770,17 +781,17 @@ partial class FrmTableSales
         this.txtSearchUser.Size = new System.Drawing.Size(371, 36);
         this.txtSearchUser.TabIndex = 32;
         // 
-        // dateStatusBar
+        // labelDateStatus
         // 
-        this.dateStatusBar.AutoSize = false;
-        this.dateStatusBar.BackColor = System.Drawing.Color.Transparent;
-        this.dateStatusBar.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.dateStatusBar.Location = new System.Drawing.Point(11, 194);
-        this.dateStatusBar.Name = "dateStatusBar";
-        this.dateStatusBar.Size = new System.Drawing.Size(125, 36);
-        this.dateStatusBar.TabIndex = 7;
-        this.dateStatusBar.Text = "00/00/0000";
-        this.dateStatusBar.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+        this.labelDateStatus.AutoSize = false;
+        this.labelDateStatus.BackColor = System.Drawing.Color.Transparent;
+        this.labelDateStatus.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelDateStatus.Location = new System.Drawing.Point(11, 194);
+        this.labelDateStatus.Name = "labelDateStatus";
+        this.labelDateStatus.Size = new System.Drawing.Size(125, 36);
+        this.labelDateStatus.TabIndex = 7;
+        this.labelDateStatus.Text = "00/00/0000";
+        this.labelDateStatus.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // labelPermanence
         // 
@@ -806,17 +817,17 @@ partial class FrmTableSales
         this.labelDate.Text = "Data";
         this.labelDate.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
         // 
-        // timeStatusBar
+        // labelTimeStatus
         // 
-        this.timeStatusBar.AutoSize = false;
-        this.timeStatusBar.BackColor = System.Drawing.Color.Transparent;
-        this.timeStatusBar.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.timeStatusBar.Location = new System.Drawing.Point(148, 194);
-        this.timeStatusBar.Name = "timeStatusBar";
-        this.timeStatusBar.Size = new System.Drawing.Size(125, 36);
-        this.timeStatusBar.TabIndex = 9;
-        this.timeStatusBar.Text = "00:00:00";
-        this.timeStatusBar.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+        this.labelTimeStatus.AutoSize = false;
+        this.labelTimeStatus.BackColor = System.Drawing.Color.Transparent;
+        this.labelTimeStatus.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelTimeStatus.Location = new System.Drawing.Point(148, 194);
+        this.labelTimeStatus.Name = "labelTimeStatus";
+        this.labelTimeStatus.Size = new System.Drawing.Size(125, 36);
+        this.labelTimeStatus.TabIndex = 9;
+        this.labelTimeStatus.Text = "00:00:00";
+        this.labelTimeStatus.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // labelEntry
         // 
@@ -848,7 +859,7 @@ partial class FrmTableSales
         this.txtClient.BorderRadius = 15;
         this.txtClient.Cursor = System.Windows.Forms.Cursors.IBeam;
         this.txtClient.CustomizableEdges = customizableEdges43;
-        this.txtClient.DefaultText = "Passante";
+        this.txtClient.DefaultText = "";
         this.txtClient.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
         this.txtClient.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
         this.txtClient.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
@@ -947,7 +958,7 @@ partial class FrmTableSales
         this.MinimumSize = new System.Drawing.Size(1080, 779);
         this.Name = "FrmTableSales";
         this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
-        this.Text = "Vendas";
+        this.Text = "Vendas de Produtos";
         this.panelReleasedItems.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
         this.panelLaunch.ResumeLayout(false);
@@ -956,11 +967,12 @@ partial class FrmTableSales
         this.ResumeLayout(false);
     }
 
-    private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-    private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-    private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-    private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-    private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+    private Guna.UI2.WinForms.Guna2HtmlLabel labelTotalValue;
+
+    private Guna.UI2.WinForms.Guna2HtmlLabel labelValue;
+
+    private Guna.UI2.WinForms.Guna2HtmlLabel labelNameProduct;
+
     private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm1;
     private Guna.UI2.WinForms.Guna2HtmlLabel labelLaunch;
     private Guna.UI2.WinForms.Guna2Panel panelReleasedItems;
@@ -989,12 +1001,12 @@ partial class FrmTableSales
     private Guna.UI2.WinForms.Guna2Button btn6;
     private Guna.UI2.WinForms.Guna2Panel panelSalesData;
     private Guna.UI2.WinForms.Guna2Button btnSearchUser;
-    private Guna.UI2.WinForms.Guna2HtmlLabel stayHoursBar;
+    private Guna.UI2.WinForms.Guna2HtmlLabel labelStayHours;
     private Guna.UI2.WinForms.Guna2TextBox txtSearchUser;
-    private Guna.UI2.WinForms.Guna2HtmlLabel dateStatusBar;
+    private Guna.UI2.WinForms.Guna2HtmlLabel labelDateStatus;
     private Guna.UI2.WinForms.Guna2HtmlLabel labelPermanence;
     private Guna.UI2.WinForms.Guna2HtmlLabel labelDate;
-    private Guna.UI2.WinForms.Guna2HtmlLabel timeStatusBar;
+    private Guna.UI2.WinForms.Guna2HtmlLabel labelTimeStatus;
     private Guna.UI2.WinForms.Guna2HtmlLabel labelEntry;
     private Guna.UI2.WinForms.Guna2HtmlLabel labelWaiter;
     private Guna.UI2.WinForms.Guna2TextBox txtClient;

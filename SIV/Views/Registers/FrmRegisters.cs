@@ -7,6 +7,7 @@ using SIV.Views.Clients;
 using SIV.Views.Employees;
 using SIV.Views.Jobs;
 using SIV.Views.Payments;
+using SIV.Views.Products;
 using SIV.Views.Users;
 
 namespace SIV.Views.Registers;
@@ -49,7 +50,7 @@ public partial class FrmRegisters : Form
     
     private void btnProduct_Click(object sender, EventArgs e)
     {
-        //throw new System.NotImplementedException();
+        OpenDisplayForm(new FrmProducts(), sender);
     }
 
     private void btnSupplier_Click(object sender, EventArgs e)

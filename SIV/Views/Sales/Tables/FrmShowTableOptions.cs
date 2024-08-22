@@ -8,66 +8,100 @@ namespace SIV.Views.Sales.Tables;
 public partial class FrmShowTableOptions : MetroFramework.Forms.MetroForm
 {
     public string TableState { get; private set; }
-    private int _tableId;
-    private Table table;
+    private readonly int _tableId;
+    private Table _table;
     
     public FrmShowTableOptions(string initialState, int tableId)
     {
         InitializeComponent();
         TableState = initialState;
         _tableId = tableId;
-        UpdateButtonVisibility();
-        table = TableRepository.LoadTables(_tableId);
+        InitializeForm();
+    }
+    
+    private void InitializeForm()
+    {
+        _table = TableRepository.LoadTable(_tableId);
+        UpdateButtonVisibility(); // Atualiza a visibilidade dos botões com base no estado da mesa
+        UpdateStatusLabel(); // Atualiza o texto do status da mesa
+    }
+    
+    private void UpdateStatusLabel()
+    {
+        labelStatus.Text = @$"A mesa {_tableId} está {_table.State}";
     }
     
     private void UpdateButtonVisibility()
     {
-        if (TableState == "Fechada")
-        {
-            btnOpenTable.Text = "Pagar";
-        }
+        if (TableState != "Fechada") return;
+        
+        btnOpenTable.Text = @"Pagar";
+        btnCloseTable.Text = @"Reabrir";
     }
     
     private void btnOpenTable_Click(object sender, EventArgs e)
     {
-        if (TableState == "Fechada")
+        if (_table.State == "Fechada")
         {
-            table = TableRepository.LoadTables(_tableId);
-            using (var frmTableSales = new FrmTableSales(_tableId, table.OpenDate, table.OpenTime, table.StayHours))
-            {
-                if (frmTableSales.ShowDialog() == DialogResult.OK)
-                {
-                    TableRepository.DeleteTable(_tableId);
-                    TableState = "Normal";
-                    DialogResult = DialogResult.OK;
-                    Close();
-                }
-            }
+            HandleClosedTable(); // Lida com a lógica de uma mesa fechada
         }
         else
         {
-            TableState = "Aberta";
+            HandleOpenTable(); // Lida com a lógica de uma mesa aberta
+        }
+    }
+    
+    private void btnCloseTable_Click(object sender, EventArgs e)
+    {
+        ToggleTableState(); 
+        DialogResult = DialogResult.OK;
+        Close();
+    }
+    
+    private void btnCancel_Click(object sender, EventArgs e)
+    {
+        Close();
+    }
+    
+    private void HandleClosedTable()
+    {
+        btnOpenTable.Text = @"Pagar";
+        
+        using (var frmTableSales = new FrmTableSales(_tableId))
+        {
+            if (frmTableSales.ShowDialog() != DialogResult.OK) return;
+            
+            TableRepository.DeleteTable(_tableId);
+            TableState = "Normal";
             DialogResult = DialogResult.OK;
             Close();
-            FrmTableSales frmTableSales = new FrmTableSales(_tableId, table.OpenDate, table.OpenTime, table.StayHours);
+        }
+    }
+    
+    private void HandleOpenTable()
+    {
+        TableState = "Ocupada";
+        DialogResult = DialogResult.OK;
+        Close();
+        
+        using (var frmTableSales = new FrmTableSales(_tableId))
+        {
             frmTableSales.ShowDialog();
         }
     }
 
-    private void btnCloseTable_Click(object sender, EventArgs e)
+    // Alterna o estado da mesa entre aberta e fechada
+    private void ToggleTableState()
     {
-        TableState = "Fechada";
-        DialogResult = DialogResult.OK;
-        Close();
-    }
-
-    private void btnPartial_Click(object sender, EventArgs e)
-    {
-        
-    }
-
-    private void btnCancel_Click(object sender, EventArgs e)
-    {
-        Close();
+        if (_table.State == "Fechada")
+        {
+            TableState = "Ocupada";
+            btnCloseTable.Text = @"Reabrir";
+        }
+        else
+        {
+            TableState = "Fechada";
+            btnCloseTable.Text = @"Fechar";
+        }
     }
 }

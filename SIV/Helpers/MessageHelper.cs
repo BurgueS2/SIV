@@ -117,4 +117,19 @@ public class MessageHelper
 
         return questioning == DialogResult.Yes;
     }
+    
+    public static void HandleException(Exception ex, string action)
+    {
+        MessageBox.Show(@$"Erro ao {action}: {ex.Message}", @"Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    }
+
+    public static void ShowInvalidProductOrQuantity()
+    {
+        MessageBox.Show(@"Nome do produto ou quantidade inválida.", @"Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    }
+    
+    public static void ShowProductNotFound()
+    {
+        MessageBox.Show(@"Produto não encontrado.", @"Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    }
 }

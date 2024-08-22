@@ -72,6 +72,16 @@ namespace SIV.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons_adicionar {
+            get {
+                object obj = ResourceManager.GetObject("icons_adicionar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons_cadastro_funcionario {
             get {
                 object obj = ResourceManager.GetObject("icons_cadastro_funcionario", resourceCulture);

@@ -45,6 +45,7 @@ partial class FrmShowTableOptions
         this.btnCancel = new Guna.UI2.WinForms.Guna2Button();
         this.btnCloseTable = new Guna.UI2.WinForms.Guna2Button();
         this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
+        this.labelStatus = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.SuspendLayout();
         // 
         // btnOpenTable
@@ -61,7 +62,7 @@ partial class FrmShowTableOptions
         this.btnOpenTable.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btnOpenTable.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
         this.btnOpenTable.ForeColor = System.Drawing.Color.Black;
-        this.btnOpenTable.Location = new System.Drawing.Point(25, 86);
+        this.btnOpenTable.Location = new System.Drawing.Point(25, 149);
         this.btnOpenTable.Margin = new System.Windows.Forms.Padding(5);
         this.btnOpenTable.Name = "btnOpenTable";
         this.btnOpenTable.ShadowDecoration.CustomizableEdges = customizableEdges2;
@@ -84,14 +85,13 @@ partial class FrmShowTableOptions
         this.btnPartial.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btnPartial.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
         this.btnPartial.ForeColor = System.Drawing.Color.Black;
-        this.btnPartial.Location = new System.Drawing.Point(172, 86);
+        this.btnPartial.Location = new System.Drawing.Point(172, 149);
         this.btnPartial.Margin = new System.Windows.Forms.Padding(5);
         this.btnPartial.Name = "btnPartial";
         this.btnPartial.ShadowDecoration.CustomizableEdges = customizableEdges4;
         this.btnPartial.Size = new System.Drawing.Size(137, 107);
         this.btnPartial.TabIndex = 1;
         this.btnPartial.Text = "Parcial";
-        this.btnPartial.Click += new System.EventHandler(this.btnPartial_Click);
         // 
         // btnCancel
         // 
@@ -107,7 +107,7 @@ partial class FrmShowTableOptions
         this.btnCancel.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btnCancel.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
         this.btnCancel.ForeColor = System.Drawing.Color.Black;
-        this.btnCancel.Location = new System.Drawing.Point(466, 86);
+        this.btnCancel.Location = new System.Drawing.Point(466, 149);
         this.btnCancel.Margin = new System.Windows.Forms.Padding(5);
         this.btnCancel.Name = "btnCancel";
         this.btnCancel.ShadowDecoration.CustomizableEdges = customizableEdges6;
@@ -130,7 +130,7 @@ partial class FrmShowTableOptions
         this.btnCloseTable.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btnCloseTable.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
         this.btnCloseTable.ForeColor = System.Drawing.Color.Black;
-        this.btnCloseTable.Location = new System.Drawing.Point(319, 86);
+        this.btnCloseTable.Location = new System.Drawing.Point(319, 149);
         this.btnCloseTable.Margin = new System.Windows.Forms.Padding(5);
         this.btnCloseTable.Name = "btnCloseTable";
         this.btnCloseTable.ShadowDecoration.CustomizableEdges = customizableEdges8;
@@ -145,12 +145,26 @@ partial class FrmShowTableOptions
         this.guna2BorderlessForm1.DockIndicatorTransparencyValue = 0.6D;
         this.guna2BorderlessForm1.TransparentWhileDrag = true;
         // 
+        // labelStatus
+        // 
+        this.labelStatus.AutoSize = false;
+        this.labelStatus.BackColor = System.Drawing.Color.Transparent;
+        this.labelStatus.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelStatus.Location = new System.Drawing.Point(25, 73);
+        this.labelStatus.Name = "labelStatus";
+        this.labelStatus.Size = new System.Drawing.Size(578, 50);
+        this.labelStatus.TabIndex = 35;
+        this.labelStatus.Text = "A mesa {mesa} está {status}";
+        this.labelStatus.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
         // FrmShowTableOptions
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-        this.ClientSize = new System.Drawing.Size(637, 236);
+        this.ClientSize = new System.Drawing.Size(637, 307);
+        this.ControlBox = false;
+        this.Controls.Add(this.labelStatus);
         this.Controls.Add(this.btnCloseTable);
         this.Controls.Add(this.btnCancel);
         this.Controls.Add(this.btnPartial);
@@ -158,14 +172,16 @@ partial class FrmShowTableOptions
         this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.Margin = new System.Windows.Forms.Padding(5);
         this.MaximizeBox = false;
-        this.MaximumSize = new System.Drawing.Size(637, 236);
+        this.MaximumSize = new System.Drawing.Size(637, 307);
         this.MinimizeBox = false;
-        this.MinimumSize = new System.Drawing.Size(637, 236);
+        this.MinimumSize = new System.Drawing.Size(637, 307);
         this.Name = "FrmShowTableOptions";
         this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
         this.Text = "Opções da Mesa";
         this.ResumeLayout(false);
     }
+
+    private Guna.UI2.WinForms.Guna2HtmlLabel labelStatus;
 
     private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm1;
 
@@ -174,9 +190,6 @@ partial class FrmShowTableOptions
     private Guna.UI2.WinForms.Guna2Button btnPartial;
 
     private Guna.UI2.WinForms.Guna2Button btnCloseTable;
-
-    private Guna.UI2.WinForms.Guna2Button guna2Button2;
-    private Guna.UI2.WinForms.Guna2Button guna2Button3;
 
     private Guna.UI2.WinForms.Guna2Button btnOpenTable;
 
