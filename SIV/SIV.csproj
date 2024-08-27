@@ -75,6 +75,7 @@
         <Reference Include="Microsoft.Extensions.Primitives, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
           <HintPath>..\packages\Microsoft.Extensions.Primitives.9.0.0-preview.6.24327.7\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
         </Reference>
+        <Reference Include="Microsoft.VisualBasic" />
         <Reference Include="mscorlib" />
         <Reference Include="MySql.Data, Version=9.0.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
           <HintPath>..\packages\MySql.Data.9.0.0\lib\net462\MySql.Data.dll</HintPath>
@@ -131,7 +132,6 @@
         <Compile Include="Controllers\ClientController.cs" />
         <Compile Include="Controllers\EmployeeController.cs" />
         <Compile Include="Controllers\JobController.cs" />
-        <Compile Include="Controllers\ProductController.cs" />
         <Compile Include="Controllers\UserController.cs" />
         <Compile Include="Core\ConnectionManager.cs" />
         <Compile Include="Core\Logger.cs" />
@@ -200,29 +200,33 @@
         <Compile Include="Views\Registers\FrmRegisters.Designer.cs">
           <DependentUpon>FrmRegisters.cs</DependentUpon>
         </Compile>
-        <Compile Include="Views\Sales\FrmSalas.cs">
-          <SubType>Form</SubType>
-        </Compile>
-        <Compile Include="Views\Sales\FrmSalas.Designer.cs">
-          <DependentUpon>FrmSalas.cs</DependentUpon>
-        </Compile>
-        <Compile Include="Views\Sales\Tables\FrmShowTableOptions.cs">
-          <SubType>Form</SubType>
-        </Compile>
-        <Compile Include="Views\Sales\Tables\FrmShowTableOptions.Designer.cs">
+        <Compile Include="Views\Tables\FrmShowTableOptions.cs" />
+        <Compile Include="Views\Tables\FrmShowTableOptions.Designer.cs">
           <DependentUpon>FrmShowTableOptions.cs</DependentUpon>
         </Compile>
-        <Compile Include="Views\Sales\Tables\FrmTables.cs">
+        <Compile Include="Views\Tables\FrmTablePayment.cs">
           <SubType>Form</SubType>
         </Compile>
-        <Compile Include="Views\Sales\Tables\FrmTables.Designer.cs">
+        <Compile Include="Views\Tables\FrmTablePayment.Designer.cs">
+          <DependentUpon>FrmTablePayment.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Views\Tables\FrmTables.cs" />
+        <Compile Include="Views\Tables\FrmTables.Designer.cs">
           <DependentUpon>FrmTables.cs</DependentUpon>
         </Compile>
-        <Compile Include="Views\Sales\Tables\FrmTableSales.cs">
+        <Compile Include="Views\Tables\FrmTableSales.cs" />
+        <Compile Include="Views\Tables\FrmTableSales.Designer.cs">
+          <DependentUpon>FrmTableSales.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Views\Tables\ProductData\FrmProductData.cs">
           <SubType>Form</SubType>
         </Compile>
-        <Compile Include="Views\Sales\Tables\FrmTableSales.Designer.cs">
-          <DependentUpon>FrmTableSales.cs</DependentUpon>
+        <Compile Include="Views\Tables\ProductData\FrmProductData.Designer.cs">
+          <DependentUpon>FrmProductData.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Views\Tables\Sales\FrmSales.cs" />
+        <Compile Include="Views\Tables\Sales\FrmSales.Designer.cs">
+          <DependentUpon>FrmSales.cs</DependentUpon>
         </Compile>
         <Compile Include="Views\Users\FrmUsers.cs">
           <SubType>Form</SubType>
@@ -266,17 +270,20 @@
         <EmbeddedResource Include="Views\Registers\FrmRegisters.resx">
           <DependentUpon>FrmRegisters.cs</DependentUpon>
         </EmbeddedResource>
-        <EmbeddedResource Include="Views\Sales\FrmSalas.resx">
-          <DependentUpon>FrmSalas.cs</DependentUpon>
-        </EmbeddedResource>
-        <EmbeddedResource Include="Views\Sales\Tables\FrmShowTableOptions.resx">
+        <EmbeddedResource Include="Views\Tables\FrmShowTableOptions.resx">
           <DependentUpon>FrmShowTableOptions.cs</DependentUpon>
         </EmbeddedResource>
-        <EmbeddedResource Include="Views\Sales\Tables\FrmTables.resx">
+        <EmbeddedResource Include="Views\Tables\FrmTables.resx">
           <DependentUpon>FrmTables.cs</DependentUpon>
         </EmbeddedResource>
-        <EmbeddedResource Include="Views\Sales\Tables\FrmTableSales.resx">
+        <EmbeddedResource Include="Views\Tables\FrmTableSales.resx">
           <DependentUpon>FrmTableSales.cs</DependentUpon>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Views\Tables\ProductData\FrmProductData.resx">
+          <DependentUpon>FrmProductData.cs</DependentUpon>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Views\Tables\Sales\FrmSales.resx">
+          <DependentUpon>FrmSales.cs</DependentUpon>
         </EmbeddedResource>
         <EmbeddedResource Include="Views\Users\FrmUsers.resx">
           <DependentUpon>FrmUsers.cs</DependentUpon>
@@ -297,18 +304,10 @@
         <None Include="App.config" />
     </ItemGroup>
     <ItemGroup>
-      <Content Include="Resources\icons8_buscar.png" />
-      <Content Include="Resources\icons8_cadastro_32.png" />
-      <Content Include="Resources\icons8_grupo_de_fundo_selecionado_48.png" />
-      <Content Include="Resources\icons8_grupo_de_fundo_selecionado_96.png" />
-      <Content Include="Resources\icons8_localizar_e_substituir_26.png" />
       <Content Include="Resources\icons_abrir_painel.png" />
       <Content Include="Resources\icons_adicionar.png" />
-      <Content Include="Resources\icons_cadastro_funcionario.png" />
       <Content Include="Resources\icons_caixa.png" />
       <Content Include="Resources\icons_cliente.png" />
-      <Content Include="Resources\icons_close.png" />
-      <Content Include="Resources\icons_closed.png" />
       <Content Include="Resources\icons_comanda.png" />
       <Content Include="Resources\icons_configuração.png" />
       <Content Include="Resources\icons_editar_produto.png" />
@@ -321,11 +320,11 @@
       <Content Include="Resources\icons_mesa_de_restaurante.png" />
       <Content Include="Resources\icons_pagamento.png" />
       <Content Include="Resources\icons_pesquisar.png" />
-      <Content Include="Resources\icons_produto.png" />
-      <Content Include="Resources\icons_relatorio.png" />
       <Content Include="Resources\icons_relatório.png" />
+      <Content Include="Resources\icons_trasferencia.png" />
       <Content Include="Resources\icons_user.png" />
       <Content Include="Resources\icons_usuário.png" />
+      <Content Include="Resources\icons_venda.png" />
       <Content Include="Resources\logotipo.png" />
       <Content Include="Resources\painelLoginImg.png" />
       <Content Include="Resources\painelLogo.png" />

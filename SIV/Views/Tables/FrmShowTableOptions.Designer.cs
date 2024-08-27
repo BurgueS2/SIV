@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace SIV.Views.Sales.Tables;
+namespace SIV.Views.Tables;
 
 partial class FrmShowTableOptions
 {

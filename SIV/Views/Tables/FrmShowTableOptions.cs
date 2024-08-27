@@ -2,14 +2,15 @@
 using System.Windows.Forms;
 using SIV.Repositories;
 using SIV.teste;
+using SIV.Views.Sales.Tables;
 
-namespace SIV.Views.Sales.Tables;
+namespace SIV.Views.Tables;
 
 public partial class FrmShowTableOptions : MetroFramework.Forms.MetroForm
 {
     public string TableState { get; private set; }
     private readonly int _tableId;
-    private Table _table;
+    private Table _table; // Instância da mesa
     
     public FrmShowTableOptions(string initialState, int tableId)
     {
@@ -24,19 +25,6 @@ public partial class FrmShowTableOptions : MetroFramework.Forms.MetroForm
         _table = TableRepository.LoadTable(_tableId);
         UpdateButtonVisibility(); // Atualiza a visibilidade dos botões com base no estado da mesa
         UpdateStatusLabel(); // Atualiza o texto do status da mesa
-    }
-    
-    private void UpdateStatusLabel()
-    {
-        labelStatus.Text = @$"A mesa {_tableId} está {_table.State}";
-    }
-    
-    private void UpdateButtonVisibility()
-    {
-        if (TableState != "Fechada") return;
-        
-        btnOpenTable.Text = @"Pagar";
-        btnCloseTable.Text = @"Reabrir";
     }
     
     private void btnOpenTable_Click(object sender, EventArgs e)
@@ -63,19 +51,29 @@ public partial class FrmShowTableOptions : MetroFramework.Forms.MetroForm
         Close();
     }
     
+    private void UpdateStatusLabel()
+    {
+        labelStatus.Text = @$"A mesa {_tableId} está {_table.State}";
+    }
+    
+    private void UpdateButtonVisibility()
+    {
+        if (TableState != "Fechada") return;
+        
+        btnOpenTable.Text = @"Pagar";
+        btnCloseTable.Text = @"Reabrir";
+    }
+    
     private void HandleClosedTable()
     {
         btnOpenTable.Text = @"Pagar";
-        
-        using (var frmTableSales = new FrmTableSales(_tableId))
-        {
-            if (frmTableSales.ShowDialog() != DialogResult.OK) return;
+
+        using var frmTableSales = new FrmTablePayment(_tableId);
+        if (frmTableSales.ShowDialog() != DialogResult.OK) return; // Se o pagamento não for confirmado, retorne
             
-            TableRepository.DeleteTable(_tableId);
-            TableState = "Normal";
-            DialogResult = DialogResult.OK;
-            Close();
-        }
+        TableState = "Normal";
+        DialogResult = DialogResult.OK;
+        Close();
     }
     
     private void HandleOpenTable()
@@ -83,11 +81,9 @@ public partial class FrmShowTableOptions : MetroFramework.Forms.MetroForm
         TableState = "Ocupada";
         DialogResult = DialogResult.OK;
         Close();
-        
-        using (var frmTableSales = new FrmTableSales(_tableId))
-        {
-            frmTableSales.ShowDialog();
-        }
+
+        using var frmTableSales = new FrmTableSales(_tableId);
+        frmTableSales.ShowDialog();
     }
 
     // Alterna o estado da mesa entre aberta e fechada

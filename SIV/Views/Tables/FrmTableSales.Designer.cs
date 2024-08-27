@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace SIV.Views.Sales.Tables;
+namespace SIV.Views.Tables;
 
 partial class FrmTableSales
 {
@@ -31,7 +31,6 @@ partial class FrmTableSales
     /// </summary>
     private void InitializeComponent()
     {
-        this.components = new System.ComponentModel.Container();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -126,7 +125,6 @@ partial class FrmTableSales
         this.labelSale = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.labelSalesData = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.txtSale = new Guna.UI2.WinForms.Guna2TextBox();
-        this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
         this.panelReleasedItems.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
         this.panelLaunch.SuspendLayout();
@@ -153,26 +151,28 @@ partial class FrmTableSales
         // 
         // labelTotalValue
         // 
+        this.labelTotalValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
         this.labelTotalValue.AutoSize = false;
         this.labelTotalValue.BackColor = System.Drawing.Color.Transparent;
-        this.labelTotalValue.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.labelTotalValue.Location = new System.Drawing.Point(280, 632);
+        this.labelTotalValue.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelTotalValue.Location = new System.Drawing.Point(197, 632);
         this.labelTotalValue.Name = "labelTotalValue";
-        this.labelTotalValue.Size = new System.Drawing.Size(145, 36);
+        this.labelTotalValue.Size = new System.Drawing.Size(167, 36);
         this.labelTotalValue.TabIndex = 24;
         this.labelTotalValue.Text = "Valor Total:";
         this.labelTotalValue.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
         // 
         // labelValue
         // 
+        this.labelValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
         this.labelValue.AutoSize = false;
         this.labelValue.BackColor = System.Drawing.Color.Transparent;
-        this.labelValue.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.labelValue.Location = new System.Drawing.Point(431, 632);
+        this.labelValue.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelValue.Location = new System.Drawing.Point(370, 632);
         this.labelValue.Name = "labelValue";
-        this.labelValue.Size = new System.Drawing.Size(107, 36);
+        this.labelValue.Size = new System.Drawing.Size(168, 36);
         this.labelValue.TabIndex = 23;
-        this.labelValue.Text = "R$ 00,00";
+        this.labelValue.Text = "R$ 0.000,00";
         this.labelValue.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
         // 
         // gridData
@@ -280,7 +280,7 @@ partial class FrmTableSales
         // 
         this.labelNameProduct.AutoSize = false;
         this.labelNameProduct.BackColor = System.Drawing.Color.Transparent;
-        this.labelNameProduct.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelNameProduct.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.labelNameProduct.Location = new System.Drawing.Point(12, 80);
         this.labelNameProduct.Name = "labelNameProduct";
         this.labelNameProduct.Size = new System.Drawing.Size(229, 34);
@@ -352,12 +352,13 @@ partial class FrmTableSales
         this.btnSearchProduct.Font = new System.Drawing.Font("Century Gothic", 12F);
         this.btnSearchProduct.ForeColor = System.Drawing.Color.White;
         this.btnSearchProduct.Image = global::SIV.Properties.Resources.icons_pesquisar;
-        this.btnSearchProduct.ImageSize = new System.Drawing.Size(30, 30);
-        this.btnSearchProduct.Location = new System.Drawing.Point(430, 39);
+        this.btnSearchProduct.ImageSize = new System.Drawing.Size(32, 32);
+        this.btnSearchProduct.Location = new System.Drawing.Point(428, 41);
         this.btnSearchProduct.Name = "btnSearchProduct";
         this.btnSearchProduct.ShadowDecoration.CustomizableEdges = customizableEdges8;
-        this.btnSearchProduct.Size = new System.Drawing.Size(32, 32);
+        this.btnSearchProduct.Size = new System.Drawing.Size(30, 30);
         this.btnSearchProduct.TabIndex = 33;
+        this.btnSearchProduct.Click += new System.EventHandler(this.btnSearchProduct_Click);
         // 
         // btnOk
         // 
@@ -468,9 +469,9 @@ partial class FrmTableSales
         this.labelCost.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.labelCost.Location = new System.Drawing.Point(11, 173);
         this.labelCost.Name = "labelCost";
-        this.labelCost.Size = new System.Drawing.Size(94, 36);
+        this.labelCost.Size = new System.Drawing.Size(125, 36);
         this.labelCost.TabIndex = 4;
-        this.labelCost.Text = "Preço R$";
+        this.labelCost.Text = "Preço    R$";
         this.labelCost.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // btnComma
@@ -935,18 +936,13 @@ partial class FrmTableSales
         this.txtSale.Size = new System.Drawing.Size(94, 36);
         this.txtSale.TabIndex = 3;
         // 
-        // guna2BorderlessForm1
-        // 
-        this.guna2BorderlessForm1.ContainerControl = this;
-        this.guna2BorderlessForm1.DockIndicatorTransparencyValue = 0.6D;
-        this.guna2BorderlessForm1.TransparentWhileDrag = true;
-        // 
         // FrmTableSales
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
         this.ClientSize = new System.Drawing.Size(1080, 779);
+        this.ControlBox = false;
         this.Controls.Add(this.panelReleasedItems);
         this.Controls.Add(this.panelLaunch);
         this.Controls.Add(this.panelSalesData);
@@ -973,7 +969,6 @@ partial class FrmTableSales
 
     private Guna.UI2.WinForms.Guna2HtmlLabel labelNameProduct;
 
-    private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm1;
     private Guna.UI2.WinForms.Guna2HtmlLabel labelLaunch;
     private Guna.UI2.WinForms.Guna2Panel panelReleasedItems;
     private Guna.UI2.WinForms.Guna2DataGridView gridData;

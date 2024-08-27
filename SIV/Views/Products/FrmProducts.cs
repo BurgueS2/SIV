@@ -5,6 +5,7 @@ using SIV.Controllers;
 using SIV.Core;
 using SIV.Helpers;
 using SIV.Models;
+using SIV.Repositories;
 
 namespace SIV.Views.Products;
 
@@ -22,6 +23,7 @@ public partial class FrmProducts : Form
         LoadProducts();
         LoadSupplier();
         LoadStockGroup();
+        ConfigureUiControls(false);
     }
 
     private void gridData_DoubleClick(object sender, EventArgs e)
@@ -76,7 +78,7 @@ public partial class FrmProducts : Form
             //if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
 
             var product = CreateProductFromFormData();
-            ProductController.SaveProduct(product);
+            ProductRepository.SaveProduct(product);
             
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowSaveSuccessMessage();
@@ -104,10 +106,10 @@ public partial class FrmProducts : Form
             //if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
 
             var product = CreateProductFromFormData();
-            ProductController.UpdateProduct(product);
+            ProductRepository.UpdateProduct(product);
             
             UpdateUiAfterSaveOrUpdate();
-            MessageHelper.ShowSaveSuccessMessage();
+            MessageHelper.ShowUpdateSuccessMessage();
         }
         catch (MySqlException ex)
         {
@@ -131,10 +133,15 @@ public partial class FrmProducts : Form
         {
             if (!MessageHelper.ConfirmDeletion()) return;
             
-            ProductController.DeleteProduct(_selectedProductId);
+            ProductRepository.DeleteProduct(_selectedProductId);
             
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowDeleteSuccessMessage();
+        }
+        catch (MySqlException ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, $"Erro ao deletar o produto: {ex.Message}");
         }
         catch (Exception ex)
         {
@@ -154,11 +161,11 @@ public partial class FrmProducts : Form
             Id = _selectedProductId,
             Code = txtCode.Text,
             Name = txtName.Text.ToUpper(),
-            Description = txtDescription.Text.ToUpper(),
-            CostPrice = Convert.ToDecimal(txtManufacturingExpenses.Text.Trim()),
+            Description = string.IsNullOrEmpty(txtDescription.Text) ? "N/A" : txtDescription.Text.ToUpper(),
+            CostPrice = string.IsNullOrEmpty(txtManufacturingExpenses.Text) ? 0 : Convert.ToDecimal(txtManufacturingExpenses.Text.Trim()),
             ResalePrice = Convert.ToDecimal(txtResalePrice.Text.Trim()),
-            StockGroup = cbStockGroup.Text.ToUpper(),
-            Supplier = cbSupplier.Text.ToUpper()
+            StockGroup = string.IsNullOrEmpty(cbStockGroup.Text) ? "N/A" : cbStockGroup.Text.ToUpper(),
+            Supplier = string.IsNullOrEmpty(cbSupplier.Text) ? "N/A" : cbSupplier.Text.ToUpper()
         };
     }
     
@@ -166,8 +173,13 @@ public partial class FrmProducts : Form
     {
         try
         {
-            gridData.DataSource = ProductController.GetAllProducts();
+            gridData.DataSource = ProductRepository.GetAllProducts();
             FormatGridData();
+        }
+        catch (MySqlException ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "carregar todos os produtos");
         }
         catch (Exception ex)
         {

@@ -58,21 +58,21 @@
             this.panelMenu = new System.Windows.Forms.Panel();
             this.btnExit = new Guna.UI2.WinForms.Guna2Button();
             this.btnReport = new Guna.UI2.WinForms.Guna2Button();
-            this.btnRegisters = new Guna.UI2.WinForms.Guna2Button();
             this.btnCashFlow = new Guna.UI2.WinForms.Guna2Button();
+            this.btnRegisters = new Guna.UI2.WinForms.Guna2Button();
             this.btnTables = new Guna.UI2.WinForms.Guna2Button();
             this.btnExitDisplay = new System.Windows.Forms.Button();
             this.btnLogoff = new Guna.UI2.WinForms.Guna2Button();
             this.panelStatus = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Separator2 = new Guna.UI2.WinForms.Guna2Separator();
-            this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
-            this.btnConf = new Guna.UI2.WinForms.Guna2Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.DateStatusBar = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.TimeStatusBar = new System.Windows.Forms.Label();
             this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.btnConf = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TimeStatusBar = new System.Windows.Forms.Label();
+            this.DateStatusBar = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -124,8 +124,8 @@
             this.panelMenu.BackColor = System.Drawing.Color.LightCyan;
             this.panelMenu.Controls.Add(this.btnExit);
             this.panelMenu.Controls.Add(this.btnReport);
-            this.panelMenu.Controls.Add(this.btnRegisters);
             this.panelMenu.Controls.Add(this.btnCashFlow);
+            this.panelMenu.Controls.Add(this.btnRegisters);
             this.panelMenu.Controls.Add(this.btnTables);
             this.panelMenu.Controls.Add(this.btnExitDisplay);
             resources.ApplyResources(this.panelMenu, "panelMenu");
@@ -165,27 +165,10 @@
             this.btnReport.ShadowDecoration.CustomizableEdges = customizableEdges4;
             this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
-            // btnRegisters
-            // 
-            this.btnRegisters.Animated = true;
-            this.btnRegisters.CustomizableEdges = customizableEdges5;
-            this.btnRegisters.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnRegisters.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnRegisters.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnRegisters.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnRegisters.FillColor = System.Drawing.Color.LightCyan;
-            resources.ApplyResources(this.btnRegisters, "btnRegisters");
-            this.btnRegisters.ForeColor = System.Drawing.Color.Black;
-            this.btnRegisters.Image = global::SIV.Properties.Resources.icons_cliente;
-            this.btnRegisters.ImageSize = new System.Drawing.Size(32, 32);
-            this.btnRegisters.Name = "btnRegisters";
-            this.btnRegisters.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            this.btnRegisters.Click += new System.EventHandler(this.btnRegisters_Click);
-            // 
             // btnCashFlow
             // 
             this.btnCashFlow.Animated = true;
-            this.btnCashFlow.CustomizableEdges = customizableEdges7;
+            this.btnCashFlow.CustomizableEdges = customizableEdges5;
             this.btnCashFlow.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnCashFlow.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnCashFlow.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -196,13 +179,29 @@
             this.btnCashFlow.Image = global::SIV.Properties.Resources.icons_comanda;
             this.btnCashFlow.ImageSize = new System.Drawing.Size(32, 32);
             this.btnCashFlow.Name = "btnCashFlow";
-            this.btnCashFlow.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            this.btnCashFlow.ShadowDecoration.CustomizableEdges = customizableEdges6;
             this.btnCashFlow.Click += new System.EventHandler(this.btnCashFlow_Click);
+            // 
+            // btnRegisters
+            // 
+            this.btnRegisters.Animated = true;
+            this.btnRegisters.CustomizableEdges = customizableEdges7;
+            this.btnRegisters.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnRegisters.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnRegisters.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnRegisters.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnRegisters.FillColor = System.Drawing.Color.LightCyan;
+            resources.ApplyResources(this.btnRegisters, "btnRegisters");
+            this.btnRegisters.ForeColor = System.Drawing.Color.Black;
+            this.btnRegisters.Image = global::SIV.Properties.Resources.icons_cliente;
+            this.btnRegisters.ImageSize = new System.Drawing.Size(32, 32);
+            this.btnRegisters.Name = "btnRegisters";
+            this.btnRegisters.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            this.btnRegisters.Click += new System.EventHandler(this.btnRegisters_Click);
             // 
             // btnTables
             // 
             this.btnTables.Animated = true;
-            this.btnTables.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.btnTables.CustomizableEdges = customizableEdges9;
             this.btnTables.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnTables.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -252,15 +251,15 @@
             this.panelStatus.BackColor = System.Drawing.Color.Transparent;
             this.panelStatus.BorderColor = System.Drawing.Color.Transparent;
             this.panelStatus.Controls.Add(this.guna2Separator2);
+            this.panelStatus.Controls.Add(this.guna2CirclePictureBox1);
+            this.panelStatus.Controls.Add(this.btnConf);
             this.panelStatus.Controls.Add(this.btnLogoff);
             this.panelStatus.Controls.Add(this.guna2Separator1);
-            this.panelStatus.Controls.Add(this.btnConf);
-            this.panelStatus.Controls.Add(this.label5);
-            this.panelStatus.Controls.Add(this.DateStatusBar);
-            this.panelStatus.Controls.Add(this.label1);
             this.panelStatus.Controls.Add(this.label2);
+            this.panelStatus.Controls.Add(this.label1);
             this.panelStatus.Controls.Add(this.TimeStatusBar);
-            this.panelStatus.Controls.Add(this.guna2CirclePictureBox1);
+            this.panelStatus.Controls.Add(this.DateStatusBar);
+            this.panelStatus.Controls.Add(this.label5);
             this.panelStatus.CustomBorderColor = System.Drawing.Color.DimGray;
             this.panelStatus.CustomizableEdges = customizableEdges16;
             this.panelStatus.FillColor = System.Drawing.Color.LightCyan;
@@ -272,15 +271,23 @@
             resources.ApplyResources(this.guna2Separator2, "guna2Separator2");
             this.guna2Separator2.Name = "guna2Separator2";
             // 
-            // guna2Separator1
+            // guna2CirclePictureBox1
             // 
-            resources.ApplyResources(this.guna2Separator1, "guna2Separator1");
-            this.guna2Separator1.Name = "guna2Separator1";
+            this.guna2CirclePictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2CirclePictureBox1.FillColor = System.Drawing.Color.Transparent;
+            this.guna2CirclePictureBox1.Image = global::SIV.Properties.Resources.icons_user;
+            this.guna2CirclePictureBox1.ImageRotate = 0F;
+            resources.ApplyResources(this.guna2CirclePictureBox1, "guna2CirclePictureBox1");
+            this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
+            this.guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges13;
+            this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.guna2CirclePictureBox1.TabStop = false;
+            this.guna2CirclePictureBox1.UseTransparentBackground = true;
             // 
             // btnConf
             // 
             this.btnConf.Animated = true;
-            this.btnConf.CustomizableEdges = customizableEdges13;
+            this.btnConf.CustomizableEdges = customizableEdges14;
             this.btnConf.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnConf.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnConf.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -292,46 +299,38 @@
             this.btnConf.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnConf.ImageSize = new System.Drawing.Size(32, 32);
             this.btnConf.Name = "btnConf";
-            this.btnConf.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            this.btnConf.ShadowDecoration.CustomizableEdges = customizableEdges15;
             this.btnConf.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
-            // label5
+            // guna2Separator1
             // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
-            // 
-            // DateStatusBar
-            // 
-            resources.ApplyResources(this.DateStatusBar, "DateStatusBar");
-            this.DateStatusBar.Name = "DateStatusBar";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.guna2Separator1, "guna2Separator1");
+            this.guna2Separator1.Name = "guna2Separator1";
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
             // TimeStatusBar
             // 
             resources.ApplyResources(this.TimeStatusBar, "TimeStatusBar");
             this.TimeStatusBar.Name = "TimeStatusBar";
             // 
-            // guna2CirclePictureBox1
+            // DateStatusBar
             // 
-            this.guna2CirclePictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CirclePictureBox1.FillColor = System.Drawing.Color.Transparent;
-            this.guna2CirclePictureBox1.Image = global::SIV.Properties.Resources.icons_user;
-            this.guna2CirclePictureBox1.ImageRotate = 0F;
-            resources.ApplyResources(this.guna2CirclePictureBox1, "guna2CirclePictureBox1");
-            this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
-            this.guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges15;
-            this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox1.TabStop = false;
-            this.guna2CirclePictureBox1.UseTransparentBackground = true;
+            resources.ApplyResources(this.DateStatusBar, "DateStatusBar");
+            this.DateStatusBar.Name = "DateStatusBar";
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
             // 
             // toolStripSplitButton1
             // 

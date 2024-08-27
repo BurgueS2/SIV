@@ -6,8 +6,9 @@ using System.Windows.Forms;
 using Guna.UI2.WinForms;
 using SIV.Repositories;
 using SIV.teste;
+using SIV.Views.Sales.Tables;
 
-namespace SIV.Views.Sales.Tables;
+namespace SIV.Views.Tables;
 
 public partial class FrmTables : Form
 {
@@ -16,13 +17,14 @@ public partial class FrmTables : Form
     public FrmTables()
     {
         InitializeComponent();
-        InitializeTables(); // Inicializa as mesas e os botões correspondentes
+        InitializeTables();
         TableRepository.InitializeDatabase();
+        EnableDoubleBuffering(flowLayoutPanelTables);
     }
     
     private void InitializeTables()
     {
-        _tables = LoadTablesFromRepository();
+        _tables = LoadTablesFromRepository(); // Carrega as mesas do repositório
         CreateTableButtons();
     }
 
@@ -47,8 +49,7 @@ public partial class FrmTables : Form
             flowLayoutPanelTables.Controls.Add(btn); // Adiciona o botão ao painel de mesas
         }
     }
-
-    // Cria um botão para uma mesa específica
+    
     private Guna2Button CreateTableButton(Table table)
     {
         var btn = new Guna2Button
@@ -105,8 +106,15 @@ public partial class FrmTables : Form
         {
             if (frmShowTableOptions.ShowDialog() != DialogResult.OK) return;
             
-            table.State = frmShowTableOptions.TableState; 
+            table.State = frmShowTableOptions.TableState;
             UpdateTableStateAndColor(table, btn); // Atualiza o estado e a cor do botão da mesa
         }
+    }
+    
+    private static void EnableDoubleBuffering(Control control)
+    {
+        typeof(Control).InvokeMember("DoubleBuffered",
+            System.Reflection.BindingFlags.SetProperty | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic,
+            null, control, [true]);
     }
 }

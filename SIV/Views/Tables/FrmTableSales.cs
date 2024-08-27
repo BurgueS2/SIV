@@ -4,18 +4,24 @@ using SIV.Core;
 using SIV.Helpers;
 using SIV.Repositories;
 using SIV.teste;
+using SIV.Views.Tables.ProductData;
 
-namespace SIV.Views.Sales.Tables;
+namespace SIV.Views.Tables;
 
 public partial class FrmTableSales : MetroFramework.Forms.MetroForm
 {
     private readonly int _tableId;
-    private Table _table;
+    private Table _table; // Instância da mesa
 
     public FrmTableSales(int tableId)
     {
         InitializeComponent();
         _tableId = tableId;
+        InitializeForm();
+    }
+    
+    private void InitializeForm()
+    {
         txtSale.Text = @$"{_tableId}";
         _table = TableRepository.LoadTable(_tableId);
         LoadTableProducts();
@@ -23,14 +29,19 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
 
     private void btnOk_Click(object sender, EventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(txtProduct.Text) || numericAmount.Value <= 0)
-        {
-            Close();
-        }
-        else
+        if (IsProductInputValid())
         {
             SaveProductToTable();
         }
+        else
+        {
+            Close();
+        }
+    }
+    
+    private void btnSearchProduct_Click(object sender, EventArgs e)
+    {
+        SearchProduct();
     }
 
     private void txtProduct_KeyDown(object sender, KeyEventArgs e)
@@ -104,6 +115,7 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
                 if (product == null) return;
 
                 TableRepository.AddProductToTable(_tableId, product.Name, product.ResalePrice, amount);
+                TableRepository.UpdateTableState(_tableId, "Ocupada", "Khaki");
                 LoadTableProducts();
                 ResetProductInputFields();
             }
@@ -193,7 +205,24 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
     private void ResetProductInputFields()
     {
         txtProduct.Clear();
+        txtCost.Clear();
         numericAmount.Value = 1;
         txtProduct.Focus();
+    }
+    
+    private bool IsProductInputValid()
+    {
+        return !string.IsNullOrWhiteSpace(txtProduct.Text) && numericAmount.Value > 0; // Verifica se o nome do produto e a quantidade são válidos
+    }
+    
+    private void SearchProduct()
+    {
+        var frmProductData = new FrmProductData();
+
+        if (frmProductData.ShowDialog() != DialogResult.OK) return;
+        
+        txtProduct.Text = frmProductData.SelectedProduct; // Preenche o campo de texto com o nome do produto selecionado
+        txtCost.Text = frmProductData.CostPrice; // Preenche o campo de texto com o preço do produto selecionado
+        numericAmount.Value = 1;
     }
 }

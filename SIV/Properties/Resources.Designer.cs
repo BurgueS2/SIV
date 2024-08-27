@@ -82,16 +82,6 @@ namespace SIV.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons_cadastro_funcionario {
-            get {
-                object obj = ResourceManager.GetObject("icons_cadastro_funcionario", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap icons_caixa {
             get {
                 object obj = ResourceManager.GetObject("icons_caixa", resourceCulture);
@@ -105,26 +95,6 @@ namespace SIV.Properties {
         internal static System.Drawing.Bitmap icons_cliente {
             get {
                 object obj = ResourceManager.GetObject("icons_cliente", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons_close {
-            get {
-                object obj = ResourceManager.GetObject("icons_close", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons_closed {
-            get {
-                object obj = ResourceManager.GetObject("icons_closed", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -252,29 +222,19 @@ namespace SIV.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons_produto {
-            get {
-                object obj = ResourceManager.GetObject("icons_produto", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons_relatorio {
-            get {
-                object obj = ResourceManager.GetObject("icons_relatorio", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap icons_relatório {
             get {
                 object obj = ResourceManager.GetObject("icons_relatório", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons_trasferencia {
+            get {
+                object obj = ResourceManager.GetObject("icons_trasferencia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -302,49 +262,9 @@ namespace SIV.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_buscar {
+        internal static System.Drawing.Bitmap icons_venda {
             get {
-                object obj = ResourceManager.GetObject("icons8_buscar", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons8_cadastro_32 {
-            get {
-                object obj = ResourceManager.GetObject("icons8_cadastro_32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons8_grupo_de_fundo_selecionado_48 {
-            get {
-                object obj = ResourceManager.GetObject("icons8_grupo_de_fundo_selecionado_48", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons8_grupo_de_fundo_selecionado_96 {
-            get {
-                object obj = ResourceManager.GetObject("icons8_grupo_de_fundo_selecionado_96", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons8_localizar_e_substituir_26 {
-            get {
-                object obj = ResourceManager.GetObject("icons8_localizar_e_substituir_26", resourceCulture);
+                object obj = ResourceManager.GetObject("icons_venda", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -355,16 +275,6 @@ namespace SIV.Properties {
         internal static System.Drawing.Bitmap logotipo {
             get {
                 object obj = ResourceManager.GetObject("logotipo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap painelLoginImg {
-            get {
-                object obj = ResourceManager.GetObject("painelLoginImg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
