@@ -83,6 +83,7 @@ partial class FrmPayments
         this.labelRegisteredPaymants = new System.Windows.Forms.Label();
         this.txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
         this.gridData = new Guna.UI2.WinForms.Guna2DataGridView();
+        this.btnDisabled = new Guna.UI2.WinForms.Guna2CheckBox();
         this.panelTypePayment.SuspendLayout();
         this.panelGrid.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
@@ -242,7 +243,7 @@ partial class FrmPayments
         this.btnVoucher.CheckedState.InnerColor = System.Drawing.Color.Aqua;
         this.btnVoucher.CheckedState.InnerOffset = -4;
         this.btnVoucher.Font = new System.Drawing.Font("Century Gothic", 12F);
-        this.btnVoucher.Location = new System.Drawing.Point(275, 44);
+        this.btnVoucher.Location = new System.Drawing.Point(315, 44);
         this.btnVoucher.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
         this.btnVoucher.Name = "btnVoucher";
         this.btnVoucher.Size = new System.Drawing.Size(109, 24);
@@ -263,7 +264,7 @@ partial class FrmPayments
         this.btnCredit.CheckedState.InnerColor = System.Drawing.Color.Aqua;
         this.btnCredit.CheckedState.InnerOffset = -4;
         this.btnCredit.Font = new System.Drawing.Font("Century Gothic", 12F);
-        this.btnCredit.Location = new System.Drawing.Point(3, 44);
+        this.btnCredit.Location = new System.Drawing.Point(43, 44);
         this.btnCredit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
         this.btnCredit.Name = "btnCredit";
         this.btnCredit.Size = new System.Drawing.Size(98, 24);
@@ -284,7 +285,7 @@ partial class FrmPayments
         this.btnDebit.CheckedState.InnerColor = System.Drawing.Color.Aqua;
         this.btnDebit.CheckedState.InnerOffset = -4;
         this.btnDebit.Font = new System.Drawing.Font("Century Gothic", 12F);
-        this.btnDebit.Location = new System.Drawing.Point(133, 44);
+        this.btnDebit.Location = new System.Drawing.Point(173, 44);
         this.btnDebit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
         this.btnDebit.Name = "btnDebit";
         this.btnDebit.Size = new System.Drawing.Size(87, 24);
@@ -573,12 +574,29 @@ partial class FrmPayments
         this.gridData.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
         this.gridData.DoubleClick += new System.EventHandler(this.gridData_DoubleClick);
         // 
+        // btnDisabled
+        // 
+        this.btnDisabled.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+        this.btnDisabled.CheckedState.BorderRadius = 0;
+        this.btnDisabled.CheckedState.BorderThickness = 0;
+        this.btnDisabled.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+        this.btnDisabled.Location = new System.Drawing.Point(781, 105);
+        this.btnDisabled.Name = "btnDisabled";
+        this.btnDisabled.Size = new System.Drawing.Size(114, 24);
+        this.btnDisabled.TabIndex = 135;
+        this.btnDisabled.Text = "Inativo";
+        this.btnDisabled.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+        this.btnDisabled.UncheckedState.BorderRadius = 0;
+        this.btnDisabled.UncheckedState.BorderThickness = 0;
+        this.btnDisabled.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+        // 
         // FrmPayments
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.BackColor = System.Drawing.Color.White;
         this.ClientSize = new System.Drawing.Size(1070, 687);
+        this.Controls.Add(this.btnDisabled);
         this.Controls.Add(this.panelGrid);
         this.Controls.Add(this.btnCancel);
         this.Controls.Add(this.btnNew);
@@ -604,6 +622,8 @@ partial class FrmPayments
         ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
         this.ResumeLayout(false);
     }
+
+    private Guna.UI2.WinForms.Guna2CheckBox btnDisabled;
 
     private Guna.UI2.WinForms.Guna2Panel panelGrid;
     private Guna.UI2.WinForms.Guna2Button btnSearch;

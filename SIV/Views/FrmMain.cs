@@ -8,8 +8,6 @@ using SIV.Helpers;
 using SIV.Models;
 using SIV.Views.Login;
 using SIV.Views.Registers;
-using SIV.Views.Sales;
-using SIV.Views.Sales.Tables;
 using SIV.Views.Tables;
 using SIV.Views.Tables.Sales;
 

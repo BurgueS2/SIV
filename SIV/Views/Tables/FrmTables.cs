@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using Guna.UI2.WinForms;
 using SIV.Repositories;
 using SIV.teste;
-using SIV.Views.Sales.Tables;
 
 namespace SIV.Views.Tables;
 
