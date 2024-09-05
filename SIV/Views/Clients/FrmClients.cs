@@ -5,6 +5,7 @@ using SIV.Controllers;
 using SIV.Core;
 using SIV.Helpers;
 using SIV.Models;
+using SIV.Repositories;
 using SIV.Validators;
 
 namespace SIV.Views.Clients;
@@ -116,29 +117,20 @@ public partial class FrmClients : Form
             var cpf = txtCpf.Text;
             var email = txtEmail.Text;
             
-            if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
+            if (!ValidateFormData()) return;
 
             if (!VerifyCpfAndEmail(cpf, email)) return;
             
             var client = CreateClientFromFormData();
-            ClientController.SaveClient(client);
+            ClientRepository.SaveClient(client);
             
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowSaveSuccessMessage();
         }
-        catch (MySqlException ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro ao salvar no banco de dados: {ex.Message}");
-        }
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro inesperado: {ex.Message}");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
+            MessageHelper.ShowErrorMessage(ex, "salvar");
         }
     }
     
@@ -149,29 +141,20 @@ public partial class FrmClients : Form
             var cpf = txtCpf.Text;
             var email = txtEmail.Text;
             
-            if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
+            if (!ValidateFormData()) return;
             
             if (!VerifyCpfAndEmail(cpf, email)) return;
 
             var client = CreateClientFromFormData();
-            ClientController.UpdateClient(client);
+            ClientRepository.UpdateClient(client);
             
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowUpdateSuccessMessage();
         }
-        catch (MySqlException ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro ao salvar no banco de dados: {ex.Message}");
-        }
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro inesperado: {ex.Message}");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
+            MessageHelper.ShowErrorMessage(ex, "atualizar");
         }
     }
     
@@ -181,7 +164,7 @@ public partial class FrmClients : Form
         {
             if (!MessageHelper.ConfirmDeletion()) return;
             
-            ClientController.DeleteClient(_selectedUserId);
+            ClientRepository.DeleteClient(_selectedUserId);
             
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowDeleteSuccessMessage();
@@ -239,19 +222,14 @@ public partial class FrmClients : Form
         try
         {
             var name = txtSearchName.Text;
-            var result = ClientController.SearchByName(name); // Realiza a busca no banco de dados pelo nome aproximado
 
-            gridData.DataSource = result;
+            gridData.DataSource = ClientRepository.SearchByName(name);
             FormatGridData();
         }
         catch (MySqlException ex)
         {
             Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, "acessar");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
+            MessageHelper.ShowErrorMessage(ex, "buscar pelo nome");
         }
     }
 
@@ -260,19 +238,14 @@ public partial class FrmClients : Form
         try
         {
             var cpf = AddCpfMask(txtSearchCpf.Text);
-            var result = ClientController.SearchByCpf(cpf); // Realiza a busca no banco de dados pelo CPF
 
-            gridData.DataSource = result;
+            gridData.DataSource = ClientRepository.SearchByCpf(cpf);
             FormatGridData();
         }
         catch (MySqlException ex)
         {
             Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, "acessar");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
+            MessageHelper.ShowErrorMessage(ex, "buscar pelo CPF");
         }
     }
     
@@ -280,17 +253,13 @@ public partial class FrmClients : Form
     {
         try
         {
-            gridData.DataSource = ClientController.GetAllClients();
+            gridData.DataSource = ClientRepository.GetAllClients();
             FormatGridData();
         }
         catch (MySqlException ex)
         {
             Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, "acessar");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
+            MessageHelper.ShowErrorMessage(ex, "acessar os clientes");
         }
     }
     
@@ -371,14 +340,14 @@ public partial class FrmClients : Form
 
     private bool VerifyCpfAndEmail(string cpf, string email)
     {
-        if (!ClientController.VerifyCpfExistence(cpf, _oldCpf))
+        if (!ClientRepository.VerifyCpfExistence(cpf, _oldCpf))
         {
             MessageHelper.ShowRegisteredCpfMessage();
             return false;
         }
 
         // Verifica se o email já está cadastrado
-        if (!ClientController.VerifyEmailExistence(email)) return true;
+        if (!ClientRepository.VerifyEmailExisting(email)) return true;
 
         // Se o email já estiver cadastrado, exibe uma mensagem de confirmação
         return MessageHelper.ShowEmailExistMessage();

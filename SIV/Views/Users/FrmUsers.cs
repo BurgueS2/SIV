@@ -6,6 +6,7 @@ using SIV.Controllers;
 using SIV.Core;
 using SIV.Helpers;
 using SIV.Models;
+using SIV.Repositories;
 using SIV.Validators;
 
 namespace SIV.Views.Users;
@@ -92,24 +93,15 @@ public partial class FrmUsers : Form
             if (!ValidateFormData()) return;
             
             var user = CreateUserFromFormData();
-            UserController.SaveUser(user);
+            UserRepository.SaveUser(user);
             
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowSaveSuccessMessage();
         }
-        catch (MySqlException ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro ao salvar no banco de dados: {ex.Message}");
-        }
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro inesperado: {ex.Message}");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
+            MessageHelper.ShowErrorMessage(ex, "salvar");
         }
     }
     
@@ -120,24 +112,15 @@ public partial class FrmUsers : Form
             if (!ValidateFormData()) return;
 
             var user = CreateUserFromFormData();
-            UserController.UpdateUser(user);
+            UserRepository.UpdateUser(user);
             
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowUpdateSuccessMessage();
         }
-        catch (MySqlException ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro ao salvar no banco de dados: {ex.Message}");
-        }
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro inesperado: {ex.Message}");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
+            MessageHelper.ShowErrorMessage(ex, "atualizar");
         }
     }
     
@@ -147,7 +130,8 @@ public partial class FrmUsers : Form
         {
             if (!MessageHelper.ConfirmDeletion()) return;
             
-            UserController.DeleteUser(_selectedUserId);
+            UserRepository.DeleteUser(_selectedUserId);
+            
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowDeleteSuccessMessage();
         }
@@ -155,10 +139,6 @@ public partial class FrmUsers : Form
         {
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "deletar");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
         }
     }
     
@@ -171,7 +151,7 @@ public partial class FrmUsers : Form
             Password = txtPassword.Text.Trim(),
             Job = cbJob.Text.ToUpper(),
             Access = GetAccessLevel(),
-            Active = btnActive.Checked ? "ATIVO" : "INATIVO",
+            Active = btnActive.Checked ? "ATIVO" : "INATIVO", // Se o botão de ativo estiver marcado, retorna "ATIVO", senão, retorna "INATIVO"
             Permissions = GetPermissions()
         };
     }
@@ -180,7 +160,7 @@ public partial class FrmUsers : Form
     {
         try
         {
-            gridData.DataSource = UserController.GetAllUsers();
+            gridData.DataSource = UserRepository.GetAllUsers();
             FormatGridData();
         }
         catch (Exception ex)
@@ -188,17 +168,13 @@ public partial class FrmUsers : Form
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "carregar a lista de usuários");
         }
-        finally
-        {
-            ConnectionManager.CloseConnection();
-        }
     }
     
     private void LoadJob()
     {
         try
         {
-            cbJob.DataSource = JobController.GetAllJobs();
+            cbJob.DataSource = JobRepository.GetAllJobs();
             cbJob.DisplayMember = "Name";
             cbJob.ValueMember = "Id";
         }
@@ -206,10 +182,6 @@ public partial class FrmUsers : Form
         {
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "carregar cargos");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
         }
     }
 

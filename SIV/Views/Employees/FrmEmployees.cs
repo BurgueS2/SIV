@@ -4,6 +4,7 @@ using SIV.Controllers;
 using SIV.Core;
 using SIV.Helpers;
 using SIV.Models;
+using SIV.Repositories;
 using SIV.Validators;
 
 namespace SIV.Views.Employees;
@@ -128,18 +129,18 @@ public partial class FrmEmployees : Form
     {
         try
         {
-            if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
+            if (!ValidateFormData()) return;
 
             var cpf = txtCpf.Text;
             
-            if (!EmployeeController.VerifyCpfExistence(cpf, _oldCpf))
+            if (!EmployeeRepository.VerifyCpfExistence(cpf, _oldCpf))
             {
                 MessageHelper.ShowRegisteredCpfMessage();
                 return; 
             }
             
             var employee = CreateEmployeeFromFormData();
-            EmployeeController.SaveEmployee(employee);
+            EmployeeRepository.SaveEmployee(employee);
             
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowSaveSuccessMessage();
@@ -149,28 +150,24 @@ public partial class FrmEmployees : Form
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "salvar");
         }
-        finally
-        {
-            ConnectionManager.CloseConnection();
-        }
     }
     
     private void UpdateFormData()
     {
         try
         {
-            if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
+            if (!ValidateFormData()) return;
             
             var cpf = txtCpf.Text;
             
-            if (!EmployeeController.VerifyCpfExistence(cpf, _oldCpf))
+            if (!EmployeeRepository.VerifyCpfExistence(cpf, _oldCpf))
             {
                 MessageHelper.ShowRegisteredCpfMessage();
                 return;
             }
             
             var employee = CreateEmployeeFromFormData();
-            EmployeeController.UpdateEmployee(employee);
+            EmployeeRepository.UpdateEmployee(employee, _changedImage);
             
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowUpdateSuccessMessage();
@@ -180,10 +177,6 @@ public partial class FrmEmployees : Form
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "atualizar");
         }
-        finally
-        {
-            ConnectionManager.CloseConnection();
-        }
     }
     
     private void DeleteFormData()
@@ -192,7 +185,8 @@ public partial class FrmEmployees : Form
         {
             if (!MessageHelper.ConfirmDeletion()) return;
             
-            EmployeeController.DeleteEmployee(_selectedEmployeeId);
+            EmployeeRepository.DeleteEmployee(_selectedEmployeeId);
+            
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowDeleteSuccessMessage();
         }
@@ -200,10 +194,6 @@ public partial class FrmEmployees : Form
         {
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "excluir");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
         }
     }
     
@@ -226,19 +216,14 @@ public partial class FrmEmployees : Form
         try
         {
             var name = txtSearch.Text.ToUpper();
-            var result = EmployeeController.SearchByName(name);
 
-            gridData.DataSource = result;
+            gridData.DataSource = EmployeeRepository.SearchByName(name);
             FormatGridData();
         }
         catch (Exception ex)
         {
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "pesquisar funcionário");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
         }
     }
     
@@ -266,7 +251,7 @@ public partial class FrmEmployees : Form
     {
         try
         {
-            gridData.DataSource = EmployeeController.GetAllEmployees();
+            gridData.DataSource = EmployeeRepository.GetAllEmployees();
             FormatGridData();
         }
         catch (Exception ex)
@@ -274,17 +259,13 @@ public partial class FrmEmployees : Form
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "carregar funcionários");
         }
-        finally
-        {
-            ConnectionManager.CloseConnection();
-        }
     }
     
     private void LoadJob()
     {
         try
         {
-            cbJob.DataSource = JobController.GetAllJobs();
+            cbJob.DataSource = JobRepository.GetAllJobs();
             cbJob.DisplayMember = "Name";
             cbJob.ValueMember = "Id";
         }
@@ -292,10 +273,6 @@ public partial class FrmEmployees : Form
         {
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "carregar cargos");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
         }
     }
     
