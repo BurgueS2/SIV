@@ -87,15 +87,15 @@ public static class ProductRepository
     /// <summary>
     /// Exclui um produto do banco de dados com base no ID fornecido.
     /// </summary>
-    /// <param name="product">O objeto <c>Product</c> contendo o ID do produto a ser excluído.</param>
-    public static void DeleteProduct(Product product)
+    /// <param name="id">ID do produto a ser excluído.</param>
+    public static void DeleteProduct(string id)
     {
         try
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand("DELETE FROM products WHERE id = @id", connection);
 
-            cmd.Parameters.AddWithValue("@id", product.Id);
+            cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery(); // Executa a query de exclusão
         }
         catch (Exception ex)

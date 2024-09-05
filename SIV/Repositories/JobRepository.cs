@@ -82,15 +82,15 @@ public static class JobRepository
     /// <summary>
     /// Exclui um cargo do banco de dados.
     /// </summary>
-    /// <param name="job">O objeto <c>Job</c> contendo o ID do cargo a ser excluído.</param>
-    public static void DeleteJob(Job job)
+    /// <param name="id">ID do cargo a ser excluído.</param>
+    public static void DeleteJob(string id)
     {
         try
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand("DELETE FROM job WHERE id = @id", connection);
             
-            cmd.Parameters.AddWithValue("@id", job.Id);
+            cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
         }
         catch (Exception ex)

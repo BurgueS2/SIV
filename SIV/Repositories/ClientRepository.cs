@@ -114,15 +114,15 @@ public static class ClientRepository
     /// <summary>
     /// Exclui um cliente do banco de dados.
     /// </summary>
-    /// <param name="client">O objeto <c>Client</c> contendo o ID do cliente a ser excluído.</param>
-    public static void DeleteClient(Client client)
+    /// <param name="id">O ID do cliente a ser excluído.</param>
+    public static void DeleteClient(string id)
     {
         try
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand("DELETE FROM clients WHERE id = @id", connection);
             
-            cmd.Parameters.AddWithValue("@id", client.Id);
+            cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
         }
         catch (Exception ex)

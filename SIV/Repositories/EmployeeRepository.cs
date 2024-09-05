@@ -125,15 +125,15 @@ public static class EmployeeRepository
     /// <summary>
     /// Exclui um funcionário do banco de dados.
     /// </summary>
-    /// <param name="employee">O objeto <c>Employee</c> contendo o ID do funcionário a ser excluído.</param>
-    public static void DeleteEmployee(Employee employee)
+    /// <param name="id">ID do funcionário a ser excluído.</param>
+    public static void DeleteEmployee(string id)
     {
         try
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand("DELETE FROM employees WHERE id = @id", connection);
             
-            cmd.Parameters.AddWithValue("@id", employee.Id);
+            cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
         }
         catch (Exception ex)

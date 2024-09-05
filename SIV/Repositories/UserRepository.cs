@@ -88,15 +88,15 @@ public static class UserRepository
     /// <summary>
     /// Exclui um usuário do banco de dados com base no ID fornecido.
     /// </summary>
-    /// <param name="user">O objeto <c>User</c> contendo o ID do usuário a ser excluído. </param>
-    public static void DeleteUser(User user)
+    /// <param name="id">ID do usuário a ser excluído. </param>
+    public static void DeleteUser(string id)
     {
         try
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand("DELETE FROM users WHERE id = @id", connection);
             
-            cmd.Parameters.AddWithValue("@id", user.Id);
+            cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
         }
         catch (Exception ex)
