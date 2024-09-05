@@ -88,15 +88,15 @@ public static class PaymentRepository
     /// <summary>
     /// Exclui um método de pagamento do banco de dados.
     /// </summary>
-    /// <param name="id">O ID do método de pagamento a ser excluído.</param>
-    public static void DeletePayment(string id)
+    /// <param name="payment">O objeto <c>Payment</c> contendo o ID do pagamento a ser excluído.</param>
+    public static void DeletePayment(Payment payment)
     {
         try
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand("DELETE FROM payments WHERE id = @id", connection);
 
-            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@id", payment.Id);
             cmd.ExecuteNonQuery();
         }
         catch (Exception ex)

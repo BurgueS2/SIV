@@ -2,14 +2,15 @@
 using System.Data;
 using MySql.Data.MySqlClient;
 using SIV.Core;
+using SIV.Helpers;
+using SIV.Models;
 
 namespace SIV.Repositories;
 
 /// <summary>
-/// A classe é responsável por gerenciar as operações de banco de dados relacionadas aos clientes.
-/// Inclui operações como buscar, salvar, atualizar e deletar clientes no banco de dados.
+/// A classe <c>ClientRepository</c> é responsável por realizar operações de CRUD (Create, Read, Update, Delete) no banco de dados para a entidade Client.
 /// </summary>
-public class ClientRepository
+public static class ClientRepository
 {
     /// <summary>
     /// Obtém todos os clientes do banco de dados.
@@ -17,110 +18,120 @@ public class ClientRepository
     /// <returns>Um <c>DataTable</c> contendo todos os clientes.</returns>
     public static DataTable GetAllClients()
     {
-        var dt = new DataTable();
-        
-        using (var connection = ConnectionManager.GetConnection())
-        using (var cmd = new MySqlCommand("SELECT * FROM clients ORDER BY name", connection))
+        try
         {
-            using (var adapter = new MySqlDataAdapter(cmd))
-            {
-                adapter.Fill(dt);
-            }
-        }
+            var dt = new DataTable();
 
-        return dt;
+            using var connection = ConnectionManager.GetConnection();
+            using var cmd = new MySqlCommand("SELECT * FROM clients ORDER BY name", connection);
+            using var adapter = new MySqlDataAdapter(cmd);
+            
+            adapter.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "obter os dados dos clientes");
+            return null;
+        }
     }
     
     /// <summary>
-    /// Verifica a existência de um CPF no banco de dados, considerando um CPF antigo para operações de atualização.
+    /// Verifica se um CPF já está cadastrado no banco de dados, exceto durante uma atualização.
     /// </summary>
-    /// <param name="cpf">O CPF a ser verificado.</param>
+    /// <param name="cpf">O CPF do cliente a ser verificado.</param>
     /// <param name="oldCpf">O CPF antigo do cliente, usado em operações de atualização.</param>
-    /// <returns>True se o CPF não existir ou for o mesmo do CPF antigo, caso contrário, false.</returns>
+    /// <returns>Retorna <c>True</c> se o CPF não existir ou for o mesmo do CPF antigo, caso contrário, <c>False</c>.</returns>
     public static bool VerifyCpfExistence(string cpf, string oldCpf)
     {
-        if (cpf == oldCpf)
+        try
         {
-            return true; // Se o CPF for igual ao CPF antigo, não é necessário verificar se o CPF já existe
-        }
-
-        using (var connection = ConnectionManager.GetConnection())
-        using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM clients WHERE cpf = @cpf", connection))
-        {
-            cmd.Parameters.AddWithValue("@cpf", cpf);
-            var result = (long)cmd.ExecuteScalar(); // ExecuteScalar retorna a primeira coluna da primeira linha do resultado da consulta
+            using var connection = ConnectionManager.GetConnection();
+            using var cmd = new MySqlCommand("SELECT COUNT(*) FROM clients WHERE cpf = @cpf AND cpf != @oldCpf", connection);
             
-            return result == 0; // Se result for 0, significa que o CPF não existe
+            cmd.Parameters.AddWithValue("@cpf", cpf);
+            cmd.Parameters.AddWithValue("@oldCpf", oldCpf);
+            var result = Convert.ToInt32(cmd.ExecuteScalar());
+            
+            return result > 0;
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "verificar a existência do CPF");
+            return false;
         }
     }
     
     /// <summary>
     /// Salva um novo cliente no banco de dados.
     /// </summary>
-    /// <param name="name">Nome do cliente.</param>
-    /// <param name="cpf">CPF do cliente.</param>
-    /// <param name="status">Status do cliente (ativo/inativo).</param>
-    /// <param name="phone">Telefone do cliente.</param>
-    /// <param name="email">Email do cliente.</param>
-    /// <param name="address">Endereço do cliente.</param>
-    /// <param name="referencePoint">Ponto de referencia para o Endereço</param>
-    /// <param name="observation">Campo de observação</param>
-    /// <param name="sex">Sexo do cliente</param>
-    public static void SaveClient(string name, string cpf, string status, string phone, string email, string address, string referencePoint, string observation, string sex)
+    /// <param name="client">O objeto <c>Client</c> contendo os dados do cliente a ser salvo.</param>
+    public static void SaveClient(Client client)
     {
-        using (var connection = ConnectionManager.GetConnection())
-        using (var cmd = new MySqlCommand("INSERT INTO clients (name, cpf, status, phone, email, address, reference_point, observation, sex, date) " + 
-            "VALUES (@name, @cpf, @status, @phone, @email, @address, @reference_point, @observation, sex, curDate())", connection))
+        try
         {
-            cmd.Parameters.AddWithValue("@name", name);
-            cmd.Parameters.AddWithValue("@cpf", cpf);
-            cmd.Parameters.AddWithValue("@status", status);
-            cmd.Parameters.AddWithValue("@phone", phone);
-            cmd.Parameters.AddWithValue("@email", email);
-            cmd.Parameters.AddWithValue("@address", address);
-            cmd.Parameters.AddWithValue("@reference_point", referencePoint);
-            cmd.Parameters.AddWithValue("@observation", observation);
-            cmd.Parameters.AddWithValue("@sex", sex);
+            using var connection = ConnectionManager.GetConnection();
+            using var cmd = new MySqlCommand(
+                "INSERT INTO clients (name, cpf, status, phone, email, address, reference_point, observation, sex, date) " + 
+                "VALUES (@name, @cpf, @status, @phone, @email, @address, @reference_point, @observation, sex, curDate())", connection);
+            
+            AddClientParameters(cmd, client);
             cmd.ExecuteNonQuery();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "salvar o cliente");
         }
     }
     
     /// <summary>
     /// Atualiza os dados de um cliente existente no banco de dados.
     /// </summary>
-    public static void UpdateClient(string id , string name, string cpf, string status, string phone, string email, string address, string referencePoint, string observation, string sex)
+    /// <param name="client">O objeto <c>Client</c> contendo os dados atualizados do cliente.</param>
+    public static void UpdateClient(Client client)
     {
-        using (var connection = ConnectionManager.GetConnection())
-        using (var cmd = new MySqlCommand("UPDATE clients SET  name = @name, cpf = @cpf, status = @status, phone = @phone, email = @email, address = @address, " +
-            "reference_point = @reference_point, observation = @observation , sex = @sex WHERE id = @id", connection))
+        try
         {
-            cmd.Parameters.AddWithValue("@id", id);
-            cmd.Parameters.AddWithValue("@name", name);
-            cmd.Parameters.AddWithValue("@cpf", cpf);
-            cmd.Parameters.AddWithValue("@status", status);
-            cmd.Parameters.AddWithValue("@phone", phone);
-            cmd.Parameters.AddWithValue("@email", email);
-            cmd.Parameters.AddWithValue("@address", address);
-            cmd.Parameters.AddWithValue("@reference_point", referencePoint);
-            cmd.Parameters.AddWithValue("@observation", observation);
-            cmd.Parameters.AddWithValue("@sex", sex);
+            using var connection = ConnectionManager.GetConnection();
+            using var cmd = new MySqlCommand(
+                "UPDATE clients SET  name = @name, cpf = @cpf, status = @status, phone = @phone, email = @email, address = @address, " +
+                "reference_point = @reference_point, observation = @observation , sex = @sex WHERE id = @id", connection);
+            
+            cmd.Parameters.AddWithValue("@id", client.Id);
+            AddClientParameters(cmd, client);
             cmd.ExecuteNonQuery();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "atualizar o cliente");
         }
     }
     
     /// <summary>
     /// Exclui um cliente do banco de dados.
     /// </summary>
-    public static void DeleteClient(string id)
+    /// <param name="client">O objeto <c>Client</c> contendo o ID do cliente a ser excluído.</param>
+    public static void DeleteClient(Client client)
     {
-        using (var connection = ConnectionManager.GetConnection()) // Uso do bloco using para garantir que a conexão será fechada após o uso
-        using (var cmd = new MySqlCommand("DELETE FROM clients WHERE id = @id", connection))
+        try
         {
-            cmd.Parameters.AddWithValue("@id", id);
+            using var connection = ConnectionManager.GetConnection();
+            using var cmd = new MySqlCommand("DELETE FROM clients WHERE id = @id", connection);
+            
+            cmd.Parameters.AddWithValue("@id", client.Id);
             cmd.ExecuteNonQuery();
         }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "excluir o cliente");
+        }
     }
-
+    
     /// <summary>
     /// Busca clientes pelo nome.
     /// </summary>
@@ -128,19 +139,26 @@ public class ClientRepository
     /// <returns>Um <c>DataTable</c> contendo os clientes que correspondem ao critério de busca.</returns>
     public static DataTable SearchByName(string name)
     {
-        var dt = new DataTable();
-        
-        using (var connection = ConnectionManager.GetConnection())
-        using (var cmd = new MySqlCommand("SELECT * FROM clients WHERE name LIKE @name ORDER BY name", connection))
+        try
         {
-            cmd.Parameters.AddWithValue("@name", "%" + name + "%"); // Adiciona o caractere % para buscar qualquer nome que contenha o valor informado
-            using (var adapter = new MySqlDataAdapter(cmd))
-            {
-                adapter.Fill(dt);
-            }
-        }
+            var dt = new DataTable();
 
-        return dt;
+            using var connection = ConnectionManager.GetConnection();
+            using var cmd = new MySqlCommand("SELECT * FROM clients WHERE name LIKE @name ORDER BY name", connection);
+            
+            cmd.Parameters.AddWithValue("@name", "%" + name + "%"); // Adiciona o caractere % para buscar qualquer nome que contenha o valor informado
+            
+            using var adapter = new MySqlDataAdapter(cmd);
+            
+            adapter.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "buscar os clientes");
+            return null;
+        }
     }
     
     /// <summary>
@@ -150,35 +168,68 @@ public class ClientRepository
     /// <returns>Um <c>DataTable</c> contendo os clientes que correspondem ao critério de busca.</returns>
     public static DataTable SearchByCpf(string cpf)
     {
-        var dt = new DataTable();
-        
-        using (var connection = ConnectionManager.GetConnection())
-        using (var cmd = new MySqlCommand("SELECT * FROM clients WHERE cpf LIKE @cpf ORDER BY name", connection))
+        try
         {
+            var dt = new DataTable();
+
+            using var connection = ConnectionManager.GetConnection();
+            using var cmd = new MySqlCommand("SELECT * FROM clients WHERE cpf LIKE @cpf ORDER BY name", connection);
+            
             cmd.Parameters.AddWithValue("@cpf", "%" + cpf + "%"); // Adiciona o caractere % para buscar qualquer CPF que contenha o valor informado
-            using (var adapter = new MySqlDataAdapter(cmd))
-            {
-                adapter.Fill(dt);
-            }
+            
+            using var adapter = new MySqlDataAdapter(cmd);
+            
+            adapter.Fill(dt);
+            return dt;
         }
-
-        return dt;
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "buscar os clientes");
+            return null;
+        }
     }
-
+    
     /// <summary>
-    /// Verifica a existência de um email no banco de dados.
+    /// Verifica se um email já está cadastrado no banco de dados.
     /// </summary>
-    /// <param name="email">O email a ser verificado.</param>
-    /// <returns>True se o email já existir, caso contrário, false.</returns>
+    /// <param name="email">O email do cliente a ser verificado.</param>
+    /// <returns> Retorna <c>True</c> se o email já existir, caso contrário, <c>False</c>.</returns>
     public static bool VerifyEmailExisting(string email)
     {
-        using (var connection = ConnectionManager.GetConnection())
-        using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM clients WHERE LOWER(email) = LOWER(@email)", connection))
+        try
         {
-            cmd.Parameters.AddWithValue("@email", email);
-            var result = Convert.ToInt32(cmd.ExecuteScalar());
+            using var connection = ConnectionManager.GetConnection();
+            using var cmd = new MySqlCommand("SELECT COUNT(*) FROM clients WHERE LOWER(email) = LOWER(@email)", connection);
             
+            cmd.Parameters.AddWithValue("@email", email);
+            
+            var result = Convert.ToInt32(cmd.ExecuteScalar());
             return result > 0; // Se result for maior que 0, significa que o email já existe
         }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "verificar a existência do email");
+            return false;
+        }
+    }
+    
+    /// <summary>
+    /// Adiciona os parâmetros de um objeto <c>Client</c> a um comando MySql.
+    /// </summary>
+    /// <param name="cmd">O comando MySql ao qual os parâmetros serão adicionados.</param>
+    /// <param name="client">O objeto <c>Client</c> contendo os dados dos parâmetros.</param>
+    private static void AddClientParameters(MySqlCommand cmd, Client client)
+    {
+        cmd.Parameters.AddWithValue("@name", client.Name);
+        cmd.Parameters.AddWithValue("@cpf", client.Cpf);
+        cmd.Parameters.AddWithValue("@status", client.Status);
+        cmd.Parameters.AddWithValue("@phone", client.Phone);
+        cmd.Parameters.AddWithValue("@email", client.Email);
+        cmd.Parameters.AddWithValue("@address", client.Address);
+        cmd.Parameters.AddWithValue("@reference_point", client.ReferencePoint);
+        cmd.Parameters.AddWithValue("@observation", client.Observation);
+        cmd.Parameters.AddWithValue("@sex", client.Sex);
     }
 }
