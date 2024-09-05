@@ -7,8 +7,14 @@ using SIV.teste;
 
 namespace SIV.Repositories;
 
+/// <summary>
+/// A classe <c>TableRepository</c> é responsável por intermediar a comunicação entre a aplicação e a tabela 'tables' do banco de dados.
+/// </summary>
 public static class TableRepository
 {
+    /// <summary>
+    /// Inicializa o banco de dados criando a tabela 'tables' se ela não existir.
+    /// </summary>
     public static void InitializeDatabase()
     {
         try
@@ -25,7 +31,7 @@ public static class TableRepository
         }
     }
     
-    // Método a ser chamado quando o programa for fechado ou possivelmente ser excluído por não ser utilizado
+    // Método a ser chamado quando o programa for fechado ou ser possivelmente excluído por não ser utilizado
     public static void SaveTable(Table table)
     {
         try
@@ -50,15 +56,18 @@ public static class TableRepository
         }
     }
 
+    /// <summary>
+    /// Carrega uma mesa do banco de dados com base no ID fornecido.
+    /// </summary>
+    /// <param name="id">O ID da mesa a ser carregada.</param>
+    /// <returns>O objeto Table contendo os dados da mesa.</returns>
     public static Table LoadTable(int id)
     {
         try
         {
             using (var connection = ConnectionManager.GetConnection())
             {
-                using (var cmd = new MySqlCommand(
-                           "SELECT state, color, product_name, product_price,save_date, save_time FROM tables WHERE id = @id",
-                           connection))
+                using (var cmd = new MySqlCommand("SELECT state, color, product_name, product_price,save_date, save_time FROM tables WHERE id = @id", connection))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -73,6 +82,7 @@ public static class TableRepository
                             SaveDate = reader["save_date"] != DBNull.Value ? (DateTime?)reader["SaveDate"] : null,
                             SaveTime = reader["save_time"] != DBNull.Value ? (TimeSpan?)reader["SaveTime"] : null
                         };
+                        
                         return table;
                     }
                 }
@@ -89,8 +99,11 @@ public static class TableRepository
             ConnectionManager.CloseConnection();
         }
     }
-
-
+    
+    /// <summary>
+    /// Exclui uma mesa do banco de dados com base no ID fornecido.
+    /// </summary>
+    /// <param name="id">O ID da mesa a ser excluída.</param>
     public static void DeleteTable(int id)
     {
         try
@@ -108,6 +121,13 @@ public static class TableRepository
         }
     }
     
+    /// <summary>
+    /// Adiciona um produto a uma mesa no banco de dados.
+    /// </summary>
+    /// <param name="tableId">O ID da mesa.</param>
+    /// <param name="productName">O nome do produto.</param>
+    /// <param name="productPrice">O preço do produto.</param>
+    /// <param name="amount">A quantidade do produto.</param>
     public static void AddProductToTable(int tableId, string productName, decimal productPrice, decimal amount)
     {
         try
@@ -130,6 +150,11 @@ public static class TableRepository
         }
     }
     
+    /// <summary>
+    /// Obtém os produtos de uma mesa específica do banco de dados.
+    /// </summary>
+    /// <param name="tableId">O ID da mesa.</param>
+    /// <returns>Um DataTable contendo os produtos da mesa.</returns>
     public static DataTable GetTableProducts(int tableId)
     {
         try
@@ -153,6 +178,12 @@ public static class TableRepository
         }
     }
     
+    /// <summary>
+    /// Atualiza o estado e a cor de uma mesa no banco de dados.
+    /// </summary>
+    /// <param name="tableId">O ID da mesa.</param>
+    /// <param name="state">O novo estado da mesa.</param>
+    /// <param name="color">A nova cor da mesa.</param>
     public static void UpdateTableState(int tableId, string state, string color)
     {
         try
