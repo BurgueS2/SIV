@@ -105,14 +105,14 @@ public static class JobRepository
     /// </summary>
     /// <param name="job">O objeto <c>Job</c> contendo o nome do cargo a ser verificado.</param>
     /// <returns>Retorna <c>true</c> se o cargo já existe no banco de dados, caso contrário, retorna <c>false</c>.</returns>
-    public static bool JobExists(Job job)
+    public static bool JobExists(string name)
     {
         try
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand("SELECT COUNT(*) FROM job WHERE LOWER(name) = LOWER(@name)", connection);
             
-            cmd.Parameters.AddWithValue("@name", job.Name);
+            cmd.Parameters.AddWithValue("@name", name);
             
             var result = Convert.ToInt32(cmd.ExecuteScalar());
             

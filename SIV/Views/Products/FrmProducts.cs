@@ -11,7 +11,7 @@ namespace SIV.Views.Products;
 
 public partial class FrmProducts : Form
 {
-    private int _selectedProductId;
+    private string _selectedProductId;
     
     public FrmProducts()
     {
@@ -34,7 +34,7 @@ public partial class FrmProducts : Form
         btnSave.Enabled = false;
 
         // Obtém os valores das células da linha selecionada e preenche os campos do formulário
-        _selectedProductId = Convert.ToInt32(gridData.CurrentRow?.Cells[0].Value.ToString()); // Armazena o ID do produto selecionado
+        _selectedProductId = gridData.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do produto selecionado
         txtCode.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
         txtName.Text = gridData.CurrentRow?.Cells[2].Value.ToString();
         txtDescription.Text = gridData.CurrentRow?.Cells[3].Value.ToString();
@@ -83,19 +83,10 @@ public partial class FrmProducts : Form
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowSaveSuccessMessage();
         }
-        catch (MySqlException ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro ao salvar no banco de dados: {ex.Message}");
-        }
         catch (Exception ex)
         {
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, $"Erro inesperado: {ex.Message}");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
         }
     }
     
@@ -111,19 +102,10 @@ public partial class FrmProducts : Form
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowUpdateSuccessMessage();
         }
-        catch (MySqlException ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro ao salvar no banco de dados: {ex.Message}");
-        }
         catch (Exception ex)
         {
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, $"Erro inesperado: {ex.Message}");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
         }
     }
     
@@ -138,19 +120,10 @@ public partial class FrmProducts : Form
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowDeleteSuccessMessage();
         }
-        catch (MySqlException ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro ao deletar o produto: {ex.Message}");
-        }
         catch (Exception ex)
         {
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "excluir");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
         }
     }
     
@@ -176,19 +149,10 @@ public partial class FrmProducts : Form
             gridData.DataSource = ProductRepository.GetAllProducts();
             FormatGridData();
         }
-        catch (MySqlException ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, "carregar todos os produtos");
-        }
         catch (Exception ex)
         {
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "carregar produtos");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
         }
     }
     
@@ -205,10 +169,6 @@ public partial class FrmProducts : Form
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "carregar fornecedores");
         }
-        finally
-        {
-            ConnectionManager.CloseConnection();
-        }
     }
     
     private void LoadStockGroup()
@@ -223,10 +183,6 @@ public partial class FrmProducts : Form
         {
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "carregar grupos de estoque");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
         }
     }
     

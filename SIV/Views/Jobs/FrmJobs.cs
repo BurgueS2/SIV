@@ -6,6 +6,7 @@ using SIV.Controllers;
 using SIV.Core;
 using SIV.Helpers;
 using SIV.Models;
+using SIV.Repositories;
 
 namespace SIV.Views.Jobs;
 
@@ -84,30 +85,21 @@ public partial class FrmJobs : Form
                 MessageBox.Show(this, @"O nome do cargo não pode estar vazio, Use apenas letras e espaços.", @"Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-        
-            if (JobController.JobExists(txtName.Text))
+            
+            if (JobRepository.JobExists(txtName.Text))
             {
                 MessageHelper.ShowJobExistMessage(newJob.Name);
                 return;
             }
             
-            JobController.SaveJob(newJob);
+            JobRepository.SaveJob(newJob);
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowSaveSuccessMessage();
-        }
-        catch (MySqlException ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro ao salvar no banco de dados: {ex.Message}");
         }
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro inesperado: {ex.Message}");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
+            MessageHelper.ShowErrorMessage(ex, "salvar");
         }
     }
     
@@ -122,24 +114,15 @@ public partial class FrmJobs : Form
             }
             
             var job = new Job { Id = _selectedJobId, Name = txtName.Text };
-            JobController.UpdateJob(job);
+            JobRepository.UpdateJob(job);
             
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowUpdateSuccessMessage();
         }
-        catch (MySqlException ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro ao salvar no banco de dados: {ex.Message}");
-        }
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro inesperado: {ex.Message}");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
+            MessageHelper.ShowErrorMessage(ex, "editar");
         }
     }
     
@@ -155,7 +138,7 @@ public partial class FrmJobs : Form
 
             if (!MessageHelper.ConfirmDeletion()) return;
             
-            JobController.DeleteJob(_selectedJobId);
+            JobRepository.DeleteJob(_selectedJobId);
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowDeleteSuccessMessage();
         }
@@ -164,27 +147,19 @@ public partial class FrmJobs : Form
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "excluir");
         }
-        finally
-        {
-            ConnectionManager.CloseConnection();
-        }
     }
     
     private void LoadJobs()
     {
         try
         {
-            gridData.DataSource = JobController.GetAllJobs();
+            gridData.DataSource = JobRepository.GetAllJobs();
             gridData.Columns[0].Visible = false;
         }
         catch (Exception ex)
         {
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "carregar");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
         }
     }
     
