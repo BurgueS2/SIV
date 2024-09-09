@@ -6,24 +6,21 @@ using SIV.Helpers;
 using SIV.Models;
 using SIV.Repositories;
 
-namespace SIV.Views.Jobs;
+namespace SIV.Views.StockGroup;
 
-/// <summary>
-/// A classe é responsável pela interface gráfica relacionada à gestão de cargos no sistema.
-/// </summary>
-public partial class FrmJobs : Form
+public partial class FrmStockGroup : MetroFramework.Forms.MetroForm
 {
-    private string _selectedJobId;
+    private string _selectedStockGroupId;
     
-    public FrmJobs()
+    public FrmStockGroup()
     {
         InitializeComponent();
     }
     
-    private void FrmJobs_Load(object sender, EventArgs e)
+    private void FrmStockGroup_Load(object sender, EventArgs e)
     {
         ConfigureUiControls(false);
-        LoadJobs();
+        LoadStockGroup();
         btnNew.Enabled = true;
         gridData.Columns[1].HeaderText = @"NOME";
         gridData.Columns[2].HeaderText = @"DATA DE CADASTRO";
@@ -37,7 +34,7 @@ public partial class FrmJobs : Form
         btnSave.Enabled = false;
         
         // Preenche o campo de texto com o nome do cargo selecionado
-        _selectedJobId = gridData.SelectedRows[0].Cells[0].Value.ToString();
+        _selectedStockGroupId = gridData.SelectedRows[0].Cells[0].Value.ToString(); // Armazena o ID do grupo de estoque selecionado
         txtName.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
     }
 
@@ -49,7 +46,7 @@ public partial class FrmJobs : Form
         btnDelete.Enabled = false;
         gridData.Enabled = false;
     }
-
+    
     private void btnCancel_Click(object sender, EventArgs e)
     {
         ConfigureUiControls(false);
@@ -76,21 +73,16 @@ public partial class FrmJobs : Form
     {
         try
         {
-            var newJob = new Job { Name = txtName.Text };
+            var newStockGroup = new Stock { Name = txtName.Text.ToUpper() };
             
             if (string.IsNullOrWhiteSpace(txtName.Text) || !Regex.IsMatch(txtName.Text, @"^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ ]{2,}$"))
             {
-                MessageBox.Show(this, @"O nome do cargo não pode estar vazio, Use apenas letras e espaços.", @"Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(this, @"O nome do estoque não pode estar vazio, Use apenas letras e espaços.", @"Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             
-            if (JobRepository.JobExists(txtName.Text))
-            {
-                MessageHelper.ShowJobExistMessage(newJob.Name);
-                return;
-            }
+            StockGroupRepository.SaveStockGroup(newStockGroup);
             
-            JobRepository.SaveJob(newJob);
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowSaveSuccessMessage();
         }
@@ -105,14 +97,8 @@ public partial class FrmJobs : Form
     {
         try
         {
-            if (string.IsNullOrWhiteSpace(_selectedJobId))
-            {
-                MessageHelper.ShowMessageJob("editar");
-                return;
-            }
-            
-            var job = new Job { Id = _selectedJobId, Name = txtName.Text };
-            JobRepository.UpdateJob(job);
+            var newStockGroup  = new Stock { Id = _selectedStockGroupId, Name = txtName.Text.ToUpper() };
+            StockGroupRepository.UpdateStockGroup(newStockGroup);
             
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowUpdateSuccessMessage();
@@ -128,7 +114,7 @@ public partial class FrmJobs : Form
     {
         try
         {
-            if (string.IsNullOrWhiteSpace(_selectedJobId))
+            if (string.IsNullOrWhiteSpace(_selectedStockGroupId))
             {
                 MessageHelper.ShowMessageJob("excluir");
                 return;
@@ -136,7 +122,7 @@ public partial class FrmJobs : Form
 
             if (!MessageHelper.ConfirmDeletion()) return;
             
-            JobRepository.DeleteJob(_selectedJobId);
+            StockGroupRepository.DeleteStockGroup(_selectedStockGroupId);
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowDeleteSuccessMessage();
         }
@@ -147,17 +133,17 @@ public partial class FrmJobs : Form
         }
     }
     
-    private void LoadJobs()
+    private void LoadStockGroup()
     {
         try
         {
-            gridData.DataSource = JobRepository.GetAllJobs();
+            gridData.DataSource = StockGroupRepository.GetAllStockGroup();
             gridData.Columns[0].Visible = false;
         }
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, "carregar");
+            MessageHelper.ShowErrorMessage(ex, "carregar os grupos de estoque");
         }
     }
     
@@ -175,7 +161,7 @@ public partial class FrmJobs : Form
     private void UpdateUiAfterSaveOrUpdate()
     {
         txtName.Clear();
-        LoadJobs();
+        LoadStockGroup();
         ConfigureUiControls(false);
         gridData.Enabled = true;
     }

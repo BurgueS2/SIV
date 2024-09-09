@@ -6,6 +6,7 @@ using SIV.Core;
 using SIV.Helpers;
 using SIV.Models;
 using SIV.Repositories;
+using SIV.Views.StockGroup;
 
 namespace SIV.Views.Products;
 
@@ -69,6 +70,12 @@ public partial class FrmProducts : Form
     private void btnDelete_Click(object sender, EventArgs e)
     {
         DeleteFormData();
+    }
+    
+    private void btnAddStockGroup_Click(object sender, EventArgs e)
+    {
+        var frmStockGroup = new FrmStockGroup();
+        frmStockGroup.ShowDialog();
     }
     
     private void SaveFormData()
@@ -160,7 +167,7 @@ public partial class FrmProducts : Form
     {
         try
         {
-            //cbSupplier.DataSource = JobController.GetAllJobs();
+            //cbSupplier.DataSource = SupplierController.GetAllSuppliers();
             cbSupplier.DisplayMember = "Name";
             cbSupplier.ValueMember = "Id";
         }
@@ -175,9 +182,10 @@ public partial class FrmProducts : Form
     {
         try
         {
-            //cbStockGroup.DataSource = StockGroupController.GetAllStockGroups();
-            cbStockGroup.DisplayMember = "Name";
-            cbStockGroup.ValueMember = "Id";
+            cbSupplier.Text = null;
+            cbStockGroup.DataSource = StockGroupRepository.GetAllStockGroup();
+            cbStockGroup.DisplayMember = "Name"; 
+            //cbStockGroup.ValueMember = "Id";
         }
         catch (Exception ex)
         {

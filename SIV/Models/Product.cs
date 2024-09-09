@@ -10,4 +10,5 @@ public class Product
     public decimal ResalePrice { get; set; }
     public string StockGroup { get; set; }
     public string Supplier { get; set; }
+    //public int StockQuantity { get; set; } // Nova propriedade
 }

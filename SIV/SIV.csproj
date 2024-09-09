@@ -160,6 +160,7 @@
         <Compile Include="Models\Job.cs" />
         <Compile Include="Models\Payment.cs" />
         <Compile Include="Models\Product.cs" />
+        <Compile Include="Models\Stock.cs" />
         <Compile Include="Models\Table.cs" />
         <Compile Include="Models\User.cs" />
         <Compile Include="Program.cs" />
@@ -169,6 +170,7 @@
         <Compile Include="Repositories\JobRepository.cs" />
         <Compile Include="Repositories\PaymentRepository.cs" />
         <Compile Include="Repositories\ProductRepository.cs" />
+        <Compile Include="Repositories\StockGroupRepository.cs" />
         <Compile Include="Repositories\TableRepository.cs" />
         <Compile Include="Repositories\UserRepository.cs" />
         <Compile Include="Validators\ClientValidator.cs" />
@@ -217,6 +219,12 @@
         </Compile>
         <Compile Include="Views\Registers\FrmRegisters.Designer.cs">
           <DependentUpon>FrmRegisters.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Views\StockGroup\FrmStockGroup.cs">
+          <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="Views\StockGroup\FrmStockGroup.Designer.cs">
+          <DependentUpon>FrmStockGroup.cs</DependentUpon>
         </Compile>
         <Compile Include="Views\Tables\FrmShowTableOptions.cs" />
         <Compile Include="Views\Tables\FrmShowTableOptions.Designer.cs">
@@ -287,6 +295,9 @@
         </EmbeddedResource>
         <EmbeddedResource Include="Views\Registers\FrmRegisters.resx">
           <DependentUpon>FrmRegisters.cs</DependentUpon>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Views\StockGroup\FrmStockGroup.resx">
+          <DependentUpon>FrmStockGroup.cs</DependentUpon>
         </EmbeddedResource>
         <EmbeddedResource Include="Views\Tables\FrmShowTableOptions.resx">
           <DependentUpon>FrmShowTableOptions.cs</DependentUpon>

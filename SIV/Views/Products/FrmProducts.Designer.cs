@@ -47,8 +47,6 @@ partial class FrmProducts
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -57,9 +55,8 @@ partial class FrmProducts
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -70,6 +67,9 @@ partial class FrmProducts
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
         this.labelCode = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.txtCode = new Guna.UI2.WinForms.Guna2TextBox();
         this.labelSupplier = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -81,13 +81,10 @@ partial class FrmProducts
         this.btnDelete = new Guna.UI2.WinForms.Guna2Button();
         this.btnEdit = new Guna.UI2.WinForms.Guna2Button();
         this.btnSave = new Guna.UI2.WinForms.Guna2Button();
-        this.panelGrid = new Guna.UI2.WinForms.Guna2Panel();
         this.btnSearchCode = new Guna.UI2.WinForms.Guna2Button();
         this.txtSearchCode = new Guna.UI2.WinForms.Guna2TextBox();
         this.btnSearchName = new Guna.UI2.WinForms.Guna2Button();
-        this.labelRegisteredProducts = new System.Windows.Forms.Label();
         this.txtSearchName = new Guna.UI2.WinForms.Guna2TextBox();
-        this.gridData = new Guna.UI2.WinForms.Guna2DataGridView();
         this.cbStockGroup = new Guna.UI2.WinForms.Guna2ComboBox();
         this.LabelStockGroup = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.labelDescription = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -97,6 +94,9 @@ partial class FrmProducts
         this.labelResalePrice = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.txtResalePrice = new Guna.UI2.WinForms.Guna2TextBox();
         this.btnAddStockGroup = new Guna.UI2.WinForms.Guna2Button();
+        this.panelGrid = new Guna.UI2.WinForms.Guna2Panel();
+        this.labelRegisteredPaymants = new System.Windows.Forms.Label();
+        this.gridData = new Guna.UI2.WinForms.Guna2DataGridView();
         this.panelGrid.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
         this.SuspendLayout();
@@ -318,25 +318,6 @@ partial class FrmProducts
         this.btnSave.Text = "Salvar";
         this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
         // 
-        // panelGrid
-        // 
-        this.panelGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-        this.panelGrid.BorderRadius = 15;
-        this.panelGrid.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-        this.panelGrid.Controls.Add(this.btnSearchCode);
-        this.panelGrid.Controls.Add(this.txtSearchCode);
-        this.panelGrid.Controls.Add(this.btnSearchName);
-        this.panelGrid.Controls.Add(this.labelRegisteredProducts);
-        this.panelGrid.Controls.Add(this.txtSearchName);
-        this.panelGrid.Controls.Add(this.gridData);
-        this.panelGrid.CustomizableEdges = customizableEdges25;
-        this.panelGrid.FillColor = System.Drawing.Color.Transparent;
-        this.panelGrid.Location = new System.Drawing.Point(12, 408);
-        this.panelGrid.Name = "panelGrid";
-        this.panelGrid.ShadowDecoration.CustomizableEdges = customizableEdges26;
-        this.panelGrid.Size = new System.Drawing.Size(1056, 300);
-        this.panelGrid.TabIndex = 135;
-        // 
         // btnSearchCode
         // 
         this.btnSearchCode.Animated = true;
@@ -397,22 +378,11 @@ partial class FrmProducts
         this.btnSearchName.ForeColor = System.Drawing.Color.White;
         this.btnSearchName.Image = global::SIV.Properties.Resources.icons_pesquisar;
         this.btnSearchName.ImageSize = new System.Drawing.Size(30, 30);
-        this.btnSearchName.Location = new System.Drawing.Point(265, 41);
+        this.btnSearchName.Location = new System.Drawing.Point(263, 41);
         this.btnSearchName.Name = "btnSearchName";
         this.btnSearchName.ShadowDecoration.CustomizableEdges = customizableEdges22;
         this.btnSearchName.Size = new System.Drawing.Size(25, 25);
         this.btnSearchName.TabIndex = 29;
-        // 
-        // labelRegisteredProducts
-        // 
-        this.labelRegisteredProducts.BackColor = System.Drawing.Color.Transparent;
-        this.labelRegisteredProducts.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.labelRegisteredProducts.Location = new System.Drawing.Point(3, 0);
-        this.labelRegisteredProducts.Name = "labelRegisteredProducts";
-        this.labelRegisteredProducts.Size = new System.Drawing.Size(207, 36);
-        this.labelRegisteredProducts.TabIndex = 27;
-        this.labelRegisteredProducts.Text = "Produtos Cadastrados";
-        this.labelRegisteredProducts.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // txtSearchName
         // 
@@ -438,66 +408,11 @@ partial class FrmProducts
         this.txtSearchName.Size = new System.Drawing.Size(295, 29);
         this.txtSearchName.TabIndex = 28;
         // 
-        // gridData
-        // 
-        this.gridData.AllowUserToAddRows = false;
-        this.gridData.AllowUserToDeleteRows = false;
-        dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
-        this.gridData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-        this.gridData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-        dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(188)))), ((int)(((byte)(211)))));
-        dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-        dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-        dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-        dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-        this.gridData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-        this.gridData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-        dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(241)))), ((int)(((byte)(245)))));
-        dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-        dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(210)))), ((int)(((byte)(225)))));
-        dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-        dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-        this.gridData.DefaultCellStyle = dataGridViewCellStyle3;
-        this.gridData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
-        this.gridData.Location = new System.Drawing.Point(0, 89);
-        this.gridData.Name = "gridData";
-        this.gridData.ReadOnly = true;
-        this.gridData.RowHeadersVisible = false;
-        this.gridData.Size = new System.Drawing.Size(1056, 211);
-        this.gridData.TabIndex = 21;
-        this.gridData.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Cyan;
-        this.gridData.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
-        this.gridData.ThemeStyle.AlternatingRowsStyle.Font = null;
-        this.gridData.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
-        this.gridData.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
-        this.gridData.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
-        this.gridData.ThemeStyle.BackColor = System.Drawing.Color.White;
-        this.gridData.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
-        this.gridData.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(188)))), ((int)(((byte)(211)))));
-        this.gridData.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-        this.gridData.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.gridData.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-        this.gridData.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-        this.gridData.ThemeStyle.HeaderStyle.Height = 23;
-        this.gridData.ThemeStyle.ReadOnly = true;
-        this.gridData.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(241)))), ((int)(((byte)(245)))));
-        this.gridData.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-        this.gridData.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.gridData.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.Black;
-        this.gridData.ThemeStyle.RowsStyle.Height = 22;
-        this.gridData.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(210)))), ((int)(((byte)(225)))));
-        this.gridData.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
-        this.gridData.DoubleClick += new System.EventHandler(this.gridData_DoubleClick);
-        // 
         // cbStockGroup
         // 
         this.cbStockGroup.BackColor = System.Drawing.Color.Transparent;
         this.cbStockGroup.BorderRadius = 10;
-        this.cbStockGroup.CustomizableEdges = customizableEdges27;
+        this.cbStockGroup.CustomizableEdges = customizableEdges25;
         this.cbStockGroup.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
         this.cbStockGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         this.cbStockGroup.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
@@ -507,7 +422,7 @@ partial class FrmProducts
         this.cbStockGroup.ItemHeight = 30;
         this.cbStockGroup.Location = new System.Drawing.Point(647, 39);
         this.cbStockGroup.Name = "cbStockGroup";
-        this.cbStockGroup.ShadowDecoration.CustomizableEdges = customizableEdges28;
+        this.cbStockGroup.ShadowDecoration.CustomizableEdges = customizableEdges26;
         this.cbStockGroup.Size = new System.Drawing.Size(262, 36);
         this.cbStockGroup.TabIndex = 137;
         // 
@@ -542,7 +457,7 @@ partial class FrmProducts
         this.txtDescription.Animated = true;
         this.txtDescription.BorderRadius = 10;
         this.txtDescription.Cursor = System.Windows.Forms.Cursors.IBeam;
-        this.txtDescription.CustomizableEdges = customizableEdges29;
+        this.txtDescription.CustomizableEdges = customizableEdges27;
         this.txtDescription.DefaultText = "";
         this.txtDescription.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
         this.txtDescription.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
@@ -558,7 +473,7 @@ partial class FrmProducts
         this.txtDescription.PasswordChar = '\0';
         this.txtDescription.PlaceholderText = "";
         this.txtDescription.SelectedText = "";
-        this.txtDescription.ShadowDecoration.CustomizableEdges = customizableEdges30;
+        this.txtDescription.ShadowDecoration.CustomizableEdges = customizableEdges28;
         this.txtDescription.Size = new System.Drawing.Size(758, 36);
         this.txtDescription.TabIndex = 138;
         // 
@@ -580,7 +495,7 @@ partial class FrmProducts
         this.txtManufacturingExpenses.Animated = true;
         this.txtManufacturingExpenses.BorderRadius = 10;
         this.txtManufacturingExpenses.Cursor = System.Windows.Forms.Cursors.IBeam;
-        this.txtManufacturingExpenses.CustomizableEdges = customizableEdges31;
+        this.txtManufacturingExpenses.CustomizableEdges = customizableEdges29;
         this.txtManufacturingExpenses.DefaultText = "";
         this.txtManufacturingExpenses.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
         this.txtManufacturingExpenses.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
@@ -596,7 +511,7 @@ partial class FrmProducts
         this.txtManufacturingExpenses.PasswordChar = '\0';
         this.txtManufacturingExpenses.PlaceholderText = "";
         this.txtManufacturingExpenses.SelectedText = "";
-        this.txtManufacturingExpenses.ShadowDecoration.CustomizableEdges = customizableEdges32;
+        this.txtManufacturingExpenses.ShadowDecoration.CustomizableEdges = customizableEdges30;
         this.txtManufacturingExpenses.Size = new System.Drawing.Size(188, 36);
         this.txtManufacturingExpenses.TabIndex = 140;
         // 
@@ -618,7 +533,7 @@ partial class FrmProducts
         this.txtResalePrice.Animated = true;
         this.txtResalePrice.BorderRadius = 10;
         this.txtResalePrice.Cursor = System.Windows.Forms.Cursors.IBeam;
-        this.txtResalePrice.CustomizableEdges = customizableEdges33;
+        this.txtResalePrice.CustomizableEdges = customizableEdges31;
         this.txtResalePrice.DefaultText = "";
         this.txtResalePrice.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
         this.txtResalePrice.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
@@ -634,7 +549,7 @@ partial class FrmProducts
         this.txtResalePrice.PasswordChar = '\0';
         this.txtResalePrice.PlaceholderText = "";
         this.txtResalePrice.SelectedText = "";
-        this.txtResalePrice.ShadowDecoration.CustomizableEdges = customizableEdges34;
+        this.txtResalePrice.ShadowDecoration.CustomizableEdges = customizableEdges32;
         this.txtResalePrice.Size = new System.Drawing.Size(188, 36);
         this.txtResalePrice.TabIndex = 142;
         // 
@@ -643,7 +558,7 @@ partial class FrmProducts
         this.btnAddStockGroup.Animated = true;
         this.btnAddStockGroup.BackColor = System.Drawing.Color.Transparent;
         this.btnAddStockGroup.BorderRadius = 10;
-        this.btnAddStockGroup.CustomizableEdges = customizableEdges35;
+        this.btnAddStockGroup.CustomizableEdges = customizableEdges33;
         this.btnAddStockGroup.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
         this.btnAddStockGroup.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
         this.btnAddStockGroup.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -655,9 +570,96 @@ partial class FrmProducts
         this.btnAddStockGroup.ImageSize = new System.Drawing.Size(30, 30);
         this.btnAddStockGroup.Location = new System.Drawing.Point(915, 39);
         this.btnAddStockGroup.Name = "btnAddStockGroup";
-        this.btnAddStockGroup.ShadowDecoration.CustomizableEdges = customizableEdges36;
+        this.btnAddStockGroup.ShadowDecoration.CustomizableEdges = customizableEdges34;
         this.btnAddStockGroup.Size = new System.Drawing.Size(36, 36);
         this.btnAddStockGroup.TabIndex = 144;
+        this.btnAddStockGroup.Click += new System.EventHandler(this.btnAddStockGroup_Click);
+        // 
+        // panelGrid
+        // 
+        this.panelGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        this.panelGrid.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
+        this.panelGrid.BorderRadius = 15;
+        this.panelGrid.BorderThickness = 1;
+        this.panelGrid.Controls.Add(this.labelRegisteredPaymants);
+        this.panelGrid.Controls.Add(this.btnSearchCode);
+        this.panelGrid.Controls.Add(this.gridData);
+        this.panelGrid.Controls.Add(this.btnSearchName);
+        this.panelGrid.Controls.Add(this.txtSearchName);
+        this.panelGrid.Controls.Add(this.txtSearchCode);
+        this.panelGrid.CustomizableEdges = customizableEdges35;
+        this.panelGrid.FillColor = System.Drawing.Color.Transparent;
+        this.panelGrid.Location = new System.Drawing.Point(12, 456);
+        this.panelGrid.Name = "panelGrid";
+        this.panelGrid.ShadowDecoration.CustomizableEdges = customizableEdges36;
+        this.panelGrid.Size = new System.Drawing.Size(1056, 252);
+        this.panelGrid.TabIndex = 145;
+        // 
+        // labelRegisteredPaymants
+        // 
+        this.labelRegisteredPaymants.BackColor = System.Drawing.Color.Transparent;
+        this.labelRegisteredPaymants.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelRegisteredPaymants.Location = new System.Drawing.Point(3, 0);
+        this.labelRegisteredPaymants.Name = "labelRegisteredPaymants";
+        this.labelRegisteredPaymants.Size = new System.Drawing.Size(207, 36);
+        this.labelRegisteredPaymants.TabIndex = 27;
+        this.labelRegisteredPaymants.Text = "Produtos Cadastrados";
+        this.labelRegisteredPaymants.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // gridData
+        // 
+        this.gridData.AllowUserToAddRows = false;
+        this.gridData.AllowUserToDeleteRows = false;
+        dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
+        this.gridData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+        this.gridData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(188)))), ((int)(((byte)(211)))));
+        dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+        dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+        dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+        dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+        this.gridData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+        this.gridData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+        dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(241)))), ((int)(((byte)(245)))));
+        dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+        dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(210)))), ((int)(((byte)(225)))));
+        dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+        dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+        this.gridData.DefaultCellStyle = dataGridViewCellStyle3;
+        this.gridData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
+        this.gridData.Location = new System.Drawing.Point(3, 89);
+        this.gridData.Name = "gridData";
+        this.gridData.ReadOnly = true;
+        this.gridData.RowHeadersVisible = false;
+        this.gridData.Size = new System.Drawing.Size(1050, 150);
+        this.gridData.TabIndex = 21;
+        this.gridData.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Cyan;
+        this.gridData.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
+        this.gridData.ThemeStyle.AlternatingRowsStyle.Font = null;
+        this.gridData.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
+        this.gridData.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
+        this.gridData.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
+        this.gridData.ThemeStyle.BackColor = System.Drawing.Color.White;
+        this.gridData.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
+        this.gridData.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(188)))), ((int)(((byte)(211)))));
+        this.gridData.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+        this.gridData.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.gridData.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
+        this.gridData.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+        this.gridData.ThemeStyle.HeaderStyle.Height = 23;
+        this.gridData.ThemeStyle.ReadOnly = true;
+        this.gridData.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(241)))), ((int)(((byte)(245)))));
+        this.gridData.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+        this.gridData.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.gridData.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.Black;
+        this.gridData.ThemeStyle.RowsStyle.Height = 22;
+        this.gridData.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(210)))), ((int)(((byte)(225)))));
+        this.gridData.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
+        this.gridData.DoubleClick += new System.EventHandler(this.gridData_DoubleClick);
         // 
         // FrmProducts
         // 
@@ -665,6 +667,7 @@ partial class FrmProducts
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.BackColor = System.Drawing.Color.White;
         this.ClientSize = new System.Drawing.Size(1080, 720);
+        this.Controls.Add(this.panelGrid);
         this.Controls.Add(this.btnAddStockGroup);
         this.Controls.Add(this.labelResalePrice);
         this.Controls.Add(this.txtResalePrice);
@@ -674,7 +677,6 @@ partial class FrmProducts
         this.Controls.Add(this.txtDescription);
         this.Controls.Add(this.cbStockGroup);
         this.Controls.Add(this.LabelStockGroup);
-        this.Controls.Add(this.panelGrid);
         this.Controls.Add(this.btnCancel);
         this.Controls.Add(this.btnNew);
         this.Controls.Add(this.btnDelete);
@@ -688,14 +690,18 @@ partial class FrmProducts
         this.Controls.Add(this.txtCode);
         this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+        this.Location = new System.Drawing.Point(15, 15);
         this.Margin = new System.Windows.Forms.Padding(5);
         this.Name = "FrmProducts";
-        this.Text = "FrmProducts";
         this.Load += new System.EventHandler(this.FrmProducts_Load);
         this.panelGrid.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
         this.ResumeLayout(false);
     }
+
+    private Guna.UI2.WinForms.Guna2Panel panelGrid;
+    private System.Windows.Forms.Label labelRegisteredPaymants;
+    private Guna.UI2.WinForms.Guna2DataGridView gridData;
 
     private Guna.UI2.WinForms.Guna2Button btnAddStockGroup;
 
@@ -710,12 +716,9 @@ partial class FrmProducts
     private Guna.UI2.WinForms.Guna2ComboBox cbStockGroup;
     private Guna.UI2.WinForms.Guna2HtmlLabel LabelStockGroup;
 
-    private Guna.UI2.WinForms.Guna2Panel panelGrid;
     private Guna.UI2.WinForms.Guna2Button btnSearchCode;
     private Guna.UI2.WinForms.Guna2TextBox txtSearchCode;
-    private System.Windows.Forms.Label labelRegisteredProducts;
     private Guna.UI2.WinForms.Guna2TextBox txtSearchName;
-    private Guna.UI2.WinForms.Guna2DataGridView gridData;
     private Guna.UI2.WinForms.Guna2Button btnSearchName;
     private Guna.UI2.WinForms.Guna2Button btnCancel;
     private Guna.UI2.WinForms.Guna2Button btnNew;
