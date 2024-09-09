@@ -24,7 +24,7 @@ public static class UserRepository
             var dt = new DataTable();
             
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("SELECT * FROM users ORDER BY name", connection);
+            using var cmd = new MySqlCommand("SELECT * FROM Users ORDER BY name", connection);
             using var da = new MySqlDataAdapter(cmd);
             
             da.Fill(dt);
@@ -48,8 +48,8 @@ public static class UserRepository
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand(
-                "INSERT INTO users (name, password, job, access, active, permissions)" + 
-                "VALUES (@name, @password, @job, @access, @active, @permissions)", connection);
+                "INSERT INTO Users (Name, Password, JobTitle, AccessLevel, IsActive, UserPermissions)" + 
+                "VALUES (@Name, @Password, @Job, @AccessLevel, @Active, @Permissions)", connection);
             
             AddUserParameters(cmd, user);
             cmd.ExecuteNonQuery();
@@ -71,8 +71,8 @@ public static class UserRepository
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand(
-                "UPDATE users SET name = @name, password = @password, job = @job, access = @access," + 
-                "active = @active, permissions = @permissions WHERE id = @id", connection);
+                "UPDATE users SET Name = @Name, Password = @Password, JobTitle = @Job, AccessLevel = @AccessLevel," + 
+                "IsActive = @Active, UserPermissions = @Permissions WHERE Id = @Id", connection);
             
             AddUserParameters(cmd, user);
             cmd.Parameters.AddWithValue("@id", user.Id);
@@ -94,7 +94,7 @@ public static class UserRepository
         try
         {
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("DELETE FROM users WHERE id = @id", connection);
+            using var cmd = new MySqlCommand("DELETE FROM users WHERE Id = @Id", connection);
             
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
@@ -118,11 +118,11 @@ public static class UserRepository
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand(
-                "SELECT id, name, password, job, access, active, permissions" +
-                "FROM users WHERE name = @name AND password = @password", connection);
+                "SELECT Id, Name, Password, JobTitle, AccessLevel, IsActive, UserPermissions" +
+                "FROM Users WHERE Name = @Name AND Password = @Password", connection);
             
-            cmd.Parameters.AddWithValue("@name", name);
-            cmd.Parameters.AddWithValue("@password", password);
+            cmd.Parameters.AddWithValue("@Name", name);
+            cmd.Parameters.AddWithValue("@Password", password);
 
             using var reader = cmd.ExecuteReader();
             
@@ -130,13 +130,13 @@ public static class UserRepository
             {
                 return new User
                 {
-                    Id = reader.GetInt32("id").ToString(),
-                    Name = reader.GetString("name"),
-                    Password = reader.GetString("password"),
-                    Job = reader.GetString("job"),
-                    Access = reader.GetString("access"),
-                    Active = reader.GetString("active"),
-                    Permissions = reader.GetString("permissions").Split(',').ToList()
+                    Id = reader.GetInt32("Id").ToString(),
+                    Name = reader.GetString("Name"),
+                    Password = reader.GetString("Password"),
+                    Job = reader.GetString("JobTitle"),
+                    Access = reader.GetString("AccessLevel"),
+                    Active = reader.GetString("IsActive"),
+                    Permissions = reader.GetString("UserPermissions").Split(',').ToList()
                 };
             }
 
@@ -161,10 +161,10 @@ public static class UserRepository
         try
         {
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("SELECT COUNT(*) FROM users WHERE user = @user AND password = @password", connection);
+            using var cmd = new MySqlCommand("SELECT COUNT(*) FROM Users WHERE User = @User AND Password = @Password", connection);
             
-            cmd.Parameters.AddWithValue("@user", user);
-            cmd.Parameters.AddWithValue("@password", password);
+            cmd.Parameters.AddWithValue("@User", user);
+            cmd.Parameters.AddWithValue("@Password", password);
             
             var result = Convert.ToInt32(cmd.ExecuteScalar());
             return result > 0; // Se result for maior que 0, significa que o usuário existe
@@ -187,9 +187,9 @@ public static class UserRepository
         try
         {
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("SELECT * FROM users WHERE name LIKE @name", connection);
+            using var cmd = new MySqlCommand("SELECT * FROM Users WHERE Name LIKE @Name", connection);
             
-            cmd.Parameters.AddWithValue("@name", "%" + userName + "%"); // Procura por nomes que contenham a string fornecida
+            cmd.Parameters.AddWithValue("@Name", "%" + userName + "%"); // Procura por nomes que contenham a string fornecida
             
             using var reader = cmd.ExecuteReader();
             
@@ -197,8 +197,8 @@ public static class UserRepository
             {
                 return new User
                 {
-                    Id = reader.GetInt32(reader.GetOrdinal("id")).ToString(),
-                    Name = reader.GetString(reader.GetOrdinal("name"))
+                    Id = reader.GetInt32(reader.GetOrdinal("Id")).ToString(),
+                    Name = reader.GetString(reader.GetOrdinal("Name"))
                 };
             }
 
@@ -219,11 +219,11 @@ public static class UserRepository
     /// <param name="user">O objeto <c>User</c> contendo os dados dos parâmetros.</param>
     private static void AddUserParameters(MySqlCommand cmd, User user)
     {
-        cmd.Parameters.AddWithValue("@name", user.Name);
-        cmd.Parameters.AddWithValue("@password", user.Password);
-        cmd.Parameters.AddWithValue("@job", user.Job);
-        cmd.Parameters.AddWithValue("@access", user.Access);
-        cmd.Parameters.AddWithValue("@active", user.Active);
-        cmd.Parameters.AddWithValue("@permissions", string.Join(",", user.Permissions));
+        cmd.Parameters.AddWithValue("@Name", user.Name);
+        cmd.Parameters.AddWithValue("@Password", user.Password);
+        cmd.Parameters.AddWithValue("@Job", user.Job);
+        cmd.Parameters.AddWithValue("@AccessLevel", user.Access);
+        cmd.Parameters.AddWithValue("@Active", user.Active);
+        cmd.Parameters.AddWithValue("@Permissions", string.Join(",", user.Permissions));
     }
 }

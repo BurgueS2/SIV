@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-using SIV.Controllers;
 using SIV.Core;
 using SIV.Helpers;
 using SIV.Models;
@@ -17,7 +16,6 @@ namespace SIV.Views.Clients;
 public partial class FrmClients : Form
 {
     private string _selectedUserId;
-    private string _oldCpf; // CPF antigo do cliente, usado para verificações durante a atualização.
     
     public FrmClients()
     {
@@ -46,7 +44,6 @@ public partial class FrmClients : Form
         _selectedUserId = gridData.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do cliente
         txtName.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
         txtCpf.Text = gridData.CurrentRow?.Cells[2].Value.ToString();
-        _oldCpf = gridData.CurrentRow?.Cells[2].Value.ToString(); // Salva o CPF antigo para verificar se foi alterado
 
         // Verifica se o status do funcionário é bloqueado
         var statusValue = gridData.CurrentRow?.Cells[3].Value.ToString().ToUpper();
@@ -114,12 +111,12 @@ public partial class FrmClients : Form
     {
         try
         {
-            var cpf = txtCpf.Text;
+            var cpf = AddCpfMask(txtCpf.Text);
             var email = txtEmail.Text;
             
-            if (!ValidateFormData()) return;
-
             if (!VerifyCpfAndEmail(cpf, email)) return;
+            
+            if (!ValidateFormData()) return;
             
             var client = CreateClientFromFormData();
             ClientRepository.SaveClient(client);
@@ -191,7 +188,7 @@ public partial class FrmClients : Form
             Phone = AddPhoneMask(txtPhone.Text),
             Email = txtEmail.Text.ToUpper(),
             Address = txtAddress.Text.ToUpper(),
-            ReferencePoint = txtRefPoint.Text.ToUpper(),
+            ReferencePoint = string.IsNullOrWhiteSpace(txtRefPoint.Text) ? "N/A" : txtRefPoint.Text.ToUpper(),
             Observation = string.IsNullOrWhiteSpace(txtObservation.Text) ? "N/A" : txtObservation.Text.ToUpper(),
             Sex = cbSex.Text.ToUpper()
         };
@@ -338,18 +335,22 @@ public partial class FrmClients : Form
         return false;
     }
 
-    private bool VerifyCpfAndEmail(string cpf, string email)
+    private static bool VerifyCpfAndEmail(string cpf, string email)
     {
-        if (!ClientRepository.VerifyCpfExistence(cpf, _oldCpf))
+        // Verifica se o CPF já está cadastrado
+        if (!ClientRepository.VerifyCpfExistence(cpf))
         {
             MessageHelper.ShowRegisteredCpfMessage();
             return false;
         }
 
-        // Verifica se o email já está cadastrado
-        if (!ClientRepository.VerifyEmailExisting(email)) return true;
+        // Verifica se o e-mail já está cadastrado
+        if (!ClientRepository.VerifyEmailExisting(email))
+        {
+            // Se o e-mail já estiver cadastrado, exibe uma mensagem de confirmação
+            return MessageHelper.ShowEmailExistMessage();
+        }
 
-        // Se o email já estiver cadastrado, exibe uma mensagem de confirmação
-        return MessageHelper.ShowEmailExistMessage();
+        return true;
     }
 }

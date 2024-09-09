@@ -23,7 +23,7 @@ public static class JobRepository
             var dt = new DataTable();
 
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("SELECT * FROM job ORDER BY name", connection);
+            using var cmd = new MySqlCommand("SELECT * FROM Jobs ORDER BY Name", connection);
             using var da = new MySqlDataAdapter(cmd);
             
             da.Fill(dt);
@@ -46,9 +46,9 @@ public static class JobRepository
         try
         {
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("INSERT INTO job (name, date) VALUES (@name, curDate())", connection);
+            using var cmd = new MySqlCommand("INSERT INTO Jobs (Name, Date) VALUES (@Name, curDate())", connection);
             
-            cmd.Parameters.AddWithValue("@name", job.Name);
+            cmd.Parameters.AddWithValue("@Name", job.Name);
             cmd.ExecuteNonQuery();
         }
         catch (Exception ex)
@@ -66,10 +66,10 @@ public static class JobRepository
         try
         {
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("UPDATE job SET name = @name WHERE id = @id", connection);
+            using var cmd = new MySqlCommand("UPDATE Jobs SET Name = @Name WHERE Id = @Id", connection);
             
-            cmd.Parameters.AddWithValue("@id", job.Id);
-            cmd.Parameters.AddWithValue("@name", job.Name);
+            cmd.Parameters.AddWithValue("@Id", job.Id);
+            cmd.Parameters.AddWithValue("@Name", job.Name);
             cmd.ExecuteNonQuery();
         }
         catch (Exception ex)
@@ -88,9 +88,9 @@ public static class JobRepository
         try
         {
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("DELETE FROM job WHERE id = @id", connection);
+            using var cmd = new MySqlCommand("DELETE FROM Jobs WHERE Id = @Id", connection);
             
-            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@Id", id);
             cmd.ExecuteNonQuery();
         }
         catch (Exception ex)
@@ -103,16 +103,16 @@ public static class JobRepository
     /// <summary>
     /// Verifica se um cargo especificado pelo nome já existe no banco de dados.
     /// </summary>
-    /// <param name="job">O objeto <c>Job</c> contendo o nome do cargo a ser verificado.</param>
+    /// <param name="name">O nome do cargo a ser verificado.</param>
     /// <returns>Retorna <c>true</c> se o cargo já existe no banco de dados, caso contrário, retorna <c>false</c>.</returns>
     public static bool JobExists(string name)
     {
         try
         {
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("SELECT COUNT(*) FROM job WHERE LOWER(name) = LOWER(@name)", connection);
+            using var cmd = new MySqlCommand("SELECT COUNT(*) FROM Jobs WHERE LOWER(Name) = LOWER(@Name)", connection);
             
-            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@Name", name);
             
             var result = Convert.ToInt32(cmd.ExecuteScalar());
             

@@ -23,7 +23,7 @@ public static class EmployeeRepository
             var dt = new DataTable();
             
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("SELECT * FROM employees ORDER BY name", connection);
+            using var cmd = new MySqlCommand("SELECT * FROM Employees ORDER BY Name", connection);
             using var adapter = new MySqlDataAdapter(cmd);
             
             adapter.Fill(dt); // Preenche o DataTable com os dados retornados da consulta
@@ -53,9 +53,9 @@ public static class EmployeeRepository
             }
 
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("SELECT COUNT(*) FROM employees WHERE cpf = @cpf", connection);
+            using var cmd = new MySqlCommand("SELECT COUNT(*) FROM Employees WHERE CPF = @Cpf", connection);
             
-            cmd.Parameters.AddWithValue("@cpf", cpf);
+            cmd.Parameters.AddWithValue("@Cpf", cpf);
             
             var result = (long)cmd.ExecuteScalar(); // ExecuteScalar retorna a primeira coluna da primeira linha do resultado da consulta
             return result == 0; // Se result for 0, significa que o CPF não existe
@@ -78,8 +78,8 @@ public static class EmployeeRepository
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand(
-                "INSERT INTO employees (name, cpf, phone, job, address, date, photo)" + 
-                "VALUES (@name, @cpf, @phone, @job, @address, curDate(), @photo)", connection);
+                "INSERT INTO employees (Name, CPF, Phone, Job, Address, Date, Photo)" + 
+                "VALUES (@Name, @Cpf, @Phone, @Job, @Address, curDate(), @Photo)", connection);
             
             AddEmployeeParameters(cmd, employee);
             cmd.ExecuteNonQuery();
@@ -102,15 +102,15 @@ public static class EmployeeRepository
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand(
-                "UPDATE employees SET name = @name, cpf = @cpf, phone = @phone, job = @job, address = @address" +
-                $"{(imageChanged ? ", photo = @photo" : "")} WHERE id = @id", connection);
+                "UPDATE Employees SET Name = @Name, CPF = @Cpf, Phone = @Phone, Job = @Job, Address = @Address" +
+                $"{(imageChanged ? ", Photo = @Photo" : "")} WHERE Id = @Id", connection);
             
-            cmd.Parameters.AddWithValue("@id", employee.Id);
+            cmd.Parameters.AddWithValue("@Id", employee.Id);
             AddEmployeeParameters(cmd, employee);
 
             if (imageChanged) // Se a imagem foi alterada, atualiza a foto
             {
-                cmd.Parameters.AddWithValue("@photo", employee.Photo);
+                cmd.Parameters.AddWithValue("@Photo", employee.Photo);
             }
 
             cmd.ExecuteNonQuery();
@@ -131,9 +131,9 @@ public static class EmployeeRepository
         try
         {
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("DELETE FROM employees WHERE id = @id", connection);
+            using var cmd = new MySqlCommand("DELETE FROM Employees WHERE Id = @Id", connection);
             
-            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@Id", id);
             cmd.ExecuteNonQuery();
         }
         catch (Exception ex)
@@ -155,9 +155,9 @@ public static class EmployeeRepository
             var dt = new DataTable();
 
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("SELECT * FROM employees WHERE name LIKE @name ORDER BY name", connection);
+            using var cmd = new MySqlCommand("SELECT * FROM Employees WHERE Name LIKE @Name ORDER BY Name", connection);
             
-            cmd.Parameters.AddWithValue("@name", "%" + name + "%"); // Adiciona o caractere % para buscar qualquer nome que contenha o valor informado
+            cmd.Parameters.AddWithValue("@Name", "%" + name + "%"); // Adiciona o caractere % para buscar qualquer nome que contenha o valor informado
             
             using var adapter = new MySqlDataAdapter(cmd);
             
@@ -179,11 +179,11 @@ public static class EmployeeRepository
     /// <param name="employee">O objeto <c>Employee</c> contendo os dados dos parâmetros.</param>
     private static void AddEmployeeParameters(MySqlCommand cmd, Employee employee)
     {
-        cmd.Parameters.AddWithValue("@name", employee.Name);
-        cmd.Parameters.AddWithValue("@cpf", employee.Cpf);
-        cmd.Parameters.AddWithValue("@phone", employee.Phone);
-        cmd.Parameters.AddWithValue("@job", employee.Job);
-        cmd.Parameters.AddWithValue("@address", employee.Address);
-        cmd.Parameters.AddWithValue("@photo", employee.Photo);
+        cmd.Parameters.AddWithValue("@Name", employee.Name);
+        cmd.Parameters.AddWithValue("@Cpf", employee.Cpf);
+        cmd.Parameters.AddWithValue("@Phone", employee.Phone);
+        cmd.Parameters.AddWithValue("@Job", employee.Job);
+        cmd.Parameters.AddWithValue("@Address", employee.Address);
+        cmd.Parameters.AddWithValue("@Photo", employee.Photo);
     }
 }

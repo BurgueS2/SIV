@@ -20,7 +20,7 @@ public static class TableRepository
         try
         {
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("CREATE TABLE IF NOT EXISTS tables (id INT PRIMARY KEY, state TEXT)", connection);
+            using var cmd = new MySqlCommand("CREATE TABLE IF NOT EXISTS RestaurantTables (EntryId INT PRIMARY KEY, TableState TEXT)", connection);
             
             cmd.ExecuteNonQuery();
         }
@@ -38,15 +38,15 @@ public static class TableRepository
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand(
-                "INSERT INTO tables (id, state, color, save_date, save_time)" + 
-                "VALUES (@id, @state, @color, @save_date, @save_time)" + 
+                "INSERT INTO tables (EntryId, TableState, TableColor, SaveDate, SaveTime)" + 
+                "VALUES (@Id, @State, @Color, @SaveDate, @SaveTime)" + 
                 "ON DUPLICATE KEY UPDATE state=@state, color=@color, save_date=@save_date, save_time=@save_time", connection);
             
-            cmd.Parameters.AddWithValue("@id", table.Id);
-            cmd.Parameters.AddWithValue("@state", table.State);
-            cmd.Parameters.AddWithValue("@color", table.Color);
-            cmd.Parameters.AddWithValue("@save_date", DateTime.Now.Date);
-            cmd.Parameters.AddWithValue("@save_time", DateTime.Now.TimeOfDay);
+            cmd.Parameters.AddWithValue("@Id", table.Id);
+            cmd.Parameters.AddWithValue("@State", table.State);
+            cmd.Parameters.AddWithValue("@Color", table.Color);
+            cmd.Parameters.AddWithValue("@SaveDate", DateTime.Now.Date);
+            cmd.Parameters.AddWithValue("@SaveTime", DateTime.Now.TimeOfDay);
             cmd.ExecuteNonQuery();
         }
         catch (Exception ex)
@@ -67,9 +67,9 @@ public static class TableRepository
         {
             using (var connection = ConnectionManager.GetConnection())
             {
-                using (var cmd = new MySqlCommand("SELECT state, color, product_name, product_price,save_date, save_time FROM tables WHERE id = @id", connection))
+                using (var cmd = new MySqlCommand("SELECT TableState, TableColor, ProductName, ProductPrice, SaveDate, SaveTime FROM RestaurantTables WHERE EntryId = @Id", connection))
                 {
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@Id", id);
 
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -77,10 +77,10 @@ public static class TableRepository
 
                         var table = new Table(id)
                         {
-                            State = reader["state"].ToString(),
-                            Color = reader["color"].ToString(),
-                            SaveDate = reader["save_date"] != DBNull.Value ? (DateTime?)reader["SaveDate"] : null,
-                            SaveTime = reader["save_time"] != DBNull.Value ? (TimeSpan?)reader["SaveTime"] : null
+                            State = reader["State"].ToString(),
+                            Color = reader["Color"].ToString(),
+                            SaveDate = reader["SaveDate"] != DBNull.Value ? (DateTime?)reader["SaveDate"] : null,
+                            SaveTime = reader["SaveTime"] != DBNull.Value ? (TimeSpan?)reader["SaveTime"] : null
                         };
                         
                         return table;
@@ -109,9 +109,9 @@ public static class TableRepository
         try
         {
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("DELETE FROM tables WHERE id = @id", connection);
+            using var cmd = new MySqlCommand("DELETE FROM RestaurantTables WHERE EntryId = @Id", connection);
             
-            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@Id", id);
             cmd.ExecuteNonQuery();
         }
         catch (Exception ex)
@@ -134,13 +134,13 @@ public static class TableRepository
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand(
-                "INSERT INTO tables (id, product_name, product_price, amount)" + 
-                "VALUES (@tableId, @productName, @productPrice, @amount)", connection);
+                "INSERT INTO RestaurantTables (EntryId, ProductName, ProductPrice, Amount)" + 
+                "VALUES (@TableId, @ProductName, @ProductPrice, @Amount)", connection);
             
-            cmd.Parameters.AddWithValue("@tableId", tableId);
-            cmd.Parameters.AddWithValue("@productName", productName);
-            cmd.Parameters.AddWithValue("@productPrice", productPrice);
-            cmd.Parameters.AddWithValue("@amount", amount);
+            cmd.Parameters.AddWithValue("@TableId", tableId);
+            cmd.Parameters.AddWithValue("@ProductName", productName);
+            cmd.Parameters.AddWithValue("@ProductPrice", productPrice);
+            cmd.Parameters.AddWithValue("@Amount", amount);
             cmd.ExecuteNonQuery();
         }
         catch (Exception ex)
@@ -162,9 +162,9 @@ public static class TableRepository
             var dt = new DataTable();
 
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("SELECT product_name, product_price, amount FROM tables WHERE id = @tableId", connection);
+            using var cmd = new MySqlCommand("SELECT ProductName, ProductPrice, Amount FROM RestaurantTables WHERE EntryId = @TableId", connection);
 
-            cmd.Parameters.AddWithValue("@tableId", tableId);
+            cmd.Parameters.AddWithValue("@TableId", tableId);
             
             using var adapter = new MySqlDataAdapter(cmd);
             adapter.Fill(dt);
@@ -189,11 +189,11 @@ public static class TableRepository
         try
         {
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("UPDATE tables SET state = @state, color = @color WHERE id = @id", connection);
+            using var cmd = new MySqlCommand("UPDATE RestaurantTables SET TableState = @State, TableColor = @Color WHERE EntryId = @Id", connection);
             
-            cmd.Parameters.AddWithValue("@id", tableId);
-            cmd.Parameters.AddWithValue("@state", state);
-            cmd.Parameters.AddWithValue("@color", color);
+            cmd.Parameters.AddWithValue("@Id", tableId);
+            cmd.Parameters.AddWithValue("@State", state);
+            cmd.Parameters.AddWithValue("@Color", color);
             cmd.ExecuteNonQuery();
         }
         catch (Exception ex)

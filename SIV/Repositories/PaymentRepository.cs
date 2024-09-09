@@ -24,7 +24,7 @@ public static class PaymentRepository
             var dt = new DataTable();
 
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("SELECT * FROM payments ORDER BY type", connection);
+            using var cmd = new MySqlCommand("SELECT * FROM Payments ORDER BY PaymentType", connection);
             using var adapter = new MySqlDataAdapter(cmd);
             
             adapter.Fill(dt);
@@ -48,8 +48,8 @@ public static class PaymentRepository
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand(
-                "INSERT INTO payments (flag, days_to_credit, operator_cnpj, tax, status, type)" + 
-                "VALUES (@flag, @daysToCredit, @operatorCnpj, @tax, @status, @type)", connection);
+                "INSERT INTO Payments (Flag, DaysToCredit, OperatorCnpj, Tax, Status, PaymentType)" + 
+                "VALUES (@Flag, @DaysToCredit, @OperatorCnpj, @Tax, @Status, @Type)", connection);
             
             AddPaymentParameters(cmd, payment);
             cmd.ExecuteNonQuery();
@@ -71,11 +71,11 @@ public static class PaymentRepository
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand(
-                "UPDATE payments SET flag = @flag, days_to_credit = @daysToCredit, operator_cnpj = @operatorCnpj, tax = @tax," +
-                "status = @status, type = @type WHERE id = @id", connection);
+                "UPDATE Payments SET Flag = @Flag, DaysToCredit = @DaysToCredit, OperatorCnpj = @OperatorCnpj, Tax = @Tax," +
+                "Status = @Status, PaymentType = @PaymentType WHERE Id = @Id", connection);
 
             AddPaymentParameters(cmd, payment);
-            cmd.Parameters.AddWithValue("@id", payment.Id);
+            cmd.Parameters.AddWithValue("@Id", payment.Id);
             cmd.ExecuteNonQuery();
         }
         catch (Exception ex)
@@ -94,9 +94,9 @@ public static class PaymentRepository
         try
         {
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("DELETE FROM payments WHERE id = @id", connection);
+            using var cmd = new MySqlCommand("DELETE FROM Payments WHERE Id = @Id", connection);
 
-            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@Id", id);
             cmd.ExecuteNonQuery();
         }
         catch (Exception ex)
@@ -117,11 +117,11 @@ public static class PaymentRepository
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand(
-                "INSERT INTO partial_payments (table_id, amount)" + 
-                "VALUES (@tableId, @amountPaid)", connection);
+                "INSERT INTO PartialPayments (TableId, Amount)" + 
+                "VALUES (@TableId, @Amount)", connection);
             
-            cmd.Parameters.AddWithValue("@tableId", tableId);
-            cmd.Parameters.AddWithValue("@amountPaid", value);
+            cmd.Parameters.AddWithValue("@TableId", tableId);
+            cmd.Parameters.AddWithValue("@Amount", value);
             cmd.ExecuteNonQuery();
         }
         catch (Exception ex)
@@ -140,9 +140,9 @@ public static class PaymentRepository
         try
         {
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("DELETE FROM partial_payments WHERE table_id = @tableId", connection);
+            using var cmd = new MySqlCommand("DELETE FROM PartialPayments WHERE TableId = @TableId", connection);
             
-            cmd.Parameters.AddWithValue("@tableId", tableId);
+            cmd.Parameters.AddWithValue("@TableId", tableId);
             cmd.ExecuteNonQuery();
         }
         catch (Exception ex)
@@ -165,14 +165,14 @@ public static class PaymentRepository
         {
             using var connection = ConnectionManager.GetConnection();
             using var command = new MySqlCommand(
-                "SELECT amount FROM partial_payments WHERE table_id = @tableId", connection);
+                "SELECT amount FROM PartialPayments WHERE TableId = @TableId", connection);
             
-            command.Parameters.AddWithValue("@tableId", tableId);
+            command.Parameters.AddWithValue("@TableId", tableId);
             using var reader = command.ExecuteReader();
             
             while (reader.Read()) // leitura dos valores pagos
             {
-                paidAmounts.Add(reader.GetDecimal("amount")); // adiciona o valor pago à lista
+                paidAmounts.Add(reader.GetDecimal("Amount")); // adiciona o valor pago à lista
             }
             
             return paidAmounts;
@@ -192,11 +192,11 @@ public static class PaymentRepository
     /// <param name="payment">O objeto Payment contendo os dados dos parâmetros.</param>
     private static void AddPaymentParameters(MySqlCommand cmd, Payment payment)
     {
-        cmd.Parameters.AddWithValue("@flag", payment.Flag);
-        cmd.Parameters.AddWithValue("@daysToCredit", payment.DaysToCredit);
-        cmd.Parameters.AddWithValue("@operatorCnpj", payment.OperatorCnpj);
-        cmd.Parameters.AddWithValue("@tax", payment.Tax);
-        cmd.Parameters.AddWithValue("@status", payment.Status);
-        cmd.Parameters.AddWithValue("@type", payment.Type);
+        cmd.Parameters.AddWithValue("@Flag", payment.Flag);
+        cmd.Parameters.AddWithValue("@DaysToCredit", payment.DaysToCredit);
+        cmd.Parameters.AddWithValue("@OperatorCnpj", payment.OperatorCnpj);
+        cmd.Parameters.AddWithValue("@Tax", payment.Tax);
+        cmd.Parameters.AddWithValue("@Ttatus", payment.Status);
+        cmd.Parameters.AddWithValue("@Type", payment.Type);
     }
 }

@@ -23,7 +23,7 @@ public static class ProductRepository
             var dt = new DataTable();
 
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("SELECT * FROM products ORDER BY name", connection);
+            using var cmd = new MySqlCommand("SELECT * FROM Products ORDER BY Name", connection);
             using var adapter = new MySqlDataAdapter(cmd);
             
             adapter.Fill(dt); // Preenche o DataTable com os dados retornados da consulta
@@ -47,8 +47,8 @@ public static class ProductRepository
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand(
-                "INSERT INTO products (code, name, description, cost_price, resale_price, stock_group_id, supplier_id)" + 
-                "VALUES (@code, @name, @description, @costPrice, @resalePrice, @stockGroup, @supplier)", connection);
+                "INSERT INTO Products (Code, Name, Description, CostPrice, ResalePrice, StockGroup, Supplier)" + 
+                "VALUES (@Code, @Name, @Description, @CostPrice, @ResalePrice, @StockGroup, @Supplier)", connection);
             
             AddProductParameters(cmd, product);
             cmd.ExecuteNonQuery();
@@ -70,11 +70,11 @@ public static class ProductRepository
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand(
-                "UPDATE products SET code = @code, name = @name, description = @description, cost_price = @costPrice," + 
-                "resale_price = @resalePrice, stock_group_id = @stockGroup, supplier_id = @supplier WHERE id = @id", connection);
+                "UPDATE Products SET Code = @Code, Name = @Name, Description = @Description, CostPrice = @CostPrice," + 
+                "ResalePrice = @ResalePrice, StockGroup = @StockGroup, Supplier = @Supplier WHERE Id = @Id", connection);
             
             AddProductParameters(cmd, product);
-            cmd.Parameters.AddWithValue("@id", product.Id);
+            cmd.Parameters.AddWithValue("@Id", product.Id);
             cmd.ExecuteNonQuery(); // Executa a query de atualização
         }
         catch (Exception ex)
@@ -93,9 +93,9 @@ public static class ProductRepository
         try
         {
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("DELETE FROM products WHERE id = @id", connection);
+            using var cmd = new MySqlCommand("DELETE FROM Products WHERE Id = @Id", connection);
 
-            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@Id", id);
             cmd.ExecuteNonQuery(); // Executa a query de exclusão
         }
         catch (Exception ex)
@@ -115,9 +115,9 @@ public static class ProductRepository
         try
         {
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("SELECT name, resale_price FROM products WHERE name = @name", connection);
+            using var cmd = new MySqlCommand("SELECT name, resale_price FROM Products WHERE Name = @Name", connection);
             
-            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@Name", name);
 
             using var reader = cmd.ExecuteReader();
             
@@ -125,8 +125,8 @@ public static class ProductRepository
             {
                 return new Product
                 {
-                    Name = reader["name"].ToString(),
-                    ResalePrice = Convert.ToDecimal(reader["resale_price"])
+                    Name = reader["Name"].ToString(),
+                    ResalePrice = Convert.ToDecimal(reader["ResalePrice"])
                 };
             }
 
@@ -152,9 +152,9 @@ public static class ProductRepository
             var dt = new DataTable();
 
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("SELECT * FROM products WHERE name LIKE @name ORDER BY name", connection);
+            using var cmd = new MySqlCommand("SELECT * FROM Products WHERE Name LIKE @Name ORDER BY Name", connection);
             
-            cmd.Parameters.AddWithValue("@name", "%" + name + "%"); // Adiciona o caractere curinga para buscar por nome parcial
+            cmd.Parameters.AddWithValue("@Name", "%" + name + "%"); // Adiciona o caractere curinga para buscar por nome parcial
             
             using var adapter = new MySqlDataAdapter(cmd);
             
@@ -177,12 +177,12 @@ public static class ProductRepository
     /// <param name="product">O objeto <c>Product</c> contendo os dados dos parâmetros.</param>
     private static void AddProductParameters(MySqlCommand cmd, Product product)
     {
-        cmd.Parameters.AddWithValue("@code", product.Code);
-        cmd.Parameters.AddWithValue("@name", product.Name);
-        cmd.Parameters.AddWithValue("@description", product.Description);
-        cmd.Parameters.AddWithValue("@costPrice", product.CostPrice);
-        cmd.Parameters.AddWithValue("@resalePrice", product.ResalePrice);
-        cmd.Parameters.AddWithValue("@stockGroup", product.StockGroup);
-        cmd.Parameters.AddWithValue("@supplier", product.Supplier);
+        cmd.Parameters.AddWithValue("@Code", product.Code);
+        cmd.Parameters.AddWithValue("@Name", product.Name);
+        cmd.Parameters.AddWithValue("@Description", product.Description);
+        cmd.Parameters.AddWithValue("@CostPrice", product.CostPrice);
+        cmd.Parameters.AddWithValue("@ResalePrice", product.ResalePrice);
+        cmd.Parameters.AddWithValue("@StockGroup", product.StockGroup);
+        cmd.Parameters.AddWithValue("@Supplier", product.Supplier);
     }
 }
