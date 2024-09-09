@@ -6,6 +6,7 @@ using SIV.Core;
 using SIV.Helpers;
 using SIV.Models;
 using SIV.Repositories;
+using SIV.Validators;
 using SIV.Views.StockGroup;
 
 namespace SIV.Views.Products;
@@ -82,7 +83,12 @@ public partial class FrmProducts : Form
     {
         try
         {
-            //if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
+            if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
+            
+            if (string.IsNullOrWhiteSpace(txtCode.Text))
+            {
+                txtCode.Text = GenerateProductCode();
+            }
 
             var product = CreateProductFromFormData();
             ProductRepository.SaveProduct(product);
@@ -101,7 +107,12 @@ public partial class FrmProducts : Form
     {
         try
         {
-            //if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
+            if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
+            
+            if (string.IsNullOrWhiteSpace(txtCode.Text))
+            {
+                txtCode.Text = GenerateProductCode();
+            }
 
             var product = CreateProductFromFormData();
             ProductRepository.UpdateProduct(product);
@@ -240,5 +251,21 @@ public partial class FrmProducts : Form
         LoadProducts();
         ConfigureUiControls(false);
         gridData.Enabled = true;
+    }
+    
+    private static string GenerateProductCode()
+    {
+        return DateTime.Now.ToString("MdHmss");
+    }
+    
+    private bool ValidateFormData()
+    {
+        var validationResult = ProductValidator.ValidateProduct(
+            txtCode.Text, txtName.Text, Convert.ToDecimal(txtManufacturingExpenses.Text), Convert.ToDecimal(txtResalePrice.Text));
+        
+        if (string.IsNullOrEmpty(validationResult)) return true;
+        
+        MessageHelper.ShowValidationMessage(validationResult);
+        return false;
     }
 }
