@@ -48,7 +48,7 @@ public static class ClientRepository
         try
         { 
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("SELECT COUNT(*) FROM clients WHERE CPF = @Cpf", connection);
+            using var cmd = new MySqlCommand("SELECT COUNT(*) FROM Clients WHERE CPF = @Cpf", connection);
             
             cmd.Parameters.AddWithValue("@Cpf", cpf);
 
