@@ -2,8 +2,9 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
+using SIV.Core;
 using SIV.Helpers;
-using SIV.Models;
+using SIV.Repositories;
 using SIV.Views.Clients;
 using SIV.Views.Employees;
 using SIV.Views.Jobs;
@@ -27,6 +28,9 @@ public partial class FrmRegisters : Form
     private void FrmRegisters_Load(object sender, EventArgs e)
     {
         ApplyingTheme();
+        LoadClientes();
+        LoadEmployees();
+        LoadProducts();
     }
     
     private void btnEmployee_Click(object sender, EventArgs e)
@@ -56,17 +60,41 @@ public partial class FrmRegisters : Form
 
     private void btnSupplier_Click(object sender, EventArgs e)
     {
-        //throw new System.NotImplementedException();
+        // Not implemented
     }
 
     private void btnAddress_Click(object sender, EventArgs e)
     {
-        //throw new System.NotImplementedException();
+        // Not implemented
     }
 
     private void btnPayment_Click(object sender, EventArgs e)
     {
         OpenDisplayForm(new FrmPayments(), sender);
+    }
+    
+    private void txtSearchClient_KeyPress(object sender, KeyPressEventArgs e)
+    {
+        if (e.KeyChar == (char)Keys.Enter)
+        {
+            SearchClient();
+        }
+    }
+    
+    private void txtSearchProduct_KeyPress(object sender, KeyPressEventArgs e)
+    {
+        if (e.KeyChar == (char)Keys.Enter)
+        {
+            SearchProduct();
+        }
+    }
+    
+    private void txtSearchEmployee_KeyPress(object sender, KeyPressEventArgs e)
+    {
+        if (e.KeyChar == (char)Keys.Enter)
+        {
+            SearchEmployee();
+        }
     }
     
     private void OpenDisplayForm(Form dashboard, object senderButton)
@@ -133,6 +161,123 @@ public partial class FrmRegisters : Form
         if (control is Guna2Button button)
         {
             button.FillColor = fillColor;
+        }
+    }
+
+    private void LoadClientes()
+    {
+        try
+        {
+            gridDataClient.DataSource = ClientRepository.GetAllClients();
+            ShowOnlyNameColumn(gridDataClient);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "carregar os clientes");
+        }
+    }
+
+    private void LoadEmployees()
+    {
+        try
+        {
+            gridDataEmployee.DataSource = EmployeeRepository.GetAllEmployees();
+            ShowOnlySpecificColumns(gridDataEmployee, new[] { 1, 4 });
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "carregar os funcionários");
+        }
+    }
+
+    private void LoadProducts()
+    {
+        try
+        {
+            gridDataProduct.DataSource = ProductRepository.GetAllProducts();
+            ShowOnlySpecificColumns(gridDataProduct, new[] { 2, 5 });
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "carregar os produtos");
+        }
+    }
+
+    private void LoadSuppliers()
+    {
+        try
+        {
+            //gridDataSupplier.DataSource = SupplierRepository.GetAllSuppliers();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "carregar os fornecedores");
+        }
+    }
+
+    private void SearchClient()
+    {
+        try
+        {
+            gridDataClient.DataSource = ClientRepository.SearchByName(txtSearchClient.Text);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "pesquisar os clientes");
+        }
+    }
+
+    private void SearchProduct()
+    {
+        try
+        {
+            gridDataProduct.DataSource = ProductRepository.SearchProductsByName(txtSearchProduct.Text);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "pesquisar os produtos");
+        }
+    }
+
+    private void SearchEmployee()
+    {
+        try
+        {
+            gridDataEmployee.DataSource = EmployeeRepository.SearchByName(txtSearchEmployee.Text);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "pesquisar os funcionários");
+        }
+    }
+
+    private static void ShowOnlyNameColumn(DataGridView grid)
+    {
+        foreach (DataGridViewColumn column in grid.Columns)
+        {
+            column.Visible = false;
+        }
+
+        grid.Columns[1].Visible = true;
+    }
+
+    private static void ShowOnlySpecificColumns(DataGridView grid, int[] columnIndexes)
+    {
+        foreach (DataGridViewColumn column in grid.Columns)
+        {
+            column.Visible = false;
+        }
+
+        foreach (var index in columnIndexes)
+        {
+            grid.Columns[index].Visible = true;
         }
     }
 }

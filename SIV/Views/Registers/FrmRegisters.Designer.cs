@@ -51,44 +51,36 @@ partial class FrmRegisters
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges45 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges46 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges43 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges39 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges40 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         this.panelMenuRegister = new Guna.UI2.WinForms.Guna2Panel();
         this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
         this.btnPayment = new Guna.UI2.WinForms.Guna2Button();
@@ -104,22 +96,18 @@ partial class FrmRegisters
         this.panelEmployee = new Guna.UI2.WinForms.Guna2Panel();
         this.gridDataEmployee = new Guna.UI2.WinForms.Guna2DataGridView();
         this.labelEmployee = new System.Windows.Forms.Label();
-        this.btnSearchEmployee = new Guna.UI2.WinForms.Guna2Button();
         this.txtSearchEmployee = new Guna.UI2.WinForms.Guna2TextBox();
         this.panelProduct = new Guna.UI2.WinForms.Guna2Panel();
         this.gridDataProduct = new Guna.UI2.WinForms.Guna2DataGridView();
         this.labelProduct = new System.Windows.Forms.Label();
-        this.btnSearchProduct = new Guna.UI2.WinForms.Guna2Button();
-        this.txtSeaarchProduct = new Guna.UI2.WinForms.Guna2TextBox();
+        this.txtSearchProduct = new Guna.UI2.WinForms.Guna2TextBox();
         this.panelSupplier = new Guna.UI2.WinForms.Guna2Panel();
         this.gridDataSupplier = new Guna.UI2.WinForms.Guna2DataGridView();
         this.labelSupplier = new System.Windows.Forms.Label();
-        this.btnSearchSupplier = new Guna.UI2.WinForms.Guna2Button();
         this.txtSearchSupplier = new Guna.UI2.WinForms.Guna2TextBox();
         this.panelClient = new Guna.UI2.WinForms.Guna2Panel();
         this.gridDataClient = new Guna.UI2.WinForms.Guna2DataGridView();
         this.labelClient = new System.Windows.Forms.Label();
-        this.btnSearchClient = new Guna.UI2.WinForms.Guna2Button();
         this.txtSearchClient = new Guna.UI2.WinForms.Guna2TextBox();
         this.scrollBarMenu = new Guna.UI2.WinForms.Guna2VScrollBar();
         this.panelMenuRegister.SuspendLayout();
@@ -393,11 +381,11 @@ partial class FrmRegisters
         // displayPanel
         // 
         this.displayPanel.Controls.Add(this.tableLayoutPanel);
-        this.displayPanel.CustomizableEdges = customizableEdges45;
+        this.displayPanel.CustomizableEdges = customizableEdges37;
         this.displayPanel.Dock = System.Windows.Forms.DockStyle.Fill;
         this.displayPanel.Location = new System.Drawing.Point(215, 0);
         this.displayPanel.Name = "displayPanel";
-        this.displayPanel.ShadowDecoration.CustomizableEdges = customizableEdges46;
+        this.displayPanel.ShadowDecoration.CustomizableEdges = customizableEdges38;
         this.displayPanel.Size = new System.Drawing.Size(865, 720);
         this.displayPanel.TabIndex = 1;
         // 
@@ -427,13 +415,12 @@ partial class FrmRegisters
         this.panelEmployee.BorderThickness = 1;
         this.panelEmployee.Controls.Add(this.gridDataEmployee);
         this.panelEmployee.Controls.Add(this.labelEmployee);
-        this.panelEmployee.Controls.Add(this.btnSearchEmployee);
         this.panelEmployee.Controls.Add(this.txtSearchEmployee);
-        this.panelEmployee.CustomizableEdges = customizableEdges25;
+        this.panelEmployee.CustomizableEdges = customizableEdges23;
         this.panelEmployee.FillColor = System.Drawing.Color.Transparent;
         this.panelEmployee.Location = new System.Drawing.Point(3, 363);
         this.panelEmployee.Name = "panelEmployee";
-        this.panelEmployee.ShadowDecoration.CustomizableEdges = customizableEdges26;
+        this.panelEmployee.ShadowDecoration.CustomizableEdges = customizableEdges24;
         this.panelEmployee.Size = new System.Drawing.Size(426, 354);
         this.panelEmployee.TabIndex = 141;
         // 
@@ -502,29 +489,6 @@ partial class FrmRegisters
         this.labelEmployee.Text = "Funcionários Cadastrados";
         this.labelEmployee.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
-        // btnSearchEmployee
-        // 
-        this.btnSearchEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        this.btnSearchEmployee.Animated = true;
-        this.btnSearchEmployee.BackColor = System.Drawing.Color.White;
-        this.btnSearchEmployee.BorderColor = System.Drawing.Color.Transparent;
-        this.btnSearchEmployee.BorderRadius = 10;
-        this.btnSearchEmployee.CustomizableEdges = customizableEdges21;
-        this.btnSearchEmployee.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-        this.btnSearchEmployee.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-        this.btnSearchEmployee.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-        this.btnSearchEmployee.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-        this.btnSearchEmployee.FillColor = System.Drawing.Color.Transparent;
-        this.btnSearchEmployee.Font = new System.Drawing.Font("Century Gothic", 12F);
-        this.btnSearchEmployee.ForeColor = System.Drawing.Color.Transparent;
-        this.btnSearchEmployee.Image = global::SIV.Properties.Resources.icons_pesquisar;
-        this.btnSearchEmployee.ImageSize = new System.Drawing.Size(30, 30);
-        this.btnSearchEmployee.Location = new System.Drawing.Point(389, 41);
-        this.btnSearchEmployee.Name = "btnSearchEmployee";
-        this.btnSearchEmployee.ShadowDecoration.CustomizableEdges = customizableEdges22;
-        this.btnSearchEmployee.Size = new System.Drawing.Size(25, 25);
-        this.btnSearchEmployee.TabIndex = 29;
-        // 
         // txtSearchEmployee
         // 
         this.txtSearchEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
@@ -532,7 +496,7 @@ partial class FrmRegisters
         this.txtSearchEmployee.BackColor = System.Drawing.Color.Transparent;
         this.txtSearchEmployee.BorderRadius = 10;
         this.txtSearchEmployee.Cursor = System.Windows.Forms.Cursors.IBeam;
-        this.txtSearchEmployee.CustomizableEdges = customizableEdges23;
+        this.txtSearchEmployee.CustomizableEdges = customizableEdges21;
         this.txtSearchEmployee.DefaultText = "";
         this.txtSearchEmployee.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
         this.txtSearchEmployee.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
@@ -546,9 +510,10 @@ partial class FrmRegisters
         this.txtSearchEmployee.PasswordChar = '\0';
         this.txtSearchEmployee.PlaceholderText = "Buscar por nome...";
         this.txtSearchEmployee.SelectedText = "";
-        this.txtSearchEmployee.ShadowDecoration.CustomizableEdges = customizableEdges24;
+        this.txtSearchEmployee.ShadowDecoration.CustomizableEdges = customizableEdges22;
         this.txtSearchEmployee.Size = new System.Drawing.Size(420, 29);
         this.txtSearchEmployee.TabIndex = 28;
+        this.txtSearchEmployee.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearchEmployee_KeyPress);
         // 
         // panelProduct
         // 
@@ -558,13 +523,12 @@ partial class FrmRegisters
         this.panelProduct.BorderThickness = 1;
         this.panelProduct.Controls.Add(this.gridDataProduct);
         this.panelProduct.Controls.Add(this.labelProduct);
-        this.panelProduct.Controls.Add(this.btnSearchProduct);
-        this.panelProduct.Controls.Add(this.txtSeaarchProduct);
-        this.panelProduct.CustomizableEdges = customizableEdges31;
+        this.panelProduct.Controls.Add(this.txtSearchProduct);
+        this.panelProduct.CustomizableEdges = customizableEdges27;
         this.panelProduct.FillColor = System.Drawing.Color.Transparent;
         this.panelProduct.Location = new System.Drawing.Point(435, 3);
         this.panelProduct.Name = "panelProduct";
-        this.panelProduct.ShadowDecoration.CustomizableEdges = customizableEdges32;
+        this.panelProduct.ShadowDecoration.CustomizableEdges = customizableEdges28;
         this.panelProduct.Size = new System.Drawing.Size(427, 354);
         this.panelProduct.TabIndex = 138;
         // 
@@ -633,53 +597,31 @@ partial class FrmRegisters
         this.labelProduct.Text = "Produtos Cadastrados";
         this.labelProduct.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
-        // btnSearchProduct
+        // txtSearchProduct
         // 
-        this.btnSearchProduct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        this.btnSearchProduct.Animated = true;
-        this.btnSearchProduct.BackColor = System.Drawing.Color.White;
-        this.btnSearchProduct.BorderColor = System.Drawing.Color.Transparent;
-        this.btnSearchProduct.BorderRadius = 10;
-        this.btnSearchProduct.CustomizableEdges = customizableEdges27;
-        this.btnSearchProduct.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-        this.btnSearchProduct.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-        this.btnSearchProduct.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-        this.btnSearchProduct.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-        this.btnSearchProduct.FillColor = System.Drawing.Color.Transparent;
-        this.btnSearchProduct.Font = new System.Drawing.Font("Century Gothic", 12F);
-        this.btnSearchProduct.ForeColor = System.Drawing.Color.Transparent;
-        this.btnSearchProduct.Image = global::SIV.Properties.Resources.icons_pesquisar;
-        this.btnSearchProduct.ImageSize = new System.Drawing.Size(30, 30);
-        this.btnSearchProduct.Location = new System.Drawing.Point(389, 41);
-        this.btnSearchProduct.Name = "btnSearchProduct";
-        this.btnSearchProduct.ShadowDecoration.CustomizableEdges = customizableEdges28;
-        this.btnSearchProduct.Size = new System.Drawing.Size(25, 25);
-        this.btnSearchProduct.TabIndex = 29;
-        // 
-        // txtSeaarchProduct
-        // 
-        this.txtSeaarchProduct.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-        this.txtSeaarchProduct.Animated = true;
-        this.txtSeaarchProduct.BackColor = System.Drawing.Color.Transparent;
-        this.txtSeaarchProduct.BorderRadius = 10;
-        this.txtSeaarchProduct.Cursor = System.Windows.Forms.Cursors.IBeam;
-        this.txtSeaarchProduct.CustomizableEdges = customizableEdges29;
-        this.txtSeaarchProduct.DefaultText = "";
-        this.txtSeaarchProduct.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-        this.txtSeaarchProduct.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-        this.txtSeaarchProduct.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-        this.txtSeaarchProduct.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-        this.txtSeaarchProduct.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-        this.txtSeaarchProduct.Font = new System.Drawing.Font("Segoe UI", 9F);
-        this.txtSeaarchProduct.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-        this.txtSeaarchProduct.Location = new System.Drawing.Point(3, 39);
-        this.txtSeaarchProduct.Name = "txtSeaarchProduct";
-        this.txtSeaarchProduct.PasswordChar = '\0';
-        this.txtSeaarchProduct.PlaceholderText = "Buscar por nome...";
-        this.txtSeaarchProduct.SelectedText = "";
-        this.txtSeaarchProduct.ShadowDecoration.CustomizableEdges = customizableEdges30;
-        this.txtSeaarchProduct.Size = new System.Drawing.Size(421, 29);
-        this.txtSeaarchProduct.TabIndex = 28;
+        this.txtSearchProduct.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        this.txtSearchProduct.Animated = true;
+        this.txtSearchProduct.BackColor = System.Drawing.Color.Transparent;
+        this.txtSearchProduct.BorderRadius = 10;
+        this.txtSearchProduct.Cursor = System.Windows.Forms.Cursors.IBeam;
+        this.txtSearchProduct.CustomizableEdges = customizableEdges25;
+        this.txtSearchProduct.DefaultText = "";
+        this.txtSearchProduct.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+        this.txtSearchProduct.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+        this.txtSearchProduct.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+        this.txtSearchProduct.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+        this.txtSearchProduct.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+        this.txtSearchProduct.Font = new System.Drawing.Font("Segoe UI", 9F);
+        this.txtSearchProduct.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+        this.txtSearchProduct.Location = new System.Drawing.Point(3, 39);
+        this.txtSearchProduct.Name = "txtSearchProduct";
+        this.txtSearchProduct.PasswordChar = '\0';
+        this.txtSearchProduct.PlaceholderText = "Buscar por nome...";
+        this.txtSearchProduct.SelectedText = "";
+        this.txtSearchProduct.ShadowDecoration.CustomizableEdges = customizableEdges26;
+        this.txtSearchProduct.Size = new System.Drawing.Size(421, 29);
+        this.txtSearchProduct.TabIndex = 28;
+        this.txtSearchProduct.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearchProduct_KeyPress);
         // 
         // panelSupplier
         // 
@@ -689,13 +631,12 @@ partial class FrmRegisters
         this.panelSupplier.BorderThickness = 1;
         this.panelSupplier.Controls.Add(this.gridDataSupplier);
         this.panelSupplier.Controls.Add(this.labelSupplier);
-        this.panelSupplier.Controls.Add(this.btnSearchSupplier);
         this.panelSupplier.Controls.Add(this.txtSearchSupplier);
-        this.panelSupplier.CustomizableEdges = customizableEdges37;
+        this.panelSupplier.CustomizableEdges = customizableEdges31;
         this.panelSupplier.FillColor = System.Drawing.Color.Transparent;
         this.panelSupplier.Location = new System.Drawing.Point(435, 363);
         this.panelSupplier.Name = "panelSupplier";
-        this.panelSupplier.ShadowDecoration.CustomizableEdges = customizableEdges38;
+        this.panelSupplier.ShadowDecoration.CustomizableEdges = customizableEdges32;
         this.panelSupplier.Size = new System.Drawing.Size(427, 354);
         this.panelSupplier.TabIndex = 139;
         // 
@@ -764,29 +705,6 @@ partial class FrmRegisters
         this.labelSupplier.Text = "Fornecedores Cadastrados";
         this.labelSupplier.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
-        // btnSearchSupplier
-        // 
-        this.btnSearchSupplier.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        this.btnSearchSupplier.Animated = true;
-        this.btnSearchSupplier.BackColor = System.Drawing.Color.White;
-        this.btnSearchSupplier.BorderColor = System.Drawing.Color.Transparent;
-        this.btnSearchSupplier.BorderRadius = 10;
-        this.btnSearchSupplier.CustomizableEdges = customizableEdges33;
-        this.btnSearchSupplier.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-        this.btnSearchSupplier.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-        this.btnSearchSupplier.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-        this.btnSearchSupplier.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-        this.btnSearchSupplier.FillColor = System.Drawing.Color.Transparent;
-        this.btnSearchSupplier.Font = new System.Drawing.Font("Century Gothic", 12F);
-        this.btnSearchSupplier.ForeColor = System.Drawing.Color.Transparent;
-        this.btnSearchSupplier.Image = global::SIV.Properties.Resources.icons_pesquisar;
-        this.btnSearchSupplier.ImageSize = new System.Drawing.Size(30, 30);
-        this.btnSearchSupplier.Location = new System.Drawing.Point(389, 41);
-        this.btnSearchSupplier.Name = "btnSearchSupplier";
-        this.btnSearchSupplier.ShadowDecoration.CustomizableEdges = customizableEdges34;
-        this.btnSearchSupplier.Size = new System.Drawing.Size(25, 25);
-        this.btnSearchSupplier.TabIndex = 29;
-        // 
         // txtSearchSupplier
         // 
         this.txtSearchSupplier.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
@@ -794,7 +712,7 @@ partial class FrmRegisters
         this.txtSearchSupplier.BackColor = System.Drawing.Color.Transparent;
         this.txtSearchSupplier.BorderRadius = 10;
         this.txtSearchSupplier.Cursor = System.Windows.Forms.Cursors.IBeam;
-        this.txtSearchSupplier.CustomizableEdges = customizableEdges35;
+        this.txtSearchSupplier.CustomizableEdges = customizableEdges29;
         this.txtSearchSupplier.DefaultText = "";
         this.txtSearchSupplier.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
         this.txtSearchSupplier.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
@@ -808,7 +726,7 @@ partial class FrmRegisters
         this.txtSearchSupplier.PasswordChar = '\0';
         this.txtSearchSupplier.PlaceholderText = "Buscar por nome...";
         this.txtSearchSupplier.SelectedText = "";
-        this.txtSearchSupplier.ShadowDecoration.CustomizableEdges = customizableEdges36;
+        this.txtSearchSupplier.ShadowDecoration.CustomizableEdges = customizableEdges30;
         this.txtSearchSupplier.Size = new System.Drawing.Size(421, 29);
         this.txtSearchSupplier.TabIndex = 28;
         // 
@@ -820,13 +738,12 @@ partial class FrmRegisters
         this.panelClient.BorderThickness = 1;
         this.panelClient.Controls.Add(this.gridDataClient);
         this.panelClient.Controls.Add(this.labelClient);
-        this.panelClient.Controls.Add(this.btnSearchClient);
         this.panelClient.Controls.Add(this.txtSearchClient);
-        this.panelClient.CustomizableEdges = customizableEdges43;
+        this.panelClient.CustomizableEdges = customizableEdges35;
         this.panelClient.FillColor = System.Drawing.Color.Transparent;
         this.panelClient.Location = new System.Drawing.Point(3, 3);
         this.panelClient.Name = "panelClient";
-        this.panelClient.ShadowDecoration.CustomizableEdges = customizableEdges44;
+        this.panelClient.ShadowDecoration.CustomizableEdges = customizableEdges36;
         this.panelClient.Size = new System.Drawing.Size(426, 354);
         this.panelClient.TabIndex = 140;
         // 
@@ -895,29 +812,6 @@ partial class FrmRegisters
         this.labelClient.Text = "Clientes Cadastrados";
         this.labelClient.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
-        // btnSearchClient
-        // 
-        this.btnSearchClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        this.btnSearchClient.Animated = true;
-        this.btnSearchClient.BackColor = System.Drawing.Color.White;
-        this.btnSearchClient.BorderColor = System.Drawing.Color.Transparent;
-        this.btnSearchClient.BorderRadius = 10;
-        this.btnSearchClient.CustomizableEdges = customizableEdges39;
-        this.btnSearchClient.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-        this.btnSearchClient.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-        this.btnSearchClient.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-        this.btnSearchClient.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-        this.btnSearchClient.FillColor = System.Drawing.Color.Transparent;
-        this.btnSearchClient.Font = new System.Drawing.Font("Century Gothic", 12F);
-        this.btnSearchClient.ForeColor = System.Drawing.Color.Transparent;
-        this.btnSearchClient.Image = global::SIV.Properties.Resources.icons_pesquisar;
-        this.btnSearchClient.ImageSize = new System.Drawing.Size(30, 30);
-        this.btnSearchClient.Location = new System.Drawing.Point(389, 41);
-        this.btnSearchClient.Name = "btnSearchClient";
-        this.btnSearchClient.ShadowDecoration.CustomizableEdges = customizableEdges40;
-        this.btnSearchClient.Size = new System.Drawing.Size(25, 25);
-        this.btnSearchClient.TabIndex = 29;
-        // 
         // txtSearchClient
         // 
         this.txtSearchClient.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
@@ -925,7 +819,7 @@ partial class FrmRegisters
         this.txtSearchClient.BackColor = System.Drawing.Color.Transparent;
         this.txtSearchClient.BorderRadius = 10;
         this.txtSearchClient.Cursor = System.Windows.Forms.Cursors.IBeam;
-        this.txtSearchClient.CustomizableEdges = customizableEdges41;
+        this.txtSearchClient.CustomizableEdges = customizableEdges33;
         this.txtSearchClient.DefaultText = "";
         this.txtSearchClient.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
         this.txtSearchClient.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
@@ -939,9 +833,10 @@ partial class FrmRegisters
         this.txtSearchClient.PasswordChar = '\0';
         this.txtSearchClient.PlaceholderText = "Buscar por nome...";
         this.txtSearchClient.SelectedText = "";
-        this.txtSearchClient.ShadowDecoration.CustomizableEdges = customizableEdges42;
+        this.txtSearchClient.ShadowDecoration.CustomizableEdges = customizableEdges34;
         this.txtSearchClient.Size = new System.Drawing.Size(420, 29);
         this.txtSearchClient.TabIndex = 28;
+        this.txtSearchClient.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearchClient_KeyPress);
         // 
         // scrollBarMenu
         // 
@@ -990,35 +885,25 @@ partial class FrmRegisters
     }
 
     private Guna.UI2.WinForms.Guna2VScrollBar scrollBarMenu;
-
     private Guna.UI2.WinForms.Guna2Panel panelSupplier;
     private Guna.UI2.WinForms.Guna2DataGridView gridDataSupplier;
     private System.Windows.Forms.Label labelSupplier;
-    private Guna.UI2.WinForms.Guna2Button btnSearchSupplier;
     private Guna.UI2.WinForms.Guna2TextBox txtSearchSupplier;
     private Guna.UI2.WinForms.Guna2Panel panelClient;
     private Guna.UI2.WinForms.Guna2DataGridView gridDataClient;
     private System.Windows.Forms.Label labelClient;
-    private Guna.UI2.WinForms.Guna2Button btnSearchClient;
     private Guna.UI2.WinForms.Guna2TextBox txtSearchClient;
     private Guna.UI2.WinForms.Guna2Panel panelEmployee;
     private Guna.UI2.WinForms.Guna2DataGridView gridDataEmployee;
     private System.Windows.Forms.Label labelEmployee;
-    private Guna.UI2.WinForms.Guna2Button btnSearchEmployee;
     private Guna.UI2.WinForms.Guna2TextBox txtSearchEmployee;
-
     private Guna.UI2.WinForms.Guna2Panel panelProduct;
     private Guna.UI2.WinForms.Guna2DataGridView gridDataProduct;
     private System.Windows.Forms.Label labelProduct;
-    private Guna.UI2.WinForms.Guna2Button btnSearchProduct;
-    private Guna.UI2.WinForms.Guna2TextBox txtSeaarchProduct;
-
+    private Guna.UI2.WinForms.Guna2TextBox txtSearchProduct;
     private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-
     private Guna.UI2.WinForms.Guna2Panel displayPanel;
-
     private Guna.UI2.WinForms.Guna2Button guna2Button1;
-
     private Guna.UI2.WinForms.Guna2Button btnPayment;
     private Guna.UI2.WinForms.Guna2Button btnAddress;
     private Guna.UI2.WinForms.Guna2Button btnSupplier;
@@ -1027,7 +912,6 @@ partial class FrmRegisters
     private Guna.UI2.WinForms.Guna2Button btnEmployee;
     private Guna.UI2.WinForms.Guna2Button btnClient;
     private Guna.UI2.WinForms.Guna2Button btnJob;
-
     private Guna.UI2.WinForms.Guna2Panel panelMenuRegister;
 
     #endregion
