@@ -41,23 +41,17 @@ public static class EmployeeRepository
     /// Verifica se um CPF já está cadastrado no banco de dados, exceto durante uma atualização.
     /// </summary>
     /// <param name="cpf">O CPF do funcionário a ser verificado.</param>
-    /// <param name="oldCpf">O CPF antigo do funcionário, usado em operações de atualização.</param>
     /// <returns>Retorna <c>True</c> se o CPF não existir ou for o mesmo do CPF antigo, caso contrário, <c>False</c>.</returns>
-    public static bool VerifyCpfExistence(string cpf, string oldCpf)
+    public static bool VerifyCpfExistence(string cpf)
     {
         try
-        {
-            if (cpf == oldCpf)
-            {
-                return true; // Se o CPF for igual ao CPF antigo, não é necessário verificar se o CPF já existe
-            }
-
+        { 
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand("SELECT COUNT(*) FROM Employees WHERE CPF = @Cpf", connection);
             
             cmd.Parameters.AddWithValue("@Cpf", cpf);
-            
-            var result = (long)cmd.ExecuteScalar(); // ExecuteScalar retorna a primeira coluna da primeira linha do resultado da consulta
+
+            var result = Convert.ToInt32(cmd.ExecuteScalar()); // ExecuteScalar retorna a primeira coluna da primeira linha do resultado da consulta
             return result == 0; // Se result for 0, significa que o CPF não existe
         }
         catch (Exception ex)

@@ -130,10 +130,8 @@ public partial class FrmEmployees : Form
         try
         {
             if (!ValidateFormData()) return;
-
-            var cpf = txtCpf.Text;
             
-            if (!EmployeeRepository.VerifyCpfExistence(cpf, _oldCpf))
+            if (!EmployeeRepository.VerifyCpfExistence(AddCpfMask(txtCpf.Text)))
             {
                 MessageHelper.ShowRegisteredCpfMessage();
                 return; 
@@ -160,7 +158,7 @@ public partial class FrmEmployees : Form
             
             var cpf = txtCpf.Text;
             
-            if (!EmployeeRepository.VerifyCpfExistence(cpf, _oldCpf))
+            if (!EmployeeRepository.VerifyCpfExistence(cpf))
             {
                 MessageHelper.ShowRegisteredCpfMessage();
                 return;
