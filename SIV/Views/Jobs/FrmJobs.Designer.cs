@@ -57,8 +57,8 @@ partial class FrmJobs
         this.btnEdit = new Guna.UI2.WinForms.Guna2Button();
         this.btnSave = new Guna.UI2.WinForms.Guna2Button();
         this.panelGrid = new Guna.UI2.WinForms.Guna2Panel();
-        this.labelRegisteredEmployees = new System.Windows.Forms.Label();
         this.gridData = new Guna.UI2.WinForms.Guna2DataGridView();
+        this.labelRegisteredEmployees = new System.Windows.Forms.Label();
         this.panelGrid.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
         this.SuspendLayout();
@@ -109,7 +109,7 @@ partial class FrmJobs
         this.btnCancel.FillColor = System.Drawing.Color.Black;
         this.btnCancel.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.btnCancel.ForeColor = System.Drawing.Color.White;
-        this.btnCancel.Location = new System.Drawing.Point(124, 200);
+        this.btnCancel.Location = new System.Drawing.Point(127, 420);
         this.btnCancel.Name = "btnCancel";
         this.btnCancel.PressedColor = System.Drawing.Color.White;
         this.btnCancel.ShadowDecoration.CustomizableEdges = customizableEdges4;
@@ -131,7 +131,7 @@ partial class FrmJobs
         this.btnNew.FillColor = System.Drawing.Color.Black;
         this.btnNew.Font = new System.Drawing.Font("Century Gothic", 12F);
         this.btnNew.ForeColor = System.Drawing.Color.White;
-        this.btnNew.Location = new System.Drawing.Point(12, 200);
+        this.btnNew.Location = new System.Drawing.Point(15, 420);
         this.btnNew.Name = "btnNew";
         this.btnNew.PressedColor = System.Drawing.Color.White;
         this.btnNew.ShadowDecoration.CustomizableEdges = customizableEdges6;
@@ -153,7 +153,7 @@ partial class FrmJobs
         this.btnDelete.FillColor = System.Drawing.Color.Black;
         this.btnDelete.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.btnDelete.ForeColor = System.Drawing.Color.White;
-        this.btnDelete.Location = new System.Drawing.Point(460, 200);
+        this.btnDelete.Location = new System.Drawing.Point(463, 420);
         this.btnDelete.Name = "btnDelete";
         this.btnDelete.PressedColor = System.Drawing.Color.White;
         this.btnDelete.ShadowDecoration.CustomizableEdges = customizableEdges8;
@@ -175,7 +175,7 @@ partial class FrmJobs
         this.btnEdit.FillColor = System.Drawing.Color.Black;
         this.btnEdit.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.btnEdit.ForeColor = System.Drawing.Color.White;
-        this.btnEdit.Location = new System.Drawing.Point(348, 200);
+        this.btnEdit.Location = new System.Drawing.Point(351, 420);
         this.btnEdit.Name = "btnEdit";
         this.btnEdit.PressedColor = System.Drawing.Color.White;
         this.btnEdit.ShadowDecoration.CustomizableEdges = customizableEdges10;
@@ -197,7 +197,7 @@ partial class FrmJobs
         this.btnSave.FillColor = System.Drawing.Color.Black;
         this.btnSave.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.btnSave.ForeColor = System.Drawing.Color.White;
-        this.btnSave.Location = new System.Drawing.Point(236, 200);
+        this.btnSave.Location = new System.Drawing.Point(239, 420);
         this.btnSave.Name = "btnSave";
         this.btnSave.PressedColor = System.Drawing.Color.White;
         this.btnSave.ShadowDecoration.CustomizableEdges = customizableEdges12;
@@ -209,28 +209,18 @@ partial class FrmJobs
         // panelGrid
         // 
         this.panelGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        this.panelGrid.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
         this.panelGrid.BorderRadius = 15;
-        this.panelGrid.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-        this.panelGrid.Controls.Add(this.labelRegisteredEmployees);
+        this.panelGrid.BorderThickness = 1;
         this.panelGrid.Controls.Add(this.gridData);
+        this.panelGrid.Controls.Add(this.labelRegisteredEmployees);
         this.panelGrid.CustomizableEdges = customizableEdges13;
         this.panelGrid.FillColor = System.Drawing.Color.Transparent;
-        this.panelGrid.Location = new System.Drawing.Point(12, 282);
+        this.panelGrid.Location = new System.Drawing.Point(12, 474);
         this.panelGrid.Name = "panelGrid";
         this.panelGrid.ShadowDecoration.CustomizableEdges = customizableEdges14;
-        this.panelGrid.Size = new System.Drawing.Size(1056, 426);
-        this.panelGrid.TabIndex = 30;
-        // 
-        // labelRegisteredEmployees
-        // 
-        this.labelRegisteredEmployees.BackColor = System.Drawing.Color.Transparent;
-        this.labelRegisteredEmployees.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.labelRegisteredEmployees.Location = new System.Drawing.Point(3, 0);
-        this.labelRegisteredEmployees.Name = "labelRegisteredEmployees";
-        this.labelRegisteredEmployees.Size = new System.Drawing.Size(207, 36);
-        this.labelRegisteredEmployees.TabIndex = 27;
-        this.labelRegisteredEmployees.Text = "Cargos Cadastrados";
-        this.labelRegisteredEmployees.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        this.panelGrid.Size = new System.Drawing.Size(1056, 234);
+        this.panelGrid.TabIndex = 137;
         // 
         // gridData
         // 
@@ -257,11 +247,11 @@ partial class FrmJobs
         dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
         this.gridData.DefaultCellStyle = dataGridViewCellStyle3;
         this.gridData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
-        this.gridData.Location = new System.Drawing.Point(0, 39);
+        this.gridData.Location = new System.Drawing.Point(3, 39);
         this.gridData.Name = "gridData";
         this.gridData.ReadOnly = true;
         this.gridData.RowHeadersVisible = false;
-        this.gridData.Size = new System.Drawing.Size(1056, 387);
+        this.gridData.Size = new System.Drawing.Size(1050, 182);
         this.gridData.TabIndex = 21;
         this.gridData.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Cyan;
         this.gridData.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
@@ -286,6 +276,17 @@ partial class FrmJobs
         this.gridData.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(210)))), ((int)(((byte)(225)))));
         this.gridData.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
         this.gridData.DoubleClick += new System.EventHandler(this.gridData_DoubleClick);
+        // 
+        // labelRegisteredEmployees
+        // 
+        this.labelRegisteredEmployees.BackColor = System.Drawing.Color.Transparent;
+        this.labelRegisteredEmployees.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelRegisteredEmployees.Location = new System.Drawing.Point(3, 0);
+        this.labelRegisteredEmployees.Name = "labelRegisteredEmployees";
+        this.labelRegisteredEmployees.Size = new System.Drawing.Size(207, 36);
+        this.labelRegisteredEmployees.TabIndex = 27;
+        this.labelRegisteredEmployees.Text = "Clientes Cadastrados";
+        this.labelRegisteredEmployees.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // FrmJobs
         // 
@@ -316,8 +317,8 @@ partial class FrmJobs
     }
 
     private Guna.UI2.WinForms.Guna2Panel panelGrid;
-    private System.Windows.Forms.Label labelRegisteredEmployees;
     private Guna.UI2.WinForms.Guna2DataGridView gridData;
+    private System.Windows.Forms.Label labelRegisteredEmployees;
 
     private Guna.UI2.WinForms.Guna2Button btnCancel;
     private Guna.UI2.WinForms.Guna2Button btnNew;

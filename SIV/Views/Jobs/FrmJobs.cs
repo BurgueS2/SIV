@@ -22,11 +22,7 @@ public partial class FrmJobs : Form
     
     private void FrmJobs_Load(object sender, EventArgs e)
     {
-        ConfigureUiControls(false);
-        LoadJobs();
-        btnNew.Enabled = true;
-        gridData.Columns[1].HeaderText = @"NOME";
-        gridData.Columns[2].HeaderText = @"DATA DE CADASTRO";
+        InitializeForm();
     }
     
     private void gridData_DoubleClick(object sender, EventArgs e)
@@ -43,18 +39,12 @@ public partial class FrmJobs : Form
 
     private void btnNew_Click(object sender, EventArgs e)
     {
-        ConfigureUiControls(true);
-        txtName.Focus();
-        btnEdit.Enabled = false;
-        btnDelete.Enabled = false;
-        gridData.Enabled = false;
+        PrepareForNewEntry();
     }
 
     private void btnCancel_Click(object sender, EventArgs e)
     {
-        ConfigureUiControls(false);
-        txtName.Clear();
-        gridData.Enabled = true;
+        ResetForm();
     }
 
     private void btnSave_Click(object sender, EventArgs e)
@@ -72,17 +62,21 @@ public partial class FrmJobs : Form
         DeleteFormData();
     }
     
+    private void InitializeForm()
+    {
+        ConfigureUiControls(false);
+        LoadJobs();
+        btnNew.Enabled = true;
+        ConfigureGridHeaders();
+    }
+    
     private void SaveFormData()
     {
         try
         {
-            var newJob = new Job { Name = txtName.Text };
+            if (!ValidadeJobName(txtName.Text)) return;
             
-            if (string.IsNullOrWhiteSpace(txtName.Text) || !Regex.IsMatch(txtName.Text, @"^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ ]{2,}$"))
-            {
-                MessageBox.Show(this, @"O nome do cargo não pode estar vazio, Use apenas letras e espaços.", @"Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            var newJob = new Job { Name = txtName.Text };
             
             if (JobRepository.JobExists(txtName.Text))
             {
@@ -161,6 +155,21 @@ public partial class FrmJobs : Form
         }
     }
     
+    private void ConfigureGridHeaders()
+    {
+        gridData.Columns[1].HeaderText = @"NOME";
+        gridData.Columns[2].HeaderText = @"DATA DE CADASTRO";
+    }
+    
+    private void PrepareForNewEntry()
+    {
+        ConfigureUiControls(true);
+        txtName.Focus();
+        btnEdit.Enabled = false;
+        btnDelete.Enabled = false;
+        gridData.Enabled = false;
+    }
+    
     private void ConfigureUiControls(bool enable)
     {
         btnNew.Enabled = !enable;
@@ -178,5 +187,22 @@ public partial class FrmJobs : Form
         LoadJobs();
         ConfigureUiControls(false);
         gridData.Enabled = true;
+    }
+    
+    private void ResetForm()
+    {
+        ConfigureUiControls(false);
+        txtName.Clear();
+        gridData.Enabled = true;
+    }
+
+    private static bool ValidadeJobName(string jobName)
+    {
+        if (!string.IsNullOrWhiteSpace(jobName) &&
+            Regex.IsMatch(jobName, @"^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ ]{3,}$")) return true;
+        
+        MessageHelper.ShowValidationMessage(@"O nome do cargo não pode estar vazio, Use apenas letras e espaços.");
+        return false;
+
     }
 }
