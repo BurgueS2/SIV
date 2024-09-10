@@ -24,59 +24,26 @@ public partial class FrmClients : Form
     
     private void FrmClients_Load(object sender, EventArgs e)
     {
-        LoadClient();
-        ConfigureUiControls(false);
-        EnableSearchControls(true);
+        InitializeForm();
     }
     
     private void gridData_DoubleClick(object sender, EventArgs e)
     {
-        if (gridData.SelectedRows.Count <= 0) return; // Verifica se há linhas selecionadas
+        if (gridData.SelectedRows.Count <= 0) return;
         
-        ClearFields();
-        ConfigureUiControls(true);
-        EnableSearchControls(false);
-
-        // Desabilita controles específicos durante a edição
-        btnSave.Enabled = false;
-        
-        // Obtém os valores das células da linha selecionada e preenche os campos do formulário
-        _selectedUserId = gridData.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do cliente
-        txtName.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
-        txtCpf.Text = gridData.CurrentRow?.Cells[2].Value.ToString();
-
-        // Verifica se o status do funcionário é bloqueado
-        var statusValue = gridData.CurrentRow?.Cells[3].Value.ToString().ToUpper();
-        btnBlocked.Checked = statusValue == "BLOQUEADO";
-        btnUnlocked.Checked = statusValue == "DESBLOQUE.";
-
-        // Preenche os campos restantes
-        txtPhone.Text = gridData.CurrentRow?.Cells[4].Value.ToString();
-        txtEmail.Text = gridData.CurrentRow?.Cells[5].Value.ToString();
-        txtAddress.Text = gridData.CurrentRow?.Cells[6].Value.ToString();
-        txtRefPoint.Text = gridData.CurrentRow?.Cells[7].Value.ToString();
-        txtObservation.Text = gridData.CurrentRow?.Cells[8].Value.ToString();
-        cbSex.Text = gridData.CurrentRow?.Cells[9].Value.ToString();
+        PopulateFormFields();
+        ConfigureUiControls(false);
+        EnableSearchControls(true);
     }
     
     private void btnNew_Click(object sender, EventArgs e)
     {
-        ConfigureUiControls(true);
-        EnableSearchControls(false);
-        txtName.Focus();
-        
-        // Desabilita controles específicos durante a edição
-        btnEdit.Enabled = false;
-        btnDelete.Enabled = false;
-        gridData.Enabled = false;
+        PrepareForNewEntry();
     }
 
     private void btnCancel_Click(object sender, EventArgs e)
     {
-        ClearFields();
-        ConfigureUiControls(false);
-        EnableSearchControls(true);
-        gridData.Enabled = true;
+        ResetForm();
     }
 
     private void btnSave_Click(object sender, EventArgs e)
@@ -107,15 +74,18 @@ public partial class FrmClients : Form
         SearchByCpf();
     }
     
+    private void InitializeForm()
+    {
+        LoadClient();
+        ConfigureUiControls(false);
+        EnableSearchControls(true);
+    }
+    
     private void SaveFormData()
     {
         try
         {
-            var cpf = AddCpfMask(txtCpf.Text);
-            var email = txtEmail.Text;
-            
-            if (!VerifyCpfAndEmail(cpf, email)) return;
-            
+            if (!VerifyCpfAndEmail(AddCpfMask(txtCpf.Text), txtEmail.Text)) return;
             if (!ValidateFormData()) return;
             
             var client = CreateClientFromFormData();
@@ -135,12 +105,8 @@ public partial class FrmClients : Form
     {
         try
         {
-            var cpf = txtCpf.Text;
-            var email = txtEmail.Text;
-            
             if (!ValidateFormData()) return;
-            
-            if (!VerifyCpfAndEmail(cpf, email)) return;
+            if (!VerifyCpfAndEmail(AddCpfMask(txtCpf.Text), txtEmail.Text)) return;
 
             var client = CreateClientFromFormData();
             ClientRepository.UpdateClient(client);
@@ -170,10 +136,6 @@ public partial class FrmClients : Form
         {
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "excluir");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
         }
     }
     
@@ -218,9 +180,7 @@ public partial class FrmClients : Form
     {
         try
         {
-            var name = txtSearchName.Text;
-
-            gridData.DataSource = ClientRepository.SearchByName(name);
+            gridData.DataSource = ClientRepository.SearchByName(txtSearchName.Text.ToUpper());
             FormatGridData();
         }
         catch (MySqlException ex)
@@ -234,9 +194,7 @@ public partial class FrmClients : Form
     {
         try
         {
-            var cpf = AddCpfMask(txtSearchCpf.Text);
-
-            gridData.DataSource = ClientRepository.SearchByCpf(cpf);
+            gridData.DataSource = ClientRepository.SearchByCpf(AddCpfMask(txtSearchCpf.Text));
             FormatGridData();
         }
         catch (MySqlException ex)
@@ -262,6 +220,7 @@ public partial class FrmClients : Form
     
     private void FormatGridData()
     {
+        gridData.Columns[0].Visible = false;
         gridData.Columns[1].HeaderText = @"NOME";
         gridData.Columns[2].HeaderText = @"CPF";
         gridData.Columns[3].HeaderText = @"STATUS";
@@ -272,7 +231,6 @@ public partial class FrmClients : Form
         gridData.Columns[8].HeaderText = @"OBSERVAÇÃO";
         gridData.Columns[9].HeaderText = @"SEXO";
         gridData.Columns[10].HeaderText = @"DATA";
-        gridData.Columns[0].Visible = false;
     }
     
     private void ConfigureUiControls(bool enable)
@@ -352,5 +310,46 @@ public partial class FrmClients : Form
         }
 
         return true;
+    }
+    
+    private void PopulateFormFields()
+    {
+        ClearFields();
+        
+        // Preenche os campos do formulário com os valores da linha selecionada
+        _selectedUserId = gridData.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do cliente
+        txtName.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
+        txtCpf.Text = gridData.CurrentRow?.Cells[2].Value.ToString();
+        
+        // Verifica se o status do cliente é bloqueado ou desbloqueado
+        var statusValue = gridData.CurrentRow?.Cells[3].Value.ToString().ToUpper();
+        btnBlocked.Checked = statusValue == "BLOQUEADO";
+        btnUnlocked.Checked = statusValue == "DESBLOQUE.";
+        
+        // Preenche os campos restantes
+        txtPhone.Text = gridData.CurrentRow?.Cells[4].Value.ToString();
+        txtEmail.Text = gridData.CurrentRow?.Cells[5].Value.ToString();
+        txtAddress.Text = gridData.CurrentRow?.Cells[6].Value.ToString();
+        txtRefPoint.Text = gridData.CurrentRow?.Cells[7].Value.ToString();
+        txtObservation.Text = gridData.CurrentRow?.Cells[8].Value.ToString();
+        cbSex.Text = gridData.CurrentRow?.Cells[9].Value.ToString();
+    }
+    
+    private void PrepareForNewEntry()
+    {
+        ConfigureUiControls(true);
+        EnableSearchControls(false);
+        txtName.Focus();
+        btnEdit.Enabled = false;
+        btnDelete.Enabled = false;
+        gridData.Enabled = false;
+    }
+
+    private void ResetForm()
+    {
+        ClearFields();
+        ConfigureUiControls(false);
+        EnableSearchControls(true);
+        gridData.Enabled = true;
     }
 }
