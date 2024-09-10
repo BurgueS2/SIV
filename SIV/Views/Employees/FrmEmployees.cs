@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using SIV.Controllers;
 using SIV.Core;
 using SIV.Helpers;
 using SIV.Models;
@@ -17,7 +16,6 @@ public partial class FrmEmployees : Form
     private string _image; // Variável para armazenar o caminho da imagem
     private bool _changedImage; // Variável para verificar se a imagem foi alterada
     private string _selectedEmployeeId;
-    private string _oldCpf;
     
     public FrmEmployees()
     {
@@ -26,11 +24,7 @@ public partial class FrmEmployees : Form
     
     private void FrmEmployees_Load(object sender, EventArgs e)
     {
-        NoPhoto();
-        LoadEmployees();
-        ConfigureUiControls(false);
-        LoadJob();
-        _changedImage = false; // Define a flag para indicar que a imagem não foi alterada
+        InitializeForm();
     }
     
     private void gridData_DoubleClick(object sender, EventArgs e)
@@ -47,22 +41,14 @@ public partial class FrmEmployees : Form
         txtPhone.Text = gridData.CurrentRow?.Cells[3].Value.ToString();
         cbJob.Text = gridData.CurrentRow?.Cells[4].Value.ToString();
         txtAddress.Text = gridData.CurrentRow?.Cells[5].Value.ToString();
-        _oldCpf = gridData.CurrentRow?.Cells[2].Value.ToString(); // Salva o CPF antigo para verificar se foi alterado
 
         // Carrega a foto do funcionário, se disponível
-        if (gridData.CurrentRow?.Cells[7].Value != DBNull.Value)
-        {
-            var photoBytes = (byte[])gridData.CurrentRow?.Cells[7].Value;
-            photo.Image = ImageHelper.ConvertByteArrayToImage(photoBytes);
-        }
-        else // Se não houver foto, exibe a imagem padrão
-        {
-            NoPhoto();
-        }
+        LoadEmployeePhoto();
     }
     
     private void btnNew_Click(object sender, EventArgs e)
     {
+        // Habilita os controles do formulário e desabilita os botões de ação
         ConfigureUiControls(true);
         txtName.Focus();
         btnEdit.Enabled = false;
@@ -72,10 +58,7 @@ public partial class FrmEmployees : Form
     
     private void btnCancel_Click(object sender, EventArgs e)
     {
-        NoPhoto();
-        ConfigureUiControls(false);
-        ClearFields();
-        gridData.Enabled = true;
+        ResetForm();
     }
     
     private void btnSave_Click(object sender, EventArgs e)
@@ -100,29 +83,25 @@ public partial class FrmEmployees : Form
     
     private void btnPhoto_Click(object sender, EventArgs e)
     {
-        var dialog = new OpenFileDialog
+        SelectPhoto();
+    }
+    
+    private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
+    {
+        if (e.KeyChar == (char)Keys.Enter)
         {
-            Filter = @"picture files(*.jpg;*.png;*.jpeg) | *.jpg;*.png;*.jpeg" // Filtro de arquivos de imagem
-        };
-
-        if (dialog.ShowDialog() != DialogResult.OK) return;
-        
-        try
-        {
-            _image = dialog.FileName;
-            photo.Image = ImageHelper.LoadImageFromFile(_image); // Carrega a imagem selecionada no PictureBox
-            _changedImage = true; // Define a flag para indicar que a imagem foi alterada
+            SearchByName();
         }
-        catch (OutOfMemoryException)
-        {
-            MessageHelper.ShowInsufficientMemory();
-            NoPhoto();
-        }
-        catch (Exception ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, "carregar imagem");
-        }
+    }
+    
+    private void InitializeForm()
+    {
+        NoPhoto();
+        LoadEmployees();
+        ConfigureUiControls(false);
+        LoadJob();
+        _changedImage = false; // Define a flag para indicar que a imagem não foi alterada
+        cbJob.SelectedIndex = -1; // Define o índice do ComboBox para não selecionado
     }
     
     private void SaveFormData()
@@ -156,9 +135,7 @@ public partial class FrmEmployees : Form
         {
             if (!ValidateFormData()) return;
             
-            var cpf = txtCpf.Text;
-            
-            if (!EmployeeRepository.VerifyCpfExistence(cpf))
+            if (!EmployeeRepository.VerifyCpfExistence(AddCpfMask(txtCpf.Text)))
             {
                 MessageHelper.ShowRegisteredCpfMessage();
                 return;
@@ -213,9 +190,7 @@ public partial class FrmEmployees : Form
     {
         try
         {
-            var name = txtSearch.Text.ToUpper();
-
-            gridData.DataSource = EmployeeRepository.SearchByName(name);
+            gridData.DataSource = EmployeeRepository.SearchByName(txtSearch.Text.ToUpper());
             FormatGridData();
         }
         catch (Exception ex)
@@ -256,6 +231,19 @@ public partial class FrmEmployees : Form
         {
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "carregar funcionários");
+        }
+    }
+
+    private void LoadEmployeePhoto()
+    {
+        if (gridData.CurrentRow?.Cells[7].Value != DBNull.Value)
+        {
+            var photoBytes = (byte[])gridData.CurrentRow?.Cells[7].Value;
+            photo.Image = ImageHelper.ConvertByteArrayToImage(photoBytes);
+        }
+        else // Se não houver foto, exibe a imagem padrão
+        {
+            NoPhoto();
         }
     }
     
@@ -311,6 +299,41 @@ public partial class FrmEmployees : Form
         txtPhone.Text = "";
         cbJob.Text = "";
         txtAddress.Text = "";
+    }
+
+    private void ResetForm()
+    {
+        NoPhoto();
+        ConfigureUiControls(false);
+        ClearFields();
+        gridData.Enabled = true;
+    }
+
+    private void SelectPhoto()
+    {
+        var dialog = new OpenFileDialog
+        {
+            Filter = @"picture files(*.jpg;*.png;*.jpeg) | *.jpg;*.png;*.jpeg" // Filtro de arquivos de imagem
+        };
+
+        if (dialog.ShowDialog() != DialogResult.OK) return;
+        
+        try
+        {
+            _image = dialog.FileName;
+            photo.Image = ImageHelper.LoadImageFromFile(_image); // Carrega a imagem selecionada no PictureBox
+            _changedImage = true; // Define a flag para indicar que a imagem foi alterada
+        }
+        catch (OutOfMemoryException)
+        {
+            MessageHelper.ShowInsufficientMemory();
+            NoPhoto();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "carregar imagem");
+        }
     }
     
     private void NoPhoto()

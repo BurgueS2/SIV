@@ -53,17 +53,17 @@ partial class FrmEmployees
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         this.txtName = new Guna.UI2.WinForms.Guna2TextBox();
         this.labelName = new System.Windows.Forms.Label();
         this.txtCpf = new Guna.UI2.WinForms.Guna2TextBox();
@@ -80,14 +80,14 @@ partial class FrmEmployees
         this.btnDelete = new Guna.UI2.WinForms.Guna2Button();
         this.btnEdit = new Guna.UI2.WinForms.Guna2Button();
         this.btnSave = new Guna.UI2.WinForms.Guna2Button();
-        this.panelGrid = new Guna.UI2.WinForms.Guna2Panel();
         this.btnSearch = new Guna.UI2.WinForms.Guna2Button();
-        this.labelRegisteredEmployees = new System.Windows.Forms.Label();
         this.txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
-        this.gridData = new Guna.UI2.WinForms.Guna2DataGridView();
         this.btnPhoto = new Guna.UI2.WinForms.Guna2Button();
+        this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+        this.gridData = new Guna.UI2.WinForms.Guna2DataGridView();
+        this.label1 = new System.Windows.Forms.Label();
         ((System.ComponentModel.ISupportInitialize)(this.photo)).BeginInit();
-        this.panelGrid.SuspendLayout();
+        this.guna2Panel1.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
         this.SuspendLayout();
         // 
@@ -258,10 +258,10 @@ partial class FrmEmployees
         this.photo.CustomizableEdges = customizableEdges11;
         this.photo.FillColor = System.Drawing.Color.Gainsboro;
         this.photo.ImageRotate = 0F;
-        this.photo.Location = new System.Drawing.Point(462, 39);
+        this.photo.Location = new System.Drawing.Point(460, 39);
         this.photo.Name = "photo";
         this.photo.ShadowDecoration.CustomizableEdges = customizableEdges12;
-        this.photo.Size = new System.Drawing.Size(196, 200);
+        this.photo.Size = new System.Drawing.Size(201, 206);
         this.photo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
         this.photo.TabIndex = 16;
         this.photo.TabStop = false;
@@ -376,23 +376,6 @@ partial class FrmEmployees
         this.btnSave.Text = "Salvar";
         this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
         // 
-        // panelGrid
-        // 
-        this.panelGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-        this.panelGrid.BorderRadius = 15;
-        this.panelGrid.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-        this.panelGrid.Controls.Add(this.btnSearch);
-        this.panelGrid.Controls.Add(this.labelRegisteredEmployees);
-        this.panelGrid.Controls.Add(this.txtSearch);
-        this.panelGrid.Controls.Add(this.gridData);
-        this.panelGrid.CustomizableEdges = customizableEdges27;
-        this.panelGrid.FillColor = System.Drawing.Color.Transparent;
-        this.panelGrid.Location = new System.Drawing.Point(12, 467);
-        this.panelGrid.Name = "panelGrid";
-        this.panelGrid.ShadowDecoration.CustomizableEdges = customizableEdges28;
-        this.panelGrid.Size = new System.Drawing.Size(1056, 241);
-        this.panelGrid.TabIndex = 25;
-        // 
         // btnSearch
         // 
         this.btnSearch.Animated = true;
@@ -415,17 +398,6 @@ partial class FrmEmployees
         this.btnSearch.TabIndex = 29;
         this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
         // 
-        // labelRegisteredEmployees
-        // 
-        this.labelRegisteredEmployees.BackColor = System.Drawing.Color.Transparent;
-        this.labelRegisteredEmployees.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.labelRegisteredEmployees.Location = new System.Drawing.Point(3, 0);
-        this.labelRegisteredEmployees.Name = "labelRegisteredEmployees";
-        this.labelRegisteredEmployees.Size = new System.Drawing.Size(207, 36);
-        this.labelRegisteredEmployees.TabIndex = 27;
-        this.labelRegisteredEmployees.Text = "Funcinários Cadastrados";
-        this.labelRegisteredEmployees.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-        // 
         // txtSearch
         // 
         this.txtSearch.Animated = true;
@@ -444,11 +416,53 @@ partial class FrmEmployees
         this.txtSearch.Location = new System.Drawing.Point(3, 39);
         this.txtSearch.Name = "txtSearch";
         this.txtSearch.PasswordChar = '\0';
-        this.txtSearch.PlaceholderText = "Bucas";
+        this.txtSearch.PlaceholderText = "Buscar por nome...";
         this.txtSearch.SelectedText = "";
         this.txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges26;
         this.txtSearch.Size = new System.Drawing.Size(295, 29);
         this.txtSearch.TabIndex = 28;
+        this.txtSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearch_KeyPress);
+        // 
+        // btnPhoto
+        // 
+        this.btnPhoto.Animated = true;
+        this.btnPhoto.BackColor = System.Drawing.Color.Transparent;
+        this.btnPhoto.BorderRadius = 10;
+        this.btnPhoto.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.ToogleButton;
+        this.btnPhoto.CustomizableEdges = customizableEdges27;
+        this.btnPhoto.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+        this.btnPhoto.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+        this.btnPhoto.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+        this.btnPhoto.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+        this.btnPhoto.FillColor = System.Drawing.Color.Black;
+        this.btnPhoto.Font = new System.Drawing.Font("Century Gothic", 12F);
+        this.btnPhoto.ForeColor = System.Drawing.Color.WhiteSmoke;
+        this.btnPhoto.Location = new System.Drawing.Point(507, 253);
+        this.btnPhoto.Name = "btnPhoto";
+        this.btnPhoto.PressedColor = System.Drawing.Color.White;
+        this.btnPhoto.ShadowDecoration.CustomizableEdges = customizableEdges28;
+        this.btnPhoto.Size = new System.Drawing.Size(106, 29);
+        this.btnPhoto.TabIndex = 26;
+        this.btnPhoto.Text = "Foto";
+        this.btnPhoto.Click += new System.EventHandler(this.btnPhoto_Click);
+        // 
+        // guna2Panel1
+        // 
+        this.guna2Panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        this.guna2Panel1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
+        this.guna2Panel1.BorderRadius = 15;
+        this.guna2Panel1.BorderThickness = 1;
+        this.guna2Panel1.Controls.Add(this.btnSearch);
+        this.guna2Panel1.Controls.Add(this.gridData);
+        this.guna2Panel1.Controls.Add(this.label1);
+        this.guna2Panel1.Controls.Add(this.txtSearch);
+        this.guna2Panel1.CustomizableEdges = customizableEdges29;
+        this.guna2Panel1.FillColor = System.Drawing.Color.Transparent;
+        this.guna2Panel1.Location = new System.Drawing.Point(12, 474);
+        this.guna2Panel1.Name = "guna2Panel1";
+        this.guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges30;
+        this.guna2Panel1.Size = new System.Drawing.Size(1056, 234);
+        this.guna2Panel1.TabIndex = 137;
         // 
         // gridData
         // 
@@ -475,11 +489,11 @@ partial class FrmEmployees
         dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
         this.gridData.DefaultCellStyle = dataGridViewCellStyle3;
         this.gridData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
-        this.gridData.Location = new System.Drawing.Point(0, 89);
+        this.gridData.Location = new System.Drawing.Point(3, 89);
         this.gridData.Name = "gridData";
         this.gridData.ReadOnly = true;
         this.gridData.RowHeadersVisible = false;
-        this.gridData.Size = new System.Drawing.Size(1056, 152);
+        this.gridData.Size = new System.Drawing.Size(1050, 132);
         this.gridData.TabIndex = 21;
         this.gridData.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Cyan;
         this.gridData.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
@@ -505,28 +519,16 @@ partial class FrmEmployees
         this.gridData.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
         this.gridData.DoubleClick += new System.EventHandler(this.gridData_DoubleClick);
         // 
-        // btnPhoto
+        // label1
         // 
-        this.btnPhoto.Animated = true;
-        this.btnPhoto.BackColor = System.Drawing.Color.Transparent;
-        this.btnPhoto.BorderRadius = 10;
-        this.btnPhoto.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.ToogleButton;
-        this.btnPhoto.CustomizableEdges = customizableEdges29;
-        this.btnPhoto.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-        this.btnPhoto.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-        this.btnPhoto.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-        this.btnPhoto.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-        this.btnPhoto.FillColor = System.Drawing.Color.Black;
-        this.btnPhoto.Font = new System.Drawing.Font("Century Gothic", 12F);
-        this.btnPhoto.ForeColor = System.Drawing.Color.WhiteSmoke;
-        this.btnPhoto.Location = new System.Drawing.Point(507, 253);
-        this.btnPhoto.Name = "btnPhoto";
-        this.btnPhoto.PressedColor = System.Drawing.Color.White;
-        this.btnPhoto.ShadowDecoration.CustomizableEdges = customizableEdges30;
-        this.btnPhoto.Size = new System.Drawing.Size(106, 29);
-        this.btnPhoto.TabIndex = 26;
-        this.btnPhoto.Text = "Foto";
-        this.btnPhoto.Click += new System.EventHandler(this.btnPhoto_Click);
+        this.label1.BackColor = System.Drawing.Color.Transparent;
+        this.label1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.label1.Location = new System.Drawing.Point(3, 0);
+        this.label1.Name = "label1";
+        this.label1.Size = new System.Drawing.Size(225, 36);
+        this.label1.TabIndex = 27;
+        this.label1.Text = "Funcionários Cadastrados";
+        this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // FrmEmployees
         // 
@@ -534,14 +536,14 @@ partial class FrmEmployees
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
         this.ClientSize = new System.Drawing.Size(1080, 720);
+        this.Controls.Add(this.photo);
+        this.Controls.Add(this.guna2Panel1);
         this.Controls.Add(this.btnPhoto);
-        this.Controls.Add(this.panelGrid);
         this.Controls.Add(this.btnCancel);
         this.Controls.Add(this.btnNew);
         this.Controls.Add(this.btnDelete);
         this.Controls.Add(this.btnEdit);
         this.Controls.Add(this.btnSave);
-        this.Controls.Add(this.photo);
         this.Controls.Add(this.labelJob);
         this.Controls.Add(this.cbJob);
         this.Controls.Add(this.txtPhone);
@@ -563,21 +565,20 @@ partial class FrmEmployees
         this.Text = "CADASTRO DE FUNCIONÁRIOS";
         this.Load += new System.EventHandler(this.FrmEmployees_Load);
         ((System.ComponentModel.ISupportInitialize)(this.photo)).EndInit();
-        this.panelGrid.ResumeLayout(false);
+        this.guna2Panel1.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
         this.ResumeLayout(false);
     }
 
+    private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
+    private Guna.UI2.WinForms.Guna2DataGridView gridData;
+    private System.Windows.Forms.Label label1;
+
     private Guna.UI2.WinForms.Guna2Button btnSearch;
 
     private Guna.UI2.WinForms.Guna2TextBox txtSearch;
-    private System.Windows.Forms.Label labelRegisteredEmployees;
-
-    private Guna.UI2.WinForms.Guna2DataGridView gridData;
 
     private Guna.UI2.WinForms.Guna2Button btnPhoto;
-
-    private Guna.UI2.WinForms.Guna2Panel panelGrid;
 
     private Guna.UI2.WinForms.Guna2Button btnCancel;
     private Guna.UI2.WinForms.Guna2Button btnNew;
