@@ -55,21 +55,21 @@ partial class FrmClients
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
         this.txtName = new Guna.UI2.WinForms.Guna2TextBox();
         this.labelName = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.labelEmail = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -92,17 +92,17 @@ partial class FrmClients
         this.btnDelete = new Guna.UI2.WinForms.Guna2Button();
         this.btnNew = new Guna.UI2.WinForms.Guna2Button();
         this.btnCancel = new Guna.UI2.WinForms.Guna2Button();
-        this.gridData = new Guna.UI2.WinForms.Guna2DataGridView();
         this.txtSearchName = new Guna.UI2.WinForms.Guna2TextBox();
         this.labelRegisteredEmployees = new System.Windows.Forms.Label();
         this.btnSearchName = new Guna.UI2.WinForms.Guna2Button();
-        this.panelGrid = new Guna.UI2.WinForms.Guna2Panel();
         this.btnSearchCpf = new Guna.UI2.WinForms.Guna2Button();
         this.txtSearchCpf = new Guna.UI2.WinForms.Guna2TextBox();
         this.labelSex = new System.Windows.Forms.Label();
         this.cbSex = new Guna.UI2.WinForms.Guna2ComboBox();
-        ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
+        this.panelGrid = new Guna.UI2.WinForms.Guna2Panel();
+        this.gridData = new Guna.UI2.WinForms.Guna2DataGridView();
         this.panelGrid.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
         this.SuspendLayout();
         // 
         // txtName
@@ -530,61 +530,6 @@ partial class FrmClients
         this.btnCancel.Text = "Cancelar";
         this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
         // 
-        // gridData
-        // 
-        this.gridData.AllowUserToAddRows = false;
-        this.gridData.AllowUserToDeleteRows = false;
-        dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
-        this.gridData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-        this.gridData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-        dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(188)))), ((int)(((byte)(211)))));
-        dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-        dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-        dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-        dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-        this.gridData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-        this.gridData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-        dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(241)))), ((int)(((byte)(245)))));
-        dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-        dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(210)))), ((int)(((byte)(225)))));
-        dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-        dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-        this.gridData.DefaultCellStyle = dataGridViewCellStyle3;
-        this.gridData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
-        this.gridData.Location = new System.Drawing.Point(0, 89);
-        this.gridData.Name = "gridData";
-        this.gridData.ReadOnly = true;
-        this.gridData.RowHeadersVisible = false;
-        this.gridData.Size = new System.Drawing.Size(1056, 138);
-        this.gridData.TabIndex = 21;
-        this.gridData.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Cyan;
-        this.gridData.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
-        this.gridData.ThemeStyle.AlternatingRowsStyle.Font = null;
-        this.gridData.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
-        this.gridData.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
-        this.gridData.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
-        this.gridData.ThemeStyle.BackColor = System.Drawing.Color.White;
-        this.gridData.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
-        this.gridData.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(188)))), ((int)(((byte)(211)))));
-        this.gridData.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-        this.gridData.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.gridData.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-        this.gridData.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-        this.gridData.ThemeStyle.HeaderStyle.Height = 23;
-        this.gridData.ThemeStyle.ReadOnly = true;
-        this.gridData.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(241)))), ((int)(((byte)(245)))));
-        this.gridData.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-        this.gridData.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.gridData.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.Black;
-        this.gridData.ThemeStyle.RowsStyle.Height = 22;
-        this.gridData.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(210)))), ((int)(((byte)(225)))));
-        this.gridData.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
-        this.gridData.DoubleClick += new System.EventHandler(this.gridData_DoubleClick);
-        // 
         // txtSearchName
         // 
         this.txtSearchName.Animated = true;
@@ -623,7 +568,8 @@ partial class FrmClients
         // btnSearchName
         // 
         this.btnSearchName.Animated = true;
-        this.btnSearchName.BackColor = System.Drawing.Color.Transparent;
+        this.btnSearchName.BackColor = System.Drawing.Color.White;
+        this.btnSearchName.BorderColor = System.Drawing.Color.Transparent;
         this.btnSearchName.BorderRadius = 10;
         this.btnSearchName.CustomizableEdges = customizableEdges27;
         this.btnSearchName.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -632,7 +578,7 @@ partial class FrmClients
         this.btnSearchName.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
         this.btnSearchName.FillColor = System.Drawing.Color.Transparent;
         this.btnSearchName.Font = new System.Drawing.Font("Century Gothic", 12F);
-        this.btnSearchName.ForeColor = System.Drawing.Color.White;
+        this.btnSearchName.ForeColor = System.Drawing.Color.Transparent;
         this.btnSearchName.Image = global::SIV.Properties.Resources.icons_pesquisar;
         this.btnSearchName.ImageSize = new System.Drawing.Size(30, 30);
         this.btnSearchName.Location = new System.Drawing.Point(265, 41);
@@ -641,25 +587,6 @@ partial class FrmClients
         this.btnSearchName.Size = new System.Drawing.Size(25, 25);
         this.btnSearchName.TabIndex = 29;
         this.btnSearchName.Click += new System.EventHandler(this.btnSearchName_Click);
-        // 
-        // panelGrid
-        // 
-        this.panelGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-        this.panelGrid.BorderRadius = 15;
-        this.panelGrid.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-        this.panelGrid.Controls.Add(this.btnSearchCpf);
-        this.panelGrid.Controls.Add(this.txtSearchCpf);
-        this.panelGrid.Controls.Add(this.btnSearchName);
-        this.panelGrid.Controls.Add(this.labelRegisteredEmployees);
-        this.panelGrid.Controls.Add(this.txtSearchName);
-        this.panelGrid.Controls.Add(this.gridData);
-        this.panelGrid.CustomizableEdges = customizableEdges33;
-        this.panelGrid.FillColor = System.Drawing.Color.Transparent;
-        this.panelGrid.Location = new System.Drawing.Point(12, 481);
-        this.panelGrid.Name = "panelGrid";
-        this.panelGrid.ShadowDecoration.CustomizableEdges = customizableEdges34;
-        this.panelGrid.Size = new System.Drawing.Size(1056, 227);
-        this.panelGrid.TabIndex = 129;
         // 
         // btnSearchCpf
         // 
@@ -721,7 +648,7 @@ partial class FrmClients
         // 
         this.cbSex.BackColor = System.Drawing.Color.Transparent;
         this.cbSex.BorderRadius = 10;
-        this.cbSex.CustomizableEdges = customizableEdges35;
+        this.cbSex.CustomizableEdges = customizableEdges33;
         this.cbSex.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
         this.cbSex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         this.cbSex.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
@@ -732,9 +659,84 @@ partial class FrmClients
         this.cbSex.Items.AddRange(new object[] { "Masculino", "Feminino" });
         this.cbSex.Location = new System.Drawing.Point(549, 157);
         this.cbSex.Name = "cbSex";
-        this.cbSex.ShadowDecoration.CustomizableEdges = customizableEdges36;
+        this.cbSex.ShadowDecoration.CustomizableEdges = customizableEdges34;
         this.cbSex.Size = new System.Drawing.Size(252, 36);
         this.cbSex.TabIndex = 130;
+        // 
+        // panelGrid
+        // 
+        this.panelGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        this.panelGrid.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
+        this.panelGrid.BorderRadius = 15;
+        this.panelGrid.BorderThickness = 1;
+        this.panelGrid.Controls.Add(this.gridData);
+        this.panelGrid.Controls.Add(this.btnSearchCpf);
+        this.panelGrid.Controls.Add(this.labelRegisteredEmployees);
+        this.panelGrid.Controls.Add(this.btnSearchName);
+        this.panelGrid.Controls.Add(this.txtSearchName);
+        this.panelGrid.Controls.Add(this.txtSearchCpf);
+        this.panelGrid.CustomizableEdges = customizableEdges35;
+        this.panelGrid.FillColor = System.Drawing.Color.Transparent;
+        this.panelGrid.Location = new System.Drawing.Point(12, 474);
+        this.panelGrid.Name = "panelGrid";
+        this.panelGrid.ShadowDecoration.CustomizableEdges = customizableEdges36;
+        this.panelGrid.Size = new System.Drawing.Size(1056, 234);
+        this.panelGrid.TabIndex = 136;
+        // 
+        // gridData
+        // 
+        this.gridData.AllowUserToAddRows = false;
+        this.gridData.AllowUserToDeleteRows = false;
+        dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
+        this.gridData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+        this.gridData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(188)))), ((int)(((byte)(211)))));
+        dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+        dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+        dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+        dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+        this.gridData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+        this.gridData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+        dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(241)))), ((int)(((byte)(245)))));
+        dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+        dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(210)))), ((int)(((byte)(225)))));
+        dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+        dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+        this.gridData.DefaultCellStyle = dataGridViewCellStyle3;
+        this.gridData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
+        this.gridData.Location = new System.Drawing.Point(3, 89);
+        this.gridData.Name = "gridData";
+        this.gridData.ReadOnly = true;
+        this.gridData.RowHeadersVisible = false;
+        this.gridData.Size = new System.Drawing.Size(1050, 132);
+        this.gridData.TabIndex = 21;
+        this.gridData.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Cyan;
+        this.gridData.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
+        this.gridData.ThemeStyle.AlternatingRowsStyle.Font = null;
+        this.gridData.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
+        this.gridData.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
+        this.gridData.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
+        this.gridData.ThemeStyle.BackColor = System.Drawing.Color.White;
+        this.gridData.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
+        this.gridData.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(188)))), ((int)(((byte)(211)))));
+        this.gridData.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+        this.gridData.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.gridData.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
+        this.gridData.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+        this.gridData.ThemeStyle.HeaderStyle.Height = 23;
+        this.gridData.ThemeStyle.ReadOnly = true;
+        this.gridData.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(241)))), ((int)(((byte)(245)))));
+        this.gridData.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+        this.gridData.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.gridData.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.Black;
+        this.gridData.ThemeStyle.RowsStyle.Height = 22;
+        this.gridData.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(210)))), ((int)(((byte)(225)))));
+        this.gridData.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
+        this.gridData.DoubleClick += new System.EventHandler(this.gridData_DoubleClick);
         // 
         // FrmClients
         // 
@@ -742,9 +744,9 @@ partial class FrmClients
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
         this.ClientSize = new System.Drawing.Size(1080, 720);
+        this.Controls.Add(this.panelGrid);
         this.Controls.Add(this.labelSex);
         this.Controls.Add(this.cbSex);
-        this.Controls.Add(this.panelGrid);
         this.Controls.Add(this.btnCancel);
         this.Controls.Add(this.btnNew);
         this.Controls.Add(this.btnDelete);
@@ -777,8 +779,8 @@ partial class FrmClients
         this.ShowInTaskbar = false;
         this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
         this.Load += new System.EventHandler(this.FrmClients_Load);
-        ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
         this.panelGrid.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
         this.ResumeLayout(false);
     }
 
