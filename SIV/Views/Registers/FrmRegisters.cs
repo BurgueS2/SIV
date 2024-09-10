@@ -81,6 +81,7 @@ public partial class FrmRegisters : Form
         dashboard.TopLevel = false;
         dashboard.FormBorderStyle = FormBorderStyle.None;
         dashboard.Dock = DockStyle.Fill;
+        tableLayoutPanel.Visible = false;
         displayPanel.Controls.Add(dashboard);
         displayPanel.Tag = dashboard;
         dashboard.BringToFront();
