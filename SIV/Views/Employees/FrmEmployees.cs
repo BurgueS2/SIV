@@ -31,29 +31,15 @@ public partial class FrmEmployees : Form
     {
         if (gridData.SelectedRows.Count <= 0) return; // Verifica se há linhas selecionadas
         
+        PopulateFormFields();
         ConfigureUiControls(true);
         btnSave.Enabled = false;
-
-        // Obtém os valores das células da linha selecionada e preenche os campos do formulário
-        _selectedEmployeeId = gridData.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do funcionário
-        txtName.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
-        txtCpf.Text = gridData.CurrentRow?.Cells[2].Value.ToString();
-        txtPhone.Text = gridData.CurrentRow?.Cells[3].Value.ToString();
-        cbJob.Text = gridData.CurrentRow?.Cells[4].Value.ToString();
-        txtAddress.Text = gridData.CurrentRow?.Cells[5].Value.ToString();
-
-        // Carrega a foto do funcionário, se disponível
         LoadEmployeePhoto();
     }
     
     private void btnNew_Click(object sender, EventArgs e)
     {
-        // Habilita os controles do formulário e desabilita os botões de ação
-        ConfigureUiControls(true);
-        txtName.Focus();
-        btnEdit.Enabled = false;
-        btnDelete.Enabled = false;
-        gridData.Enabled = false;
+        PrepareForNewEntry();
     }
     
     private void btnCancel_Click(object sender, EventArgs e)
@@ -359,5 +345,24 @@ public partial class FrmEmployees : Form
         LoadEmployees();
         ConfigureUiControls(false);
         gridData.Enabled = true;
+    }
+
+    private void PopulateFormFields()
+    {
+        _selectedEmployeeId = gridData.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do funcionário
+        txtName.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
+        txtCpf.Text = gridData.CurrentRow?.Cells[2].Value.ToString();
+        txtPhone.Text = gridData.CurrentRow?.Cells[3].Value.ToString();
+        cbJob.Text = gridData.CurrentRow?.Cells[4].Value.ToString();
+        txtAddress.Text = gridData.CurrentRow?.Cells[5].Value.ToString();
+    }
+
+    private void PrepareForNewEntry()
+    {
+        ConfigureUiControls(true);
+        txtName.Focus();
+        btnEdit.Enabled = false;
+        btnDelete.Enabled = false;
+        gridData.Enabled = false;
     }
 }
