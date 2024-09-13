@@ -32,7 +32,8 @@ public partial class FrmClients : Form
         if (gridData.SelectedRows.Count <= 0) return;
         
         PopulateFormFields();
-        ConfigureUiControls(false);
+        ConfigureUiControls(true);
+        btnSave.Enabled = false;
         EnableSearchControls(true);
     }
     
@@ -314,8 +315,6 @@ public partial class FrmClients : Form
     
     private void PopulateFormFields()
     {
-        ClearFields();
-        
         // Preenche os campos do formulário com os valores da linha selecionada
         _selectedUserId = gridData.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do cliente
         txtName.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
