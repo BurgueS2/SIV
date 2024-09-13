@@ -82,11 +82,6 @@ public partial class FrmProducts : Form
         try
         {
             if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
-            
-            if (string.IsNullOrWhiteSpace(txtCode.Text))
-            {
-                txtCode.Text = GenerateProductCode();
-            }
 
             var product = CreateProductFromFormData();
             ProductRepository.SaveProduct(product);
@@ -148,11 +143,11 @@ public partial class FrmProducts : Form
         return new Product
         {
             Id = _selectedProductId,
-            Code = txtCode.Text,
+            Code = string.IsNullOrWhiteSpace(txtCode.Text) ? GenerateProductCode() : txtCode.Text,
             Name = txtName.Text.ToUpper(),
             Description = string.IsNullOrEmpty(txtDescription.Text) ? "N/A" : txtDescription.Text.ToUpper(),
             CostPrice = string.IsNullOrEmpty(txtManufacturingExpenses.Text) ? 0 : Convert.ToDecimal(txtManufacturingExpenses.Text.Trim()),
-            ResalePrice = Convert.ToDecimal(txtResalePrice.Text.Trim()),
+            ResalePrice = string.IsNullOrEmpty(txtResalePrice.Text) ? 0 : Convert.ToDecimal(txtResalePrice.Text.Trim()),
             StockGroup = string.IsNullOrEmpty(cbStockGroup.Text) ? "N/A" : cbStockGroup.Text.ToUpper(),
             Supplier = string.IsNullOrEmpty(cbSupplier.Text) ? "N/A" : cbSupplier.Text.ToUpper()
         };
@@ -259,7 +254,7 @@ public partial class FrmProducts : Form
     private bool ValidateFormData()
     {
         var validationResult = ProductValidator.ValidateProduct(
-            txtCode.Text, txtName.Text, Convert.ToDecimal(txtManufacturingExpenses.Text), Convert.ToDecimal(txtResalePrice.Text));
+            txtCode.Text, txtName.Text, txtManufacturingExpenses.Text, txtResalePrice.Text);
         
         if (string.IsNullOrEmpty(validationResult)) return true;
         

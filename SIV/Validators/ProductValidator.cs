@@ -1,4 +1,6 @@
-﻿namespace SIV.Validators;
+﻿using System;
+
+namespace SIV.Validators;
 
 public static class ProductValidator
 {
@@ -10,7 +12,7 @@ public static class ProductValidator
     /// <param name="costPrice">Preço de custo do produto. Pode ser nulo ou um valor decimal positivo.</param>
     /// <param name="resalePrice">Preço de revenda do produto. Deve ser um valor decimal positivo.</param>
     /// <returns>Retorna uma string vazia se todos os campos forem válidos. Caso contrário, retorna uma mensagem de erro específica para o primeiro campo inválido encontrado.</returns>
-    public static string ValidateProduct(string code, string name, decimal? costPrice, decimal resalePrice)
+    public static string ValidateProduct(string code, string name, string costPrice, string resalePrice)
     {
         if (!string.IsNullOrWhiteSpace(code) && !int.TryParse(code, out _))
         {
@@ -22,12 +24,12 @@ public static class ProductValidator
             return "Nome inválido. Deve conter pelo menos 3 caracteres.";
         }
 
-        if (costPrice.HasValue && costPrice < 0)
+        if (!decimal.TryParse(costPrice, out _) && !string.IsNullOrWhiteSpace(costPrice))
         {
             return "Preço de custo inválido. Deve ser um valor positivo.";
         }
 
-        if (resalePrice < 0)
+        if (decimal.Parse(resalePrice) <= 0)
         {
             return "Preço de revenda inválido. Deve ser um valor positivo.";
         }
