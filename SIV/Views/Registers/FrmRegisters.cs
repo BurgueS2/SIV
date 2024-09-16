@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
+using Microsoft.VisualBasic.ApplicationServices;
 using SIV.Core;
 using SIV.Helpers;
 using SIV.Repositories;
@@ -17,20 +19,20 @@ namespace SIV.Views.Registers;
 public partial class FrmRegisters : Form
 {
     private const double BrightnessFactor = 0.5;
-    //private readonly User _loggedInUser;
-    
-    public FrmRegisters(/*User loggedInUser*/)
+    private readonly User _loggedInUser;
+
+    public FrmRegisters(User loggedInUser)
     {
         InitializeComponent();
-        //_loggedInUser = loggedInUser;
+        _loggedInUser = loggedInUser;
     }
     
-    private void FrmRegisters_Load(object sender, EventArgs e)
+    private async void FrmRegisters_Load(object sender, EventArgs e)
     {
         ApplyingTheme();
-        LoadClientes();
-        LoadEmployees();
-        LoadProducts();
+        await LoadClientesAsync();
+        await LoadEmployeesAsync();
+        await LoadProductsAsync();
     }
     
     private void btnEmployee_Click(object sender, EventArgs e)
@@ -99,11 +101,11 @@ public partial class FrmRegisters : Form
     
     private void OpenDisplayForm(Form dashboard, object senderButton)
     {
-        /*if (!_loggedInUser.HasPermission("ManageCadastres"))
+        if (!_loggedInUser.HasPermission("ManageCadastres"))
         {
-            MessageHelper.ShowValidationMessage("Usuário não tem permissão para acessar o cadastro de Employees!");
+            MessageHelper.ShowValidationMessage("Usuário não tem permissão para acessar o cadastro!");
             return;
-        }*/
+        }
         
         ActivateButton(senderButton);
         dashboard.TopLevel = false;
@@ -164,11 +166,12 @@ public partial class FrmRegisters : Form
         }
     }
 
-    private void LoadClientes()
+    private async Task LoadClientesAsync()
     {
         try
         {
-            gridDataClient.DataSource = ClientRepository.GetAllClients();
+            var clients = await Task.Run(ClientRepository.GetAllClients);
+            gridDataClient.DataSource = clients;
             ShowOnlyNameColumn(gridDataClient);
         }
         catch (Exception ex)
@@ -178,12 +181,13 @@ public partial class FrmRegisters : Form
         }
     }
 
-    private void LoadEmployees()
+    private async Task LoadEmployeesAsync()
     {
         try
         {
-            gridDataEmployee.DataSource = EmployeeRepository.GetAllEmployees();
-            ShowOnlySpecificColumns(gridDataEmployee, new[] { 1, 4 });
+            var employees = await Task.Run(EmployeeRepository.GetAllEmployees);
+            gridDataEmployee.DataSource = employees;
+            ShowOnlySpecificColumns(gridDataEmployee, [1, 4]);
         }
         catch (Exception ex)
         {
@@ -192,12 +196,13 @@ public partial class FrmRegisters : Form
         }
     }
 
-    private void LoadProducts()
+    private async Task LoadProductsAsync()
     {
         try
         {
-            gridDataProduct.DataSource = ProductRepository.GetAllProducts();
-            ShowOnlySpecificColumns(gridDataProduct, new[] { 2, 5 });
+            var products = await Task.Run(ProductRepository.GetAllProducts);
+            gridDataProduct.DataSource = products;
+            ShowOnlySpecificColumns(gridDataProduct, [2, 5]);
         }
         catch (Exception ex)
         {
