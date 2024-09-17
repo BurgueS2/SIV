@@ -49,6 +49,8 @@ partial class FrmUsers
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -70,7 +72,10 @@ partial class FrmUsers
         this.labelActive = new System.Windows.Forms.Label();
         this.btnActive = new Guna.UI2.WinForms.Guna2CheckBox();
         this.btnCancel = new Guna.UI2.WinForms.Guna2Button();
+        this.panelGrid = new Guna.UI2.WinForms.Guna2Panel();
         this.gridData = new Guna.UI2.WinForms.Guna2DataGridView();
+        this.labelRegisteredEmployees = new System.Windows.Forms.Label();
+        this.panelGrid.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
         this.SuspendLayout();
         // 
@@ -381,6 +386,22 @@ partial class FrmUsers
         this.btnCancel.Text = "Cancelar";
         this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
         // 
+        // panelGrid
+        // 
+        this.panelGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        this.panelGrid.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
+        this.panelGrid.BorderRadius = 15;
+        this.panelGrid.BorderThickness = 1;
+        this.panelGrid.Controls.Add(this.gridData);
+        this.panelGrid.Controls.Add(this.labelRegisteredEmployees);
+        this.panelGrid.CustomizableEdges = customizableEdges19;
+        this.panelGrid.FillColor = System.Drawing.Color.Transparent;
+        this.panelGrid.Location = new System.Drawing.Point(12, 474);
+        this.panelGrid.Name = "panelGrid";
+        this.panelGrid.ShadowDecoration.CustomizableEdges = customizableEdges20;
+        this.panelGrid.Size = new System.Drawing.Size(1056, 234);
+        this.panelGrid.TabIndex = 137;
+        // 
         // gridData
         // 
         this.gridData.AllowUserToAddRows = false;
@@ -406,12 +427,12 @@ partial class FrmUsers
         dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
         this.gridData.DefaultCellStyle = dataGridViewCellStyle3;
         this.gridData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
-        this.gridData.Location = new System.Drawing.Point(12, 405);
+        this.gridData.Location = new System.Drawing.Point(3, 39);
         this.gridData.Name = "gridData";
         this.gridData.ReadOnly = true;
         this.gridData.RowHeadersVisible = false;
-        this.gridData.Size = new System.Drawing.Size(1056, 303);
-        this.gridData.TabIndex = 20;
+        this.gridData.Size = new System.Drawing.Size(1050, 182);
+        this.gridData.TabIndex = 21;
         this.gridData.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Cyan;
         this.gridData.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
         this.gridData.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -436,6 +457,17 @@ partial class FrmUsers
         this.gridData.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
         this.gridData.DoubleClick += new System.EventHandler(this.gridData_DoubleClick);
         // 
+        // labelRegisteredEmployees
+        // 
+        this.labelRegisteredEmployees.BackColor = System.Drawing.Color.Transparent;
+        this.labelRegisteredEmployees.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelRegisteredEmployees.Location = new System.Drawing.Point(3, 0);
+        this.labelRegisteredEmployees.Name = "labelRegisteredEmployees";
+        this.labelRegisteredEmployees.Size = new System.Drawing.Size(207, 36);
+        this.labelRegisteredEmployees.TabIndex = 27;
+        this.labelRegisteredEmployees.Text = "Usuários Cadastrados";
+        this.labelRegisteredEmployees.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
         // FrmUsers
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
@@ -443,7 +475,7 @@ partial class FrmUsers
         this.AutoScroll = true;
         this.BackColor = System.Drawing.Color.White;
         this.ClientSize = new System.Drawing.Size(1080, 720);
-        this.Controls.Add(this.gridData);
+        this.Controls.Add(this.panelGrid);
         this.Controls.Add(this.btnCancel);
         this.Controls.Add(this.btnActive);
         this.Controls.Add(this.labelActive);
@@ -468,9 +500,13 @@ partial class FrmUsers
         this.Name = "FrmUsers";
         this.Text = "FrmUsers";
         this.Load += new System.EventHandler(this.FrmUsers_Load);
+        this.panelGrid.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
         this.ResumeLayout(false);
     }
+
+    private Guna.UI2.WinForms.Guna2Panel panelGrid;
+    private System.Windows.Forms.Label labelRegisteredEmployees;
 
     private Guna.UI2.WinForms.Guna2DataGridView gridData;
 

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
-using SIV.Controllers;
 using SIV.Core;
 using SIV.Helpers;
 using SIV.Models;
@@ -24,9 +23,9 @@ public partial class FrmUsers : Form
         InitializeComponent();
     }
     
-    private void FrmUsers_Load(object sender, EventArgs e)
+    private async void FrmUsers_Load(object sender, EventArgs e)
     {
-        LoadUser();
+        await LoadUserAsync();
         LoadJob();
         ConfigureUiControls(false);
     }
@@ -35,56 +34,19 @@ public partial class FrmUsers : Form
     {
         ClearFields();
         ConfigureUiControls(true);
-        btnSave.Enabled = false;
-        
-        // Obtém os valores das células da linha selecionada e preenche os campos do formulário
-        _selectedUserId = gridData.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do funcionário
-        txtName.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
-        txtPassword.Text = gridData.CurrentRow?.Cells[2].Value.ToString();
-        txtRepeatPassword.Text = gridData.CurrentRow?.Cells[2].Value.ToString();
-        cbJob.Text = gridData.CurrentRow?.Cells[3].Value.ToString();
-        
-        // Verifica o nível de acesso do usuário
-        var accessLevel = gridData.CurrentRow?.Cells[4].Value.ToString().ToUpper();
-        btnFullAccess.Checked = accessLevel == "FULL";
-        btnPartialAccess.Checked = accessLevel == "PARCIAL";
-        
-        // Verifica se o status do usuário é ativo ou inativo
-        var activeStatus = gridData.CurrentRow?.Cells[5].Value.ToString().ToUpper();
-        btnActive.Checked = activeStatus == "ATIVO";
+        PopulateFormFields();
+        btnSave.Enabled = false; // Desabilita o botão de salvar, pois o usuário não está criando um novo registro
     }
     
-    private void btnNew_Click(object sender, EventArgs e)
-    {
-        ClearFields();
-        txtName.Focus();
-        btnDelete.Enabled = false;
-        btnEdit.Enabled = false;
-        ConfigureUiControls(true);
-        gridData.Enabled = false;
-    }
+    private void btnNew_Click(object sender, EventArgs e) => PrepareForNewEntry();
 
-    private void btnCancel_Click(object sender, EventArgs e)
-    {
-        ClearFields();
-        ConfigureUiControls(false);
-        gridData.Enabled = true;
-    }
+    private void btnCancel_Click(object sender, EventArgs e) => ResetForm();
 
-    private void btnSave_Click(object sender, EventArgs e)
-    {
-        SaveFormData();
-    }
+    private void btnSave_Click(object sender, EventArgs e) => SaveFormData();
 
-    private void btnEdit_Click(object sender, EventArgs e)
-    {
-        UpdateFormData();
-    }
+    private void btnEdit_Click(object sender, EventArgs e) => UpdateFormData();
 
-    private void btnDelete_Click(object sender, EventArgs e)
-    {
-        DeleteFormData();
-    }
+    private void btnDelete_Click(object sender, EventArgs e) => DeleteFormData();
     
     private void SaveFormData()
     {
@@ -156,11 +118,11 @@ public partial class FrmUsers : Form
         };
     }
     
-    private void LoadUser()
+    private async Task LoadUserAsync()
     {
         try
         {
-            gridData.DataSource = UserRepository.GetAllUsers();
+            gridData.DataSource = await Task.Run(UserRepository.GetAllUsers);
             FormatGridData();
         }
         catch (Exception ex)
@@ -177,6 +139,7 @@ public partial class FrmUsers : Form
             cbJob.DataSource = JobRepository.GetAllJobs();
             cbJob.DisplayMember = "Name";
             cbJob.ValueMember = "Id";
+            cbJob.SelectedIndex = -1;
         }
         catch (Exception ex)
         {
@@ -187,7 +150,7 @@ public partial class FrmUsers : Form
 
     /// <summary>
     /// Retorna o nível de acesso selecionado no formulário.
-    /// Será utilizado para definir as permissões do usuário, de acordo com o nível de acesso selecionado.
+    /// Será utilizado para definir as permissões do usuário, conforme o nível de acesso selecionado.
     /// </summary>
     private string GetAccessLevel()
     {
@@ -196,7 +159,7 @@ public partial class FrmUsers : Form
     }
 
     /// <summary>
-    /// Retorna a lista de permissões de acordo com o nível de acesso selecionado.
+    /// Retorna a lista de permissões conforme o nível de acesso selecionado.
     /// </summary>
     /// <example>Se o nível de acesso for "FULL", retorna todas as permissões disponíveis.</example>
     /// <example>Se o nível de acesso for "PARCIAL", retorna apenas as permissões de acesso ao sistema e criação de pedidos.</example>
@@ -254,10 +217,10 @@ public partial class FrmUsers : Form
         btnPartialAccess.Checked = false;
     }
     
-    private void UpdateUiAfterSaveOrUpdate()
+    private async void UpdateUiAfterSaveOrUpdate()
     {
         ClearFields();
-        LoadUser();
+        await LoadUserAsync();
         ConfigureUiControls(false);
         gridData.Enabled = true;
     }
@@ -270,5 +233,42 @@ public partial class FrmUsers : Form
         
         MessageHelper.ShowValidationMessage(validationResult);
         return false;
+    }
+
+    private void PopulateFormFields()
+    {
+        // Obtém os valores das células da linha selecionada e preenche os campos do formulário
+        _selectedUserId = gridData.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do funcionário
+        txtName.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
+        txtPassword.Text = gridData.CurrentRow?.Cells[2].Value.ToString();
+        txtRepeatPassword.Text = gridData.CurrentRow?.Cells[2].Value.ToString();
+        cbJob.Text = gridData.CurrentRow?.Cells[3].Value.ToString();
+        
+        // Verifica o nível de acesso do usuário
+        var accessLevel = gridData.CurrentRow?.Cells[4].Value.ToString().ToUpper();
+        btnFullAccess.Checked = accessLevel == "FULL";
+        btnPartialAccess.Checked = accessLevel == "PARCIAL";
+        
+        // Verifica se a condição do usuário é ativo ou inativo
+        var activeStatus = gridData.CurrentRow?.Cells[5].Value.ToString().ToUpper();
+        btnActive.Checked = activeStatus == "ATIVO";
+    }
+
+    private void PrepareForNewEntry()
+    {
+        ClearFields();
+        ConfigureUiControls(true);
+        txtName.Focus();
+        btnDelete.Enabled = false;
+        btnEdit.Enabled = false;
+        gridData.Enabled = false;
+        cbJob.SelectedIndex = -1;
+    }
+
+    private void ResetForm()
+    {
+        ClearFields();
+        ConfigureUiControls(false);
+        gridData.Enabled = true;
     }
 }
