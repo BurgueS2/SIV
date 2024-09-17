@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using SIV.Core;
@@ -23,58 +24,19 @@ public partial class FrmPayments : Form
         
         ClearFields();
         ConfigureUiControls(true);
-
-        // Desabilita controles específicos durante a edição
-        btnSave.Enabled = false;
-        
-        // Obtém os valores das células da linha selecionada e preenche os campos do formulário
-        _selectPaymentId = gridData.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do cliente
-        txtFlag.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
-        txtDaysToCredit.Text = gridData.CurrentRow?.Cells[2].Value.ToString();
-        txtOperatorCnpj.Text = gridData.CurrentRow?.Cells[3].Value.ToString();
-        txtTax.Text = gridData.CurrentRow?.Cells[4].Value.ToString();
-
-        // Verifica se o status é bloqueado
-        var statusValue = gridData.CurrentRow?.Cells[5].Value.ToString().ToUpper();
-        btnDisabled.Checked = statusValue == "ATIVO";
-        btnDisabled.Checked = statusValue == "INATIVO.";
-
-        // Preenche os campos restantes
-        txtFlag.Text = gridData.CurrentRow?.Cells[6].Value.ToString();
+        PopulateFormFields();
+        btnSave.Enabled = false; // Desabilita o botão de salvar, pois o usuário não está criando um novo registro
     }
 
-    private void btnNew_Click(object sender, EventArgs e)
-    {
-        ConfigureUiControls(true);
-        txtFlag.Focus();
-        
-        // Desabilita controles específicos durante a edição
-        btnEdit.Enabled = false;
-        btnDelete.Enabled = false;
-        gridData.Enabled = false;
-    }
+    private void btnNew_Click(object sender, EventArgs e) => PrepareForNewEntry();
 
-    private void btnCancel_Click(object sender, EventArgs e)
-    {
-        ClearFields();
-        ConfigureUiControls(false);
-        gridData.Enabled = true;
-    }
+    private void btnCancel_Click(object sender, EventArgs e) => ResetForm();
 
-    private void btnSave_Click(object sender, EventArgs e)
-    {
-        SaveFormData();
-    }
+    private void btnSave_Click(object sender, EventArgs e) => SaveFormData();
 
-    private void btnEdit_Click(object sender, EventArgs e)
-    {
-        UpdateFormData();
-    }
+    private void btnEdit_Click(object sender, EventArgs e) => UpdateFormData();
 
-    private void btnDelete_Click(object sender, EventArgs e)
-    {
-        DeleteFormData();
-    }
+    private void btnDelete_Click(object sender, EventArgs e) => DeleteFormData();
     
     private void SaveFormData()
     {
@@ -88,19 +50,10 @@ public partial class FrmPayments : Form
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowSaveSuccessMessage();
         }
-        catch (MySqlException ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro ao salvar no banco de dados: {ex.Message}");
-        }
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro inesperado: {ex.Message}");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
+            MessageHelper.ShowErrorMessage(ex, "salvar");
         }
     }
     
@@ -116,19 +69,10 @@ public partial class FrmPayments : Form
             UpdateUiAfterSaveOrUpdate();
             MessageHelper.ShowUpdateSuccessMessage();
         }
-        catch (MySqlException ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro ao salvar no banco de dados: {ex.Message}");
-        }
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro inesperado: {ex.Message}");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
+            MessageHelper.ShowErrorMessage(ex, "atualizar");
         }
     }
     
@@ -147,10 +91,6 @@ public partial class FrmPayments : Form
         {
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "excluir");
-        }
-        finally
-        {
-            ConnectionManager.CloseConnection();
         }
     }
     
@@ -178,11 +118,11 @@ public partial class FrmPayments : Form
         return cnpj;
     }
     
-    private void LoadClient()
+    private async void LoadClient()
     {
         try
         {
-            gridData.DataSource = PaymentRepository.GetAllPayment();
+            gridData.DataSource = await Task.Run(PaymentRepository.GetAllPayment);
             FormatGridData();
         }
         catch (MySqlException ex)
@@ -235,12 +175,43 @@ public partial class FrmPayments : Form
         btnDebit.Checked = false;
         btnVoucher.Checked = false;
     }
+
+    private void ResetForm()
+    {
+        ClearFields();
+        ConfigureUiControls(false);
+    }
     
     private void UpdateUiAfterSaveOrUpdate()
     {
         ClearFields();
         LoadClient();
         ConfigureUiControls(false);
-        gridData.Enabled = true;
+    }
+
+    private void PrepareForNewEntry()
+    {
+        ConfigureUiControls(true);
+        txtFlag.Focus();
+        btnEdit.Enabled = false;
+        btnDelete.Enabled = false;
+    }
+
+    private void PopulateFormFields()
+    {
+        // Obtém os valores das células da linha selecionada e preenche os campos do formulário
+        _selectPaymentId = gridData.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do cliente
+        txtFlag.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
+        txtDaysToCredit.Text = gridData.CurrentRow?.Cells[2].Value.ToString();
+        txtOperatorCnpj.Text = gridData.CurrentRow?.Cells[3].Value.ToString();
+        txtTax.Text = gridData.CurrentRow?.Cells[4].Value.ToString();
+
+        // Verifica se o status é bloqueado
+        var statusValue = gridData.CurrentRow?.Cells[5].Value.ToString().ToUpper();
+        btnDisabled.Checked = statusValue == "ATIVO";
+        btnDisabled.Checked = statusValue == "INATIVO.";
+
+        // Preenche os campos restantes
+        txtFlag.Text = gridData.CurrentRow?.Cells[6].Value.ToString();
     }
 }

@@ -270,7 +270,6 @@ public partial class FrmEmployees : Form
         NoPhoto();
         ConfigureUiControls(false);
         ClearFields();
-        gridData.Enabled = true;
         cbJob.SelectedIndex = -1;
     }
 
@@ -323,7 +322,6 @@ public partial class FrmEmployees : Form
         ClearFields();
         await LoadEmployeesAsync();
         ConfigureUiControls(false);
-        gridData.Enabled = true;
         cbJob.SelectedIndex = -1;
     }
 
@@ -343,6 +341,5 @@ public partial class FrmEmployees : Form
         txtName.Focus();
         btnEdit.Enabled = false;
         btnDelete.Enabled = false;
-        gridData.Enabled = false;
     }
 }

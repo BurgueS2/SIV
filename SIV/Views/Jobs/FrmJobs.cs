@@ -27,46 +27,30 @@ public partial class FrmJobs : Form
     
     private void gridData_DoubleClick(object sender, EventArgs e)
     {
-        if (gridData.SelectedRows.Count <= 0) return; // Verifica se há linhas selecionadas
+        if (gridData.SelectedRows.Count <= 0) return;
         
         ConfigureUiControls(true);
-        btnSave.Enabled = false;
+        btnSave.Enabled = false; // Desabilita o botão de salvar, pois o usuário não está criando um novo registro
         
         // Preenche o campo de texto com o nome do cargo selecionado
         _selectedJobId = gridData.SelectedRows[0].Cells[0].Value.ToString();
         txtName.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
     }
 
-    private void btnNew_Click(object sender, EventArgs e)
-    {
-        PrepareForNewEntry();
-    }
+    private void btnNew_Click(object sender, EventArgs e) => PrepareForNewEntry();
 
-    private void btnCancel_Click(object sender, EventArgs e)
-    {
-        ResetForm();
-    }
+    private void btnCancel_Click(object sender, EventArgs e) => ResetForm();
 
-    private void btnSave_Click(object sender, EventArgs e)
-    {
-        SaveFormData();
-    }
+    private void btnSave_Click(object sender, EventArgs e) => SaveFormData();
 
-    private void btnEdit_Click(object sender, EventArgs e)
-    {
-        UpdateFormData();
-    }
+    private void btnEdit_Click(object sender, EventArgs e) => UpdateFormData();
 
-    private void btnDelete_Click(object sender, EventArgs e)
-    {
-        DeleteFormData();
-    }
+    private void btnDelete_Click(object sender, EventArgs e) => DeleteFormData();
     
     private void InitializeForm()
     {
         ConfigureUiControls(false);
         LoadJobs();
-        btnNew.Enabled = true;
         ConfigureGridHeaders();
     }
     
@@ -167,7 +151,6 @@ public partial class FrmJobs : Form
         txtName.Focus();
         btnEdit.Enabled = false;
         btnDelete.Enabled = false;
-        gridData.Enabled = false;
     }
     
     private void ConfigureUiControls(bool enable)
@@ -186,14 +169,12 @@ public partial class FrmJobs : Form
         txtName.Clear();
         LoadJobs();
         ConfigureUiControls(false);
-        gridData.Enabled = true;
     }
     
     private void ResetForm()
     {
         ConfigureUiControls(false);
         txtName.Clear();
-        gridData.Enabled = true;
     }
 
     private static bool ValidadeJobName(string jobName)
@@ -203,6 +184,5 @@ public partial class FrmJobs : Form
         
         MessageHelper.ShowValidationMessage(@"O nome do cargo não pode estar vazio, Use apenas letras e espaços.");
         return false;
-
     }
 }

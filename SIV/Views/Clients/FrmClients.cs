@@ -34,8 +34,8 @@ public partial class FrmClients : Form
         
         PopulateFormFields();
         ConfigureUiControls(true);
-        btnSave.Enabled = false;
         EnableSearchControls(true);
+        btnSave.Enabled = false; // Desabilita o botão de salvar, pois o usuário não está criando um novo registro
     }
     
     private void btnNew_Click(object sender, EventArgs e)
@@ -180,30 +180,12 @@ public partial class FrmClients : Form
     
     private void SearchByName()
     {
-        try
-        {
-            gridData.DataSource = ClientRepository.SearchByName(txtSearchName.Text.ToUpper());
-            FormatGridData();
-        }
-        catch (MySqlException ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, "buscar pelo nome");
-        }
+        SearchData(ClientRepository.SearchByName, txtSearchName.Text, gridData, "buscar pelo nome");
     }
 
     private void SearchByCpf()
     {
-        try
-        {
-            gridData.DataSource = ClientRepository.SearchByCpf(AddCpfMask(txtSearchCpf.Text));
-            FormatGridData();
-        }
-        catch (MySqlException ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, "buscar pelo CPF");
-        }
+        SearchData(ClientRepository.SearchByCpf, txtCpf.Text, gridData, "buscar pelo CPF");
     }
     
     private async Task LoadClientAsync()
@@ -217,6 +199,19 @@ public partial class FrmClients : Form
         {
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "acessar os clientes");
+        }
+    }
+    
+    private static void SearchData(Func<string, object> searchFunc, string searchText, DataGridView grid, string action)
+    {
+        try
+        {
+            grid.DataSource = searchFunc(searchText);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, action);
         }
     }
     
@@ -281,7 +276,6 @@ public partial class FrmClients : Form
         ClearFields();
         await LoadClientAsync();
         ConfigureUiControls(false);
-        gridData.Enabled = true;
     }
     
     private bool ValidateFormData()
@@ -342,7 +336,6 @@ public partial class FrmClients : Form
         txtName.Focus();
         btnEdit.Enabled = false;
         btnDelete.Enabled = false;
-        gridData.Enabled = false;
     }
 
     private void ResetForm()
@@ -350,6 +343,5 @@ public partial class FrmClients : Form
         ClearFields();
         ConfigureUiControls(false);
         EnableSearchControls(true);
-        gridData.Enabled = true;
     }
 }

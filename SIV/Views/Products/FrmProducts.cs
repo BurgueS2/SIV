@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using SIV.Core;
 using SIV.Helpers;
@@ -18,9 +19,9 @@ public partial class FrmProducts : Form
         InitializeComponent();
     }
     
-    private void FrmProducts_Load(object sender, EventArgs e)
+    private async void FrmProducts_Load(object sender, EventArgs e)
     {
-        LoadProducts();
+        await LoadProductsAsync();
         LoadSupplier();
         LoadStockGroup();
         ConfigureUiControls(false);
@@ -28,48 +29,22 @@ public partial class FrmProducts : Form
 
     private void gridData_DoubleClick(object sender, EventArgs e)
     {
-        if (gridData.SelectedRows.Count <= 0) return; // Verifica se há linhas selecionadas
+        if (gridData.SelectedRows.Count <= 0) return;
         
         ConfigureUiControls(true);
-        btnSave.Enabled = false;
-
-        // Obtém os valores das células da linha selecionada e preenche os campos do formulário
-        _selectedProductId = gridData.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do produto selecionado
-        txtCode.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
-        txtName.Text = gridData.CurrentRow?.Cells[2].Value.ToString();
-        txtDescription.Text = gridData.CurrentRow?.Cells[3].Value.ToString();
-        txtManufacturingExpenses.Text = gridData.CurrentRow?.Cells[4].Value.ToString();
-        txtResalePrice.Text = gridData.CurrentRow?.Cells[5].Value.ToString();
-        cbStockGroup.Text = gridData.CurrentRow?.Cells[6].Value.ToString();
-        cbSupplier.Text = gridData.CurrentRow?.Cells[7].Value.ToString();
+        PopulateFormFields();
+        btnSave.Enabled = false; // Desabilita o botão de salvar, pois o usuário não está criando um novo registro
     }
 
-    private void btnNew_Click(object sender, EventArgs e)
-    {
-        ConfigureUiControls(true);
-        ClearFields();
-    }
+    private void btnNew_Click(object sender, EventArgs e) => PrepareForNewEntry();
 
-    private void btnCancel_Click(object sender, EventArgs e)
-    {
-        ConfigureUiControls(false);
-        ClearFields();
-    }
+    private void btnCancel_Click(object sender, EventArgs e) => ResetForm();
 
-    private void btnSave_Click(object sender, EventArgs e)
-    {
-        SaveFormData();
-    }
+    private void btnSave_Click(object sender, EventArgs e) => SaveFormData();
 
-    private void btnEdit_Click(object sender, EventArgs e)
-    {
-        UpdateFormData();
-    }
+    private void btnEdit_Click(object sender, EventArgs e) => UpdateFormData(); 
 
-    private void btnDelete_Click(object sender, EventArgs e)
-    {
-        DeleteFormData();
-    }
+    private void btnDelete_Click(object sender, EventArgs e) => DeleteFormData();
     
     private void btnAddStockGroup_Click(object sender, EventArgs e)
     {
@@ -81,7 +56,7 @@ public partial class FrmProducts : Form
     {
         try
         {
-            if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
+            if (!ValidateFormData()) return;
 
             var product = CreateProductFromFormData();
             ProductRepository.SaveProduct(product);
@@ -92,7 +67,7 @@ public partial class FrmProducts : Form
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro inesperado: {ex.Message}");
+            MessageHelper.ShowErrorMessage(ex, "salvar");
         }
     }
     
@@ -100,7 +75,7 @@ public partial class FrmProducts : Form
     {
         try
         {
-            if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
+            if (!ValidateFormData()) return;
             
             if (string.IsNullOrWhiteSpace(txtCode.Text))
             {
@@ -116,7 +91,7 @@ public partial class FrmProducts : Form
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, $"Erro inesperado: {ex.Message}");
+            MessageHelper.ShowErrorMessage(ex, "atualizar");
         }
     }
     
@@ -153,11 +128,11 @@ public partial class FrmProducts : Form
         };
     }
     
-    private void LoadProducts()
+    private async Task LoadProductsAsync()
     {
         try
         {
-            gridData.DataSource = ProductRepository.GetAllProducts();
+            gridData.DataSource = await Task.Run(ProductRepository.GetAllProducts);
             FormatGridData();
         }
         catch (Exception ex)
@@ -174,6 +149,7 @@ public partial class FrmProducts : Form
             //cbSupplier.DataSource = SupplierController.GetAllSuppliers();
             cbSupplier.DisplayMember = "Name";
             cbSupplier.ValueMember = "Id";
+            cbSupplier.SelectedIndex = -1;
         }
         catch (Exception ex)
         {
@@ -186,10 +162,10 @@ public partial class FrmProducts : Form
     {
         try
         {
-            cbSupplier.Text = null;
             cbStockGroup.DataSource = StockGroupRepository.GetAllStockGroup();
             cbStockGroup.DisplayMember = "Name"; 
-            //cbStockGroup.ValueMember = "Id";
+            cbStockGroup.ValueMember = "Id";
+            cbStockGroup.SelectedIndex = -1;
         }
         catch (Exception ex)
         {
@@ -238,12 +214,27 @@ public partial class FrmProducts : Form
         cbSupplier.SelectedIndex = -1;
     }
     
-    private void UpdateUiAfterSaveOrUpdate()
+    private void ResetForm()
+    {
+        ConfigureUiControls(false);
+        ClearFields();
+        cbStockGroup.SelectedIndex = -1;
+        cbSupplier.SelectedIndex = -1;
+    }
+    
+    private void PrepareForNewEntry()
+    {
+        ConfigureUiControls(true);
+        txtName.Focus();
+        btnEdit.Enabled = false;
+        btnDelete.Enabled = false;
+    }
+    
+    private async void UpdateUiAfterSaveOrUpdate()
     {
         ClearFields();
-        LoadProducts();
+        await LoadProductsAsync();
         ConfigureUiControls(false);
-        gridData.Enabled = true;
     }
     
     private static string GenerateProductCode()
@@ -260,5 +251,18 @@ public partial class FrmProducts : Form
         
         MessageHelper.ShowValidationMessage(validationResult);
         return false;
+    }
+
+    private void PopulateFormFields()
+    {
+        // Obtém os valores das células da linha selecionada e preenche os campos do formulário
+        _selectedProductId = gridData.CurrentRow?.Cells[0].Value.ToString(); // Armazena o ID do produto selecionado
+        txtCode.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
+        txtName.Text = gridData.CurrentRow?.Cells[2].Value.ToString();
+        txtDescription.Text = gridData.CurrentRow?.Cells[3].Value.ToString();
+        txtManufacturingExpenses.Text = gridData.CurrentRow?.Cells[4].Value.ToString();
+        txtResalePrice.Text = gridData.CurrentRow?.Cells[5].Value.ToString();
+        cbStockGroup.Text = gridData.CurrentRow?.Cells[6].Value.ToString();
+        cbSupplier.Text = gridData.CurrentRow?.Cells[7].Value.ToString();
     }
 }
