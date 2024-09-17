@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using SIV.Core;
 using SIV.Helpers;
@@ -33,57 +34,33 @@ public partial class FrmEmployees : Form
         
         PopulateFormFields();
         ConfigureUiControls(true);
-        btnSave.Enabled = false;
         LoadEmployeePhoto();
+        btnSave.Enabled = false; // Desabilita o botão de salvar, pois o usuário não está criando um novo registro
     }
     
-    private void btnNew_Click(object sender, EventArgs e)
-    {
-        PrepareForNewEntry();
-    }
+    private void btnNew_Click(object sender, EventArgs e) => PrepareForNewEntry();
     
-    private void btnCancel_Click(object sender, EventArgs e)
-    {
-        ResetForm();
-    }
+    private void btnCancel_Click(object sender, EventArgs e) => ResetForm();
     
-    private void btnSave_Click(object sender, EventArgs e)
-    {
-        SaveFormData();
-    }
+    private void btnSave_Click(object sender, EventArgs e) => SaveFormData();
     
-    private void btnEdit_Click(object sender, EventArgs e)
-    {
-        UpdateFormData();
-    }
+    private void btnEdit_Click(object sender, EventArgs e) => UpdateFormData();
     
-    private void btnDelete_Click(object sender, EventArgs e)
-    {
-        DeleteFormData();
-    }
+    private void btnDelete_Click(object sender, EventArgs e) => DeleteFormData();
     
-    private void btnSearch_Click(object sender, EventArgs e)
-    {
-        SearchByName();
-    }
+    private void btnSearch_Click(object sender, EventArgs e) => SearchByName();
     
-    private void btnPhoto_Click(object sender, EventArgs e)
-    {
-        SelectPhoto();
-    }
+    private void btnPhoto_Click(object sender, EventArgs e) => SelectPhoto();
     
     private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
     {
-        if (e.KeyChar == (char)Keys.Enter)
-        {
-            SearchByName();
-        }
+        if (e.KeyChar == (char)Keys.Enter) SearchByName();
     }
     
-    private void InitializeForm()
+    private async void InitializeForm()
     {
         NoPhoto();
-        LoadEmployees();
+        await LoadEmployeesAsync();
         ConfigureUiControls(false);
         LoadJob();
         _changedImage = false; // Define a flag para indicar que a imagem não foi alterada
@@ -206,11 +183,11 @@ public partial class FrmEmployees : Form
         return phone;
     }
     
-    private void LoadEmployees()
+    private async Task LoadEmployeesAsync()
     {
         try
         {
-            gridData.DataSource = EmployeeRepository.GetAllEmployees();
+            gridData.DataSource = await Task.Run(EmployeeRepository.GetAllEmployees);
             FormatGridData();
         }
         catch (Exception ex)
@@ -240,6 +217,7 @@ public partial class FrmEmployees : Form
             cbJob.DataSource = JobRepository.GetAllJobs();
             cbJob.DisplayMember = "Name";
             cbJob.ValueMember = "Id";
+            cbJob.SelectedIndex = -1;
         }
         catch (Exception ex)
         {
@@ -293,6 +271,7 @@ public partial class FrmEmployees : Form
         ConfigureUiControls(false);
         ClearFields();
         gridData.Enabled = true;
+        cbJob.SelectedIndex = -1;
     }
 
     private void SelectPhoto()
@@ -338,13 +317,14 @@ public partial class FrmEmployees : Form
         return false;
     }
     
-    private void UpdateUiAfterSaveOrUpdate()
+    private async void UpdateUiAfterSaveOrUpdate()
     {
         NoPhoto();
         ClearFields();
-        LoadEmployees();
+        await LoadEmployeesAsync();
         ConfigureUiControls(false);
         gridData.Enabled = true;
+        cbJob.SelectedIndex = -1;
     }
 
     private void PopulateFormFields()
