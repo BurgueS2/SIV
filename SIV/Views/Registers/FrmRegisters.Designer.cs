@@ -853,6 +853,7 @@ partial class FrmRegisters
         this.scrollBarMenu.Size = new System.Drawing.Size(18, 720);
         this.scrollBarMenu.SmallChange = 5;
         this.scrollBarMenu.TabIndex = 30;
+        this.scrollBarMenu.ThumbColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
         this.scrollBarMenu.ThumbStyle = Guna.UI2.WinForms.Enums.ThumbStyle.Inset;
         // 
         // FrmRegisters

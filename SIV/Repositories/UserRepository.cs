@@ -118,8 +118,7 @@ public static class UserRepository
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand(
-                "SELECT Id, Name, Password, JobTitle, AccessLevel, IsActive, UserPermissions" +
-                "FROM Users WHERE Name = @Name AND Password = @Password", connection);
+                "SELECT Id, Name, Password, JobTitle, AccessLevel, IsActive, UserPermissions FROM Users WHERE Name = @Name AND Password = @Password", connection);
             
             cmd.Parameters.AddWithValue("@Name", name);
             cmd.Parameters.AddWithValue("@Password", password);

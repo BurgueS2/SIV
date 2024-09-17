@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
-using Microsoft.VisualBasic.ApplicationServices;
 using SIV.Core;
 using SIV.Helpers;
 using SIV.Repositories;
@@ -28,100 +27,58 @@ public partial class FrmRegisters : Form
     private async void FrmRegisters_Load(object sender, EventArgs e)
     {
         ApplyingTheme();
-        await LoadClientesAsync();
-        await LoadEmployeesAsync();
-        await LoadProductsAsync();
+        await LoadDataAsync();
     }
     
-    private void btnEmployee_Click(object sender, EventArgs e)
-    {
-        OpenDisplayForm(new FrmEmployees(), sender);
-    }
+    private void btnEmployee_Click(object sender, EventArgs e) => OpenDisplayForm(new FrmEmployees(), sender);
     
-    private void btnUser_Click(object sender, EventArgs e)
-    {
-        OpenDisplayForm(new FrmUsers(), sender);
-    }
+    private void btnUser_Click(object sender, EventArgs e) => OpenDisplayForm(new FrmUsers(), sender);
+
+    private void btnClient_Click(object sender, EventArgs e) => OpenDisplayForm(new FrmClients(), sender);
     
-    private void btnClient_Click(object sender, EventArgs e)
-    {
-        OpenDisplayForm(new FrmClients(), sender);
-    }
-
-    private void btnJob_Click(object sender, EventArgs e)
-    {
-        OpenDisplayForm(new FrmJobs(), sender);
-    }
+    private void btnJob_Click(object sender, EventArgs e) => OpenDisplayForm(new FrmJobs(), sender);
     
-    private void btnProduct_Click(object sender, EventArgs e)
-    {
-        OpenDisplayForm(new FrmProducts(), sender);
-    }
-
-    private void btnSupplier_Click(object sender, EventArgs e)
-    {
-        // Not implemented
-    }
-
-    private void btnAddress_Click(object sender, EventArgs e)
-    {
-        // Not implemented
-    }
-
-    private void btnPayment_Click(object sender, EventArgs e)
-    {
-        OpenDisplayForm(new FrmPayments(), sender);
-    }
+    private void btnProduct_Click(object sender, EventArgs e) => OpenDisplayForm(new FrmProducts(), sender);
+    
+    private void btnSupplier_Click(object sender, EventArgs e) { /* Not implemented */ }
+    
+    private void btnAddress_Click(object sender, EventArgs e) { /* Not implemented */ }
+    
+    private void btnPayment_Click(object sender, EventArgs e) => OpenDisplayForm(new FrmPayments(), sender);
     
     private void txtSearchClient_KeyPress(object sender, KeyPressEventArgs e)
     {
-        if (e.KeyChar == (char)Keys.Enter)
-        {
-            SearchClient();
-        }
+        if (e.KeyChar == (char)Keys.Enter) SearchClient();
     }
     
     private void txtSearchProduct_KeyPress(object sender, KeyPressEventArgs e)
     {
-        if (e.KeyChar == (char)Keys.Enter)
-        {
-            SearchProduct();
-        }
+        if (e.KeyChar == (char)Keys.Enter) SearchProduct();
     }
     
     private void txtSearchEmployee_KeyPress(object sender, KeyPressEventArgs e)
     {
-        if (e.KeyChar == (char)Keys.Enter)
-        {
-            SearchEmployee();
-        }
+        if (e.KeyChar == (char)Keys.Enter) SearchEmployee();
     }
     
     private void OpenDisplayForm(Form dashboard, object senderButton)
     {
         if (SessionManager.CurrentUser.HasPermission("ManageCadastres") == false)
         {
-            MessageBox.Show(@"Você não tem permissão para acessar este recurso.");
+            MessageHelper.NoPermissionMessage();
             return;
         }
         
         ActivateButton(senderButton);
-        dashboard.TopLevel = false;
-        dashboard.FormBorderStyle = FormBorderStyle.None;
-        dashboard.Dock = DockStyle.Fill;
-        tableLayoutPanel.Visible = false;
-        displayPanel.Controls.Add(dashboard);
-        displayPanel.Tag = dashboard;
-        dashboard.BringToFront();
-        dashboard.Show();
+        DisplayForm(dashboard);
     }
     
     private void ActivateButton(object senderButton)
     {
         var color = ColorThemes.PrimaryColor;
         ResetButtons(color);
-        var currentButton = (Guna2Button)senderButton;
         
+        var currentButton = (Guna2Button)senderButton;
         currentButton.FillColor = color;
         currentButton.ForeColor = Color.Black;
         currentButton.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
@@ -144,8 +101,8 @@ public partial class FrmRegisters : Form
     private void ApplyingTheme()
     {
         var fillColor = ColorThemes.ChangeBrightness(ColorThemes.PrimaryColor, 0.5);
-        
         panelMenuRegister.BackColor = fillColor;
+        
         ApplyThemeToControl(btnEmployee, fillColor);
         ApplyThemeToControl(btnUser, fillColor);
         ApplyThemeToControl(btnClient, fillColor);
@@ -162,6 +119,14 @@ public partial class FrmRegisters : Form
         {
             button.FillColor = fillColor;
         }
+    }
+    
+    private async Task LoadDataAsync()
+    {
+        await LoadClientesAsync();
+        await LoadEmployeesAsync();
+        await LoadProductsAsync();
+        await LoadSuppliersAsync();
     }
 
     private async Task LoadClientesAsync()
@@ -206,11 +171,11 @@ public partial class FrmRegisters : Form
         }
     }
 
-    private void LoadSuppliers()
+    private async Task LoadSuppliersAsync()
     {
         try
         {
-            //gridDataSupplier.DataSource = SupplierRepository.GetAllSuppliers();
+            //gridDataSupplier.DataSource = await Task.Run(SupplierRepository.GetAllSuppliers);
         }
         catch (Exception ex)
         {
@@ -221,51 +186,35 @@ public partial class FrmRegisters : Form
 
     private void SearchClient()
     {
-        try
-        {
-            gridDataClient.DataSource = ClientRepository.SearchByName(txtSearchClient.Text);
-        }
-        catch (Exception ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, "pesquisar os clientes");
-        }
+        SearchData(ClientRepository.SearchByName, txtSearchClient.Text, gridDataClient, "pesquisar os clientes");
     }
 
     private void SearchProduct()
     {
-        try
-        {
-            gridDataProduct.DataSource = ProductRepository.SearchProductsByName(txtSearchProduct.Text);
-        }
-        catch (Exception ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, "pesquisar os produtos");
-        }
+        SearchData(EmployeeRepository.SearchByName, txtSearchProduct.Text, gridDataProduct, "pesquisar os produtos");
     }
 
     private void SearchEmployee()
     {
+        SearchData(EmployeeRepository.SearchByName, txtSearchEmployee.Text, gridDataEmployee, "pesquisar os funcionários");
+    }
+    
+    private static void SearchData(Func<string, object> searchFunc, string searchText, DataGridView grid, string action)
+    {
         try
         {
-            gridDataEmployee.DataSource = EmployeeRepository.SearchByName(txtSearchEmployee.Text);
+            grid.DataSource = searchFunc(searchText);
         }
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            MessageHelper.ShowErrorMessage(ex, "pesquisar os funcionários");
+            MessageHelper.ShowErrorMessage(ex, action);
         }
     }
-
+    
     private static void ShowOnlyNameColumn(DataGridView grid)
     {
-        foreach (DataGridViewColumn column in grid.Columns)
-        {
-            column.Visible = false;
-        }
-
-        grid.Columns[1].Visible = true;
+        ShowOnlySpecificColumns(grid, [1]);
     }
 
     private static void ShowOnlySpecificColumns(DataGridView grid, int[] columnIndexes)
@@ -279,5 +228,20 @@ public partial class FrmRegisters : Form
         {
             grid.Columns[index].Visible = true;
         }
+    }
+    
+    private void DisplayForm(Form dashboard)
+    {
+        dashboard.TopLevel = false;
+        dashboard.FormBorderStyle = FormBorderStyle.None;
+        dashboard.Dock = DockStyle.Fill;
+        
+        tableLayoutPanel.Visible = false;
+        
+        displayPanel.Controls.Add(dashboard);
+        displayPanel.Tag = dashboard;
+        
+        dashboard.BringToFront();
+        dashboard.Show();
     }
 }
