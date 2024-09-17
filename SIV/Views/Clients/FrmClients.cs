@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using SIV.Core;
@@ -75,9 +76,9 @@ public partial class FrmClients : Form
         SearchByCpf();
     }
     
-    private void InitializeForm()
+    private async void InitializeForm()
     {
-        LoadClient();
+        await LoadClientAsync();
         ConfigureUiControls(false);
         EnableSearchControls(true);
     }
@@ -205,11 +206,11 @@ public partial class FrmClients : Form
         }
     }
     
-    private void LoadClient()
+    private async Task LoadClientAsync()
     {
         try
         {
-            gridData.DataSource = ClientRepository.GetAllClients();
+            gridData.DataSource =await Task.Run(ClientRepository.GetAllClients);
             FormatGridData();
         }
         catch (MySqlException ex)
@@ -275,10 +276,10 @@ public partial class FrmClients : Form
         btnUnlocked.Checked = false;
     }
     
-    private void UpdateUiAfterSaveOrUpdate()
+    private async void UpdateUiAfterSaveOrUpdate()
     {
         ClearFields();
-        LoadClient();
+        await LoadClientAsync();
         ConfigureUiControls(false);
         gridData.Enabled = true;
     }
