@@ -20,12 +20,10 @@ public partial class FrmMain : Form
     private readonly Random _random = new();
     private int _tempIndex; // Armazena o índice da cor temporária
     private Form _enableFormDisplay; // Armazena o formulário que está sendo exibido
-    private readonly User _loggedInUser;
     
-    public FrmMain(/*User loggedInUser*/)
+    public FrmMain()
     {
         InitializeComponent();
-        //_loggedInUser = loggedInUser;\
     }
     
     private void btnExitDisplay_Click(object sender, EventArgs e)
@@ -47,7 +45,7 @@ public partial class FrmMain : Form
     {
         try
         {
-            OpenDisplayForm(new FrmRegisters(/*_loggedInUser*/), sender);
+            OpenDisplayForm(new FrmRegisters(), sender);
         }
         catch (Exception ex)
         {

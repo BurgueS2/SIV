@@ -118,18 +118,46 @@ public class MessageHelper
         return questioning == DialogResult.Yes;
     }
     
+    /// <summary>
+    /// Exibe uma mensagem de erro personalizada, baseada na exceção capturada e na ação que estava sendo realizada.
+    /// </summary>
+    /// <param name="ex">A exceção capturada durante a operação.</param>
+    /// <param name="action">A ação que estava sendo realizada, para contextualizar a mensagem de erro.</param>
     public static void HandleException(Exception ex, string action)
     {
         MessageBox.Show(@$"Erro ao {action}: {ex.Message}", @"Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
-
+    
+    /// <summary>
+    /// Exibe uma mensagem de alerta informando que o nome do produto ou a quantidade é inválida.
+    /// </summary>
     public static void ShowInvalidProductOrQuantity()
     {
         MessageBox.Show(@"Nome do produto ou quantidade inválida.", @"Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
     }
     
+    /// <summary>
+    /// Exibe uma mensagem de alerta informando que o produto não foi encontrado.
+    /// </summary>
     public static void ShowProductNotFound()
     {
         MessageBox.Show(@"Produto não encontrado.", @"Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    }
+    
+    /// <summary>
+    /// Exibe uma mensagem de alerta com o resultado da validação de login.
+    /// </summary>
+    /// <param name="message">A mensagem de validação a ser exibida.</param>
+    public static void LoginValidationMessage(string message)
+    {
+        MessageBox.Show(message, @"ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    }
+    
+    /// <summary>
+    /// Exibe uma mensagem de alerta informando que o usuário não tem permissão para acessar o recurso.
+    /// </summary>
+    public static void NoPermissionMessage()
+    {
+        MessageBox.Show(@"Você não tem permissão para acessar este recurso.", @"ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
     }
 }

@@ -19,12 +19,10 @@ namespace SIV.Views.Registers;
 public partial class FrmRegisters : Form
 {
     private const double BrightnessFactor = 0.5;
-    private readonly User _loggedInUser;
 
-    public FrmRegisters(User loggedInUser)
+    public FrmRegisters()
     {
         InitializeComponent();
-        _loggedInUser = loggedInUser;
     }
     
     private async void FrmRegisters_Load(object sender, EventArgs e)
@@ -101,9 +99,9 @@ public partial class FrmRegisters : Form
     
     private void OpenDisplayForm(Form dashboard, object senderButton)
     {
-        if (!_loggedInUser.HasPermission("ManageCadastres"))
+        if (SessionManager.CurrentUser.HasPermission("ManageCadastres") == false)
         {
-            MessageHelper.ShowValidationMessage("Usuário não tem permissão para acessar o cadastro!");
+            MessageBox.Show(@"Você não tem permissão para acessar este recurso.");
             return;
         }
         
@@ -170,8 +168,7 @@ public partial class FrmRegisters : Form
     {
         try
         {
-            var clients = await Task.Run(ClientRepository.GetAllClients);
-            gridDataClient.DataSource = clients;
+            gridDataClient.DataSource = await Task.Run(ClientRepository.GetAllClients);
             ShowOnlyNameColumn(gridDataClient);
         }
         catch (Exception ex)
@@ -185,8 +182,7 @@ public partial class FrmRegisters : Form
     {
         try
         {
-            var employees = await Task.Run(EmployeeRepository.GetAllEmployees);
-            gridDataEmployee.DataSource = employees;
+            gridDataEmployee.DataSource = await Task.Run(EmployeeRepository.GetAllEmployees);
             ShowOnlySpecificColumns(gridDataEmployee, [1, 4]);
         }
         catch (Exception ex)
@@ -200,8 +196,7 @@ public partial class FrmRegisters : Form
     {
         try
         {
-            var products = await Task.Run(ProductRepository.GetAllProducts);
-            gridDataProduct.DataSource = products;
+            gridDataProduct.DataSource = await Task.Run(ProductRepository.GetAllProducts);
             ShowOnlySpecificColumns(gridDataProduct, [2, 5]);
         }
         catch (Exception ex)

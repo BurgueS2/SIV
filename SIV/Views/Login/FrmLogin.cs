@@ -8,17 +8,9 @@ namespace SIV.Views.Login;
 
 public partial class FrmLogin : Form
 {
-    private readonly UserController _controller;
-    
     public FrmLogin()
     {
         InitializeComponent();
-        _controller = new UserController();
-    }
-    
-    private void btnExit_Click(object sender, EventArgs e)
-    {
-        Application.Exit();
     }
     
     private void btnEnter_Click(object sender, EventArgs e)
@@ -28,53 +20,61 @@ public partial class FrmLogin : Form
     
     private void btnCancel_Click(object sender, EventArgs e)
     {
-        txtUser.Clear();
-        txtPassword.Clear();
+        ClearFields();
     }
     
     private void VerifyUser()
     {
         try
         {
-            var user = "teste";//txtUser.Text.Trim();
-            var password = "teste";//txtPassword.Text.Trim();
-            
-            if (string.IsNullOrEmpty(user) && string.IsNullOrEmpty(password))
-            {
-                MessageHelper.ShowValidationMessage("Campos Inválidos!");
-                return;
-            }
+            var user = txtUser.Text.Trim().ToUpper();
+            var password = txtPassword.Text.Trim();
 
-            if (string.IsNullOrEmpty(user))
+            if (!AreFieldsValid(user, password))
             {
-                MessageHelper.ShowValidationMessage("Informe o Usuário!");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(password))
-            {
-                MessageHelper.ShowValidationMessage("Informe a Senha!");
-                return;
+                MessageHelper.LoginValidationMessage("Preencha todos os campos!");
             }
             
             UserController.Login(user, password);
-            
-            var loggedInUser = SessionManager.CurrentUser;
-            if (loggedInUser.HasPermission("AccessSystem"))
+
+            if (SessionManager.CurrentUser != null)
             {
-                Hide();
-                //var frm = new FrmMain(loggedInUser);
-                //frm.Show();
+                OpenMainForm();
             }
             else
             {
-                MessageHelper.ShowValidationMessage("Usuário não tem permissão para acessar o sistema!");
+                HandleInvalidLogin();
             }
         }
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            MessageBox.Show($@"Ocorreu um erro ao verificar o usuário! {ex.Message}");
+            MessageHelper.ShowErrorMessage(ex, "realizar o login");
         }
+    }
+    
+    private static bool AreFieldsValid(string user, string password)
+    {
+        return !string.IsNullOrEmpty(user) && !string.IsNullOrEmpty(password);
+    }
+    
+    private void OpenMainForm()
+    {
+        Hide();
+        var main = new FrmMain();
+        main.Show();
+    }
+    
+    private void HandleInvalidLogin()
+    {
+        MessageHelper.LoginValidationMessage("Usuário ou senha inválidos!");
+        ClearFields();
+        txtUser.Focus();
+    }
+    
+    private void ClearFields()
+    {
+        txtUser.Clear();
+        txtPassword.Clear();
     }
 }
