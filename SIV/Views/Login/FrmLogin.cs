@@ -8,20 +8,11 @@ namespace SIV.Views.Login;
 
 public partial class FrmLogin : Form
 {
-    public FrmLogin()
-    {
-        InitializeComponent();
-    }
+    public FrmLogin() => InitializeComponent();
     
-    private void btnEnter_Click(object sender, EventArgs e)
-    {
-        VerifyUser();
-    }
+    private void btnEnter_Click(object sender, EventArgs e) => VerifyUser();
     
-    private void btnCancel_Click(object sender, EventArgs e)
-    {
-        ClearFields();
-    }
+    private void btnCancel_Click(object sender, EventArgs e) => ClearFields();
     
     private void VerifyUser()
     {
@@ -30,20 +21,13 @@ public partial class FrmLogin : Form
             var user = txtUser.Text.Trim().ToUpper();
             var password = txtPassword.Text.Trim();
 
-            if (!AreFieldsValid(user, password))
-            {
-                MessageHelper.LoginValidationMessage("Preencha todos os campos!");
-            }
+            if (AreFieldsValid(user, password)) return;
             
             UserController.Login(user, password);
 
             if (SessionManager.CurrentUser != null)
             {
                 OpenMainForm();
-            }
-            else
-            {
-                HandleInvalidLogin();
             }
         }
         catch (Exception ex)
@@ -55,21 +39,17 @@ public partial class FrmLogin : Form
     
     private static bool AreFieldsValid(string user, string password)
     {
-        return !string.IsNullOrEmpty(user) && !string.IsNullOrEmpty(password);
+        if (!string.IsNullOrEmpty(user) && !string.IsNullOrEmpty(password)) return false;
+        MessageHelper.LoginValidationMessage("Preencha todos os campos!");
+        return true;
     }
     
     private void OpenMainForm()
     {
         Hide();
-        var main = new FrmMain();
-        main.Show();
-    }
-    
-    private void HandleInvalidLogin()
-    {
-        MessageHelper.LoginValidationMessage("Usuário ou senha inválidos!");
-        ClearFields();
-        txtUser.Focus();
+        var frm = new FrmMain();
+        frm.UpdateUserLabel(SessionManager.CurrentUser.Name); // Atualiza o label com o nome do usuário logado
+        frm.Show();
     }
     
     private void ClearFields()

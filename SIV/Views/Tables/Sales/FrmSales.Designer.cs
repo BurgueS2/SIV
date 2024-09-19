@@ -1130,6 +1130,7 @@ partial class FrmSales
         this.Location = new System.Drawing.Point(15, 15);
         this.Margin = new System.Windows.Forms.Padding(5);
         this.Name = "FrmSales";
+        this.Text = "Caixa";
         this.Load += new System.EventHandler(this.FrmSales_Load);
         this.panelStatusv.ResumeLayout(false);
         this.panelStatusv.PerformLayout();

@@ -64,13 +64,13 @@
             this.btnExitDisplay = new System.Windows.Forms.Button();
             this.btnLogoff = new Guna.UI2.WinForms.Guna2Button();
             this.panelStatus = new Guna.UI2.WinForms.Guna2Panel();
+            this.timeStatusBar = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.guna2Separator2 = new Guna.UI2.WinForms.Guna2Separator();
             this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.btnConf = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.TimeStatusBar = new System.Windows.Forms.Label();
+            this.labelUser = new System.Windows.Forms.Label();
             this.DateStatusBar = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
@@ -123,11 +123,11 @@
             // 
             this.panelMenu.BackColor = System.Drawing.Color.LightCyan;
             this.panelMenu.Controls.Add(this.btnExit);
+            this.panelMenu.Controls.Add(this.btnExitDisplay);
             this.panelMenu.Controls.Add(this.btnReport);
             this.panelMenu.Controls.Add(this.btnCashFlow);
             this.panelMenu.Controls.Add(this.btnRegisters);
             this.panelMenu.Controls.Add(this.btnTables);
-            this.panelMenu.Controls.Add(this.btnExitDisplay);
             resources.ApplyResources(this.panelMenu, "panelMenu");
             this.panelMenu.Name = "panelMenu";
             // 
@@ -249,15 +249,15 @@
             // 
             resources.ApplyResources(this.panelStatus, "panelStatus");
             this.panelStatus.BackColor = System.Drawing.Color.Transparent;
-            this.panelStatus.BorderColor = System.Drawing.Color.Transparent;
+            this.panelStatus.BorderColor = System.Drawing.Color.Black;
+            this.panelStatus.Controls.Add(this.timeStatusBar);
+            this.panelStatus.Controls.Add(this.label1);
             this.panelStatus.Controls.Add(this.guna2Separator2);
             this.panelStatus.Controls.Add(this.guna2CirclePictureBox1);
             this.panelStatus.Controls.Add(this.btnConf);
             this.panelStatus.Controls.Add(this.btnLogoff);
             this.panelStatus.Controls.Add(this.guna2Separator1);
-            this.panelStatus.Controls.Add(this.label2);
-            this.panelStatus.Controls.Add(this.label1);
-            this.panelStatus.Controls.Add(this.TimeStatusBar);
+            this.panelStatus.Controls.Add(this.labelUser);
             this.panelStatus.Controls.Add(this.DateStatusBar);
             this.panelStatus.Controls.Add(this.label5);
             this.panelStatus.CustomBorderColor = System.Drawing.Color.DimGray;
@@ -265,6 +265,16 @@
             this.panelStatus.FillColor = System.Drawing.Color.LightCyan;
             this.panelStatus.Name = "panelStatus";
             this.panelStatus.ShadowDecoration.CustomizableEdges = customizableEdges17;
+            // 
+            // timeStatusBar
+            // 
+            resources.ApplyResources(this.timeStatusBar, "timeStatusBar");
+            this.timeStatusBar.Name = "timeStatusBar";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
             // 
             // guna2Separator2
             // 
@@ -307,20 +317,10 @@
             resources.ApplyResources(this.guna2Separator1, "guna2Separator1");
             this.guna2Separator1.Name = "guna2Separator1";
             // 
-            // label2
+            // labelUser
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
-            // TimeStatusBar
-            // 
-            resources.ApplyResources(this.TimeStatusBar, "TimeStatusBar");
-            this.TimeStatusBar.Name = "TimeStatusBar";
+            resources.ApplyResources(this.labelUser, "labelUser");
+            this.labelUser.Name = "labelUser";
             // 
             // DateStatusBar
             // 
@@ -380,6 +380,8 @@
             this.ResumeLayout(false);
         }
 
+        private System.Windows.Forms.Label timeStatusBar;
+
         private System.Windows.Forms.PictureBox logoTipo;
         private System.Windows.Forms.Label label4;
 
@@ -397,7 +399,7 @@
         private System.Windows.Forms.Label DateStatusBar;
         private System.Windows.Forms.Label label5;
 
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelUser;
 
         private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
 

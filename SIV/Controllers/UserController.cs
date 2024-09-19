@@ -1,9 +1,10 @@
 ﻿using SIV.Core;
+using SIV.Helpers;
 using SIV.Repositories;
 
 namespace SIV.Controllers;
 
-public class UserController
+public static class UserController
 { 
     /// <summary>
     /// Realiza o logoff do usuário atual, limpando a sessão.
@@ -22,10 +23,19 @@ public class UserController
     public static void Login(string username, string password)
     {
         var user = UserRepository.UserPermission(username, password);
-        
-        if (user != null)
+
+        if (user == null)
         {
-            SessionManager.SetCurrentUser(user);
+            MessageHelper.LoginValidationMessage("Usuário ou senha inválidos!");
+            return;
         }
+        
+        if (user.Active == "INATIVO")
+        {
+            MessageHelper.LoginValidationMessage("Usuário inativo! Contate o administrador.");
+            return;
+        }
+        
+        SessionManager.SetCurrentUser(user);
     }
 }

@@ -5,7 +5,6 @@ using Guna.UI2.WinForms;
 using SIV.Controllers;
 using SIV.Core;
 using SIV.Helpers;
-using SIV.Models;
 using SIV.Views.Login;
 using SIV.Views.Registers;
 using SIV.Views.Tables;
@@ -21,54 +20,21 @@ public partial class FrmMain : Form
     private int _tempIndex; // Armazena o índice da cor temporária
     private Form _enableFormDisplay; // Armazena o formulário que está sendo exibido
     
-    public FrmMain()
-    {
-        InitializeComponent();
-    }
+    public FrmMain() => InitializeComponent();
     
-    private void btnExitDisplay_Click(object sender, EventArgs e)
-    {
-        CloseDisplayForm();
-    }
+    private void btnExitDisplay_Click(object sender, EventArgs e) => CloseDisplayForm();
     
-    private void btnTables_Click(object sender, EventArgs e)
-    {
-        OpenDisplayForm(new FrmTables(), sender);
-    }
-
-    private void btnCashFlow_Click(object sender, EventArgs e)
-    {
-        OpenDisplayForm(new FrmSales(), sender);
-    }
-
-    private void btnRegisters_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            OpenDisplayForm(new FrmRegisters(), sender);
-        }
-        catch (Exception ex)
-        {
-            Logger.LogException(ex);
-            MessageBox.Show($@"Ocorreu um erro: {ex.Message}");
-        }
-    }
-
-    private void btnReport_Click(object sender, EventArgs e)
-    {
-        HandleButtonClick(sender);
-    }
-
-    private void btnExit_Click(object sender, EventArgs e)
-    {
-        if (!MessageHelper.ConfirmExit()) return;
-        Application.Exit();
-    }
+    private void btnTables_Click(object sender, EventArgs e) => OpenForm(new FrmTables(), sender);
     
-    private void btnLogoff_Click(object sender, EventArgs e)
-    {
-        OpenLogin();
-    }
+    private void btnCashFlow_Click(object sender, EventArgs e) => OpenForm(new FrmSales(), sender);
+    
+    private void btnRegisters_Click(object sender, EventArgs e) => OpenForm(new FrmRegisters(), sender);
+    
+    private void btnReport_Click(object sender, EventArgs e) => HandleButtonClick(sender);
+    
+    private void btnExit_Click(object sender, EventArgs e) => ExitTheApplication();
+    
+    private void btnLogoff_Click(object sender, EventArgs e) => OpenLogin();
     
     private Color RandomColor()
     {
@@ -82,14 +48,13 @@ public partial class FrmMain : Form
             }
 
             _tempIndex = index;
-            var color = ColorThemes.ColorList[index];
-
-            return ColorTranslator.FromHtml(color);
+            
+            return ColorTranslator.FromHtml(ColorThemes.ColorList[index]);
         }
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            MessageBox.Show(@$"Ocorreu um erro em RandomColor: {ex.Message}");
+            MessageHelper.HandleException(ex, "gerar uma cor aleatória");
             return Color.Black; // Retorna uma cor padrão em caso de erro
         }
     }
@@ -124,23 +89,21 @@ public partial class FrmMain : Form
     
     private void UpdatePanelColors(Color color)
     {
-        panelBar.BackColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
-        panelStatus.FillColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
-        panelMenu.BackColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
-        btnConf.FillColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
-        btnLogoff.FillColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
+        var brightColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
+        panelBar.BackColor = brightColor;
+        panelStatus.FillColor = brightColor;
+        panelMenu.BackColor = brightColor;
+        btnConf.FillColor = brightColor;
+        btnLogoff.FillColor = brightColor;
     }
     
     private void OpenDisplayForm(Form dashboard, object senderButton)
     {
         _enableFormDisplay?.Close();
-
+        
         ActivateButton(senderButton);
         _enableFormDisplay = dashboard;
-        
-        dashboard.TopLevel = false;
-        dashboard.FormBorderStyle = FormBorderStyle.None;
-        dashboard.Dock = DockStyle.Fill;
+        ConfigureForm(dashboard);
         
         displayPanel.Controls.Add(dashboard);
         displayPanel.Tag = dashboard;
@@ -150,21 +113,11 @@ public partial class FrmMain : Form
         labelTitle.Text = dashboard.Text;
     }
     
-    public void OpenFormInDisplayPanel(Form form)
+    private static void ConfigureForm(Form form)
     {
-        _enableFormDisplay?.Close();
-        _enableFormDisplay = form;
-        
-        form.TopLevel = false;
-        form.FormBorderStyle = FormBorderStyle.None;
-        form.Dock = DockStyle.Fill;
-        
-        displayPanel.Controls.Add(form);
-        displayPanel.Tag = form;
-        
-        form.BringToFront();
-        form.Show();
-        labelTitle.Text = form.Text;
+        form.TopLevel = false; // Define o formulário como não principal
+        form.FormBorderStyle = FormBorderStyle.None; // Remove a borda do formulário
+        form.Dock = DockStyle.Fill; // Preenche o formulário no painel
     }
     
     /// <summary>
@@ -192,20 +145,19 @@ public partial class FrmMain : Form
         
         ResetButtons(ColorThemes.PrimaryColor);
     }
-
+    
     private void timer_Tick(object sender, EventArgs e)
     {
         DateStatusBar.Text = DateTime.Today.ToString("dd/MMMM/yyyy");
-        TimeStatusBar.Text = DateTime.Now.ToString("HH:mm:ss");
+        timeStatusBar.Text = DateTime.Now.ToString("HH:mm:ss");
     }
-
+    
     private void OpenLogin()
     {
         try
         {
-            var controller = new UserController();
             UserController.Logoff();
-
+            
             var loginForm = new FrmLogin();
             loginForm.ShowDialog();
             Close();
@@ -213,7 +165,31 @@ public partial class FrmMain : Form
         catch (Exception ex)
         {
             Logger.LogException(ex);
-            MessageBox.Show(@$"Ocorreu um erro: {ex.Message}");
+            MessageHelper.HandleException(ex, "abrir ao fazer logoff");
         }
+    }
+    
+    public void UpdateUserLabel(string userName)
+    {
+        labelUser.Text = @$"Usuário: {userName}";
+    }
+    
+    private void OpenForm(Form form, object sender)
+    {
+        try
+        {
+            OpenDisplayForm(form, sender);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "abrir o formulário");
+        }
+    }
+    
+    private static void ExitTheApplication()
+    {
+        if (!MessageHelper.ConfirmExit()) return;
+        Application.Exit();
     }
 }
