@@ -18,25 +18,9 @@ public partial class FrmEmployees : Form
     private bool _changedImage; // Variável para verificar se a imagem foi alterada
     private string _selectedEmployeeId;
     
-    public FrmEmployees()
-    {
-        InitializeComponent();
-    }
+    public FrmEmployees() => InitializeComponent();
     
-    private void FrmEmployees_Load(object sender, EventArgs e)
-    {
-        InitializeForm();
-    }
-    
-    private void gridData_DoubleClick(object sender, EventArgs e)
-    {
-        if (gridData.SelectedRows.Count <= 0) return; // Verifica se há linhas selecionadas
-        
-        PopulateFormFields();
-        ConfigureUiControls(true);
-        LoadEmployeePhoto();
-        btnSave.Enabled = false; // Desabilita o botão de salvar, pois o usuário não está criando um novo registro
-    }
+    private void FrmEmployees_Load(object sender, EventArgs e) => InitializeForm();
     
     private void btnNew_Click(object sender, EventArgs e) => PrepareForNewEntry();
     
@@ -55,6 +39,16 @@ public partial class FrmEmployees : Form
     private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
     {
         if (e.KeyChar == (char)Keys.Enter) SearchByName();
+    }
+    
+    private void gridData_DoubleClick(object sender, EventArgs e)
+    {
+        if (gridData.SelectedRows.Count <= 0) return;
+        
+        PopulateFormFields();
+        ConfigureUiControls(true);
+        LoadEmployeePhoto();
+        btnSave.Enabled = false; // Desabilita o botão de salvar, pois o usuário não está criando um novo registro
     }
     
     private async void InitializeForm()
