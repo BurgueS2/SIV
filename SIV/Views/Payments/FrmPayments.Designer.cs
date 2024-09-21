@@ -483,6 +483,7 @@ partial class FrmPayments
         this.btnSearch.ShadowDecoration.CustomizableEdges = customizableEdges22;
         this.btnSearch.Size = new System.Drawing.Size(25, 25);
         this.btnSearch.TabIndex = 29;
+        this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
         // 
         // labelRegisteredPaymants
         // 
@@ -513,11 +514,12 @@ partial class FrmPayments
         this.txtSearch.Location = new System.Drawing.Point(3, 39);
         this.txtSearch.Name = "txtSearch";
         this.txtSearch.PasswordChar = '\0';
-        this.txtSearch.PlaceholderText = "Buscar...";
+        this.txtSearch.PlaceholderText = "Buscar por nome...";
         this.txtSearch.SelectedText = "";
         this.txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges24;
         this.txtSearch.Size = new System.Drawing.Size(295, 29);
         this.txtSearch.TabIndex = 28;
+        this.txtSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearch_KeyPress);
         // 
         // gridData
         // 
@@ -617,6 +619,7 @@ partial class FrmPayments
         this.Margin = new System.Windows.Forms.Padding(5);
         this.Name = "FrmPayments";
         this.Text = "Forma de Pagamento";
+        this.Load += new System.EventHandler(this.FrmPayments_Load);
         this.panelTypePayment.ResumeLayout(false);
         this.panelGrid.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();

@@ -6,6 +6,7 @@ using SIV.Core;
 using SIV.Helpers;
 using SIV.Models;
 using SIV.Repositories;
+using SIV.Validators;
 
 namespace SIV.Views.Payments;
 
@@ -13,36 +14,48 @@ public partial class FrmPayments : Form
 {
     private string _selectPaymentId;
     
-    public FrmPayments()
-    {
-        InitializeComponent();
-    }
+    public FrmPayments() => InitializeComponent();
+    
+    private void FrmPayments_Load(object sender, EventArgs e) => InitializeForm();
+    
+    private void btnNew_Click(object sender, EventArgs e) => PrepareForNewEntry();
+    
+    private void btnCancel_Click(object sender, EventArgs e) => ResetForm();
+    
+    private void btnSave_Click(object sender, EventArgs e) => SaveFormData();
+    
+    private void btnEdit_Click(object sender, EventArgs e) => UpdateFormData();
+    
+    private void btnDelete_Click(object sender, EventArgs e) => DeleteFormData();
+    
+    private void btnSearch_Click(object sender, EventArgs e) => SearchByName();
 
+    private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
+    {
+        if (e.KeyChar == (char)Keys.Enter) SearchByName();
+    }
+    
     private void gridData_DoubleClick(object sender, EventArgs e)
     {
-        if (gridData.SelectedRows.Count <= 0) return; // Verifica se há linhas selecionadas
+        if (gridData.SelectedRows.Count <= 0) return;
         
         ClearFields();
         ConfigureUiControls(true);
         PopulateFormFields();
         btnSave.Enabled = false; // Desabilita o botão de salvar, pois o usuário não está criando um novo registro
     }
-
-    private void btnNew_Click(object sender, EventArgs e) => PrepareForNewEntry();
-
-    private void btnCancel_Click(object sender, EventArgs e) => ResetForm();
-
-    private void btnSave_Click(object sender, EventArgs e) => SaveFormData();
-
-    private void btnEdit_Click(object sender, EventArgs e) => UpdateFormData();
-
-    private void btnDelete_Click(object sender, EventArgs e) => DeleteFormData();
+    
+    private async void InitializeForm()
+    {
+        ConfigureUiControls(false);
+        await LoadPaymentAsync();
+    }
     
     private void SaveFormData()
     {
         try
         {
-            // if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
+            if (!ValidateFormData()) return;
             
             var paymentMethod = CreatePaymentMethodFromFormData();
             PaymentRepository.SavePayment(paymentMethod);
@@ -61,7 +74,7 @@ public partial class FrmPayments : Form
     {
         try
         {
-            // if (!ValidateFormData()) return; // Se a validação falhar, interrompe a execução
+            if (!ValidateFormData()) return;
 
             var paymentMethod = CreatePaymentMethodFromFormData();
             PaymentRepository.UpdatePayment(paymentMethod);
@@ -100,9 +113,9 @@ public partial class FrmPayments : Form
         {
             Id = _selectPaymentId,
             Flag = txtFlag.Text.ToUpper(),
-            DaysToCredit = txtDaysToCredit.Text,
-            OperatorCnpj = AddCnpjMask(txtOperatorCnpj.Text),
-            Tax = txtTax.Text,
+            DaysToCredit = string.IsNullOrWhiteSpace(txtDaysToCredit.Text) ? "0" : txtDaysToCredit.Text,
+            OperatorCnpj = string.IsNullOrWhiteSpace(txtOperatorCnpj.Text) ? "N/A" : AddCnpjMask(txtOperatorCnpj.Text),
+            Tax = string.IsNullOrWhiteSpace(txtTax.Text) ? "0" : txtTax.Text,
             Status = btnDebit.Checked ? "INATIVO" : "ATIVO",
             Type = btnCredit.Checked ? "CREDITO" : btnDebit.Checked ? "DEBITO" : "VOUCHER" // Verifica qual RadioButton está selecionado
         };
@@ -118,7 +131,7 @@ public partial class FrmPayments : Form
         return cnpj;
     }
     
-    private async void LoadClient()
+    private async Task LoadPaymentAsync()
     {
         try
         {
@@ -136,12 +149,26 @@ public partial class FrmPayments : Form
         }
     }
     
+    private void SearchByName()
+    {
+        try
+        {
+            gridData.DataSource = PaymentRepository.SearchByPaymentName(txtSearch.Text.ToUpper());
+            FormatGridData();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "pesquisar o método de pagamento");
+        }
+    }
+    
     private void FormatGridData()
     {
         gridData.Columns[1].HeaderText = @"BANDEIRA";
         gridData.Columns[2].HeaderText = @"DIAS P/ CRÉDITAR";
         gridData.Columns[3].HeaderText = @"CNPJ";
-        gridData.Columns[4].HeaderText = @"TAX";
+        gridData.Columns[4].HeaderText = @"TAXA";
         gridData.Columns[5].HeaderText = @"STATUS";
         gridData.Columns[6].HeaderText = @"FORMATO";
         gridData.Columns[0].Visible = false;
@@ -159,9 +186,10 @@ public partial class FrmPayments : Form
         btnNew.Enabled = !enable;
         btnSave.Enabled = enable;
         btnCancel.Enabled = enable;
-        btnEdit.Enabled = !enable;
-        btnDelete.Enabled = !enable;
-        btnDisabled.Enabled = !enable;
+        btnEdit.Enabled = enable;
+        btnDelete.Enabled = enable;
+        btnDisabled.Enabled = enable;
+        gridData.Enabled = !enable;
     }
     
     private void ClearFields()
@@ -182,10 +210,10 @@ public partial class FrmPayments : Form
         ConfigureUiControls(false);
     }
     
-    private void UpdateUiAfterSaveOrUpdate()
+    private async void UpdateUiAfterSaveOrUpdate()
     {
         ClearFields();
-        LoadClient();
+        await LoadPaymentAsync();
         ConfigureUiControls(false);
     }
 
@@ -213,5 +241,15 @@ public partial class FrmPayments : Form
 
         // Preenche os campos restantes
         txtFlag.Text = gridData.CurrentRow?.Cells[6].Value.ToString();
+    }
+    
+    private bool ValidateFormData()
+    {
+        var validationResult = PaymentValidator.ValidatePayment(txtFlag.Text, txtOperatorCnpj.Text);
+
+        if (string.IsNullOrEmpty(validationResult)) return true;
+        
+        MessageHelper.ShowValidationMessage(validationResult);
+        return false;
     }
 }

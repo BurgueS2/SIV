@@ -175,6 +175,7 @@
         <Compile Include="Repositories\UserRepository.cs" />
         <Compile Include="Validators\ClientValidator.cs" />
         <Compile Include="Validators\EmployeeValidator.cs" />
+        <Compile Include="Validators\PaymentValidator.cs" />
         <Compile Include="Validators\ProductValidator.cs" />
         <Compile Include="Validators\UserValidator.cs" />
         <Compile Include="Views\Clients\FrmClients.cs">

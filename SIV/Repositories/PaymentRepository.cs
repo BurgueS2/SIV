@@ -105,6 +105,35 @@ public static class PaymentRepository
             MessageHelper.HandleException(ex, "excluir o método de pagamento");
         }
     }
+    
+    /// <summary>
+    /// Pesquisa métodos de pagamento pelo nome da bandeira.
+    /// </summary>
+    /// <param name="flag">A bandeira do pagamento a ser pesquisada.</param>
+    /// <returns>Um DataTable contendo os métodos de pagamento que correspondem à bandeira informada.</returns>
+    public static DataTable SearchByPaymentName(string flag)
+    {
+        try
+        {
+            var dt = new DataTable();
+
+            using var connection = ConnectionManager.GetConnection();
+            using var cmd = new MySqlCommand("SELECT * FROM Payments WHERE Flag LIKE @Flag ORDER BY Flag", connection);
+            
+            cmd.Parameters.AddWithValue("@Flag", "%" + flag + "%"); // Adiciona o caractere % para buscar qualquer nome que contenha o valor informado
+            
+            using var adapter = new MySqlDataAdapter(cmd);
+            
+            adapter.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "pesquisar funcionários");
+            return null;
+        }
+    }
 
     /// <summary>
     /// Salva um pagamento parcial para uma mesa.
@@ -196,7 +225,7 @@ public static class PaymentRepository
         cmd.Parameters.AddWithValue("@DaysToCredit", payment.DaysToCredit);
         cmd.Parameters.AddWithValue("@OperatorCnpj", payment.OperatorCnpj);
         cmd.Parameters.AddWithValue("@Tax", payment.Tax);
-        cmd.Parameters.AddWithValue("@Ttatus", payment.Status);
+        cmd.Parameters.AddWithValue("@Status", payment.Status);
         cmd.Parameters.AddWithValue("@Type", payment.Type);
     }
 }
