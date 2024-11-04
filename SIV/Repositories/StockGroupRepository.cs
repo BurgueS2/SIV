@@ -100,4 +100,33 @@ public static class StockGroupRepository
             MessageHelper.HandleException(ex, "excluir o grupo de estoque");
         }
     }
+    
+    /// <summary>
+    /// Busca um grupo de estoque pelo nome.
+    /// </summary>
+    /// <param name="name">Nome do grupo a ser buscado.</param>
+    /// <returns>Um <c>DataTable</c> contendo os grupos que correspondem ao critério de busca.</returns>
+    public static DataTable SearchByName(string name)
+    {
+        try
+        {
+            var dt = new DataTable();
+
+            using var connection = ConnectionManager.GetConnection();
+            using var cmd = new MySqlCommand("SELECT * FROM StockGroups WHERE Name LIKE @Name ORDER BY Name", connection);
+            
+            cmd.Parameters.AddWithValue("@Name", "%" + name + "%"); // Adiciona o caractere % para buscar qualquer nome que contenha o valor informado
+            
+            using var adapter = new MySqlDataAdapter(cmd);
+            
+            adapter.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "pesquisar os grupos de estoque");
+            return null;
+        }
+    }
 }

@@ -104,11 +104,12 @@ partial class FrmStockGroup
         this.btnSearch.ForeColor = System.Drawing.Color.White;
         this.btnSearch.Image = global::SIV.Properties.Resources.icons_pesquisar;
         this.btnSearch.ImageSize = new System.Drawing.Size(30, 30);
-        this.btnSearch.Location = new System.Drawing.Point(265, 41);
+        this.btnSearch.Location = new System.Drawing.Point(754, 40);
         this.btnSearch.Name = "btnSearch";
         this.btnSearch.ShadowDecoration.CustomizableEdges = customizableEdges2;
         this.btnSearch.Size = new System.Drawing.Size(25, 25);
         this.btnSearch.TabIndex = 29;
+        this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
         // 
         // labelRegisteredPaymants
         // 
@@ -118,7 +119,7 @@ partial class FrmStockGroup
         this.labelRegisteredPaymants.Name = "labelRegisteredPaymants";
         this.labelRegisteredPaymants.Size = new System.Drawing.Size(207, 36);
         this.labelRegisteredPaymants.TabIndex = 27;
-        this.labelRegisteredPaymants.Text = "Clientes Cadastrados";
+        this.labelRegisteredPaymants.Text = "Grupos Cadastrados";
         this.labelRegisteredPaymants.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // txtSearch
@@ -139,11 +140,12 @@ partial class FrmStockGroup
         this.txtSearch.Location = new System.Drawing.Point(3, 39);
         this.txtSearch.Name = "txtSearch";
         this.txtSearch.PasswordChar = '\0';
-        this.txtSearch.PlaceholderText = "Buscar...";
+        this.txtSearch.PlaceholderText = "Buscar por nome:";
         this.txtSearch.SelectedText = "";
         this.txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges4;
-        this.txtSearch.Size = new System.Drawing.Size(295, 29);
+        this.txtSearch.Size = new System.Drawing.Size(784, 29);
         this.txtSearch.TabIndex = 28;
+        this.txtSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearch_KeyPress);
         // 
         // gridData
         // 
@@ -205,10 +207,10 @@ partial class FrmStockGroup
         this.labelFlag.AutoSize = false;
         this.labelFlag.BackColor = System.Drawing.Color.Transparent;
         this.labelFlag.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.labelFlag.Location = new System.Drawing.Point(12, 92);
+        this.labelFlag.Location = new System.Drawing.Point(15, 92);
         this.labelFlag.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
         this.labelFlag.Name = "labelFlag";
-        this.labelFlag.Size = new System.Drawing.Size(124, 36);
+        this.labelFlag.Size = new System.Drawing.Size(106, 36);
         this.labelFlag.TabIndex = 137;
         this.labelFlag.Text = "Nome";
         this.labelFlag.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -227,7 +229,7 @@ partial class FrmStockGroup
         this.txtName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
         this.txtName.Font = new System.Drawing.Font("Segoe UI", 9F);
         this.txtName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-        this.txtName.Location = new System.Drawing.Point(142, 92);
+        this.txtName.Location = new System.Drawing.Point(127, 92);
         this.txtName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
         this.txtName.MaxLength = 255;
         this.txtName.Name = "txtName";
@@ -235,7 +237,7 @@ partial class FrmStockGroup
         this.txtName.PlaceholderText = "";
         this.txtName.SelectedText = "";
         this.txtName.ShadowDecoration.CustomizableEdges = customizableEdges8;
-        this.txtName.Size = new System.Drawing.Size(252, 36);
+        this.txtName.Size = new System.Drawing.Size(672, 36);
         this.txtName.TabIndex = 136;
         // 
         // btnCancel
@@ -251,7 +253,7 @@ partial class FrmStockGroup
         this.btnCancel.FillColor = System.Drawing.Color.Black;
         this.btnCancel.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.btnCancel.ForeColor = System.Drawing.Color.White;
-        this.btnCancel.Location = new System.Drawing.Point(124, 181);
+        this.btnCancel.Location = new System.Drawing.Point(127, 185);
         this.btnCancel.Name = "btnCancel";
         this.btnCancel.PressedColor = System.Drawing.Color.White;
         this.btnCancel.ShadowDecoration.CustomizableEdges = customizableEdges10;
@@ -273,7 +275,7 @@ partial class FrmStockGroup
         this.btnNew.FillColor = System.Drawing.Color.Black;
         this.btnNew.Font = new System.Drawing.Font("Century Gothic", 12F);
         this.btnNew.ForeColor = System.Drawing.Color.White;
-        this.btnNew.Location = new System.Drawing.Point(12, 181);
+        this.btnNew.Location = new System.Drawing.Point(15, 185);
         this.btnNew.Name = "btnNew";
         this.btnNew.PressedColor = System.Drawing.Color.White;
         this.btnNew.ShadowDecoration.CustomizableEdges = customizableEdges12;
@@ -295,7 +297,7 @@ partial class FrmStockGroup
         this.btnDelete.FillColor = System.Drawing.Color.Black;
         this.btnDelete.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.btnDelete.ForeColor = System.Drawing.Color.White;
-        this.btnDelete.Location = new System.Drawing.Point(460, 181);
+        this.btnDelete.Location = new System.Drawing.Point(463, 185);
         this.btnDelete.Name = "btnDelete";
         this.btnDelete.PressedColor = System.Drawing.Color.White;
         this.btnDelete.ShadowDecoration.CustomizableEdges = customizableEdges14;
@@ -317,7 +319,7 @@ partial class FrmStockGroup
         this.btnEdit.FillColor = System.Drawing.Color.Black;
         this.btnEdit.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.btnEdit.ForeColor = System.Drawing.Color.White;
-        this.btnEdit.Location = new System.Drawing.Point(348, 181);
+        this.btnEdit.Location = new System.Drawing.Point(351, 185);
         this.btnEdit.Name = "btnEdit";
         this.btnEdit.PressedColor = System.Drawing.Color.White;
         this.btnEdit.ShadowDecoration.CustomizableEdges = customizableEdges16;
@@ -339,7 +341,7 @@ partial class FrmStockGroup
         this.btnSave.FillColor = System.Drawing.Color.Black;
         this.btnSave.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.btnSave.ForeColor = System.Drawing.Color.White;
-        this.btnSave.Location = new System.Drawing.Point(236, 181);
+        this.btnSave.Location = new System.Drawing.Point(239, 185);
         this.btnSave.Name = "btnSave";
         this.btnSave.PressedColor = System.Drawing.Color.White;
         this.btnSave.ShadowDecoration.CustomizableEdges = customizableEdges18;
@@ -383,7 +385,8 @@ partial class FrmStockGroup
         this.MinimumSize = new System.Drawing.Size(814, 528);
         this.Name = "FrmStockGroup";
         this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
-        this.Text = "Cadatrar Estoque";
+        this.Text = "CADASTRAR GRUPO DE ESTOQUE";
+        this.TextAlign = MetroFramework.Forms.MetroFormTextAlign.Center;
         this.Load += new System.EventHandler(this.FrmStockGroup_Load);
         this.panelGrid.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();

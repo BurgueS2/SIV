@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using SIV.Core;
 using SIV.Helpers;
@@ -12,61 +13,43 @@ public partial class FrmStockGroup : MetroFramework.Forms.MetroForm
 {
     private string _selectedStockGroupId;
     
-    public FrmStockGroup()
-    {
-        InitializeComponent();
-    }
+    public FrmStockGroup() => InitializeComponent();
     
-    private void FrmStockGroup_Load(object sender, EventArgs e)
+    private void FrmStockGroup_Load(object sender, EventArgs e) => InitializeForm();
+    
+    private void btnNew_Click(object sender, EventArgs e) => PrepareForNewEntry();
+    
+    private void btnCancel_Click(object sender, EventArgs e) => ResetForm();
+    
+    private void btnSave_Click(object sender, EventArgs e) => SaveFormData();
+    
+    private void btnEdit_Click(object sender, EventArgs e) => UpdateFormData();
+    
+    private void btnDelete_Click(object sender, EventArgs e) => DeleteFormData();
+    
+    private void btnSearch_Click(object sender, EventArgs e) => SearchStockGroup();
+    
+    private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
     {
-        ConfigureUiControls(false);
-        LoadStockGroup();
-        btnNew.Enabled = true;
-        gridData.Columns[1].HeaderText = @"NOME";
-        gridData.Columns[2].HeaderText = @"DATA DE CADASTRO";
+        if (e.KeyChar == (char)Keys.Enter) SearchStockGroup();
     }
     
     private void gridData_DoubleClick(object sender, EventArgs e)
     {
-        if (gridData.SelectedRows.Count <= 0) return; // Verifica se há linhas selecionadas
+        if (gridData.SelectedRows.Count <= 0) return;
         
         ConfigureUiControls(true);
-        btnSave.Enabled = false;
-        
-        // Preenche o campo de texto com o nome do cargo selecionado
-        _selectedStockGroupId = gridData.SelectedRows[0].Cells[0].Value.ToString(); // Armazena o ID do grupo de estoque selecionado
-        txtName.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
+        PopulateFormFields();
+        btnSave.Enabled = false; // Desabilita o botão de salvar, pois o usuário não está criando um novo registro
     }
 
-    private void btnNew_Click(object sender, EventArgs e)
-    {
-        ConfigureUiControls(true);
-        txtName.Focus();
-        btnEdit.Enabled = false;
-        btnDelete.Enabled = false;
-        gridData.Enabled = false;
-    }
-    
-    private void btnCancel_Click(object sender, EventArgs e)
+    private async void InitializeForm()
     {
         ConfigureUiControls(false);
-        txtName.Clear();
-        gridData.Enabled = true;
-    }
-
-    private void btnSave_Click(object sender, EventArgs e)
-    {
-        SaveFormData();
-    }
-
-    private void btnEdit_Click(object sender, EventArgs e)
-    {
-        UpdateFormData();
-    }
-
-    private void btnDelete_Click(object sender, EventArgs e)
-    {
-        DeleteFormData();
+        await LoadStockGroupAsync();
+        btnNew.Enabled = true;
+        gridData.Columns[1].HeaderText = @"NOME";
+        gridData.Columns[2].HeaderText = @"DATA DE CADASTRO";
     }
     
     private void SaveFormData()
@@ -114,12 +97,6 @@ public partial class FrmStockGroup : MetroFramework.Forms.MetroForm
     {
         try
         {
-            if (string.IsNullOrWhiteSpace(_selectedStockGroupId))
-            {
-                MessageHelper.ShowMessageJob("excluir");
-                return;
-            }
-
             if (!MessageHelper.ConfirmDeletion()) return;
             
             StockGroupRepository.DeleteStockGroup(_selectedStockGroupId);
@@ -133,17 +110,30 @@ public partial class FrmStockGroup : MetroFramework.Forms.MetroForm
         }
     }
     
-    private void LoadStockGroup()
+    private async Task LoadStockGroupAsync()
     {
         try
         {
-            gridData.DataSource = StockGroupRepository.GetAllStockGroup();
+            gridData.DataSource = await Task.Run(StockGroupRepository.GetAllStockGroup);
             gridData.Columns[0].Visible = false;
         }
         catch (Exception ex)
         {
             Logger.LogException(ex);
             MessageHelper.ShowErrorMessage(ex, "carregar os grupos de estoque");
+        }
+    }
+    
+    private void SearchStockGroup()
+    {
+        try
+        {
+            gridData.DataSource = StockGroupRepository.SearchByName(txtSearch.Text);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.ShowErrorMessage(ex, "pesquisar os grupos de estoque");
         }
     }
     
@@ -157,12 +147,33 @@ public partial class FrmStockGroup : MetroFramework.Forms.MetroForm
         txtName.Enabled = enable;
         gridData.Enabled = !enable;
     }
+
+    private void ResetForm()
+    {
+        ConfigureUiControls(false);
+        txtName.Clear();
+    }
+
+    private void PrepareForNewEntry()
+    {
+        ConfigureUiControls(true);
+        txtName.Focus();
+        btnEdit.Enabled = false;
+        btnDelete.Enabled = false;
+        gridData.Enabled = false;
+    }
     
-    private void UpdateUiAfterSaveOrUpdate()
+    private async void UpdateUiAfterSaveOrUpdate()
     {
         txtName.Clear();
-        LoadStockGroup();
+        await LoadStockGroupAsync();
         ConfigureUiControls(false);
-        gridData.Enabled = true;
+    }
+
+    private void PopulateFormFields()
+    {
+        // Preenche o campo de texto com o nome do cargo selecionado
+        _selectedStockGroupId = gridData.SelectedRows[0].Cells[0].Value.ToString(); // Armazena o ID do grupo de estoque selecionado
+        txtName.Text = gridData.CurrentRow?.Cells[1].Value.ToString();
     }
 }
