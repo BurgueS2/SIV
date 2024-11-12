@@ -14,44 +14,22 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
     private readonly int _tableId;
     private readonly string _userName; // Adiciona a propriedade _UserName para armazenar o nome do usuário logado
     private Table _table; // Instância da mesa
-    private Timer _timer; // Adiciona a propriedade _timer para controlar o tempo de inatividade
-
+    
     public FrmTableSales(int tableId)
     {
         InitializeComponent();
         _tableId = tableId;
         _userName = SessionManager.CurrentUser.Name;
         InitializeForm();
-        InitializeTimer();
     }
     
-    private void InitializeForm()
-    {
-        txtSale.Text = @$"{_tableId}";
-        _table = TableRepository.LoadTable(_tableId);
-        LoadTableProducts();
-        txtSearchUser.Text = _userName; // Preenche o campo de texto com o nome do usuário logado
-        txtClient.Text = @"Passante";
-        labelDateStatus.Text = _table.SaveDate?.ToString("dd/MM/yyyy");
-        labelTimeStatus.Text = _table.SaveTime.ToString();
-    }
+    private void btnExit_Click(object sender, EventArgs e) => Close();
     
-    private void InitializeTimer()
-    {
-        _timer = new Timer();
-        _timer.Interval = 1000; // Atualiza a cada segundo
-        _timer.Tick += Timer_Tick;
-        _timer.Start();
-    }
+    private void btnCancelProduct_Click(object sender, EventArgs e) => HelperToCancel();
     
-    private void Timer_Tick(object sender, EventArgs e)
-    {
-        if (_table.SaveTime.HasValue)
-        {
-            var duration = DateTime.Now - _table.SaveTime.Value;
-            labelStayHours.Text = duration.ToString(@"hh\:mm\:ss");
-        }
-    }
+    private void btnSearchProduct_Click(object sender, EventArgs e) => SearchProduct();
+    
+    private void btnTransferProducts_Click(object sender, EventArgs e) => OpenForm();
     
     private void btnOk_Click(object sender, EventArgs e)
     {
@@ -65,39 +43,8 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
         }
     }
     
-    /*private void btnExit_Click(object sender, EventArgs e)
-    {
-        Close();
-    }*/
-
-    /*private void btnCancelProduct_Click(object sender, EventArgs e)
-    {
-        if (!MessageHelper.ConfirmDeletion()) return;
-
-        if (gridData.SelectedRows.Count > 0)
-        {
-            var selectedRow = gridData.SelectedRows[0];
-            if (int.TryParse(selectedRow.Cells["EntryId"].Value.ToString(), out var productId))
-            {
-                TableRepository.RemoveProductFromTable(_tableId, productId);
-                LoadTableProducts();
-            }
-            else
-            {
-                MessageBox.Show(@"Invalid product ID.");
-            }
-        }
-        else
-        {
-            MessageHelper.ShowProductNotFound();
-        }
-    }*/
+    private void txtProduct_TextChanged(object sender, EventArgs e) => UpdateProductNameLabel(txtProduct.Text);
     
-    private void btnSearchProduct_Click(object sender, EventArgs e)
-    {
-        SearchProduct();
-    }
-
     private void txtProduct_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.KeyCode != Keys.Enter) return;
@@ -106,7 +53,7 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
         e.Handled = true;
         e.SuppressKeyPress = true;
     }
-
+    
     private void numericAmount_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.KeyCode != Keys.Enter) return;
@@ -115,18 +62,23 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
         e.Handled = true;
         e.SuppressKeyPress = true;
     }
-
-    private void txtProduct_TextChanged(object sender, EventArgs e)
+    
+    private void InitializeForm()
     {
-        UpdateProductNameLabel(txtProduct.Text);
+        txtSale.Text = @$"{_tableId}";
+        _table = TableRepository.LoadTable(_tableId);
+        LoadTableProducts();
+        txtSearchUser.Text = _userName; // Preenche o campo de texto com o nome do usuário logado
+        txtClient.Text = @"Passante";
+        labelDateStatus.Text = _table.SaveDate?.ToString("dd/MM/yyyy");
+        labelTimeStatus.Text = _table.SaveTime.ToString();
     }
-
+    
     private void LoadTableProducts()
     {
         try
         {
-            var tableProducts = TableRepository.GetTableProducts(_tableId);
-            gridData.DataSource = tableProducts;
+            gridData.DataSource = TableRepository.GetTableProducts(_tableId);
             FormatGridData();
             UpdateTotalValueLabel();
         }
@@ -135,12 +87,8 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
             Logger.LogException(ex);
             MessageHelper.HandleException(ex, "carregar produtos da mesa");
         }
-        finally
-        {
-            ConnectionManager.CloseConnection();
-        }
     }
-
+    
     private void FormatGridData()
     {
         gridData.Columns[0].Visible = false;
@@ -157,7 +105,7 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
             }
         }
     }
-
+    
     private void SaveProductToTable()
     {
         var productName = txtProduct.Text;
@@ -180,25 +128,44 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
                 Logger.LogException(ex);
                 MessageHelper.HandleException(ex, "adicionar produto");
             }
-            finally
-            {
-                ConnectionManager.CloseConnection();
-            }
         }
         else
         {
             MessageHelper.ShowInvalidProductOrQuantity();
         }
     }
+    
+    private void HelperToCancel()
+    {
+        if (!MessageHelper.ConfirmDeletion()) return;
 
+        if (gridData.SelectedRows.Count > 0)
+        {
+            var selectedRow = gridData.SelectedRows[0];
+            
+            if (int.TryParse(selectedRow.Cells["EntryId"].Value.ToString(), out var productId))
+            {
+                TableRepository.RemoveProductFromTable(_tableId, productId);
+                LoadTableProducts();
+            }
+            else
+            {
+                MessageBox.Show(@"Erro ao cancelar o produto.");
+            }
+        }
+        else
+        {
+            MessageHelper.ShowProductNotFound();
+        }
+    }
+    
     private void HandleProductSearch()
     {
-        var productName = txtProduct.Text;
-        var product = ProductRepository.GetProductByName(productName);
+        var product = ProductRepository.GetProductByName(txtProduct.Text);
 
         if (product != null)
         {
-            UpdateProductNameLabel(productName);
+            UpdateProductNameLabel(txtProduct.Text);
             txtCost.Text = product.ResalePrice.ToString("C");
             numericAmount.Value = 1;
             numericAmount.Focus();
@@ -208,7 +175,7 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
             MessageHelper.ShowProductNotFound();
         }
     }
-
+    
     private void UpdateProductNameLabel(string partialProductName)
     {
         try
@@ -232,12 +199,8 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
             labelNameProduct.Text = @$"Não encontrado: {ex.Message}";
             labelNameProduct.Visible = true;
         }
-        finally
-        {
-            ConnectionManager.CloseConnection();
-        }
     }
-
+    
     private void UpdateTotalValueLabel()
     {
         decimal totalValue = 0;
@@ -252,12 +215,7 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
         
         labelValue.Text = totalValue.ToString("C");
     }
-
-    private static bool IsValidProductInput(string productName, decimal amount)
-    {
-        return !string.IsNullOrWhiteSpace(productName) && amount > 0; // Verifica se o nome do produto e a quantidade são válidos
-    }
-
+    
     private void ResetProductInputFields()
     {
         txtProduct.Clear();
@@ -266,11 +224,16 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
         txtProduct.Focus();
     }
     
+    private static bool IsValidProductInput(string productName, decimal amount)
+    {
+        return !string.IsNullOrWhiteSpace(productName) && amount > 0; // Verifica se o nome do produto e a quantidade são válidos
+    }
+    
     private bool IsProductInputValid()
     {
         return !string.IsNullOrWhiteSpace(txtProduct.Text) && numericAmount.Value > 0; // Verifica se o nome do produto e a quantidade são válidos
     }
-
+    
     private void SearchProduct()
     {
         var frmProductData = new FrmProductData();
@@ -281,11 +244,18 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
         txtCost.Text = frmProductData.CostPrice; // Preenche o campo de texto com o preço do produto selecionado
         numericAmount.Value = 1;
     }
-
-    /*private void btnTransferProducts_Click(object sender, EventArgs e)
+    
+    private void OpenForm()
     {
         var frmTransferProducts = new FrmTableTransfer(_tableId);
         frmTransferProducts.ShowDialog();
         Close();
-    }*/
+    }
+    
+    private void timer_Tick(object sender, EventArgs e)
+    {
+        if (!_table.SaveTime.HasValue) return;
+        var duration = DateTime.Now - _table.SaveTime.Value;
+        labelStayHours.Text = duration.ToString("T");
+    }
 }
