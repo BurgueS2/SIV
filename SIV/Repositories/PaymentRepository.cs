@@ -146,8 +146,8 @@ public static class PaymentRepository
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand(
-                "INSERT INTO PartialPayments (TableId, Amount)" + 
-                "VALUES (@TableId, @Amount)", connection);
+                "INSERT INTO PartialPayments (TableId, Amount, Date)" + 
+                "VALUES (@TableId, @Amount, curDate())", connection);
             
             cmd.Parameters.AddWithValue("@TableId", tableId);
             cmd.Parameters.AddWithValue("@Amount", value);

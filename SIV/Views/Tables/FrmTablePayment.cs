@@ -27,7 +27,7 @@ public partial class FrmTablePayment : MetroFramework.Forms.MetroForm
     private void gridDataPayment_DoubleClick(object sender, EventArgs e)
     {
         var selectedPaymentMethod = gridDataPayment.SelectedRows[0];
-        var paymentType = selectedPaymentMethod.Cells["type"].Value.ToString();
+        var paymentType = selectedPaymentMethod.Cells["PaymentType"].Value.ToString();
         txtCost.Text = _remainingCost.ToString("F2");
     }
 
@@ -82,7 +82,7 @@ public partial class FrmTablePayment : MetroFramework.Forms.MetroForm
 
         foreach (DataGridViewRow row in gridData.Rows)
         {
-            if (string.IsNullOrWhiteSpace(row.Cells["product_name"].Value?.ToString()))
+            if (string.IsNullOrWhiteSpace(row.Cells["ProductName"].Value?.ToString()))
             {
                 row.Visible = false;
             }
@@ -106,9 +106,9 @@ public partial class FrmTablePayment : MetroFramework.Forms.MetroForm
 
         foreach (DataGridViewRow row in gridData.Rows)
         {
-            if (row.Cells["product_price"].Value != null)
+            if (row.Cells["ProductPrice"].Value != null)
             {
-                _totalValue += Convert.ToDecimal(row.Cells["product_price"]. Value) * Convert.ToDecimal(row.Cells["amount"].Value);
+                _totalValue += Convert.ToDecimal(row.Cells["ProductPrice"]. Value) * Convert.ToDecimal(row.Cells["Amount"].Value);
             }
         }
         
@@ -152,10 +152,13 @@ public partial class FrmTablePayment : MetroFramework.Forms.MetroForm
 
         if (valuePaid == _remainingCost)
         {
+            TableRepository.UpdateTableState(_tableId, "Disponível", "Khaki");
             PaymentRepository.DeleteParcialPayment(_tableId);
             TableRepository.DeleteTable(_tableId);
-            TableRepository.UpdateTableState(_tableId, "Livre", "White");
             MessageBox.Show(@"Pagamento efetuado com sucesso.");
+            // Atualiza o formulário pai
+            var parentForm = Application.OpenForms.OfType<FrmTables>().FirstOrDefault();
+            parentForm?.ReloadTables();
             Close();
         }
 

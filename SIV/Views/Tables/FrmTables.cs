@@ -4,8 +4,8 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
+using SIV.Models;
 using SIV.Repositories;
-using SIV.teste;
 
 namespace SIV.Views.Tables;
 
@@ -85,7 +85,7 @@ public partial class FrmTables : Form
                 btn.FillColor = Color.LightCoral;
                 table.Color = "LightCoral";
                 break;
-            case "Normal":
+            case "Disponível":
                 btn.FillColor = SystemColors.Control;
                 table.Color = "Control";
                 break;
@@ -115,5 +115,12 @@ public partial class FrmTables : Form
         typeof(Control).InvokeMember("DoubleBuffered",
             System.Reflection.BindingFlags.SetProperty | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic,
             null, control, [true]);
+    }
+    
+    public void ReloadTables()
+    {
+        flowLayoutPanelTables.Controls.Clear();
+        _tables = LoadTablesFromRepository();
+        CreateTableButtons();
     }
 }

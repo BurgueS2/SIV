@@ -3,7 +3,7 @@ using System.Data;
 using MySql.Data.MySqlClient;
 using SIV.Core;
 using SIV.Helpers;
-using SIV.teste;
+using SIV.Models;
 
 namespace SIV.Repositories;
 
@@ -20,7 +20,7 @@ public static class TableRepository
         try
         {
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("CREATE TABLE IF NOT EXISTS RestaurantTables (EntryId INT PRIMARY KEY, TableState TEXT)", connection);
+            using var cmd = new MySqlCommand("CREATE TABLE IF NOT EXISTS RestaurantTables (TableId INT PRIMARY KEY, TableState TEXT)", connection);
             
             cmd.ExecuteNonQuery();
         }
@@ -67,7 +67,7 @@ public static class TableRepository
         {
             using (var connection = ConnectionManager.GetConnection())
             {
-                using (var cmd = new MySqlCommand("SELECT TableState, TableColor, ProductName, ProductPrice, SaveDate, SaveTime FROM RestaurantTables WHERE EntryId = @Id", connection))
+                using (var cmd = new MySqlCommand("SELECT TableState, TableColor, ProductName, ProductPrice, SaveDate, SaveTime FROM RestaurantTables WHERE TableId = @Id", connection))
                 {
                     cmd.Parameters.AddWithValue("@Id", id);
 
@@ -77,8 +77,8 @@ public static class TableRepository
 
                         var table = new Table(id)
                         {
-                            State = reader["State"].ToString(),
-                            Color = reader["Color"].ToString(),
+                            State = reader["TableState"].ToString(),
+                            Color = reader["TableColor"].ToString(),
                             SaveDate = reader["SaveDate"] != DBNull.Value ? (DateTime?)reader["SaveDate"] : null,
                             SaveTime = reader["SaveTime"] != DBNull.Value ? (TimeSpan?)reader["SaveTime"] : null
                         };
@@ -109,7 +109,7 @@ public static class TableRepository
         try
         {
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("DELETE FROM RestaurantTables WHERE EntryId = @Id", connection);
+            using var cmd = new MySqlCommand("DELETE FROM RestaurantTables WHERE TableId = @Id", connection);
             
             cmd.Parameters.AddWithValue("@Id", id);
             cmd.ExecuteNonQuery();
@@ -128,19 +128,22 @@ public static class TableRepository
     /// <param name="productName">O nome do produto.</param>
     /// <param name="productPrice">O preço do produto.</param>
     /// <param name="amount">A quantidade do produto.</param>
-    public static void AddProductToTable(int tableId, string productName, decimal productPrice, decimal amount)
+    public static void AddProductToTable(int tableId, string productName, decimal productPrice, decimal amount, string user)
     {
         try
         {
             using var connection = ConnectionManager.GetConnection();
             using var cmd = new MySqlCommand(
-                "INSERT INTO RestaurantTables (EntryId, ProductName, ProductPrice, Amount)" + 
-                "VALUES (@TableId, @ProductName, @ProductPrice, @Amount)", connection);
+                "INSERT INTO RestaurantTables (TableId, ProductName, ProductPrice, Amount, User, SaveDate, SaveTime)" + 
+                "VALUES (@TableId, @ProductName, @ProductPrice, @Amount, @User, @SaveDate, @SaveTime)", connection);
             
             cmd.Parameters.AddWithValue("@TableId", tableId);
             cmd.Parameters.AddWithValue("@ProductName", productName);
             cmd.Parameters.AddWithValue("@ProductPrice", productPrice);
             cmd.Parameters.AddWithValue("@Amount", amount);
+            cmd.Parameters.AddWithValue("@User", user);
+            cmd.Parameters.AddWithValue("@SaveDate", DateTime.Now.Date);
+            cmd.Parameters.AddWithValue("@SaveTime", DateTime.Now.TimeOfDay);
             cmd.ExecuteNonQuery();
         }
         catch (Exception ex)
@@ -149,7 +152,31 @@ public static class TableRepository
             MessageHelper.HandleException(ex, "adicionar produto à mesa");
         }
     }
-    
+
+    /// <summary>
+    /// Remove um produto de uma mesa no banco de dados.
+    /// </summary>
+    /// <param name="tableId">O ID da mesa.</param>
+    /// <param name="productId">O ID do produto a ser removido.</param>
+    public static void RemoveProductFromTable(int tableId, int productId)
+    {
+        try
+        {
+            using var connection = ConnectionManager.GetConnection();
+            using var cmd = new MySqlCommand(
+                "DELETE FROM RestaurantTables WHERE TableId = @TableId AND EntryId = @ProductId", connection);
+
+            cmd.Parameters.AddWithValue("@TableId", tableId);
+            cmd.Parameters.AddWithValue("@ProductId", productId);
+            cmd.ExecuteNonQuery();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "remover produto da mesa");
+        }
+    }
+
     /// <summary>
     /// Obtém os produtos de uma mesa específica do banco de dados.
     /// </summary>
@@ -162,7 +189,7 @@ public static class TableRepository
             var dt = new DataTable();
 
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("SELECT ProductName, ProductPrice, Amount FROM RestaurantTables WHERE EntryId = @TableId", connection);
+            using var cmd = new MySqlCommand("SELECT EntryId, ProductName, ProductPrice, Amount, User FROM RestaurantTables WHERE TableId = @TableId", connection);
 
             cmd.Parameters.AddWithValue("@TableId", tableId);
             
@@ -179,6 +206,30 @@ public static class TableRepository
     }
     
     /// <summary>
+    /// Transfere todos os produtos de uma mesa para outra no banco de dados.
+    /// </summary>
+    /// <param name="sourceTableId">O ID da mesa de origem.</param>
+    /// <param name="targetTableId">O ID da mesa de destino.</param>
+    public static void TransferProductsToTable(int sourceTableId, int targetTableId)
+    {
+        try
+        {
+            using var connection = ConnectionManager.GetConnection();
+            using var cmd = new MySqlCommand(
+                "UPDATE RestaurantTables SET TableId = @TargetTableId WHERE TableId = @SourceTableId", connection);
+
+            cmd.Parameters.AddWithValue("@SourceTableId", sourceTableId);
+            cmd.Parameters.AddWithValue("@TargetTableId", targetTableId);
+            cmd.ExecuteNonQuery();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "transferir produtos para outra mesa");
+        }
+    }
+    
+    /// <summary>
     /// Atualiza o estado e a cor de uma mesa no banco de dados.
     /// </summary>
     /// <param name="tableId">O ID da mesa.</param>
@@ -189,7 +240,7 @@ public static class TableRepository
         try
         {
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("UPDATE RestaurantTables SET TableState = @State, TableColor = @Color WHERE EntryId = @Id", connection);
+            using var cmd = new MySqlCommand("UPDATE RestaurantTables SET TableState = @State, TableColor = @Color WHERE TableId = @Id", connection);
             
             cmd.Parameters.AddWithValue("@Id", tableId);
             cmd.Parameters.AddWithValue("@State", state);

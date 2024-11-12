@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using SIV.Models;
 using SIV.Repositories;
-using SIV.teste;
 
 namespace SIV.Views.Tables;
 
@@ -65,13 +65,14 @@ public partial class FrmShowTableOptions : MetroFramework.Forms.MetroForm
     
     private void HandleClosedTable()
     {
-        btnOpenTable.Text = @"Pagar";
+        //btnOpenTable.Text = @"Pagar";
 
         using var frmTableSales = new FrmTablePayment(_tableId);
         if (frmTableSales.ShowDialog() != DialogResult.OK) return; // Se o pagamento não for confirmado, retorne
             
-        TableState = "Normal";
+        TableState = "Disponível";
         DialogResult = DialogResult.OK;
+        frmTableSales.ShowDialog();
         Close();
     }
     

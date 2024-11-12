@@ -256,6 +256,12 @@
         <Compile Include="Views\Tables\Sales\FrmSales.Designer.cs">
           <DependentUpon>FrmSales.cs</DependentUpon>
         </Compile>
+        <Compile Include="Views\Tables\TableOrItemTransfer\FrmTableTransfer.cs">
+          <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="Views\Tables\TableOrItemTransfer\FrmTableTransfer.Designer.cs">
+          <DependentUpon>FrmTableTransfer.cs</DependentUpon>
+        </Compile>
         <Compile Include="Views\Users\FrmUsers.cs">
           <SubType>Form</SubType>
         </Compile>
@@ -319,6 +325,9 @@
         <EmbeddedResource Include="Views\Tables\Sales\FrmSales.resx">
           <DependentUpon>FrmSales.cs</DependentUpon>
         </EmbeddedResource>
+        <EmbeddedResource Include="Views\Tables\TableOrItemTransfer\FrmTableTransfer.resx">
+          <DependentUpon>FrmTableTransfer.cs</DependentUpon>
+        </EmbeddedResource>
         <EmbeddedResource Include="Views\Users\FrmUsers.resx">
           <DependentUpon>FrmUsers.cs</DependentUpon>
         </EmbeddedResource>
@@ -340,7 +349,9 @@
     <ItemGroup>
       <Content Include="Resources\icons_abrir_painel.png" />
       <Content Include="Resources\icons_adicionar.png" />
+      <Content Include="Resources\icons_backspace.png" />
       <Content Include="Resources\icons_caixa.png" />
+      <Content Include="Resources\icons_cancelar.png" />
       <Content Include="Resources\icons_cliente.png" />
       <Content Include="Resources\icons_comanda.png" />
       <Content Include="Resources\icons_configuração.png" />

@@ -2,22 +2,27 @@
 using System.Windows.Forms;
 using SIV.Core;
 using SIV.Helpers;
+using SIV.Models;
 using SIV.Repositories;
-using SIV.teste;
 using SIV.Views.Tables.ProductData;
+using SIV.Views.Tables.TableOrItemTransfer;
 
 namespace SIV.Views.Tables;
 
 public partial class FrmTableSales : MetroFramework.Forms.MetroForm
 {
     private readonly int _tableId;
+    private readonly string _userName; // Adiciona a propriedade _UserName para armazenar o nome do usuário logado
     private Table _table; // Instância da mesa
+    private Timer _timer; // Adiciona a propriedade _timer para controlar o tempo de inatividade
 
     public FrmTableSales(int tableId)
     {
         InitializeComponent();
         _tableId = tableId;
+        _userName = SessionManager.CurrentUser.Name;
         InitializeForm();
+        InitializeTimer();
     }
     
     private void InitializeForm()
@@ -25,8 +30,29 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
         txtSale.Text = @$"{_tableId}";
         _table = TableRepository.LoadTable(_tableId);
         LoadTableProducts();
+        txtSearchUser.Text = _userName; // Preenche o campo de texto com o nome do usuário logado
+        txtClient.Text = @"Passante";
+        labelDateStatus.Text = _table.SaveDate?.ToString("dd/MM/yyyy");
+        labelTimeStatus.Text = _table.SaveTime.ToString();
     }
-
+    
+    private void InitializeTimer()
+    {
+        _timer = new Timer();
+        _timer.Interval = 1000; // Atualiza a cada segundo
+        _timer.Tick += Timer_Tick;
+        _timer.Start();
+    }
+    
+    private void Timer_Tick(object sender, EventArgs e)
+    {
+        if (_table.SaveTime.HasValue)
+        {
+            var duration = DateTime.Now - _table.SaveTime.Value;
+            labelStayHours.Text = duration.ToString(@"hh\:mm\:ss");
+        }
+    }
+    
     private void btnOk_Click(object sender, EventArgs e)
     {
         if (IsProductInputValid())
@@ -38,6 +64,34 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
             Close();
         }
     }
+    
+    /*private void btnExit_Click(object sender, EventArgs e)
+    {
+        Close();
+    }*/
+
+    /*private void btnCancelProduct_Click(object sender, EventArgs e)
+    {
+        if (!MessageHelper.ConfirmDeletion()) return;
+
+        if (gridData.SelectedRows.Count > 0)
+        {
+            var selectedRow = gridData.SelectedRows[0];
+            if (int.TryParse(selectedRow.Cells["EntryId"].Value.ToString(), out var productId))
+            {
+                TableRepository.RemoveProductFromTable(_tableId, productId);
+                LoadTableProducts();
+            }
+            else
+            {
+                MessageBox.Show(@"Invalid product ID.");
+            }
+        }
+        else
+        {
+            MessageHelper.ShowProductNotFound();
+        }
+    }*/
     
     private void btnSearchProduct_Click(object sender, EventArgs e)
     {
@@ -89,13 +143,15 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
 
     private void FormatGridData()
     {
-        gridData.Columns[0].HeaderText = @"Nome do Produto";
-        gridData.Columns[1].HeaderText = @"Preço do Produto";
-        gridData.Columns[2].HeaderText = @"Quantidade";
+        gridData.Columns[0].Visible = false;
+        gridData.Columns[1].HeaderText = @"Produto";
+        gridData.Columns[2].HeaderText = @"Preço";
+        gridData.Columns[3].HeaderText = @"Qtd.";
+        gridData.Columns[4].HeaderText = @"Garçom";
 
         foreach (DataGridViewRow row in gridData.Rows)
         {
-            if (string.IsNullOrWhiteSpace(row.Cells["product_name"].Value?.ToString()))
+            if (string.IsNullOrWhiteSpace(row.Cells["ProductName"].Value?.ToString()))
             {
                 row.Visible = false;
             }
@@ -114,7 +170,7 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
                 var product = ProductRepository.GetProductByName(productName);
                 if (product == null) return;
 
-                TableRepository.AddProductToTable(_tableId, product.Name, product.ResalePrice, amount);
+                TableRepository.AddProductToTable(_tableId, product.Name, product.ResalePrice, amount, _userName);
                 TableRepository.UpdateTableState(_tableId, "Ocupada", "Khaki");
                 LoadTableProducts();
                 ResetProductInputFields();
@@ -188,9 +244,9 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
 
         foreach (DataGridViewRow row in gridData.Rows)
         {
-            if (row.Cells["product_price"].Value != null)
+            if (row.Cells["ProductPrice"].Value != null)
             {
-                totalValue += Convert.ToDecimal(row.Cells["product_price"]. Value) * Convert.ToDecimal(row.Cells["amount"].Value);
+                totalValue += Convert.ToDecimal(row.Cells["ProductPrice"]. Value) * Convert.ToDecimal(row.Cells["Amount"].Value);
             }
         }
         
@@ -214,15 +270,22 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
     {
         return !string.IsNullOrWhiteSpace(txtProduct.Text) && numericAmount.Value > 0; // Verifica se o nome do produto e a quantidade são válidos
     }
-    
+
     private void SearchProduct()
     {
         var frmProductData = new FrmProductData();
 
         if (frmProductData.ShowDialog() != DialogResult.OK) return;
-        
+
         txtProduct.Text = frmProductData.SelectedProduct; // Preenche o campo de texto com o nome do produto selecionado
         txtCost.Text = frmProductData.CostPrice; // Preenche o campo de texto com o preço do produto selecionado
         numericAmount.Value = 1;
     }
+
+    /*private void btnTransferProducts_Click(object sender, EventArgs e)
+    {
+        var frmTransferProducts = new FrmTableTransfer(_tableId);
+        frmTransferProducts.ShowDialog();
+        Close();
+    }*/
 }

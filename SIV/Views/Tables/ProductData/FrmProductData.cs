@@ -27,8 +27,8 @@ public partial class FrmProductData : MetroFramework.Forms.MetroForm
     {
         if (gridData.CurrentRow == null) return;
         
-        SelectedProduct = gridData.CurrentRow.Cells["name"].Value.ToString();
-        CostPrice = gridData.CurrentRow.Cells["resale_price"].Value.ToString();
+        SelectedProduct = gridData.CurrentRow.Cells["Name"].Value.ToString();
+        CostPrice = gridData.CurrentRow.Cells["ResalePrice"].Value.ToString();
         DialogResult = DialogResult.OK;
         Close();
     }

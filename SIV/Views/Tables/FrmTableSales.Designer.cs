@@ -778,7 +778,7 @@ partial class FrmTableSales
         this.txtSearchUser.PasswordChar = '\0';
         this.txtSearchUser.PlaceholderText = "Buscar por Garçom...";
         this.txtSearchUser.SelectedText = "";
-        this.txtSearchUser.ShadowDecoration.CustomizableEdges = customizableEdges42;
+        this.txtSearchUser.ShadowDecoration.CustomizableEdges = customizableEdges48;
         this.txtSearchUser.Size = new System.Drawing.Size(371, 36);
         this.txtSearchUser.TabIndex = 32;
         // 

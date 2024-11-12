@@ -115,7 +115,7 @@ public static class ProductRepository
         try
         {
             using var connection = ConnectionManager.GetConnection();
-            using var cmd = new MySqlCommand("SELECT name, resale_price FROM Products WHERE Name = @Name", connection);
+            using var cmd = new MySqlCommand("SELECT name, ResalePrice FROM Products WHERE Name = @Name", connection);
             
             cmd.Parameters.AddWithValue("@Name", name);
 

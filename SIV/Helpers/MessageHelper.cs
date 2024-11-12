@@ -160,4 +160,26 @@ public class MessageHelper
     {
         MessageBox.Show(@"Você não tem permissão para acessar este recurso.", @"ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
     }
+    
+    public static void TableStatusClosedMessage(int tableId)
+    {
+        MessageBox.Show(@$"A mesa {tableId} está fechada. Por favor, abra a mesa antes de realizar uma transferência.", @"ATENÇÃO" ,MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    }
+    
+    public static void TableStatusMessage(int tableId, string state)
+    {
+        MessageBox.Show(@$"A mesa {tableId} está {state}.");
+    }
+    
+    public static void TableTransferSuccessMessage()
+    {
+        MessageBox.Show(@"Mesa transferida com sucesso.", @"SUCESSO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+    }
+    
+    public static void TableTransferErrorMessage()
+    {
+        MessageBox.Show(@"Erro ao transferir a mesa;", @"ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    }
+    
+    
 }
