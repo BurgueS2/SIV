@@ -103,15 +103,15 @@ partial class FrmSales
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges62 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges63 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         this.panelStatusv = new Guna.UI2.WinForms.Guna2Panel();
+        this.labelTimeStatusBar = new System.Windows.Forms.Label();
+        this.label1 = new System.Windows.Forms.Label();
         this.guna2Separator2 = new Guna.UI2.WinForms.Guna2Separator();
-        this.btnCancelProduct = new Guna.UI2.WinForms.Guna2Button();
         this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
         this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
-        this.label2 = new System.Windows.Forms.Label();
-        this.label1 = new System.Windows.Forms.Label();
-        this.labelTimeStatusBar = new System.Windows.Forms.Label();
+        this.labelUser = new System.Windows.Forms.Label();
         this.labelDateStatusBar = new System.Windows.Forms.Label();
         this.label5 = new System.Windows.Forms.Label();
+        this.btnCancelProduct = new Guna.UI2.WinForms.Guna2Button();
         this.btnItemRelease = new Guna.UI2.WinForms.Guna2Button();
         this.btnTableTransfer = new Guna.UI2.WinForms.Guna2Button();
         this.btnItemTransfer = new Guna.UI2.WinForms.Guna2Button();
@@ -149,13 +149,13 @@ partial class FrmSales
         this.btnOk = new Guna.UI2.WinForms.Guna2Button();
         this.txtProduct = new Guna.UI2.WinForms.Guna2TextBox();
         this.labelProduct = new Guna.UI2.WinForms.Guna2HtmlLabel();
+        this.labelAmount = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.btn1 = new Guna.UI2.WinForms.Guna2Button();
+        this.txtCost = new Guna.UI2.WinForms.Guna2TextBox();
         this.btn9 = new Guna.UI2.WinForms.Guna2Button();
         this.labelCost = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.btnComma = new Guna.UI2.WinForms.Guna2Button();
-        this.txtCost = new Guna.UI2.WinForms.Guna2TextBox();
         this.btn8 = new Guna.UI2.WinForms.Guna2Button();
-        this.labelAmount = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.btn2 = new Guna.UI2.WinForms.Guna2Button();
         this.btn4 = new Guna.UI2.WinForms.Guna2Button();
         this.btn0 = new Guna.UI2.WinForms.Guna2Button();
@@ -177,15 +177,15 @@ partial class FrmSales
         // panelStatusv
         // 
         this.panelStatusv.BackColor = System.Drawing.Color.Transparent;
+        this.panelStatusv.Controls.Add(this.labelTimeStatusBar);
+        this.panelStatusv.Controls.Add(this.label1);
         this.panelStatusv.Controls.Add(this.guna2Separator2);
-        this.panelStatusv.Controls.Add(this.btnCancelProduct);
         this.panelStatusv.Controls.Add(this.guna2CirclePictureBox1);
         this.panelStatusv.Controls.Add(this.guna2Separator1);
-        this.panelStatusv.Controls.Add(this.label2);
-        this.panelStatusv.Controls.Add(this.label1);
-        this.panelStatusv.Controls.Add(this.labelTimeStatusBar);
+        this.panelStatusv.Controls.Add(this.labelUser);
         this.panelStatusv.Controls.Add(this.labelDateStatusBar);
         this.panelStatusv.Controls.Add(this.label5);
+        this.panelStatusv.Controls.Add(this.btnCancelProduct);
         this.panelStatusv.Controls.Add(this.btnItemRelease);
         this.panelStatusv.Controls.Add(this.btnTableTransfer);
         this.panelStatusv.Controls.Add(this.btnItemTransfer);
@@ -201,18 +201,102 @@ partial class FrmSales
         this.panelStatusv.Size = new System.Drawing.Size(215, 720);
         this.panelStatusv.TabIndex = 3;
         // 
+        // labelTimeStatusBar
+        // 
+        this.labelTimeStatusBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        this.labelTimeStatusBar.Font = new System.Drawing.Font("Century Gothic", 11.25F);
+        this.labelTimeStatusBar.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+        this.labelTimeStatusBar.Location = new System.Drawing.Point(60, 149);
+        this.labelTimeStatusBar.Name = "labelTimeStatusBar";
+        this.labelTimeStatusBar.Size = new System.Drawing.Size(155, 36);
+        this.labelTimeStatusBar.TabIndex = 33;
+        this.labelTimeStatusBar.Text = "00:00:00";
+        this.labelTimeStatusBar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // label1
+        // 
+        this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        this.label1.Font = new System.Drawing.Font("Century Gothic", 11.25F);
+        this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+        this.label1.Location = new System.Drawing.Point(3, 149);
+        this.label1.Name = "label1";
+        this.label1.Size = new System.Drawing.Size(62, 36);
+        this.label1.TabIndex = 35;
+        this.label1.Text = "Hora:";
+        this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        // 
         // guna2Separator2
         // 
-        this.guna2Separator2.Location = new System.Drawing.Point(12, 159);
+        this.guna2Separator2.Location = new System.Drawing.Point(15, 141);
         this.guna2Separator2.Name = "guna2Separator2";
         this.guna2Separator2.Size = new System.Drawing.Size(187, 10);
-        this.guna2Separator2.TabIndex = 28;
+        this.guna2Separator2.TabIndex = 36;
+        // 
+        // guna2CirclePictureBox1
+        // 
+        this.guna2CirclePictureBox1.BackColor = System.Drawing.Color.Transparent;
+        this.guna2CirclePictureBox1.FillColor = System.Drawing.Color.Transparent;
+        this.guna2CirclePictureBox1.Image = global::SIV.Properties.Resources.icons_user;
+        this.guna2CirclePictureBox1.ImageRotate = 0F;
+        this.guna2CirclePictureBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+        this.guna2CirclePictureBox1.Location = new System.Drawing.Point(60, 12);
+        this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
+        this.guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges1;
+        this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+        this.guna2CirclePictureBox1.Size = new System.Drawing.Size(96, 96);
+        this.guna2CirclePictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+        this.guna2CirclePictureBox1.TabIndex = 29;
+        this.guna2CirclePictureBox1.TabStop = false;
+        this.guna2CirclePictureBox1.UseTransparentBackground = true;
+        // 
+        // guna2Separator1
+        // 
+        this.guna2Separator1.Location = new System.Drawing.Point(15, 224);
+        this.guna2Separator1.Name = "guna2Separator1";
+        this.guna2Separator1.Size = new System.Drawing.Size(187, 10);
+        this.guna2Separator1.TabIndex = 30;
+        // 
+        // labelUser
+        // 
+        this.labelUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        this.labelUser.Font = new System.Drawing.Font("Century Gothic", 11.25F);
+        this.labelUser.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+        this.labelUser.Location = new System.Drawing.Point(15, 102);
+        this.labelUser.Name = "labelUser";
+        this.labelUser.Size = new System.Drawing.Size(187, 36);
+        this.labelUser.TabIndex = 31;
+        this.labelUser.Text = "Nome_User";
+        this.labelUser.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        // 
+        // labelDateStatusBar
+        // 
+        this.labelDateStatusBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        this.labelDateStatusBar.Font = new System.Drawing.Font("Century Gothic", 11.25F);
+        this.labelDateStatusBar.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+        this.labelDateStatusBar.Location = new System.Drawing.Point(60, 185);
+        this.labelDateStatusBar.Name = "labelDateStatusBar";
+        this.labelDateStatusBar.Size = new System.Drawing.Size(155, 36);
+        this.labelDateStatusBar.TabIndex = 32;
+        this.labelDateStatusBar.Text = "31/novembro/2024";
+        this.labelDateStatusBar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // label5
+        // 
+        this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        this.label5.Font = new System.Drawing.Font("Century Gothic", 11.25F);
+        this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+        this.label5.Location = new System.Drawing.Point(3, 185);
+        this.label5.Name = "label5";
+        this.label5.Size = new System.Drawing.Size(62, 36);
+        this.label5.TabIndex = 34;
+        this.label5.Text = "Data:";
+        this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         // 
         // btnCancelProduct
         // 
         this.btnCancelProduct.Animated = true;
         this.btnCancelProduct.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
-        this.btnCancelProduct.CustomizableEdges = customizableEdges1;
+        this.btnCancelProduct.CustomizableEdges = customizableEdges2;
         this.btnCancelProduct.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
         this.btnCancelProduct.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
         this.btnCancelProduct.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -222,97 +306,13 @@ partial class FrmSales
         this.btnCancelProduct.ForeColor = System.Drawing.Color.Black;
         this.btnCancelProduct.Image = global::SIV.Properties.Resources.icons_cancelar;
         this.btnCancelProduct.ImageSize = new System.Drawing.Size(32, 32);
-        this.btnCancelProduct.Location = new System.Drawing.Point(12, 367);
+        this.btnCancelProduct.Location = new System.Drawing.Point(15, 350);
         this.btnCancelProduct.Name = "btnCancelProduct";
-        this.btnCancelProduct.ShadowDecoration.CustomizableEdges = customizableEdges2;
+        this.btnCancelProduct.ShadowDecoration.CustomizableEdges = customizableEdges3;
         this.btnCancelProduct.Size = new System.Drawing.Size(187, 49);
         this.btnCancelProduct.TabIndex = 28;
         this.btnCancelProduct.Text = "Cancelar Item";
         this.btnCancelProduct.Click += new System.EventHandler(this.btnCancelProduct_Click);
-        // 
-        // guna2CirclePictureBox1
-        // 
-        this.guna2CirclePictureBox1.BackColor = System.Drawing.Color.Transparent;
-        this.guna2CirclePictureBox1.FillColor = System.Drawing.Color.Transparent;
-        this.guna2CirclePictureBox1.Image = global::SIV.Properties.Resources.icons_user;
-        this.guna2CirclePictureBox1.ImageRotate = 0F;
-        this.guna2CirclePictureBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-        this.guna2CirclePictureBox1.Location = new System.Drawing.Point(57, 30);
-        this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
-        this.guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges3;
-        this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-        this.guna2CirclePictureBox1.Size = new System.Drawing.Size(96, 96);
-        this.guna2CirclePictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-        this.guna2CirclePictureBox1.TabIndex = 21;
-        this.guna2CirclePictureBox1.TabStop = false;
-        this.guna2CirclePictureBox1.UseTransparentBackground = true;
-        // 
-        // guna2Separator1
-        // 
-        this.guna2Separator1.Location = new System.Drawing.Point(12, 242);
-        this.guna2Separator1.Name = "guna2Separator1";
-        this.guna2Separator1.Size = new System.Drawing.Size(187, 10);
-        this.guna2Separator1.TabIndex = 22;
-        // 
-        // label2
-        // 
-        this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-        this.label2.Font = new System.Drawing.Font("Century Gothic", 11.25F);
-        this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-        this.label2.Location = new System.Drawing.Point(12, 120);
-        this.label2.Name = "label2";
-        this.label2.Size = new System.Drawing.Size(187, 36);
-        this.label2.TabIndex = 23;
-        this.label2.Text = "nome_usuario";
-        this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        // 
-        // label1
-        // 
-        this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-        this.label1.Font = new System.Drawing.Font("Century Gothic", 11.25F);
-        this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-        this.label1.Location = new System.Drawing.Point(12, 167);
-        this.label1.Name = "label1";
-        this.label1.Size = new System.Drawing.Size(49, 36);
-        this.label1.TabIndex = 24;
-        this.label1.Text = "Hora:";
-        this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        // 
-        // labelTimeStatusBar
-        // 
-        this.labelTimeStatusBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-        this.labelTimeStatusBar.Font = new System.Drawing.Font("Century Gothic", 11.25F);
-        this.labelTimeStatusBar.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-        this.labelTimeStatusBar.Location = new System.Drawing.Point(67, 167);
-        this.labelTimeStatusBar.Name = "labelTimeStatusBar";
-        this.labelTimeStatusBar.Size = new System.Drawing.Size(142, 36);
-        this.labelTimeStatusBar.TabIndex = 25;
-        this.labelTimeStatusBar.Text = "00:00:00";
-        this.labelTimeStatusBar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-        // 
-        // labelDateStatusBar
-        // 
-        this.labelDateStatusBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-        this.labelDateStatusBar.Font = new System.Drawing.Font("Century Gothic", 11.25F);
-        this.labelDateStatusBar.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-        this.labelDateStatusBar.Location = new System.Drawing.Point(67, 203);
-        this.labelDateStatusBar.Name = "labelDateStatusBar";
-        this.labelDateStatusBar.Size = new System.Drawing.Size(145, 36);
-        this.labelDateStatusBar.TabIndex = 26;
-        this.labelDateStatusBar.Text = "00/mes/0000";
-        this.labelDateStatusBar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-        // 
-        // label5
-        // 
-        this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-        this.label5.Font = new System.Drawing.Font("Century Gothic", 11.25F);
-        this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-        this.label5.Location = new System.Drawing.Point(12, 203);
-        this.label5.Name = "label5";
-        this.label5.Size = new System.Drawing.Size(49, 36);
-        this.label5.TabIndex = 27;
-        this.label5.Text = "Data:";
-        this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         // 
         // btnItemRelease
         // 
@@ -328,7 +328,7 @@ partial class FrmSales
         this.btnItemRelease.Image = global::SIV.Properties.Resources.icons_caixa;
         this.btnItemRelease.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
         this.btnItemRelease.ImageSize = new System.Drawing.Size(32, 32);
-        this.btnItemRelease.Location = new System.Drawing.Point(12, 532);
+        this.btnItemRelease.Location = new System.Drawing.Point(15, 515);
         this.btnItemRelease.Name = "btnItemRelease";
         this.btnItemRelease.ShadowDecoration.CustomizableEdges = customizableEdges5;
         this.btnItemRelease.Size = new System.Drawing.Size(187, 49);
@@ -350,7 +350,7 @@ partial class FrmSales
         this.btnTableTransfer.Image = global::SIV.Properties.Resources.icons_mesa;
         this.btnTableTransfer.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
         this.btnTableTransfer.ImageSize = new System.Drawing.Size(32, 32);
-        this.btnTableTransfer.Location = new System.Drawing.Point(12, 477);
+        this.btnTableTransfer.Location = new System.Drawing.Point(15, 460);
         this.btnTableTransfer.Name = "btnTableTransfer";
         this.btnTableTransfer.ShadowDecoration.CustomizableEdges = customizableEdges7;
         this.btnTableTransfer.Size = new System.Drawing.Size(187, 49);
@@ -373,7 +373,7 @@ partial class FrmSales
         this.btnItemTransfer.Image = global::SIV.Properties.Resources.icons_trasferencia;
         this.btnItemTransfer.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
         this.btnItemTransfer.ImageSize = new System.Drawing.Size(32, 32);
-        this.btnItemTransfer.Location = new System.Drawing.Point(12, 422);
+        this.btnItemTransfer.Location = new System.Drawing.Point(15, 405);
         this.btnItemTransfer.Name = "btnItemTransfer";
         this.btnItemTransfer.ShadowDecoration.CustomizableEdges = customizableEdges9;
         this.btnItemTransfer.Size = new System.Drawing.Size(187, 49);
@@ -395,7 +395,7 @@ partial class FrmSales
         this.btnSale.Image = global::SIV.Properties.Resources.icons_venda;
         this.btnSale.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
         this.btnSale.ImageSize = new System.Drawing.Size(32, 32);
-        this.btnSale.Location = new System.Drawing.Point(12, 312);
+        this.btnSale.Location = new System.Drawing.Point(15, 295);
         this.btnSale.Name = "btnSale";
         this.btnSale.ShadowDecoration.CustomizableEdges = customizableEdges11;
         this.btnSale.Size = new System.Drawing.Size(187, 49);
@@ -418,7 +418,7 @@ partial class FrmSales
         this.btnLogoff.Image = global::SIV.Properties.Resources.icons_funcionário;
         this.btnLogoff.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
         this.btnLogoff.ImageSize = new System.Drawing.Size(32, 32);
-        this.btnLogoff.Location = new System.Drawing.Point(12, 257);
+        this.btnLogoff.Location = new System.Drawing.Point(15, 240);
         this.btnLogoff.Name = "btnLogoff";
         this.btnLogoff.ShadowDecoration.CustomizableEdges = customizableEdges13;
         this.btnLogoff.Size = new System.Drawing.Size(187, 49);
@@ -440,7 +440,7 @@ partial class FrmSales
         this.btnConf.Image = global::SIV.Properties.Resources.icons_configuração;
         this.btnConf.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
         this.btnConf.ImageSize = new System.Drawing.Size(32, 32);
-        this.btnConf.Location = new System.Drawing.Point(12, 587);
+        this.btnConf.Location = new System.Drawing.Point(15, 570);
         this.btnConf.Name = "btnConf";
         this.btnConf.ShadowDecoration.CustomizableEdges = customizableEdges15;
         this.btnConf.Size = new System.Drawing.Size(187, 49);
@@ -835,13 +835,13 @@ partial class FrmSales
         this.panelLaunch.Controls.Add(this.btnOk);
         this.panelLaunch.Controls.Add(this.txtProduct);
         this.panelLaunch.Controls.Add(this.labelProduct);
+        this.panelLaunch.Controls.Add(this.labelAmount);
         this.panelLaunch.Controls.Add(this.btn1);
+        this.panelLaunch.Controls.Add(this.txtCost);
         this.panelLaunch.Controls.Add(this.btn9);
         this.panelLaunch.Controls.Add(this.labelCost);
         this.panelLaunch.Controls.Add(this.btnComma);
-        this.panelLaunch.Controls.Add(this.txtCost);
         this.panelLaunch.Controls.Add(this.btn8);
-        this.panelLaunch.Controls.Add(this.labelAmount);
         this.panelLaunch.Controls.Add(this.btn2);
         this.panelLaunch.Controls.Add(this.btn4);
         this.panelLaunch.Controls.Add(this.btn0);
@@ -860,8 +860,8 @@ partial class FrmSales
         // 
         this.labelNameProduct.AutoSize = false;
         this.labelNameProduct.BackColor = System.Drawing.Color.Transparent;
-        this.labelNameProduct.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.labelNameProduct.Location = new System.Drawing.Point(11, 92);
+        this.labelNameProduct.Font = new System.Drawing.Font("Century Gothic", 15.75F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) | System.Drawing.FontStyle.Underline))));
+        this.labelNameProduct.Location = new System.Drawing.Point(217, 92);
         this.labelNameProduct.Name = "labelNameProduct";
         this.labelNameProduct.Size = new System.Drawing.Size(230, 34);
         this.labelNameProduct.TabIndex = 35;
@@ -896,7 +896,7 @@ partial class FrmSales
         this.btnBackspace.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btnBackspace.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btnBackspace.ForeColor = System.Drawing.Color.Black;
-        this.btnBackspace.Location = new System.Drawing.Point(265, 376);
+        this.btnBackspace.Location = new System.Drawing.Point(4, 376);
         this.btnBackspace.Name = "btnBackspace";
         this.btnBackspace.ShadowDecoration.CustomizableEdges = customizableEdges31;
         this.btnBackspace.Size = new System.Drawing.Size(101, 65);
@@ -911,10 +911,10 @@ partial class FrmSales
         this.numericAmount.CustomizableEdges = customizableEdges32;
         this.numericAmount.Enabled = false;
         this.numericAmount.Font = new System.Drawing.Font("Segoe UI", 9F);
-        this.numericAmount.Location = new System.Drawing.Point(145, 163);
+        this.numericAmount.Location = new System.Drawing.Point(351, 163);
         this.numericAmount.Name = "numericAmount";
         this.numericAmount.ShadowDecoration.CustomizableEdges = customizableEdges33;
-        this.numericAmount.Size = new System.Drawing.Size(96, 36);
+        this.numericAmount.Size = new System.Drawing.Size(119, 36);
         this.numericAmount.TabIndex = 2;
         this.numericAmount.UpDownButtonFillColor = System.Drawing.Color.DeepSkyBlue;
         this.numericAmount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericAmount_KeyDown);
@@ -956,7 +956,7 @@ partial class FrmSales
         this.btnOk.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btnOk.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btnOk.ForeColor = System.Drawing.Color.Black;
-        this.btnOk.Location = new System.Drawing.Point(372, 376);
+        this.btnOk.Location = new System.Drawing.Point(111, 376);
         this.btnOk.Name = "btnOk";
         this.btnOk.ShadowDecoration.CustomizableEdges = customizableEdges37;
         this.btnOk.Size = new System.Drawing.Size(101, 65);
@@ -984,7 +984,7 @@ partial class FrmSales
         this.txtProduct.PlaceholderText = "Buscar por Produto...";
         this.txtProduct.SelectedText = "";
         this.txtProduct.ShadowDecoration.CustomizableEdges = customizableEdges39;
-        this.txtProduct.Size = new System.Drawing.Size(368, 36);
+        this.txtProduct.Size = new System.Drawing.Size(371, 36);
         this.txtProduct.TabIndex = 32;
         this.txtProduct.TextChanged += new System.EventHandler(this.txtProduct_TextChanged);
         this.txtProduct.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtProduct_KeyDown);
@@ -1001,6 +1001,18 @@ partial class FrmSales
         this.labelProduct.Text = "Produto";
         this.labelProduct.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
         // 
+        // labelAmount
+        // 
+        this.labelAmount.AutoSize = false;
+        this.labelAmount.BackColor = System.Drawing.Color.Transparent;
+        this.labelAmount.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelAmount.Location = new System.Drawing.Point(217, 163);
+        this.labelAmount.Name = "labelAmount";
+        this.labelAmount.Size = new System.Drawing.Size(131, 36);
+        this.labelAmount.TabIndex = 2;
+        this.labelAmount.Text = "Quantidade";
+        this.labelAmount.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
         // btn1
         // 
         this.btn1.Animated = true;
@@ -1015,12 +1027,36 @@ partial class FrmSales
         this.btn1.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn1.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn1.ForeColor = System.Drawing.Color.Black;
-        this.btn1.Location = new System.Drawing.Point(265, 92);
+        this.btn1.Location = new System.Drawing.Point(4, 92);
         this.btn1.Name = "btn1";
         this.btn1.ShadowDecoration.CustomizableEdges = customizableEdges41;
         this.btn1.Size = new System.Drawing.Size(65, 65);
         this.btn1.TabIndex = 2;
         this.btn1.Text = "1";
+        // 
+        // txtCost
+        // 
+        this.txtCost.Animated = true;
+        this.txtCost.BorderRadius = 15;
+        this.txtCost.Cursor = System.Windows.Forms.Cursors.IBeam;
+        this.txtCost.CustomizableEdges = customizableEdges42;
+        this.txtCost.DefaultText = "";
+        this.txtCost.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+        this.txtCost.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+        this.txtCost.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+        this.txtCost.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+        this.txtCost.Enabled = false;
+        this.txtCost.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+        this.txtCost.Font = new System.Drawing.Font("Segoe UI", 9F);
+        this.txtCost.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+        this.txtCost.Location = new System.Drawing.Point(351, 234);
+        this.txtCost.Name = "txtCost";
+        this.txtCost.PasswordChar = '\0';
+        this.txtCost.PlaceholderText = "";
+        this.txtCost.SelectedText = "";
+        this.txtCost.ShadowDecoration.CustomizableEdges = customizableEdges43;
+        this.txtCost.Size = new System.Drawing.Size(119, 36);
+        this.txtCost.TabIndex = 5;
         // 
         // btn9
         // 
@@ -1028,7 +1064,7 @@ partial class FrmSales
         this.btn9.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
         this.btn9.BorderRadius = 15;
         this.btn9.BorderThickness = 1;
-        this.btn9.CustomizableEdges = customizableEdges42;
+        this.btn9.CustomizableEdges = customizableEdges44;
         this.btn9.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
         this.btn9.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
         this.btn9.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -1036,9 +1072,9 @@ partial class FrmSales
         this.btn9.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn9.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn9.ForeColor = System.Drawing.Color.Black;
-        this.btn9.Location = new System.Drawing.Point(407, 234);
+        this.btn9.Location = new System.Drawing.Point(146, 234);
         this.btn9.Name = "btn9";
-        this.btn9.ShadowDecoration.CustomizableEdges = customizableEdges43;
+        this.btn9.ShadowDecoration.CustomizableEdges = customizableEdges45;
         this.btn9.Size = new System.Drawing.Size(65, 65);
         this.btn9.TabIndex = 4;
         this.btn9.Text = "9";
@@ -1048,7 +1084,7 @@ partial class FrmSales
         this.labelCost.AutoSize = false;
         this.labelCost.BackColor = System.Drawing.Color.Transparent;
         this.labelCost.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.labelCost.Location = new System.Drawing.Point(11, 216);
+        this.labelCost.Location = new System.Drawing.Point(217, 234);
         this.labelCost.Name = "labelCost";
         this.labelCost.Size = new System.Drawing.Size(125, 36);
         this.labelCost.TabIndex = 4;
@@ -1061,7 +1097,7 @@ partial class FrmSales
         this.btnComma.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
         this.btnComma.BorderRadius = 15;
         this.btnComma.BorderThickness = 1;
-        this.btnComma.CustomizableEdges = customizableEdges44;
+        this.btnComma.CustomizableEdges = customizableEdges46;
         this.btnComma.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
         this.btnComma.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
         this.btnComma.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -1069,36 +1105,12 @@ partial class FrmSales
         this.btnComma.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btnComma.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btnComma.ForeColor = System.Drawing.Color.Black;
-        this.btnComma.Location = new System.Drawing.Point(407, 305);
+        this.btnComma.Location = new System.Drawing.Point(146, 305);
         this.btnComma.Name = "btnComma";
-        this.btnComma.ShadowDecoration.CustomizableEdges = customizableEdges45;
+        this.btnComma.ShadowDecoration.CustomizableEdges = customizableEdges47;
         this.btnComma.Size = new System.Drawing.Size(65, 65);
         this.btnComma.TabIndex = 12;
         this.btnComma.Text = ",";
-        // 
-        // txtCost
-        // 
-        this.txtCost.Animated = true;
-        this.txtCost.BorderRadius = 15;
-        this.txtCost.Cursor = System.Windows.Forms.Cursors.IBeam;
-        this.txtCost.CustomizableEdges = customizableEdges46;
-        this.txtCost.DefaultText = "";
-        this.txtCost.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-        this.txtCost.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-        this.txtCost.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-        this.txtCost.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-        this.txtCost.Enabled = false;
-        this.txtCost.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-        this.txtCost.Font = new System.Drawing.Font("Segoe UI", 9F);
-        this.txtCost.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-        this.txtCost.Location = new System.Drawing.Point(145, 216);
-        this.txtCost.Name = "txtCost";
-        this.txtCost.PasswordChar = '\0';
-        this.txtCost.PlaceholderText = "";
-        this.txtCost.SelectedText = "";
-        this.txtCost.ShadowDecoration.CustomizableEdges = customizableEdges47;
-        this.txtCost.Size = new System.Drawing.Size(96, 36);
-        this.txtCost.TabIndex = 5;
         // 
         // btn8
         // 
@@ -1114,24 +1126,12 @@ partial class FrmSales
         this.btn8.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn8.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn8.ForeColor = System.Drawing.Color.Black;
-        this.btn8.Location = new System.Drawing.Point(336, 234);
+        this.btn8.Location = new System.Drawing.Point(75, 234);
         this.btn8.Name = "btn8";
         this.btn8.ShadowDecoration.CustomizableEdges = customizableEdges49;
         this.btn8.Size = new System.Drawing.Size(65, 65);
         this.btn8.TabIndex = 5;
         this.btn8.Text = "8";
-        // 
-        // labelAmount
-        // 
-        this.labelAmount.AutoSize = false;
-        this.labelAmount.BackColor = System.Drawing.Color.Transparent;
-        this.labelAmount.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.labelAmount.Location = new System.Drawing.Point(11, 163);
-        this.labelAmount.Name = "labelAmount";
-        this.labelAmount.Size = new System.Drawing.Size(131, 36);
-        this.labelAmount.TabIndex = 2;
-        this.labelAmount.Text = "Quantidade";
-        this.labelAmount.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // btn2
         // 
@@ -1147,7 +1147,7 @@ partial class FrmSales
         this.btn2.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn2.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn2.ForeColor = System.Drawing.Color.Black;
-        this.btn2.Location = new System.Drawing.Point(336, 92);
+        this.btn2.Location = new System.Drawing.Point(75, 92);
         this.btn2.Name = "btn2";
         this.btn2.ShadowDecoration.CustomizableEdges = customizableEdges51;
         this.btn2.Size = new System.Drawing.Size(65, 65);
@@ -1168,7 +1168,7 @@ partial class FrmSales
         this.btn4.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn4.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn4.ForeColor = System.Drawing.Color.Black;
-        this.btn4.Location = new System.Drawing.Point(265, 163);
+        this.btn4.Location = new System.Drawing.Point(4, 163);
         this.btn4.Name = "btn4";
         this.btn4.ShadowDecoration.CustomizableEdges = customizableEdges53;
         this.btn4.Size = new System.Drawing.Size(65, 65);
@@ -1189,7 +1189,7 @@ partial class FrmSales
         this.btn0.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn0.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn0.ForeColor = System.Drawing.Color.Black;
-        this.btn0.Location = new System.Drawing.Point(265, 305);
+        this.btn0.Location = new System.Drawing.Point(4, 305);
         this.btn0.Name = "btn0";
         this.btn0.ShadowDecoration.CustomizableEdges = customizableEdges55;
         this.btn0.Size = new System.Drawing.Size(136, 65);
@@ -1210,7 +1210,7 @@ partial class FrmSales
         this.btn5.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn5.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn5.ForeColor = System.Drawing.Color.Black;
-        this.btn5.Location = new System.Drawing.Point(336, 163);
+        this.btn5.Location = new System.Drawing.Point(75, 163);
         this.btn5.Name = "btn5";
         this.btn5.ShadowDecoration.CustomizableEdges = customizableEdges57;
         this.btn5.Size = new System.Drawing.Size(65, 65);
@@ -1231,7 +1231,7 @@ partial class FrmSales
         this.btn7.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn7.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn7.ForeColor = System.Drawing.Color.Black;
-        this.btn7.Location = new System.Drawing.Point(265, 234);
+        this.btn7.Location = new System.Drawing.Point(4, 234);
         this.btn7.Name = "btn7";
         this.btn7.ShadowDecoration.CustomizableEdges = customizableEdges59;
         this.btn7.Size = new System.Drawing.Size(65, 65);
@@ -1252,7 +1252,7 @@ partial class FrmSales
         this.btn3.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn3.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn3.ForeColor = System.Drawing.Color.Black;
-        this.btn3.Location = new System.Drawing.Point(407, 92);
+        this.btn3.Location = new System.Drawing.Point(146, 92);
         this.btn3.Name = "btn3";
         this.btn3.ShadowDecoration.CustomizableEdges = customizableEdges61;
         this.btn3.Size = new System.Drawing.Size(65, 65);
@@ -1273,7 +1273,7 @@ partial class FrmSales
         this.btn6.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn6.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn6.ForeColor = System.Drawing.Color.Black;
-        this.btn6.Location = new System.Drawing.Point(407, 163);
+        this.btn6.Location = new System.Drawing.Point(146, 163);
         this.btn6.Name = "btn6";
         this.btn6.ShadowDecoration.CustomizableEdges = customizableEdges63;
         this.btn6.Size = new System.Drawing.Size(65, 65);
@@ -1311,6 +1311,15 @@ partial class FrmSales
         ((System.ComponentModel.ISupportInitialize)(this.numericAmount)).EndInit();
         this.ResumeLayout(false);
     }
+
+    private System.Windows.Forms.Label labelTimeStatusBar;
+    private System.Windows.Forms.Label label1;
+    private Guna.UI2.WinForms.Guna2Separator guna2Separator2;
+    private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
+    private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
+    private System.Windows.Forms.Label labelUser;
+    private System.Windows.Forms.Label labelDateStatusBar;
+    private System.Windows.Forms.Label label5;
 
     private Guna.UI2.WinForms.Guna2Panel panelReleasedItems;
     private Guna.UI2.WinForms.Guna2Separator guna2Separator3;
@@ -1357,15 +1366,6 @@ partial class FrmSales
     private Guna.UI2.WinForms.Guna2HtmlLabel labelSale;
     private Guna.UI2.WinForms.Guna2HtmlLabel labelSalesData;
     private Guna.UI2.WinForms.Guna2TextBox txtSale;
-
-    private Guna.UI2.WinForms.Guna2Separator guna2Separator2;
-    private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
-    private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
-    private System.Windows.Forms.Label label2;
-    private System.Windows.Forms.Label label1;
-    private System.Windows.Forms.Label labelTimeStatusBar;
-    private System.Windows.Forms.Label labelDateStatusBar;
-    private System.Windows.Forms.Label label5;
 
     private System.Windows.Forms.Timer timer;
     private Guna.UI2.WinForms.Guna2Button btnSale;

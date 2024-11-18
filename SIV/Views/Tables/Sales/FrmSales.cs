@@ -19,6 +19,7 @@ public partial class FrmSales : Form
     public FrmSales()
     {
         InitializeComponent();
+        labelUser.Text = SessionManager.CurrentUser.Name;
     }
     
     private void FrmSales_Load(object sender, EventArgs e)

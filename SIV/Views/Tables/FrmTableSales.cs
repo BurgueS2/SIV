@@ -30,19 +30,9 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
     private void btnSearchProduct_Click(object sender, EventArgs e) => SearchProduct();
     
     private void btnTransferProducts_Click(object sender, EventArgs e) => OpenForm();
-    
-    private void btnOk_Click(object sender, EventArgs e)
-    {
-        if (IsProductInputValid())
-        {
-            SaveProductToTable();
-        }
-        else
-        {
-            Close();
-        }
-    }
-    
+
+    private void btnOk_Click(object sender, EventArgs e) { if (IsProductInputValid())  SaveProductToTable(); }
+
     private void txtProduct_TextChanged(object sender, EventArgs e) => UpdateProductNameLabel(txtProduct.Text);
     
     private void txtProduct_KeyDown(object sender, KeyEventArgs e)
