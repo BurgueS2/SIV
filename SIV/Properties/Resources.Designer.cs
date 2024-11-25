@@ -102,6 +102,16 @@ namespace SIV.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons_caixa_aberto {
+            get {
+                object obj = ResourceManager.GetObject("icons_caixa_aberto", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons_cancelar {
             get {
                 object obj = ResourceManager.GetObject("icons_cancelar", resourceCulture);
@@ -245,6 +255,26 @@ namespace SIV.Properties {
         internal static System.Drawing.Bitmap icons_relatório {
             get {
                 object obj = ResourceManager.GetObject("icons_relatório", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons_selecionado {
+            get {
+                object obj = ResourceManager.GetObject("icons_selecionado", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons_trancar {
+            get {
+                object obj = ResourceManager.GetObject("icons_trancar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel;
-using System.Windows.Forms;
 
-namespace SIV.Views.Tables.TableOrItemTransfer;
+namespace SIV.Views.CashRegister;
 
-partial class FrmTableTransfer
+partial class FrmOpenCashRegister
 {
     /// <summary>
     /// Required designer variable.
@@ -62,28 +61,21 @@ partial class FrmTableTransfer
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges39 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
         Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges40 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges43 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-        this.labelCurrentTable = new Guna.UI2.WinForms.Guna2HtmlLabel();
-        this.labelDestinationTable = new Guna.UI2.WinForms.Guna2HtmlLabel();
-        this.txtCurrentTable = new Guna.UI2.WinForms.Guna2TextBox();
-        this.txtTargetTableId = new Guna.UI2.WinForms.Guna2TextBox();
-        this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+        this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+        this.txtUser = new Guna.UI2.WinForms.Guna2TextBox();
         this.btnBackspace = new Guna.UI2.WinForms.Guna2Button();
         this.btnOk = new Guna.UI2.WinForms.Guna2Button();
         this.btn1 = new Guna.UI2.WinForms.Guna2Button();
@@ -97,108 +89,62 @@ partial class FrmTableTransfer
         this.btn7 = new Guna.UI2.WinForms.Guna2Button();
         this.btn3 = new Guna.UI2.WinForms.Guna2Button();
         this.btn6 = new Guna.UI2.WinForms.Guna2Button();
-        this.gridData = new Guna.UI2.WinForms.Guna2DataGridView();
-        this.btnExit = new Guna.UI2.WinForms.Guna2Button();
         this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+        this.txtAmount = new Guna.UI2.WinForms.Guna2TextBox();
         this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-        this.guna2PictureBox2 = new Guna.UI2.WinForms.Guna2PictureBox();
-        this.guna2PictureBox3 = new Guna.UI2.WinForms.Guna2PictureBox();
-        this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+        this.panelMain = new Guna.UI2.WinForms.Guna2Panel();
+        this.btnOpen = new Guna.UI2.WinForms.Guna2Button();
+        this.labelDateStatusBar = new Guna.UI2.WinForms.Guna2HtmlLabel();
+        this.btnCancel = new Guna.UI2.WinForms.Guna2Button();
+        this.labelTimeStatusBar = new Guna.UI2.WinForms.Guna2HtmlLabel();
+        this.labelTime = new Guna.UI2.WinForms.Guna2HtmlLabel();
+        this.labelDate = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+        this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
         this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
-        this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-        ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox3)).BeginInit();
-        this.guna2Panel1.SuspendLayout();
+        this.gridData = new Guna.UI2.WinForms.Guna2DataGridView();
+        this.guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+        this.panelMain.SuspendLayout();
         this.guna2Panel2.SuspendLayout();
         this.guna2Panel3.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
         this.SuspendLayout();
         // 
-        // labelCurrentTable
+        // guna2HtmlLabel1
         // 
-        this.labelCurrentTable.AutoSize = false;
-        this.labelCurrentTable.BackColor = System.Drawing.Color.Transparent;
-        this.labelCurrentTable.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.labelCurrentTable.Location = new System.Drawing.Point(70, 45);
-        this.labelCurrentTable.Name = "labelCurrentTable";
-        this.labelCurrentTable.Size = new System.Drawing.Size(151, 36);
-        this.labelCurrentTable.TabIndex = 3;
-        this.labelCurrentTable.Text = "Mesa Atual";
-        this.labelCurrentTable.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+        this.guna2HtmlLabel1.AutoSize = false;
+        this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
+        this.guna2HtmlLabel1.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
+        this.guna2HtmlLabel1.Location = new System.Drawing.Point(3, 3);
+        this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+        this.guna2HtmlLabel1.Size = new System.Drawing.Size(394, 36);
+        this.guna2HtmlLabel1.TabIndex = 0;
+        this.guna2HtmlLabel1.Text = "Abrir Caixa";
+        this.guna2HtmlLabel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
         // 
-        // labelDestinationTable
+        // txtUser
         // 
-        this.labelDestinationTable.AutoSize = false;
-        this.labelDestinationTable.BackColor = System.Drawing.Color.Transparent;
-        this.labelDestinationTable.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.labelDestinationTable.Location = new System.Drawing.Point(63, 125);
-        this.labelDestinationTable.Name = "labelDestinationTable";
-        this.labelDestinationTable.Size = new System.Drawing.Size(158, 36);
-        this.labelDestinationTable.TabIndex = 4;
-        this.labelDestinationTable.Text = "Mesa Destino";
-        this.labelDestinationTable.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-        // 
-        // txtCurrentTable
-        // 
-        this.txtCurrentTable.Animated = true;
-        this.txtCurrentTable.BorderRadius = 15;
-        this.txtCurrentTable.Cursor = System.Windows.Forms.Cursors.IBeam;
-        this.txtCurrentTable.CustomizableEdges = customizableEdges1;
-        this.txtCurrentTable.DefaultText = "";
-        this.txtCurrentTable.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-        this.txtCurrentTable.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-        this.txtCurrentTable.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-        this.txtCurrentTable.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-        this.txtCurrentTable.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-        this.txtCurrentTable.Font = new System.Drawing.Font("Segoe UI", 9F);
-        this.txtCurrentTable.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-        this.txtCurrentTable.Location = new System.Drawing.Point(228, 45);
-        this.txtCurrentTable.Name = "txtCurrentTable";
-        this.txtCurrentTable.PasswordChar = '\0';
-        this.txtCurrentTable.PlaceholderText = "";
-        this.txtCurrentTable.SelectedText = "";
-        this.txtCurrentTable.ShadowDecoration.CustomizableEdges = customizableEdges2;
-        this.txtCurrentTable.Size = new System.Drawing.Size(236, 36);
-        this.txtCurrentTable.TabIndex = 5;
-        this.txtCurrentTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCurrentTable_KeyDown);
-        // 
-        // txtTargetTableId
-        // 
-        this.txtTargetTableId.Animated = true;
-        this.txtTargetTableId.BorderRadius = 15;
-        this.txtTargetTableId.Cursor = System.Windows.Forms.Cursors.IBeam;
-        this.txtTargetTableId.CustomizableEdges = customizableEdges3;
-        this.txtTargetTableId.DefaultText = "";
-        this.txtTargetTableId.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-        this.txtTargetTableId.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-        this.txtTargetTableId.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-        this.txtTargetTableId.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-        this.txtTargetTableId.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-        this.txtTargetTableId.Font = new System.Drawing.Font("Segoe UI", 9F);
-        this.txtTargetTableId.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-        this.txtTargetTableId.Location = new System.Drawing.Point(228, 125);
-        this.txtTargetTableId.Name = "txtTargetTableId";
-        this.txtTargetTableId.PasswordChar = '\0';
-        this.txtTargetTableId.PlaceholderText = "";
-        this.txtTargetTableId.SelectedText = "";
-        this.txtTargetTableId.ShadowDecoration.CustomizableEdges = customizableEdges4;
-        this.txtTargetTableId.Size = new System.Drawing.Size(236, 36);
-        this.txtTargetTableId.TabIndex = 1;
-        // 
-        // guna2PictureBox1
-        // 
-        this.guna2PictureBox1.CustomizableEdges = customizableEdges5;
-        this.guna2PictureBox1.Image = global::SIV.Properties.Resources.icons_trasferencia;
-        this.guna2PictureBox1.ImageRotate = 0F;
-        this.guna2PictureBox1.Location = new System.Drawing.Point(217, 87);
-        this.guna2PictureBox1.Name = "guna2PictureBox1";
-        this.guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges6;
-        this.guna2PictureBox1.Size = new System.Drawing.Size(32, 32);
-        this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-        this.guna2PictureBox1.TabIndex = 7;
-        this.guna2PictureBox1.TabStop = false;
+        this.txtUser.Animated = true;
+        this.txtUser.BorderRadius = 15;
+        this.txtUser.Cursor = System.Windows.Forms.Cursors.IBeam;
+        this.txtUser.CustomizableEdges = customizableEdges1;
+        this.txtUser.DefaultText = "";
+        this.txtUser.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+        this.txtUser.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+        this.txtUser.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+        this.txtUser.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+        this.txtUser.Enabled = false;
+        this.txtUser.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+        this.txtUser.Font = new System.Drawing.Font("Segoe UI", 9F);
+        this.txtUser.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+        this.txtUser.Location = new System.Drawing.Point(220, 178);
+        this.txtUser.Name = "txtUser";
+        this.txtUser.PasswordChar = '\0';
+        this.txtUser.PlaceholderText = "";
+        this.txtUser.SelectedText = "";
+        this.txtUser.ShadowDecoration.CustomizableEdges = customizableEdges2;
+        this.txtUser.Size = new System.Drawing.Size(162, 36);
+        this.txtUser.TabIndex = 1;
         // 
         // btnBackspace
         // 
@@ -207,7 +153,7 @@ partial class FrmTableTransfer
         this.btnBackspace.BorderRadius = 15;
         this.btnBackspace.BorderThickness = 1;
         this.btnBackspace.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
-        this.btnBackspace.CustomizableEdges = customizableEdges7;
+        this.btnBackspace.CustomizableEdges = customizableEdges3;
         this.btnBackspace.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
         this.btnBackspace.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
         this.btnBackspace.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -217,9 +163,10 @@ partial class FrmTableTransfer
         this.btnBackspace.ForeColor = System.Drawing.Color.Black;
         this.btnBackspace.Image = global::SIV.Properties.Resources.icons_backspace;
         this.btnBackspace.ImageSize = new System.Drawing.Size(32, 32);
-        this.btnBackspace.Location = new System.Drawing.Point(49, 338);
+        this.btnBackspace.Location = new System.Drawing.Point(105, 344);
         this.btnBackspace.Name = "btnBackspace";
-        this.btnBackspace.ShadowDecoration.CustomizableEdges = customizableEdges8;
+        this.btnBackspace.PressedColor = System.Drawing.Color.Red;
+        this.btnBackspace.ShadowDecoration.CustomizableEdges = customizableEdges4;
         this.btnBackspace.Size = new System.Drawing.Size(101, 65);
         this.btnBackspace.TabIndex = 27;
         this.btnBackspace.Click += new System.EventHandler(this.btnBackspace_Click);
@@ -230,7 +177,7 @@ partial class FrmTableTransfer
         this.btnOk.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
         this.btnOk.BorderRadius = 15;
         this.btnOk.BorderThickness = 1;
-        this.btnOk.CustomizableEdges = customizableEdges9;
+        this.btnOk.CustomizableEdges = customizableEdges5;
         this.btnOk.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
         this.btnOk.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
         this.btnOk.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -238,11 +185,11 @@ partial class FrmTableTransfer
         this.btnOk.FillColor = System.Drawing.Color.LightGreen;
         this.btnOk.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btnOk.ForeColor = System.Drawing.Color.Black;
-        this.btnOk.Location = new System.Drawing.Point(156, 338);
+        this.btnOk.Location = new System.Drawing.Point(212, 344);
         this.btnOk.Name = "btnOk";
         this.btnOk.PressedColor = System.Drawing.Color.Lime;
-        this.btnOk.ShadowDecoration.CustomizableEdges = customizableEdges10;
-        this.btnOk.Size = new System.Drawing.Size(101, 65);
+        this.btnOk.ShadowDecoration.CustomizableEdges = customizableEdges6;
+        this.btnOk.Size = new System.Drawing.Size(100, 65);
         this.btnOk.TabIndex = 26;
         this.btnOk.Text = "Ok";
         this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
@@ -253,7 +200,7 @@ partial class FrmTableTransfer
         this.btn1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
         this.btn1.BorderRadius = 15;
         this.btn1.BorderThickness = 1;
-        this.btn1.CustomizableEdges = customizableEdges11;
+        this.btn1.CustomizableEdges = customizableEdges7;
         this.btn1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
         this.btn1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
         this.btn1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -261,9 +208,9 @@ partial class FrmTableTransfer
         this.btn1.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn1.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn1.ForeColor = System.Drawing.Color.Black;
-        this.btn1.Location = new System.Drawing.Point(49, 54);
+        this.btn1.Location = new System.Drawing.Point(105, 60);
         this.btn1.Name = "btn1";
-        this.btn1.ShadowDecoration.CustomizableEdges = customizableEdges12;
+        this.btn1.ShadowDecoration.CustomizableEdges = customizableEdges8;
         this.btn1.Size = new System.Drawing.Size(65, 65);
         this.btn1.TabIndex = 15;
         this.btn1.Text = "1";
@@ -275,7 +222,7 @@ partial class FrmTableTransfer
         this.btn9.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
         this.btn9.BorderRadius = 15;
         this.btn9.BorderThickness = 1;
-        this.btn9.CustomizableEdges = customizableEdges13;
+        this.btn9.CustomizableEdges = customizableEdges9;
         this.btn9.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
         this.btn9.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
         this.btn9.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -283,9 +230,9 @@ partial class FrmTableTransfer
         this.btn9.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn9.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn9.ForeColor = System.Drawing.Color.Black;
-        this.btn9.Location = new System.Drawing.Point(191, 196);
+        this.btn9.Location = new System.Drawing.Point(247, 202);
         this.btn9.Name = "btn9";
-        this.btn9.ShadowDecoration.CustomizableEdges = customizableEdges14;
+        this.btn9.ShadowDecoration.CustomizableEdges = customizableEdges10;
         this.btn9.Size = new System.Drawing.Size(65, 65);
         this.btn9.TabIndex = 17;
         this.btn9.Text = "9";
@@ -297,7 +244,7 @@ partial class FrmTableTransfer
         this.btnComma.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
         this.btnComma.BorderRadius = 15;
         this.btnComma.BorderThickness = 1;
-        this.btnComma.CustomizableEdges = customizableEdges15;
+        this.btnComma.CustomizableEdges = customizableEdges11;
         this.btnComma.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
         this.btnComma.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
         this.btnComma.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -305,9 +252,9 @@ partial class FrmTableTransfer
         this.btnComma.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btnComma.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btnComma.ForeColor = System.Drawing.Color.Black;
-        this.btnComma.Location = new System.Drawing.Point(191, 267);
+        this.btnComma.Location = new System.Drawing.Point(247, 273);
         this.btnComma.Name = "btnComma";
-        this.btnComma.ShadowDecoration.CustomizableEdges = customizableEdges16;
+        this.btnComma.ShadowDecoration.CustomizableEdges = customizableEdges12;
         this.btnComma.Size = new System.Drawing.Size(65, 65);
         this.btnComma.TabIndex = 25;
         this.btnComma.Text = ",";
@@ -319,7 +266,7 @@ partial class FrmTableTransfer
         this.btn8.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
         this.btn8.BorderRadius = 15;
         this.btn8.BorderThickness = 1;
-        this.btn8.CustomizableEdges = customizableEdges17;
+        this.btn8.CustomizableEdges = customizableEdges13;
         this.btn8.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
         this.btn8.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
         this.btn8.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -327,9 +274,9 @@ partial class FrmTableTransfer
         this.btn8.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn8.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn8.ForeColor = System.Drawing.Color.Black;
-        this.btn8.Location = new System.Drawing.Point(120, 196);
+        this.btn8.Location = new System.Drawing.Point(176, 202);
         this.btn8.Name = "btn8";
-        this.btn8.ShadowDecoration.CustomizableEdges = customizableEdges18;
+        this.btn8.ShadowDecoration.CustomizableEdges = customizableEdges14;
         this.btn8.Size = new System.Drawing.Size(65, 65);
         this.btn8.TabIndex = 18;
         this.btn8.Text = "8";
@@ -341,7 +288,7 @@ partial class FrmTableTransfer
         this.btn2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
         this.btn2.BorderRadius = 15;
         this.btn2.BorderThickness = 1;
-        this.btn2.CustomizableEdges = customizableEdges19;
+        this.btn2.CustomizableEdges = customizableEdges15;
         this.btn2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
         this.btn2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
         this.btn2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -349,9 +296,9 @@ partial class FrmTableTransfer
         this.btn2.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn2.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn2.ForeColor = System.Drawing.Color.Black;
-        this.btn2.Location = new System.Drawing.Point(120, 54);
+        this.btn2.Location = new System.Drawing.Point(176, 60);
         this.btn2.Name = "btn2";
-        this.btn2.ShadowDecoration.CustomizableEdges = customizableEdges20;
+        this.btn2.ShadowDecoration.CustomizableEdges = customizableEdges16;
         this.btn2.Size = new System.Drawing.Size(65, 65);
         this.btn2.TabIndex = 16;
         this.btn2.Text = "2";
@@ -363,7 +310,7 @@ partial class FrmTableTransfer
         this.btn4.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
         this.btn4.BorderRadius = 15;
         this.btn4.BorderThickness = 1;
-        this.btn4.CustomizableEdges = customizableEdges21;
+        this.btn4.CustomizableEdges = customizableEdges17;
         this.btn4.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
         this.btn4.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
         this.btn4.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -371,9 +318,9 @@ partial class FrmTableTransfer
         this.btn4.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn4.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn4.ForeColor = System.Drawing.Color.Black;
-        this.btn4.Location = new System.Drawing.Point(49, 125);
+        this.btn4.Location = new System.Drawing.Point(105, 131);
         this.btn4.Name = "btn4";
-        this.btn4.ShadowDecoration.CustomizableEdges = customizableEdges22;
+        this.btn4.ShadowDecoration.CustomizableEdges = customizableEdges18;
         this.btn4.Size = new System.Drawing.Size(65, 65);
         this.btn4.TabIndex = 22;
         this.btn4.Text = "4";
@@ -385,7 +332,7 @@ partial class FrmTableTransfer
         this.btn0.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
         this.btn0.BorderRadius = 15;
         this.btn0.BorderThickness = 1;
-        this.btn0.CustomizableEdges = customizableEdges23;
+        this.btn0.CustomizableEdges = customizableEdges19;
         this.btn0.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
         this.btn0.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
         this.btn0.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -393,9 +340,9 @@ partial class FrmTableTransfer
         this.btn0.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn0.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn0.ForeColor = System.Drawing.Color.Black;
-        this.btn0.Location = new System.Drawing.Point(49, 267);
+        this.btn0.Location = new System.Drawing.Point(105, 273);
         this.btn0.Name = "btn0";
-        this.btn0.ShadowDecoration.CustomizableEdges = customizableEdges24;
+        this.btn0.ShadowDecoration.CustomizableEdges = customizableEdges20;
         this.btn0.Size = new System.Drawing.Size(136, 65);
         this.btn0.TabIndex = 24;
         this.btn0.Text = "0";
@@ -407,7 +354,7 @@ partial class FrmTableTransfer
         this.btn5.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
         this.btn5.BorderRadius = 15;
         this.btn5.BorderThickness = 1;
-        this.btn5.CustomizableEdges = customizableEdges25;
+        this.btn5.CustomizableEdges = customizableEdges21;
         this.btn5.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
         this.btn5.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
         this.btn5.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -415,9 +362,9 @@ partial class FrmTableTransfer
         this.btn5.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn5.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn5.ForeColor = System.Drawing.Color.Black;
-        this.btn5.Location = new System.Drawing.Point(120, 125);
+        this.btn5.Location = new System.Drawing.Point(176, 131);
         this.btn5.Name = "btn5";
-        this.btn5.ShadowDecoration.CustomizableEdges = customizableEdges26;
+        this.btn5.ShadowDecoration.CustomizableEdges = customizableEdges22;
         this.btn5.Size = new System.Drawing.Size(65, 65);
         this.btn5.TabIndex = 21;
         this.btn5.Text = "5";
@@ -429,7 +376,7 @@ partial class FrmTableTransfer
         this.btn7.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
         this.btn7.BorderRadius = 15;
         this.btn7.BorderThickness = 1;
-        this.btn7.CustomizableEdges = customizableEdges27;
+        this.btn7.CustomizableEdges = customizableEdges23;
         this.btn7.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
         this.btn7.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
         this.btn7.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -437,9 +384,9 @@ partial class FrmTableTransfer
         this.btn7.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn7.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn7.ForeColor = System.Drawing.Color.Black;
-        this.btn7.Location = new System.Drawing.Point(49, 196);
+        this.btn7.Location = new System.Drawing.Point(105, 202);
         this.btn7.Name = "btn7";
-        this.btn7.ShadowDecoration.CustomizableEdges = customizableEdges28;
+        this.btn7.ShadowDecoration.CustomizableEdges = customizableEdges24;
         this.btn7.Size = new System.Drawing.Size(65, 65);
         this.btn7.TabIndex = 19;
         this.btn7.Text = "7";
@@ -451,7 +398,7 @@ partial class FrmTableTransfer
         this.btn3.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
         this.btn3.BorderRadius = 15;
         this.btn3.BorderThickness = 1;
-        this.btn3.CustomizableEdges = customizableEdges29;
+        this.btn3.CustomizableEdges = customizableEdges25;
         this.btn3.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
         this.btn3.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
         this.btn3.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -459,9 +406,9 @@ partial class FrmTableTransfer
         this.btn3.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn3.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn3.ForeColor = System.Drawing.Color.Black;
-        this.btn3.Location = new System.Drawing.Point(191, 54);
+        this.btn3.Location = new System.Drawing.Point(247, 60);
         this.btn3.Name = "btn3";
-        this.btn3.ShadowDecoration.CustomizableEdges = customizableEdges30;
+        this.btn3.ShadowDecoration.CustomizableEdges = customizableEdges26;
         this.btn3.Size = new System.Drawing.Size(65, 65);
         this.btn3.TabIndex = 23;
         this.btn3.Text = "3";
@@ -473,7 +420,7 @@ partial class FrmTableTransfer
         this.btn6.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
         this.btn6.BorderRadius = 15;
         this.btn6.BorderThickness = 1;
-        this.btn6.CustomizableEdges = customizableEdges31;
+        this.btn6.CustomizableEdges = customizableEdges27;
         this.btn6.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
         this.btn6.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
         this.btn6.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -481,13 +428,235 @@ partial class FrmTableTransfer
         this.btn6.FillColor = System.Drawing.Color.WhiteSmoke;
         this.btn6.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btn6.ForeColor = System.Drawing.Color.Black;
-        this.btn6.Location = new System.Drawing.Point(191, 125);
+        this.btn6.Location = new System.Drawing.Point(247, 131);
         this.btn6.Name = "btn6";
-        this.btn6.ShadowDecoration.CustomizableEdges = customizableEdges32;
+        this.btn6.ShadowDecoration.CustomizableEdges = customizableEdges28;
         this.btn6.Size = new System.Drawing.Size(65, 65);
         this.btn6.TabIndex = 20;
         this.btn6.Text = "6";
         this.btn6.Click += new System.EventHandler(this.NumberButton_Click);
+        // 
+        // guna2HtmlLabel2
+        // 
+        this.guna2HtmlLabel2.AutoSize = false;
+        this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
+        this.guna2HtmlLabel2.Font = new System.Drawing.Font("Century Gothic", 14.25F);
+        this.guna2HtmlLabel2.Location = new System.Drawing.Point(18, 178);
+        this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
+        this.guna2HtmlLabel2.Size = new System.Drawing.Size(160, 36);
+        this.guna2HtmlLabel2.TabIndex = 28;
+        this.guna2HtmlLabel2.Text = "Operador";
+        this.guna2HtmlLabel2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // txtAmount
+        // 
+        this.txtAmount.Animated = true;
+        this.txtAmount.BorderRadius = 15;
+        this.txtAmount.Cursor = System.Windows.Forms.Cursors.IBeam;
+        this.txtAmount.CustomizableEdges = customizableEdges29;
+        this.txtAmount.DefaultText = "";
+        this.txtAmount.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+        this.txtAmount.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+        this.txtAmount.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+        this.txtAmount.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+        this.txtAmount.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+        this.txtAmount.Font = new System.Drawing.Font("Segoe UI", 9F);
+        this.txtAmount.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+        this.txtAmount.Location = new System.Drawing.Point(220, 249);
+        this.txtAmount.Name = "txtAmount";
+        this.txtAmount.PasswordChar = '\0';
+        this.txtAmount.PlaceholderText = "";
+        this.txtAmount.SelectedText = "";
+        this.txtAmount.ShadowDecoration.CustomizableEdges = customizableEdges30;
+        this.txtAmount.Size = new System.Drawing.Size(162, 36);
+        this.txtAmount.TabIndex = 29;
+        // 
+        // guna2HtmlLabel3
+        // 
+        this.guna2HtmlLabel3.AutoSize = false;
+        this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
+        this.guna2HtmlLabel3.Font = new System.Drawing.Font("Century Gothic", 14.25F);
+        this.guna2HtmlLabel3.Location = new System.Drawing.Point(18, 249);
+        this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
+        this.guna2HtmlLabel3.Size = new System.Drawing.Size(196, 36);
+        this.guna2HtmlLabel3.TabIndex = 30;
+        this.guna2HtmlLabel3.Text = "Fundo de Caixa R$";
+        this.guna2HtmlLabel3.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // panelMain
+        // 
+        this.panelMain.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
+        this.panelMain.BorderRadius = 15;
+        this.panelMain.BorderThickness = 1;
+        this.panelMain.Controls.Add(this.btnOpen);
+        this.panelMain.Controls.Add(this.labelDateStatusBar);
+        this.panelMain.Controls.Add(this.btnCancel);
+        this.panelMain.Controls.Add(this.labelTimeStatusBar);
+        this.panelMain.Controls.Add(this.labelTime);
+        this.panelMain.Controls.Add(this.guna2HtmlLabel3);
+        this.panelMain.Controls.Add(this.txtUser);
+        this.panelMain.Controls.Add(this.txtAmount);
+        this.panelMain.Controls.Add(this.labelDate);
+        this.panelMain.Controls.Add(this.guna2HtmlLabel2);
+        this.panelMain.Controls.Add(this.guna2HtmlLabel1);
+        this.panelMain.CustomizableEdges = customizableEdges35;
+        this.panelMain.Location = new System.Drawing.Point(23, 23);
+        this.panelMain.Name = "panelMain";
+        this.panelMain.ShadowDecoration.CustomizableEdges = customizableEdges36;
+        this.panelMain.Size = new System.Drawing.Size(400, 436);
+        this.panelMain.TabIndex = 31;
+        // 
+        // btnOpen
+        // 
+        this.btnOpen.Animated = true;
+        this.btnOpen.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
+        this.btnOpen.BorderRadius = 15;
+        this.btnOpen.BorderThickness = 1;
+        this.btnOpen.CustomizableEdges = customizableEdges31;
+        this.btnOpen.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+        this.btnOpen.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+        this.btnOpen.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+        this.btnOpen.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+        this.btnOpen.FillColor = System.Drawing.Color.LightGreen;
+        this.btnOpen.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.btnOpen.ForeColor = System.Drawing.Color.Black;
+        this.btnOpen.Image = global::SIV.Properties.Resources.icons_selecionado;
+        this.btnOpen.ImageSize = new System.Drawing.Size(32, 32);
+        this.btnOpen.Location = new System.Drawing.Point(200, 338);
+        this.btnOpen.Name = "btnOpen";
+        this.btnOpen.PressedColor = System.Drawing.Color.Lime;
+        this.btnOpen.ShadowDecoration.CustomizableEdges = customizableEdges32;
+        this.btnOpen.Size = new System.Drawing.Size(148, 65);
+        this.btnOpen.TabIndex = 41;
+        this.btnOpen.Text = "Abrir";
+        this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
+        // 
+        // labelDateStatusBar
+        // 
+        this.labelDateStatusBar.AutoSize = false;
+        this.labelDateStatusBar.BackColor = System.Drawing.Color.Transparent;
+        this.labelDateStatusBar.Font = new System.Drawing.Font("Century Gothic", 14.25F);
+        this.labelDateStatusBar.Location = new System.Drawing.Point(88, 45);
+        this.labelDateStatusBar.Name = "labelDateStatusBar";
+        this.labelDateStatusBar.Size = new System.Drawing.Size(294, 36);
+        this.labelDateStatusBar.TabIndex = 39;
+        this.labelDateStatusBar.Text = "12/12/2222";
+        this.labelDateStatusBar.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // btnCancel
+        // 
+        this.btnCancel.Animated = true;
+        this.btnCancel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
+        this.btnCancel.BorderRadius = 15;
+        this.btnCancel.BorderThickness = 1;
+        this.btnCancel.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
+        this.btnCancel.CustomizableEdges = customizableEdges33;
+        this.btnCancel.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+        this.btnCancel.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+        this.btnCancel.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+        this.btnCancel.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+        this.btnCancel.FillColor = System.Drawing.Color.IndianRed;
+        this.btnCancel.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+        this.btnCancel.ForeColor = System.Drawing.Color.Black;
+        this.btnCancel.Image = global::SIV.Properties.Resources.icons_cancelar;
+        this.btnCancel.ImageSize = new System.Drawing.Size(32, 32);
+        this.btnCancel.Location = new System.Drawing.Point(46, 338);
+        this.btnCancel.Name = "btnCancel";
+        this.btnCancel.PressedColor = System.Drawing.Color.Transparent;
+        this.btnCancel.ShadowDecoration.CustomizableEdges = customizableEdges34;
+        this.btnCancel.Size = new System.Drawing.Size(148, 65);
+        this.btnCancel.TabIndex = 37;
+        this.btnCancel.Text = "Cancelar";
+        this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+        // 
+        // labelTimeStatusBar
+        // 
+        this.labelTimeStatusBar.AutoSize = false;
+        this.labelTimeStatusBar.BackColor = System.Drawing.Color.Transparent;
+        this.labelTimeStatusBar.Font = new System.Drawing.Font("Century Gothic", 14.25F);
+        this.labelTimeStatusBar.Location = new System.Drawing.Point(88, 107);
+        this.labelTimeStatusBar.Name = "labelTimeStatusBar";
+        this.labelTimeStatusBar.Size = new System.Drawing.Size(294, 36);
+        this.labelTimeStatusBar.TabIndex = 40;
+        this.labelTimeStatusBar.Text = "99:59:59";
+        this.labelTimeStatusBar.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // labelTime
+        // 
+        this.labelTime.AutoSize = false;
+        this.labelTime.BackColor = System.Drawing.Color.Transparent;
+        this.labelTime.Font = new System.Drawing.Font("Century Gothic", 14.25F);
+        this.labelTime.Location = new System.Drawing.Point(18, 107);
+        this.labelTime.Name = "labelTime";
+        this.labelTime.Size = new System.Drawing.Size(64, 36);
+        this.labelTime.TabIndex = 32;
+        this.labelTime.Text = "Hora:";
+        this.labelTime.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // labelDate
+        // 
+        this.labelDate.AutoSize = false;
+        this.labelDate.BackColor = System.Drawing.Color.Transparent;
+        this.labelDate.Font = new System.Drawing.Font("Century Gothic", 14.25F);
+        this.labelDate.Location = new System.Drawing.Point(18, 45);
+        this.labelDate.Name = "labelDate";
+        this.labelDate.Size = new System.Drawing.Size(64, 36);
+        this.labelDate.TabIndex = 31;
+        this.labelDate.Text = "Data:";
+        this.labelDate.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // guna2Panel2
+        // 
+        this.guna2Panel2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
+        this.guna2Panel2.BorderRadius = 15;
+        this.guna2Panel2.BorderThickness = 1;
+        this.guna2Panel2.Controls.Add(this.guna2HtmlLabel4);
+        this.guna2Panel2.Controls.Add(this.btn1);
+        this.guna2Panel2.Controls.Add(this.btn8);
+        this.guna2Panel2.Controls.Add(this.btnComma);
+        this.guna2Panel2.Controls.Add(this.btn6);
+        this.guna2Panel2.Controls.Add(this.btnBackspace);
+        this.guna2Panel2.Controls.Add(this.btn2);
+        this.guna2Panel2.Controls.Add(this.btn5);
+        this.guna2Panel2.Controls.Add(this.btn9);
+        this.guna2Panel2.Controls.Add(this.btn0);
+        this.guna2Panel2.Controls.Add(this.btn3);
+        this.guna2Panel2.Controls.Add(this.btnOk);
+        this.guna2Panel2.Controls.Add(this.btn4);
+        this.guna2Panel2.Controls.Add(this.btn7);
+        this.guna2Panel2.CustomizableEdges = customizableEdges37;
+        this.guna2Panel2.Location = new System.Drawing.Point(429, 23);
+        this.guna2Panel2.Name = "guna2Panel2";
+        this.guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges38;
+        this.guna2Panel2.Size = new System.Drawing.Size(400, 436);
+        this.guna2Panel2.TabIndex = 38;
+        // 
+        // guna2HtmlLabel4
+        // 
+        this.guna2HtmlLabel4.AutoSize = false;
+        this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
+        this.guna2HtmlLabel4.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
+        this.guna2HtmlLabel4.Location = new System.Drawing.Point(3, 3);
+        this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
+        this.guna2HtmlLabel4.Size = new System.Drawing.Size(394, 36);
+        this.guna2HtmlLabel4.TabIndex = 28;
+        this.guna2HtmlLabel4.Text = "Teclado";
+        this.guna2HtmlLabel4.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+        // 
+        // guna2Panel3
+        // 
+        this.guna2Panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left)));
+        this.guna2Panel3.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
+        this.guna2Panel3.BorderRadius = 15;
+        this.guna2Panel3.BorderThickness = 1;
+        this.guna2Panel3.Controls.Add(this.gridData);
+        this.guna2Panel3.Controls.Add(this.guna2HtmlLabel5);
+        this.guna2Panel3.CustomizableEdges = customizableEdges39;
+        this.guna2Panel3.Location = new System.Drawing.Point(23, 465);
+        this.guna2Panel3.Name = "guna2Panel3";
+        this.guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges40;
+        this.guna2Panel3.Size = new System.Drawing.Size(806, 232);
+        this.guna2Panel3.TabIndex = 39;
         // 
         // gridData
         // 
@@ -495,7 +664,7 @@ partial class FrmTableTransfer
         this.gridData.AllowUserToDeleteRows = false;
         dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
         this.gridData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-        this.gridData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left)));
+        this.gridData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
         dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
         dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(188)))), ((int)(((byte)(211)))));
         dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 14.25F);
@@ -514,12 +683,12 @@ partial class FrmTableTransfer
         dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
         this.gridData.DefaultCellStyle = dataGridViewCellStyle3;
         this.gridData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
-        this.gridData.Location = new System.Drawing.Point(14, 45);
+        this.gridData.Location = new System.Drawing.Point(18, 45);
         this.gridData.Name = "gridData";
         this.gridData.ReadOnly = true;
         this.gridData.RowHeadersVisible = false;
-        this.gridData.Size = new System.Drawing.Size(450, 309);
-        this.gridData.TabIndex = 28;
+        this.gridData.Size = new System.Drawing.Size(770, 184);
+        this.gridData.TabIndex = 41;
         this.gridData.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Cyan;
         this.gridData.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(235)))), ((int)(((byte)(241)))));
         this.gridData.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -543,197 +712,67 @@ partial class FrmTableTransfer
         this.gridData.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(210)))), ((int)(((byte)(225)))));
         this.gridData.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
         // 
-        // btnExit
+        // guna2HtmlLabel5
         // 
-        this.btnExit.Animated = true;
-        this.btnExit.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
-        this.btnExit.BorderRadius = 15;
-        this.btnExit.BorderThickness = 1;
-        this.btnExit.CustomizableEdges = customizableEdges33;
-        this.btnExit.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-        this.btnExit.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-        this.btnExit.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-        this.btnExit.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-        this.btnExit.FillColor = System.Drawing.Color.IndianRed;
-        this.btnExit.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
-        this.btnExit.ForeColor = System.Drawing.Color.Black;
-        this.btnExit.Image = global::SIV.Properties.Resources.icons_exit;
-        this.btnExit.ImageSize = new System.Drawing.Size(32, 32);
-        this.btnExit.Location = new System.Drawing.Point(49, 409);
-        this.btnExit.Name = "btnExit";
-        this.btnExit.PressedColor = System.Drawing.Color.Red;
-        this.btnExit.ShadowDecoration.CustomizableEdges = customizableEdges34;
-        this.btnExit.Size = new System.Drawing.Size(208, 65);
-        this.btnExit.TabIndex = 37;
-        this.btnExit.Text = "Sair";
-        this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+        this.guna2HtmlLabel5.AutoSize = false;
+        this.guna2HtmlLabel5.BackColor = System.Drawing.Color.Transparent;
+        this.guna2HtmlLabel5.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
+        this.guna2HtmlLabel5.Location = new System.Drawing.Point(218, 3);
+        this.guna2HtmlLabel5.Name = "guna2HtmlLabel5";
+        this.guna2HtmlLabel5.Size = new System.Drawing.Size(394, 36);
+        this.guna2HtmlLabel5.TabIndex = 40;
+        this.guna2HtmlLabel5.Text = "Lançamento de Caixa";
+        this.guna2HtmlLabel5.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
         // 
-        // guna2HtmlLabel2
-        // 
-        this.guna2HtmlLabel2.AutoSize = false;
-        this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
-        this.guna2HtmlLabel2.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.guna2HtmlLabel2.Location = new System.Drawing.Point(14, 3);
-        this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-        this.guna2HtmlLabel2.Size = new System.Drawing.Size(120, 36);
-        this.guna2HtmlLabel2.TabIndex = 38;
-        this.guna2HtmlLabel2.Text = "Dados";
-        this.guna2HtmlLabel2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-        // 
-        // guna2HtmlLabel3
-        // 
-        this.guna2HtmlLabel3.AutoSize = false;
-        this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
-        this.guna2HtmlLabel3.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.guna2HtmlLabel3.Location = new System.Drawing.Point(15, 3);
-        this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-        this.guna2HtmlLabel3.Size = new System.Drawing.Size(111, 36);
-        this.guna2HtmlLabel3.TabIndex = 39;
-        this.guna2HtmlLabel3.Text = "Teclado";
-        this.guna2HtmlLabel3.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-        // 
-        // guna2PictureBox2
-        // 
-        this.guna2PictureBox2.CustomizableEdges = customizableEdges35;
-        this.guna2PictureBox2.Image = global::SIV.Properties.Resources.icons_mesa;
-        this.guna2PictureBox2.ImageRotate = 0F;
-        this.guna2PictureBox2.Location = new System.Drawing.Point(14, 45);
-        this.guna2PictureBox2.Name = "guna2PictureBox2";
-        this.guna2PictureBox2.ShadowDecoration.CustomizableEdges = customizableEdges36;
-        this.guna2PictureBox2.Size = new System.Drawing.Size(32, 32);
-        this.guna2PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-        this.guna2PictureBox2.TabIndex = 40;
-        this.guna2PictureBox2.TabStop = false;
-        // 
-        // guna2PictureBox3
-        // 
-        this.guna2PictureBox3.CustomizableEdges = customizableEdges37;
-        this.guna2PictureBox3.Image = global::SIV.Properties.Resources.icons_mesa;
-        this.guna2PictureBox3.ImageRotate = 0F;
-        this.guna2PictureBox3.Location = new System.Drawing.Point(14, 125);
-        this.guna2PictureBox3.Name = "guna2PictureBox3";
-        this.guna2PictureBox3.ShadowDecoration.CustomizableEdges = customizableEdges38;
-        this.guna2PictureBox3.Size = new System.Drawing.Size(32, 32);
-        this.guna2PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-        this.guna2PictureBox3.TabIndex = 41;
-        this.guna2PictureBox3.TabStop = false;
-        // 
-        // guna2Panel1
-        // 
-        this.guna2Panel1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
-        this.guna2Panel1.BorderRadius = 15;
-        this.guna2Panel1.BorderThickness = 1;
-        this.guna2Panel1.Controls.Add(this.guna2HtmlLabel2);
-        this.guna2Panel1.Controls.Add(this.guna2PictureBox3);
-        this.guna2Panel1.Controls.Add(this.labelCurrentTable);
-        this.guna2Panel1.Controls.Add(this.guna2PictureBox2);
-        this.guna2Panel1.Controls.Add(this.labelDestinationTable);
-        this.guna2Panel1.Controls.Add(this.txtCurrentTable);
-        this.guna2Panel1.Controls.Add(this.txtTargetTableId);
-        this.guna2Panel1.Controls.Add(this.guna2PictureBox1);
-        this.guna2Panel1.CustomizableEdges = customizableEdges39;
-        this.guna2Panel1.Location = new System.Drawing.Point(23, 63);
-        this.guna2Panel1.Name = "guna2Panel1";
-        this.guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges40;
-        this.guna2Panel1.Size = new System.Drawing.Size(480, 181);
-        this.guna2Panel1.TabIndex = 42;
-        // 
-        // guna2Panel2
-        // 
-        this.guna2Panel2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
-        this.guna2Panel2.BorderRadius = 15;
-        this.guna2Panel2.BorderThickness = 1;
-        this.guna2Panel2.Controls.Add(this.guna2HtmlLabel3);
-        this.guna2Panel2.Controls.Add(this.btn6);
-        this.guna2Panel2.Controls.Add(this.btn3);
-        this.guna2Panel2.Controls.Add(this.btnExit);
-        this.guna2Panel2.Controls.Add(this.btn7);
-        this.guna2Panel2.Controls.Add(this.btn5);
-        this.guna2Panel2.Controls.Add(this.btnBackspace);
-        this.guna2Panel2.Controls.Add(this.btn0);
-        this.guna2Panel2.Controls.Add(this.btnOk);
-        this.guna2Panel2.Controls.Add(this.btn4);
-        this.guna2Panel2.Controls.Add(this.btn1);
-        this.guna2Panel2.Controls.Add(this.btn2);
-        this.guna2Panel2.Controls.Add(this.btn9);
-        this.guna2Panel2.Controls.Add(this.btn8);
-        this.guna2Panel2.Controls.Add(this.btnComma);
-        this.guna2Panel2.CustomizableEdges = customizableEdges41;
-        this.guna2Panel2.Location = new System.Drawing.Point(509, 63);
-        this.guna2Panel2.Name = "guna2Panel2";
-        this.guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges42;
-        this.guna2Panel2.Size = new System.Drawing.Size(308, 544);
-        this.guna2Panel2.TabIndex = 43;
-        // 
-        // guna2Panel3
-        // 
-        this.guna2Panel3.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
-        this.guna2Panel3.BorderRadius = 15;
-        this.guna2Panel3.BorderThickness = 1;
-        this.guna2Panel3.Controls.Add(this.guna2HtmlLabel1);
-        this.guna2Panel3.Controls.Add(this.gridData);
-        this.guna2Panel3.CustomizableEdges = customizableEdges43;
-        this.guna2Panel3.Location = new System.Drawing.Point(23, 250);
-        this.guna2Panel3.Name = "guna2Panel3";
-        this.guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges44;
-        this.guna2Panel3.Size = new System.Drawing.Size(480, 357);
-        this.guna2Panel3.TabIndex = 44;
-        // 
-        // guna2HtmlLabel1
-        // 
-        this.guna2HtmlLabel1.AutoSize = false;
-        this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
-        this.guna2HtmlLabel1.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.guna2HtmlLabel1.Location = new System.Drawing.Point(14, 3);
-        this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-        this.guna2HtmlLabel1.Size = new System.Drawing.Size(160, 36);
-        this.guna2HtmlLabel1.TabIndex = 39;
-        this.guna2HtmlLabel1.Text = "Lançamentos";
-        this.guna2HtmlLabel1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-        // 
-        // FrmTableTransfer
+        // FrmOpenCashRegister
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        this.ClientSize = new System.Drawing.Size(843, 628);
+        this.BackColor = System.Drawing.Color.White;
+        this.ClientSize = new System.Drawing.Size(863, 720);
         this.ControlBox = false;
         this.Controls.Add(this.guna2Panel3);
         this.Controls.Add(this.guna2Panel2);
-        this.Controls.Add(this.guna2Panel1);
+        this.Controls.Add(this.panelMain);
         this.Font = new System.Drawing.Font("Century Gothic", 14.25F);
+        this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+        this.Location = new System.Drawing.Point(15, 15);
         this.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-        this.MinimumSize = new System.Drawing.Size(805, 628);
-        this.Name = "FrmTableTransfer";
-        this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
-        this.Text = "Transferência de Mesa";
-        ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox3)).EndInit();
-        this.guna2Panel1.ResumeLayout(false);
+        this.MaximizeBox = false;
+        this.MinimizeBox = false;
+        this.Name = "FrmOpenCashRegister";
+        this.Padding = new System.Windows.Forms.Padding(20);
+        this.Load += new System.EventHandler(this.FrmOpenCashRegister_Load);
+        this.panelMain.ResumeLayout(false);
         this.guna2Panel2.ResumeLayout(false);
         this.guna2Panel3.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
         this.ResumeLayout(false);
     }
 
-    private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+    private Guna.UI2.WinForms.Guna2DataGridView gridData;
+
+    private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
+
+    private Guna.UI2.WinForms.Guna2Button btnOpen;
+
+    private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
+    private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
+
+    private Guna.UI2.WinForms.Guna2HtmlLabel labelDateStatusBar;
+    private Guna.UI2.WinForms.Guna2HtmlLabel labelTimeStatusBar;
+
+    private Guna.UI2.WinForms.Guna2HtmlLabel labelDate;
+    private Guna.UI2.WinForms.Guna2HtmlLabel labelTime;
 
     private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
-    private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
 
-    private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
-
-    private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox3;
-
-    private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox2;
-
-    private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
+    private Guna.UI2.WinForms.Guna2Button btnCancel;
 
     private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
-
-    private Guna.UI2.WinForms.Guna2Button btnExit;
-
-    private Guna.UI2.WinForms.Guna2DataGridView gridData;
+    private Guna.UI2.WinForms.Guna2TextBox txtAmount;
+    private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
+    private Guna.UI2.WinForms.Guna2Panel panelMain;
 
     private Guna.UI2.WinForms.Guna2Button btnBackspace;
     private Guna.UI2.WinForms.Guna2Button btnOk;
@@ -749,12 +788,8 @@ partial class FrmTableTransfer
     private Guna.UI2.WinForms.Guna2Button btn3;
     private Guna.UI2.WinForms.Guna2Button btn6;
 
-    private Guna.UI2.WinForms.Guna2TextBox txtCurrentTable;
-    private Guna.UI2.WinForms.Guna2TextBox txtTargetTableId;
-    private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
-
-    private Guna.UI2.WinForms.Guna2HtmlLabel labelCurrentTable;
-    private Guna.UI2.WinForms.Guna2HtmlLabel labelDestinationTable;
+    private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+    private Guna.UI2.WinForms.Guna2TextBox txtUser;
 
     #endregion
 }

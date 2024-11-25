@@ -7,7 +7,7 @@ namespace SIV.Helpers;
 /// A classe é responsável por centralizar a exibição de mensagens ao usuário, utilizando caixas de diálogo do Windows Forms.
 /// Ela oferece métodos estáticos para exibir mensagens de sucesso, erro, e confirmação.
 /// </summary>
-public class MessageHelper
+public static class MessageHelper
 {
     /// <summary>
     /// Exibe uma mensagem de sucesso ao salvar um registro.
@@ -16,7 +16,7 @@ public class MessageHelper
     {
         MessageBox.Show(@"Registro salvo com sucesso!", @"REGISTRO SALVO", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
-
+    
     /// <summary>
     /// Exibe uma mensagem de sucesso ao atualizar um registro.
     /// </summary>
@@ -51,7 +51,7 @@ public class MessageHelper
         var message = $"Erro ao {action} no banco de dados:\n{ex.Message}";
         MessageBox.Show(message, @"ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
-
+    
     /// <summary>
     /// Exibe uma caixa de diálogo de confirmação para a exclusão de um registro.
     /// </summary>
@@ -161,25 +161,62 @@ public class MessageHelper
         MessageBox.Show(@"Você não tem permissão para acessar este recurso.", @"ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
     }
     
+    /// <summary>
+    /// Exibe uma mensagem de alerta informando que a mesa está fechada e não pode ser transferida.
+    /// </summary>
+    /// <param name="tableId">Recebe o ID da mesa.</param>
     public static void TableStatusClosedMessage(int tableId)
     {
         MessageBox.Show(@$"A mesa {tableId} está fechada. Por favor, abra a mesa antes de realizar uma transferência.", @"ATENÇÃO" ,MessageBoxButtons.OK, MessageBoxIcon.Warning);
     }
     
+    /// <summary>
+    /// Exibe uma mensagem informando o estado atual da mesa.
+    /// </summary>
+    /// <param name="tableId">O número (ID) da mesa.</param>
+    /// <param name="state">O estado atual da mesa.</param>
     public static void TableStatusMessage(int tableId, string state)
     {
         MessageBox.Show(@$"A mesa {tableId} está {state}.");
     }
     
+    /// <summary>
+    /// Exibe uma mensagem de sucesso ao transferir a mesa.
+    /// </summary>
     public static void TableTransferSuccessMessage()
     {
         MessageBox.Show(@"Mesa transferida com sucesso.", @"SUCESSO", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
     
+    /// <summary>
+    /// Exibe uma mensagem de erro ao transferir a mesa.
+    /// </summary>
     public static void TableTransferErrorMessage()
     {
         MessageBox.Show(@"Erro ao transferir a mesa;", @"ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
     
+    /// <summary>
+    /// Exibe uma mensagem de erro ao tentar abrir um caixa já aberto.
+    /// </summary>
+    public static void BoxIsAlreadyOpenMessage()
+    {
+        MessageBox.Show(@"O caixa já está aberto para o usuário atual.", @"Caixa já aberto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    }
     
+    /// <summary>
+    /// Exibe uma mensagem de erro ao tentar realizar uma operação sem abrir o caixa.
+    /// </summary>
+    public static void BoxIsNotOpenMessage()
+    {
+        MessageBox.Show(@"Você precisa abrir um caixa antes de realizar esta operação.", @"Caixa não aberto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    }
+    
+    /// <summary>
+    /// Exibe uma mensagem de sucesso ao abrir o caixa.
+    /// </summary>
+    public static void BoxOpenSuccessMessage()
+    {
+        MessageBox.Show(@"Caixa aberto com sucesso.", @"Caixa aberto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+    }
 }

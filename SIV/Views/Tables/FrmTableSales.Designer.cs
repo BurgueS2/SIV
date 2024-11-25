@@ -500,11 +500,12 @@ partial class FrmTableSales
         this.btnOk.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
         this.btnOk.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
         this.btnOk.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-        this.btnOk.FillColor = System.Drawing.Color.WhiteSmoke;
+        this.btnOk.FillColor = System.Drawing.Color.LightGreen;
         this.btnOk.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold);
         this.btnOk.ForeColor = System.Drawing.Color.Black;
         this.btnOk.Location = new System.Drawing.Point(111, 376);
         this.btnOk.Name = "btnOk";
+        this.btnOk.PressedColor = System.Drawing.Color.Transparent;
         this.btnOk.ShadowDecoration.CustomizableEdges = customizableEdges18;
         this.btnOk.Size = new System.Drawing.Size(101, 65);
         this.btnOk.TabIndex = 13;

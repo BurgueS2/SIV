@@ -55,13 +55,21 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
     
     private void InitializeForm()
     {
-        txtSale.Text = @$"{_tableId}";
-        _table = TableRepository.LoadTable(_tableId);
-        LoadTableProducts();
-        txtSearchUser.Text = _userName; // Preenche o campo de texto com o nome do usuário logado
-        txtClient.Text = @"Passante";
-        labelDateStatus.Text = _table.SaveDate?.ToString("dd/MM/yyyy");
-        labelTimeStatus.Text = _table.SaveTime.ToString();
+        try
+        {
+            txtSale.Text = @$"{_tableId}";
+            _table = TableRepository.LoadTable(_tableId);
+            LoadTableProducts();
+            txtSearchUser.Text = _userName; // Preenche o campo de texto com o nome do usuário logado
+            txtClient.Text = @"Passante";
+            labelDateStatus.Text = _table.SaveDate?.ToString("dd/MM/yyyy");
+            labelTimeStatus.Text = _table.SaveTime.ToString();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "inicializar formulário");
+        }
     }
     
     private void LoadTableProducts()
@@ -168,26 +176,16 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
     
     private void UpdateProductNameLabel(string partialProductName)
     {
-        try
-        {
-            var product = ProductRepository.GetProductByName(partialProductName);
+        var product = ProductRepository.GetProductByName(partialProductName);
 
-            if (product != null)
-            {
-                labelNameProduct.Text = product.Name;
-                labelNameProduct.Visible = true;
-            }
-            else
-            {
-                labelNameProduct.Visible = false;
-            }
-        }
-        catch (Exception ex)
+        if (product != null)
         {
-            Logger.LogException(ex);
-            MessageHelper.HandleException(ex, "buscar produto");
-            labelNameProduct.Text = @$"Não encontrado: {ex.Message}";
+            labelNameProduct.Text = product.Name;
             labelNameProduct.Visible = true;
+        }
+        else
+        {
+            labelNameProduct.Visible = false;
         }
     }
     
@@ -209,7 +207,7 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
     private void ResetProductInputFields()
     {
         txtProduct.Clear();
-        txtCost.Clear();
+        txtCost.Text = @"0,00";
         numericAmount.Value = 1;
         txtProduct.Focus();
     }
@@ -226,13 +224,21 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
     
     private void SearchProduct()
     {
-        var frmProductData = new FrmProductData();
+        try
+        {
+            var frmProductData = new FrmProductData();
 
-        if (frmProductData.ShowDialog() != DialogResult.OK) return;
+            if (frmProductData.ShowDialog() != DialogResult.OK) return;
 
-        txtProduct.Text = frmProductData.SelectedProduct; // Preenche o campo de texto com o nome do produto selecionado
-        txtCost.Text = frmProductData.CostPrice; // Preenche o campo de texto com o preço do produto selecionado
-        numericAmount.Value = 1;
+            txtProduct.Text = frmProductData.SelectedProduct; // Preenche o campo de texto com o nome do produto selecionado
+            txtCost.Text = frmProductData.CostPrice; // Preenche o campo de texto com o preço do produto selecionado
+            numericAmount.Value = 1;
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "buscar produto");
+        }
     }
     
     private void OpenForm()
@@ -244,8 +250,16 @@ public partial class FrmTableSales : MetroFramework.Forms.MetroForm
     
     private void timer_Tick(object sender, EventArgs e)
     {
-        if (!_table.SaveTime.HasValue) return;
-        var duration = DateTime.Now - _table.SaveTime.Value;
-        labelStayHours.Text = duration.ToString("T");
+        try
+        {
+            if (!_table.SaveTime.HasValue) return;
+            var duration = DateTime.Now - _table.SaveTime.Value;
+            labelStayHours.Text = duration.ToString("T");
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "atualizar tempo de permanência");
+        }
     }
 }

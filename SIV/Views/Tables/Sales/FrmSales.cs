@@ -2,97 +2,92 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
-using Microsoft.VisualBasic;
 using SIV.Core;
 using SIV.Helpers;
+using SIV.Models;
 using SIV.Repositories;
+using SIV.Views.CashRegister;
 using SIV.Views.Tables.ProductData;
-using SIV.Views.Tables.TableOrItemTransfer; // Adicione a referência ao repositório de mesas
+using SIV.Views.Tables.TableOrItemTransfer;
 
 namespace SIV.Views.Tables.Sales;
 
 public partial class FrmSales : Form
 {
-    private const double BrightnessFactor = 0.5; // Fator de brilho para a cor de destaque
-    private int _tableId; // ID da mesa
+    private const double BrightnessFactor = 0.5; // Fator de brilho para a cor de destaque.
+    private int _tableId;
+    private readonly string _userName;
+    private Table _table; // Instância da mesa. 
     
     public FrmSales()
     {
         InitializeComponent();
-        labelUser.Text = SessionManager.CurrentUser.Name;
+        _userName = SessionManager.CurrentUser.Name;
+        labelUser.Text = $@"Usuário: {_userName}";
     }
     
-    private void FrmSales_Load(object sender, EventArgs e)
-    {
-        ApplyingTheme();
-    }
+    private void FrmSales_Load(object sender, EventArgs e) => ApplyTheme();
     
-    private void btnSale_Click(object sender, EventArgs e)
-    {
-        txtSale.Enabled = true;
-        txtSale.Focus();
-        btnCancelProduct.Enabled = true;
-        txtClient.Enabled = true;
-        txtSearchUser.Enabled = true;
-        btnSearchUser.Visible = true;
-        numericAmount.Enabled = true;
-        btnSearchProduct.Visible = true;
-    }
+    private void btnSale_Click(object sender, EventArgs e) => EnableSaleControls();
     
-    private void btnTableTransfer_Click(object sender, EventArgs e)
-    {
-        var frmTableTransfer = new FrmTableTransfer(0);
-        
-        panelDisplayForm.Controls.Clear();
-        OpenDisplayForm(frmTableTransfer, btnTableTransfer);
-    }
+    private void btnCancelProduct_Click(object sender, EventArgs e) => CancelSelectedProduct();
     
-    private void btnCancelProduct_Click(object sender, EventArgs e)
-    {
-        if (!MessageHelper.ConfirmDeletion()) return;
-
-        if (gridData.SelectedRows.Count > 0)
-        {
-            var selectedRow = gridData.SelectedRows[0];
-            if (int.TryParse(selectedRow.Cells["EntryId"].Value.ToString(), out int productId))
-            {
-                TableRepository.RemoveProductFromTable(_tableId, productId);
-                LoadTableProducts();
-            }
-            else
-            {
-                MessageBox.Show(@"Invalid product ID.");
-            }
-        }
-        else
-        {
-            MessageHelper.ShowProductNotFound();
-        }
-    }
+    private void btnItemTransfer_Click(object sender, EventArgs e) { /* TODO: Implementar lógica de transferência de item */ }
+    
+    private void btnTableTransfer_Click(object sender, EventArgs e) => OpenForm(new FrmTableTransfer(0), btnTableTransfer);
+    
+    private void btnItemRelease_Click(object sender, EventArgs e) { /* TODO: Implementar lógica de lançamento de caixa */ }
+    
+    private void btnCloseCashRegister_Click(object sender, EventArgs e) { /* TODO: Implementar lógica de fechamento de caixa */ }
+    
+    private void btnConf_Click(object sender, EventArgs e) { /* TODO: Implementar lógica de configuração */ }
+    
+    private void btnSearchProduct_Click(object sender, EventArgs e) => SearchProduct();
+    
+    private void btnOpenCashRegister_Click(object sender, EventArgs e) => OpenCashRegister();
+    
+    private void btnOk_Click(object sender, EventArgs e) { if (IsProductInputValid())  SaveProductToTable(); }
+    
+    private void txtProduct_TextChanged(object sender, EventArgs e) => UpdateProductNameLabel(txtProduct.Text);
+    
+    private void timer_Tick(object sender, EventArgs e) => UpdateStatusBar();
     
     private void txtSale_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.KeyCode != Keys.Enter) return;
         
-        var input = txtSale.Text;
-
-        if (int.TryParse(input, out var tableId))
+        HandleTableInput(); // Lida com a entrada de dados da mesa.
+        InitializeForm();
+        e.Handled = true;
+        e.SuppressKeyPress = true;
+    }
+    
+    private void txtProduct_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode != Keys.Enter) return;
+        
+        HandleProductSearch(); // Lida com a entrada de dados do produto.
+        e.Handled = true;
+        e.SuppressKeyPress = true;
+    }
+    
+    private void InitializeForm()
+    {
+        try
         {
-            var table = TableRepository.LoadTable(tableId); // Carrega a mesa do repositório
-
-            MessageBox.Show(@$"A mesa {tableId} está {table.State}.");
-                
-            _tableId = tableId;
+            labelUser.Text = $@"Usuário: {_userName}"; // Exibe o nome do usuário logado.
+            _table = TableRepository.LoadTable(_tableId);
             LoadTableProducts();
-
-            if (table.State == "Fechada")
-            {
-                MessageBox.Show(@"A mesa está fechada. Por favor, abra a mesa antes de realizar vendas.");
-            }
+            txtSearchUser.Text = _userName; // Preenche o campo de texto com o nome do usuário logado.
+            txtClient.Text = @"Passante";
+            labelDateStatus.Text = _table.SaveDate?.ToString("dd/mm/yyyy");
+            labelTimeStatus.Text = _table.SaveTime.ToString();
+            LengthOfStay();
         }
-        else
+        catch (Exception ex)
         {
-            MessageBox.Show(@"ID da mesa inválido. Por favor, tente novamente.");
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "inicializar formulário de vendas");
         }
     }
     
@@ -100,8 +95,7 @@ public partial class FrmSales : Form
     {
         try
         {
-            var products = TableRepository.GetTableProducts(_tableId);
-            gridData.DataSource = products;
+            gridData.DataSource = TableRepository.GetTableProducts(_tableId);
             UpdateTotalValueLabel();
             FormatGridData();
         }
@@ -114,11 +108,13 @@ public partial class FrmSales : Form
     
     private void FormatGridData()
     {
-        gridData.Columns["EntryId"]!.Visible = false;
-        gridData.Columns["ProductName"]!.HeaderText = @"Produto";
-        gridData.Columns["ProductPrice"]!.Visible = false;
-        gridData.Columns["Amount"]!.HeaderText = @"Quant.";
-
+        gridData.Columns[0].Visible = false;
+        gridData.Columns[1].HeaderText = @"Produto";
+        gridData.Columns[2].HeaderText = @"Preço";
+        gridData.Columns[3].HeaderText = @"Qtd.";
+        gridData.Columns[4].HeaderText = @"Garçom";
+        
+        // Oculta as linhas sem produtos.
         foreach (DataGridViewRow row in gridData.Rows)
         {
             if (string.IsNullOrWhiteSpace(row.Cells["ProductName"].Value?.ToString()))
@@ -131,66 +127,32 @@ public partial class FrmSales : Form
     private void UpdateTotalValueLabel()
     {
         decimal totalValue = 0;
-
+        
+        // Calcula o valor total dos produtos.
         foreach (DataGridViewRow row in gridData.Rows)
         {
             if (row.Cells["ProductPrice"].Value != null)
             {
-                totalValue += Convert.ToDecimal(row.Cells["ProductPrice"]. Value) * Convert.ToDecimal(row.Cells["Amount"].Value);
+                totalValue += Convert.ToDecimal(row.Cells["ProductPrice"].Value) * Convert.ToDecimal(row.Cells["Amount"].Value);
             }
         }
         
         labelValue.Text = totalValue.ToString("C");
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    private void OpenFrmTableSales(int tableId)
+    private void OpenForm(Form form, object senderButton)
     {
-        var frmTableSales = new FrmTableSales(tableId);
-        
-        panelDisplayForm.Controls.Clear();
-        OpenDisplayForm(frmTableSales, btnSale);
-    }
-    
-    private void OpenDisplayForm(Form dashboard, object senderButton)
-    {
-        /*if (!_loggedInUser.HasPermission("ManageCadastres"))
-        {
-            MessageHelper.ShowValidationMessage("Usuário não tem permissão para acessar!");
-            return;
-        }*/
-        
         ActivateButton(senderButton);
+        // _enableFormDisplay = form;
+        form.TopLevel = false;
+        form.FormBorderStyle = FormBorderStyle.None;
+        form.Dock = DockStyle.Fill;
         
-        dashboard.TopLevel = false;
-        dashboard.FormBorderStyle = FormBorderStyle.None;
-        dashboard.Dock = DockStyle.Fill;
+        panelDisplayForm.Controls.Add(form);
+        panelDisplayForm.Tag = form;
         
-        panelDisplayForm.Controls.Add(dashboard);
-        panelDisplayForm.Tag = dashboard;
-        
-        dashboard.BringToFront();
-        dashboard.Show();
+        form.BringToFront();
+        form.Show();
     }
     
     private void ActivateButton(object senderButton)
@@ -203,11 +165,12 @@ public partial class FrmSales : Form
         currentButton.ForeColor = Color.Black;
         currentButton.Font = new Font("Century Gothic", 14F, FontStyle.Bold);
         
-        panelStatusv.BackColor = ColorThemes.ChangeBrightness(color, BrightnessFactor);
+        panelStatusv.BackColor = ColorThemes.ChangeBrightness(color, BrightnessFactor); // Altera o brilho do painel de status.
     }
     
     private void ResetButtons(Color color)
-    { 
+    {
+        // Altera a cor de todos os botões do painel.
         foreach (Control control in panelStatusv.Controls)
         {
             if (control is not Guna2Button button) continue;
@@ -218,18 +181,19 @@ public partial class FrmSales : Form
         }
     }
     
-    private void ApplyingTheme()
+    private void ApplyTheme()
     {
         var fillColor = ColorThemes.ChangeBrightness(ColorThemes.PrimaryColor, 0.5);
         
         panelStatusv.BackColor = fillColor;
-        ApplyThemeToControl(btnLogoff, fillColor);
         ApplyThemeToControl(btnSale, fillColor);
         ApplyThemeToControl(btnItemTransfer, fillColor);
         ApplyThemeToControl(btnTableTransfer, fillColor);
         ApplyThemeToControl(btnItemRelease, fillColor);
         ApplyThemeToControl(btnConf, fillColor);
         ApplyThemeToControl(btnCancelProduct, fillColor);
+        ApplyThemeToControl(btnOpenCashRegister, fillColor);
+        ApplyThemeToControl(btnCloseCashRegister, fillColor);
     }
     
     private static void ApplyThemeToControl(Control control, Color fillColor)
@@ -243,23 +207,9 @@ public partial class FrmSales : Form
     private void UpdateStatusBar()
     {
         labelTimeStatusBar.Text = DateTime.Now.ToString("HH:mm:ss");
-        labelDateStatusBar.Text = DateTime.Today.ToString("dd/MMMM/yyyy");
+        labelDateStatusBar.Text = DateTime.Today.ToString("dd/MM/yyyy");
     }
     
-    private void timer_Tick(object sender, EventArgs e)
-    {
-        UpdateStatusBar();
-    }
-
-    private void txtProduct_KeyDown(object sender, KeyEventArgs e)
-    {
-        if (e.KeyCode != Keys.Enter) return;
-        
-        HandleProductSearch();
-        e.Handled = true;
-        e.SuppressKeyPress = true;
-    }
-
     private void numericAmount_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.KeyCode != Keys.Enter) return;
@@ -269,11 +219,14 @@ public partial class FrmSales : Form
         e.SuppressKeyPress = true;
     }
     
+    /// <summary>
+    /// Lida com a busca de um produto no banco de dados.
+    /// </summary>
     private void HandleProductSearch()
     {
         var productName = txtProduct.Text;
         var product = ProductRepository.GetProductByName(productName);
-
+        
         if (product != null)
         {
             UpdateProductNameLabel(productName);
@@ -292,14 +245,14 @@ public partial class FrmSales : Form
         var productName = txtProduct.Text;
         var amount = numericAmount.Value;
 
-        if (IsValidProductInput(productName, amount))
+        if (IsProductInputValid())
         {
             try
             {
                 var product = ProductRepository.GetProductByName(productName);
                 if (product == null) return;
 
-                //TableRepository.AddProductToTable(_tableId, product.Name, product.ResalePrice, amount);
+                TableRepository.AddProductToTable(_tableId, product.Name, product.ResalePrice, amount, _userName);
                 TableRepository.UpdateTableState(_tableId, "Ocupada", "Khaki");
                 LoadTableProducts();
                 ResetProductInputFields();
@@ -309,10 +262,6 @@ public partial class FrmSales : Form
                 Logger.LogException(ex);
                 MessageHelper.HandleException(ex, "adicionar produto");
             }
-            finally
-            {
-                ConnectionManager.CloseConnection();
-            }
         }
         else
         {
@@ -320,44 +269,38 @@ public partial class FrmSales : Form
         }
     }
     
-    private static bool IsValidProductInput(string productName, decimal amount)
+    /// <summary>
+    /// Verifica se o nome do produto e a quantidade são válidos.
+    /// </summary>
+    /// <returns>'true' se o nome do produto e a quantidade forem válidos, 'false' caso contrário.</returns>
+    private bool IsProductInputValid()
     {
-        return !string.IsNullOrWhiteSpace(productName) && amount > 0; // Verifica se o nome do produto e a quantidade são válidos
+        return !string.IsNullOrWhiteSpace(txtProduct.Text) && numericAmount.Value > 0; // Verifica se o nome do produto e a quantidade são válidos.
     }
     
+    /// <summary>
+    /// Atualiza o nome do produto exibido no formulário.
+    /// </summary>
+    /// <param name="partialProductName">O nome do produto a ser buscado.</param>
     private void UpdateProductNameLabel(string partialProductName)
     {
-        try
+        var product = ProductRepository.GetProductByName(partialProductName);
+        
+        if (product != null)
         {
-            var product = ProductRepository.GetProductByName(partialProductName);
-
-            if (product != null)
-            {
-                labelNameProduct.Text = product.Name;
-                labelNameProduct.Visible = true;
-            }
-            else
-            {
-                labelNameProduct.Visible = false;
-            }
-        }
-        catch (Exception ex)
-        {
-            Logger.LogException(ex);
-            MessageHelper.HandleException(ex, "buscar produto");
-            labelNameProduct.Text = @$"Não encontrado: {ex.Message}";
+            labelNameProduct.Text = product.Name;
             labelNameProduct.Visible = true;
         }
-        finally
+        else // Caso o produto não seja encontrado no banco de dados (ou o nome seja inválido).
         {
-            ConnectionManager.CloseConnection();
+            labelNameProduct.Visible = false;
         }
     }
     
     private void ResetProductInputFields()
     {
         txtProduct.Clear();
-        txtCost.Clear();
+        txtCost.Text = @"0,00";
         numericAmount.Value = 1;
         txtProduct.Focus();
     }
@@ -365,21 +308,115 @@ public partial class FrmSales : Form
     private void SearchProduct()
     {
         var frmProductData = new FrmProductData();
-
+        
         if (frmProductData.ShowDialog() != DialogResult.OK) return;
-
-        txtProduct.Text = frmProductData.SelectedProduct; // Preenche o campo de texto com o nome do produto selecionado
-        txtCost.Text = frmProductData.CostPrice; // Preenche o campo de texto com o preço do produto selecionado
+        
+        txtProduct.Text = frmProductData.SelectedProduct;
+        txtCost.Text = frmProductData.CostPrice;
         numericAmount.Value = 1;
     }
-
-    private void txtProduct_TextChanged(object sender, EventArgs e)
+    
+    /// <summary>
+    /// Verifica se o caixa já está aberto e, caso não esteja, abre o formulário de abertura de caixa.
+    /// </summary>
+    private void OpenCashRegister()
     {
-        UpdateProductNameLabel(txtProduct.Text);
+        if (!CashRegisterRepository.IsCashRegisterAlreadyOpen(int.Parse(SessionManager.CurrentUser.Id)))
+        {
+            OpenForm(new FrmOpenCashRegister(), btnOpenCashRegister);
+        }
+        else
+        {
+            MessageHelper.BoxIsAlreadyOpenMessage();
+        }
     }
-
-    private void btnSearchProduct_Click(object sender, EventArgs e)
+    
+    private void EnableSaleControls()
     {
-        SearchProduct();
+        txtSale.Enabled = true;
+        txtSale.Focus();
+        btnCancelProduct.Enabled = true;
+        txtClient.Enabled = true;
+        txtSearchUser.Enabled = true;
+        btnSearchUser.Visible = true;
+        numericAmount.Enabled = true;
+        btnSearchProduct.Visible = true;
+    }
+    
+    private void CancelSelectedProduct()
+    {
+        if (!MessageHelper.ConfirmDeletion()) return;
+        
+        if (gridData.SelectedRows.Count > 0)
+        {
+            var selectedRow = gridData.SelectedRows[0]; // Obtém a linha selecionada.
+            
+            if (int.TryParse(selectedRow.Cells["EntryId"].Value.ToString(), out var productId)) // Obtém o ID do produto.
+            {
+                TableRepository.RemoveProductFromTable(_tableId, productId);
+                LoadTableProducts();
+            }
+            else
+            {
+                MessageBox.Show(@"Erro ao obter o ID do produto.");
+            }
+        }
+        else
+        {
+            MessageHelper.ShowProductNotFound();
+        }
+    }
+    
+    /// <summary>
+    /// Lida com a entrada de dados da mesa no campo de texto.
+    /// o ID da mesa é obtido e, caso seja válido, as informações da mesa são carregadas.
+    /// </summary>
+    private void HandleTableInput()
+    {
+        try
+        {
+            var input = txtSale.Text;
+        
+            if (int.TryParse(input, out var tableId))
+            {
+                var table = TableRepository.LoadTable(tableId);
+                
+                if (table.State == "Fechada")
+                {
+                    MessageHelper.ShowValidationMessage("A mesa está fechada. Por favor, abra a mesa antes de realizar a venda.");
+                    return;
+                }
+                
+                MessageBox.Show(@$"A mesa {tableId} está {table.State}.");
+                
+                _tableId = tableId;
+                LoadTableProducts();
+            }
+            else
+            {
+                MessageHelper.ShowValidationMessage("O número da mesa é inválido. Por favor, tente novamente.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "lidar com entrada de mesa");
+        }
+    }
+    
+    private void LengthOfStay()
+    {
+        try
+        {
+            if (!_table.SaveTime.HasValue) return;
+            
+            var duration = DateTime.Now - _table.SaveTime.Value;
+            labelStayHours.Text = duration.ToString("HH:mm:ss");
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "calcular duração da estadia");
+        }
     }
 }

@@ -15,8 +15,8 @@ public partial class FrmTableTransfer : MetroFramework.Forms.MetroForm
     public FrmTableTransfer(int tableId)
     {
         InitializeComponent();
-        _tableId = tableId;
-        txtCurrentTable.Text = tableId.ToString();
+        _tableId = tableId; // Recebe o ID da mesa que será transferida.
+        txtCurrentTable.Text = tableId.ToString(); // Exibe o ID da mesa na tela.
         LoadTableProducts();
         txtTargetTableId.Focus();
     }
@@ -25,31 +25,13 @@ public partial class FrmTableTransfer : MetroFramework.Forms.MetroForm
     
     private void btnBackspace_Click(object sender, EventArgs e) => RemoveLastCharacter(txtTargetTableId);
     
-    private void btnOk_Click(object sender, EventArgs e)
-    {
-        if (int.TryParse(txtTargetTableId.Text, out var targetTableId))
-        {
-            if (targetTableId == _tableId)
-            {
-                MessageHelper.TableTransferErrorMessage();
-                return;
-            }
-            
-            TransferProducts(targetTableId);
-            MessageHelper.TableTransferSuccessMessage();
-            UpdateParentForm();
-        }
-        else
-        {
-            MessageBox.Show(@"Número de mesa inválido.");
-        }
-    }
+    private void btnOk_Click(object sender, EventArgs e) => TransferProductsToTable();
     
     private void NumberButton_Click(object sender, EventArgs e)
     {
         if (sender is Guna2Button btn)
         {
-            AppendText(txtTargetTableId, btn.Text);
+            AppendText(txtTargetTableId, btn.Text); // Coloca o número do botão no campo de texto, ao clicar no botão.
         }
     }
     
@@ -57,7 +39,7 @@ public partial class FrmTableTransfer : MetroFramework.Forms.MetroForm
     {
         if (e.KeyCode == Keys.Enter)
         {
-            HandleCurrentTableEnter();
+            HandleCurrentTableEnter(); // Verifica se o valor inserido é um número. Após isso, exibe o estado da mesa.
         }
     }
     
@@ -81,7 +63,8 @@ public partial class FrmTableTransfer : MetroFramework.Forms.MetroForm
         gridData.Columns["ProductName"]!.HeaderText = @"Produto";
         gridData.Columns["ProductPrice"]!.Visible = false;
         gridData.Columns["Amount"]!.HeaderText = @"Quant.";
-
+        
+        // Oculta as linhas que não possuem produtos.
         foreach (DataGridViewRow row in gridData.Rows)
         {
             if (string.IsNullOrWhiteSpace(row.Cells["ProductName"].Value?.ToString()))
@@ -104,23 +87,35 @@ public partial class FrmTableTransfer : MetroFramework.Forms.MetroForm
         parentForm?.ReloadTables();
     }
     
+    /// <summary>
+    /// Método que auxilia na transferência de produtos entre mesas.
+    /// Ao pressionar a tecla Enter, o sistema verifica se o valor inserido é um número. Após isso, exibe o estado da mesa.
+    /// </summary>
     private void HandleCurrentTableEnter()
     {
-        var input = txtCurrentTable.Text;
-
-        if (!int.TryParse(input, out var tableId)) return; // Verifica se o valor inserido é um número
-        
-        var table = TableRepository.LoadTable(tableId); // Carrega os dados da mesa
-
-        if (table.State == "Fechada")
+        try
         {
-            MessageHelper.TableStatusClosedMessage(tableId);
-            return;
+            var input = txtCurrentTable.Text;
+
+            if (!int.TryParse(input, out var tableId)) return; // Verifica se o valor inserido é um número 
+            
+            var table = TableRepository.LoadTable(tableId); // Carrega os dados da mesa
+
+            if (table.State == "Fechada")
+            {
+                MessageHelper.TableStatusClosedMessage(tableId);
+                return;
+            }
+            
+            MessageHelper.TableStatusMessage(tableId, table.State); // Exibe o estado da mesa
+            _tableId = tableId;
+            LoadTableProducts();
         }
-        
-        MessageHelper.TableStatusMessage(tableId, table.State); // Exibe o estado da mesa
-        _tableId = tableId;
-        LoadTableProducts();
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "Lidar com a entrada da mesa atual");
+        }
 
     }
     
@@ -135,5 +130,33 @@ public partial class FrmTableTransfer : MetroFramework.Forms.MetroForm
     private static void AppendText(Guna2TextBox textBox, string text)
     {
         textBox.Text += text; // Coloca o número do botão no campo de texto
+    }
+    
+    private void TransferProductsToTable()
+    {
+        try
+        {
+            if (int.TryParse(txtTargetTableId.Text, out var targetTableId))
+            {
+                if (targetTableId == _tableId)
+                {
+                    MessageHelper.TableTransferErrorMessage();
+                    return;
+                }
+                
+                TransferProducts(targetTableId);
+                MessageHelper.TableTransferSuccessMessage();
+                UpdateParentForm();
+            }
+            else
+            {
+                MessageHelper.ShowValidationMessage("O valor informado é inválido.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.LogException(ex);
+            MessageHelper.HandleException(ex, "transferir produtos para mesa");
+        }
     }
 }

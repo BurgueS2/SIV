@@ -395,7 +395,7 @@
         private Guna.UI2.WinForms.Guna2Button btnConf;
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label TimeStatusBar;
+        private System.Windows.Forms.Label TimeStatusBar; // Nunca é utilizado, pode ser removido em uma refatoração futura.
         private System.Windows.Forms.Label DateStatusBar;
         private System.Windows.Forms.Label label5;
 
