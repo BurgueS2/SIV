@@ -59,7 +59,9 @@ public partial class FrmJobs : Form
         try
         {
             if (!ValidadeJobName(txtName.Text)) return;
-            
+
+            var jobNameUpper = txtName.Text.ToUpper(); // Converte o nome do cargo para maiúsculas
+            txtName.Text = jobNameUpper.Trim(); // Remove espaços em branco no início e no fim
             var newJob = new Job { Name = txtName.Text };
             
             if (JobRepository.JobExists(txtName.Text))

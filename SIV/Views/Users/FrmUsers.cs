@@ -111,7 +111,7 @@ public partial class FrmUsers : Form
             Id = _selectedUserId,
             Name = txtName.Text.ToUpper().Trim(),
             Password = txtPassword.Text.Trim(),
-            Job = cbJob.Text.ToUpper(),
+            Job = string.IsNullOrWhiteSpace(cbJob.Text) ? "N/A" : cbJob.Text.ToUpper(), // Se o campo de cargo estiver vazio, atribui "N/A"
             Access = GetAccessLevel(),
             Active = btnActive.Checked ? "ATIVO" : "INATIVO", // Se o botão de ativo estiver marcado, retorna "ATIVO", senão, retorna "INATIVO"
             Permissions = GetPermissions()
@@ -154,7 +154,7 @@ public partial class FrmUsers : Form
     /// </summary>
     private string GetAccessLevel()
     {
-        if (btnFullAccess.Checked) return "FULL";
+        if (btnFullAccess.Checked) return "TOTAL";
         return btnPartialAccess.Checked ? "PARCIAL" : "SEM ACESSO"; // Se nenhum dos dois estiver marcado, retorna "SEM ACESSO"
     }
 
@@ -227,7 +227,7 @@ public partial class FrmUsers : Form
 
     private bool ValidateFormData()
     {
-        var validationResult = UserValidator.ValidateUser(txtName.Text, txtPassword.Text, txtRepeatPassword.Text, cbJob.Text);
+        var validationResult = UserValidator.ValidateUser(txtName.Text, txtPassword.Text, txtRepeatPassword.Text);
         
         if (string.IsNullOrEmpty(validationResult)) return true;
         
@@ -246,7 +246,7 @@ public partial class FrmUsers : Form
         
         // Verifica o nível de acesso do usuário
         var accessLevel = gridData.CurrentRow?.Cells[4].Value.ToString().ToUpper();
-        btnFullAccess.Checked = accessLevel == "FULL";
+        btnFullAccess.Checked = accessLevel == "TOTAL";
         btnPartialAccess.Checked = accessLevel == "PARCIAL";
         
         // Verifica se a condição do usuário é ativo ou inativo

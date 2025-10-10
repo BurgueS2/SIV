@@ -16,7 +16,7 @@ public abstract class UserValidator
     /// <param name="repeatPassword">Repetição da senha do usuário. Deve coincidir com a senha.</param>
     /// <param name="job">Cargo do usuário. Não pode ser vazio.</param>
     /// <returns>Retorna uma string vazia se todos os campos forem válidos. Caso contrário, retorna uma mensagem de erro específica para o primeiro campo inválido encontrado.</returns>    
-    public static string ValidateUser(string name, string password, string repeatPassword, string job)
+    public static string ValidateUser(string name, string password, string repeatPassword)
     {
         if (string.IsNullOrWhiteSpace(name) || !Regex.IsMatch(name, @"^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ ]{2,}$"))
         {
@@ -31,11 +31,6 @@ public abstract class UserValidator
         if (string.IsNullOrWhiteSpace(password) || password.Length < 4)
         {
             return "A senha deve ter no mínimo 4 caracteres.";
-        }
-        
-        if (string.IsNullOrWhiteSpace(job))
-        {
-            return "Adicione um cargo ao funcionário.";
         }
         
         return string.Empty;

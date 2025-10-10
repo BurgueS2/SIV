@@ -378,7 +378,6 @@
         <None Include="App.config" />
     </ItemGroup>
     <ItemGroup>
-      <Content Include="appsettings.json" />
       <Content Include="Resources\icons_abrir_painel.png" />
       <Content Include="Resources\icons_adicionar.png" />
       <Content Include="Resources\icons_backspace.png" />
@@ -409,9 +408,6 @@
       <Content Include="Resources\painelLoginImg.png" />
       <Content Include="Resources\painelLogo.png" />
       <Content Include="Resources\sem_foto.png" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="teste\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>
